@@ -35,10 +35,12 @@ export async function getStaticProps() {
   }
 }
 
+const KATEGORIA_LABEL = { 'Plener': 'Na polu', 'Pod dachem': 'Pod dachem' };
+const displayKategoria = (k) => KATEGORIA_LABEL[k] || k;
+
 export default function Home({ places, missingConfig, fetchError }) {
   const [kategoria, setKategoria] = useState('');
   const [podkategoria, setPodkategoria] = useState('');
-  const [pogoda, setPogoda] = useState('');
   const [gmina, setGmina] = useState('');
   const [query, setQuery] = useState('');
 
@@ -55,7 +57,6 @@ export default function Home({ places, missingConfig, fetchError }) {
   const filtered = places.filter((p) => {
     if (kategoria && p.kategoria !== kategoria) return false;
     if (podkategoria && p.podkategoria !== podkategoria) return false;
-    if (pogoda && p.pogoda !== pogoda) return false;
     if (gmina && p.gmina !== gmina) return false;
     if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
     return true;
@@ -90,18 +91,13 @@ export default function Home({ places, missingConfig, fetchError }) {
         <select value={kategoria} onChange={(e) => setKategoria(e.target.value)}>
           <option value="">Wszystkie kategorie</option>
           <option value="Pod dachem">Pod dachem</option>
-          <option value="Plener">Plener</option>
+          <option value="Plener">Na polu</option>
         </select>
         <select value={podkategoria} onChange={(e) => setPodkategoria(e.target.value)}>
           <option value="">Wszystkie podkategorie</option>
           {podkategorie.map((p) => (
             <option key={p} value={p}>{p}</option>
           ))}
-        </select>
-        <select value={pogoda} onChange={(e) => setPogoda(e.target.value)}>
-          <option value="">W środku i na dworze</option>
-          <option value="w środku">W środku</option>
-          <option value="na dworze">Na dworze</option>
         </select>
         <select value={gmina} onChange={(e) => setGmina(e.target.value)}>
           <option value="">Kraków + aglomeracja</option>
@@ -121,7 +117,7 @@ export default function Home({ places, missingConfig, fetchError }) {
               {p.urodziny && <span className="tag urodziny">urodziny</span>}
             </div>
             <p className="meta">
-              {p.podkategoria || p.kategoria} · {p.adres} {p.adres && '·'} {p.gmina}
+              {p.podkategoria || displayKategoria(p.kategoria)} · {p.adres} {p.adres && '·'} {p.gmina}
             </p>
             <div className="tags">
               {p.rating && <span className="tag">★ {p.rating} ({p.reviews})</span>}
