@@ -124,7 +124,33 @@ button, input, select { font: inherit; color: inherit; }
   background: var(--biel); font-size: 15px; min-width: 0;
 }
 
-.wynik { font-size: 14px; color: var(--tusz-2); margin: 0 0 14px; }
+.wynik { font-size: 14px; color: var(--tusz-2); margin: 0; }
+.wynik-pasek { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 14px; }
+.widok { display: inline-flex; border: 2px solid var(--tusz); border-radius: 999px; overflow: hidden; background: var(--biel); }
+.widok-btn { height: 38px; padding: 0 16px; border: 0; background: transparent; cursor: pointer; font-weight: 600; font-size: 14px; }
+.widok-btn[aria-pressed="true"] { background: var(--tusz); color: var(--papier); }
+
+/* mapa */
+.mapa-wrap { margin-bottom: 8px; }
+.mapa {
+  height: 65vh; min-height: 420px; max-height: 720px; border: 2px solid var(--tusz); border-radius: 22px;
+  box-shadow: 5px 5px 0 var(--slonce); overflow: hidden; background: var(--kreda); z-index: 0;
+}
+.mapa-ladowanie { display: flex; align-items: center; justify-content: center; color: var(--tusz-2); }
+.mapa-legenda { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 13px; color: var(--tusz-2); margin: 12px 0 0; }
+.kropka { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--tusz); margin-right: -8px; vertical-align: -1px; }
+.kropka-dach { background: var(--slonce); }
+.kropka-pole { background: var(--mak); }
+.mapa-uwaga { margin-left: auto; }
+.leaflet-container { font-family: var(--font-body); }
+.leaflet-popup-content-wrapper { border: 2px solid var(--tusz); border-radius: 16px; box-shadow: 4px 4px 0 var(--tusz); }
+.leaflet-popup-content { margin: 12px 14px; }
+.dymek p { margin: 0; }
+.dymek-typ { font-size: 12px; color: var(--tusz-2); margin-bottom: 2px !important; }
+.dymek-nazwa { font: 700 16px/1.2 var(--font-display); margin-bottom: 2px !important; }
+.dymek-adres, .dymek-ocena { font-size: 12px; color: var(--tusz-2); }
+.dymek-linki { display: flex; gap: 12px; margin-top: 8px !important; }
+.dymek-linki a { color: var(--tusz); font-weight: 600; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
 /* karty-naklejki */
 .lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; grid-template-columns: 1fr; }
