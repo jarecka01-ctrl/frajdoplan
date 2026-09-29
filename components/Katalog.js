@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { IKONY } from '../lib/ikony';
+import { IKONY, SKROTY } from '../lib/ikony';
 
 // Mapa ładuje się tylko w przeglądarce (Leaflet nie działa na serwerze).
 const Mapa = dynamic(() => import('./Mapa'), {
@@ -28,12 +28,12 @@ const odmianaMiejsc = (n) => {
 export default function Katalog({ places, tytul, pokazDachPole = true, placeholder = 'Szukaj po nazwie lub ulicy…' }) {
   const [strefa, setStrefa] = useState('Kraków i okolice');
   const [kategoria, setKategoria] = useState('');
-  const [podkategoria, setPodkategoria] = useState('');
+  const [wybrane, setWybrane] = useState([]); // kilka rodzajów naraz; pusto = wszystkie
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(NA_STRONE);
   const [widok, setWidok] = useState('lista');
 
-  useEffect(() => setLimit(NA_STRONE), [strefa, kategoria, podkategoria, query]);
+  useEffect(() => setLimit(NA_STRONE), [strefa, kategoria, wybrane, query]);
 
   // Rodzaje miejsc z liczbą — tylko te, które są w wybranej strefie i kategorii.
   const rodzaje = useMemo(() => {
@@ -44,25 +44,29 @@ export default function Katalog({ places, tytul, pokazDachPole = true, placehold
     return Object.entries(licz).sort((a, b) => b[1] - a[1]);
   }, [places, strefa, kategoria]);
 
+  // usuń z wyboru rodzaje, których nie ma w nowej strefie lub kategorii
   useEffect(() => {
-    if (podkategoria && !rodzaje.some(([r]) => r === podkategoria)) setPodkategoria('');
-  }, [rodzaje, podkategoria]);
+    const dostepne = new Set(rodzaje.map(([r]) => r));
+    if (wybrane.some((r) => !dostepne.has(r))) setWybrane(wybrane.filter((r) => dostepne.has(r)));
+  }, [rodzaje, wybrane]);
+
+  const przelacz = (r) => setWybrane((w) => (w.includes(r) ? w.filter((x) => x !== r) : [...w, r]));
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const out = places.filter((p) => {
       if (strefa && p.strefa !== strefa) return false;
       if (kategoria && p.kategoria !== kategoria) return false;
-      if (podkategoria && p.podkategoria !== podkategoria) return false;
+      if (wybrane.length && !wybrane.includes(p.podkategoria)) return false;
       if (q && !`${p.name} ${p.adres} ${p.podkategoria}`.toLowerCase().includes(q)) return false;
       return true;
     });
     if (strefa === 'Pod Krakowem') out.sort((a, b) => (a.km ?? 999) - (b.km ?? 999));
     else out.sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0));
     return out;
-  }, [places, strefa, kategoria, podkategoria, query]);
+  }, [places, strefa, kategoria, wybrane, query]);
 
-  const wyczysc = () => { setKategoria(''); setPodkategoria(''); setQuery(''); };
+  const wyczysc = () => { setKategoria(''); setWybrane([]); setQuery(''); };
 
   return (
     <section aria-label={tytul}>
@@ -95,10 +99,12 @@ export default function Katalog({ places, tytul, pokazDachPole = true, placehold
         )}
 
         <div className="rodzaje" role="group" aria-label="Rodzaj miejsca">
-          <button className="rodzaj" aria-pressed={!podkategoria} onClick={() => setPodkategoria('')}>Wszystkie rodzaje</button>
+          <button className="rodzaj" aria-pressed={wybrane.length === 0} onClick={() => setWybrane([])}>
+            {wybrane.length ? `Wyczyść wybór (${wybrane.length})` : 'Wszystkie rodzaje'}
+          </button>
           {rodzaje.map(([r, n]) => (
-            <button key={r} className="rodzaj" aria-pressed={podkategoria === r} onClick={() => setPodkategoria(podkategoria === r ? '' : r)}>
-              <span aria-hidden="true">{IKONY[r] || '📍'}</span> {r} <small>{n}</small>
+            <button key={r} className="rodzaj" aria-pressed={wybrane.includes(r)} onClick={() => przelacz(r)}>
+              <span aria-hidden="true">{IKONY[r] || '📍'}</span> {SKROTY[r] || r} <small>{n}</small>
             </button>
           ))}
         </div>
