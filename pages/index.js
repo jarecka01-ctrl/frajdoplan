@@ -155,11 +155,7 @@ export default function Home({ places, wydarzenia = [], missingConfig, fetchErro
 
         <section className="hero">
           <h1>Gdzie dziś idziemy?</h1>
-          <p className="lead">
-            {places.length > 0
-              ? `${places.length} miejsc w Krakowie i pod Krakowem: od sal zabaw po wycieczki na cały dzień.`
-              : 'Miejsca w Krakowie i pod Krakowem: od sal zabaw po wycieczki na cały dzień.'}
-          </p>
+          <p className="lead">Miejsca dla dzieci w Krakowie i okolicy: od sal zabaw po wycieczki za miasto.</p>
         </section>
 
         {missingConfig && (
