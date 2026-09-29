@@ -26,8 +26,22 @@ button, input, select { font: inherit; color: inherit; }
 .wrap { max-width: 1040px; margin: 0 auto; padding: 20px 20px 64px; }
 
 /* nagłówek */
-.top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
-.brand { font: 700 26px/1 var(--font-display); letter-spacing: -0.01em; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.brand { font: 700 26px/1 var(--font-display); letter-spacing: -0.01em; color: var(--tusz); text-decoration: none; }
+.menu { display: flex; gap: 6px; flex-wrap: wrap; }
+.menu-link { padding: 8px 14px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 15px; }
+.menu-link:hover { border-color: var(--kreda); }
+.menu-link[aria-current="page"] { border-color: var(--tusz); background: var(--slonce); }
+
+/* rodzaje miejsc: przewijany rząd chipów z ikonami */
+.rodzaje { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 6px; scrollbar-width: thin; }
+.rodzaj {
+  flex: 0 0 auto; height: 40px; padding: 0 14px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  border: 2px solid var(--kreda); background: var(--biel); font-size: 14px; font-weight: 500;
+}
+.rodzaj small { color: var(--tusz-2); font-weight: 400; margin-left: 2px; }
+.rodzaj[aria-pressed="true"] { border-color: var(--tusz); background: var(--tusz); color: var(--papier); }
+.rodzaj[aria-pressed="true"] small { color: var(--kreda); }
 
 /* hero — jedyne „głośne" miejsce typografii */
 .hero { margin-bottom: 24px; max-width: 720px; }
