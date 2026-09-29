@@ -1,59 +1,180 @@
+/* Frajdoplan — kierunek „Plac Zabaw"
+   Pomysł: karty jak naklejki — gruby kontur i twardy, kolorowy cień.
+   Żółty = pod dachem, czerwony = na polu. Reszta spokojna. */
 :root {
-  --ink: #1E2A22; --ink-soft: #4B5A50;
-  --bg: #EFF3F1; --card: #FFFFFF; --line: #DAE1DC;
-  --sun: #E4A94F; --leaf: #2F7C6E; --berry: #E2685A;
+  --papier: #FFFDF7;
+  --tusz: #20242B;
+  --tusz-2: #5B6270;
+  --slonce: #F7B32B;
+  --mak: #E4483A;
+  --kreda: #EFE7D6;
+  --biel: #FFFFFF;
+  --font-display: 'Baloo 2', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 * { box-sizing: border-box; }
-
+html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Inter', system-ui, sans-serif;
-  line-height: 1.55;
+  margin: 0; background: var(--papier); color: var(--tusz);
+  font: 400 16px/1.55 var(--font-body);
+}
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--tusz); outline-offset: 3px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 20px 20px 64px; }
+
+/* nagłówek */
+.top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
+.brand { font: 700 26px/1 var(--font-display); letter-spacing: -0.01em; }
+
+/* hero — jedyne „głośne" miejsce typografii */
+.hero { margin-bottom: 24px; max-width: 720px; }
+.hero h1 {
+  font: 700 clamp(44px, 9vw, 84px)/0.95 var(--font-display);
+  letter-spacing: -0.025em; margin: 0 0 16px;
+}
+.lead { font-size: 18px; color: var(--tusz-2); margin: 0; max-width: 56ch; }
+
+.notice { background: #FFF1CC; border: 2px solid var(--tusz); border-radius: 14px; padding: 12px 16px; margin-bottom: 20px; font-size: 14px; }
+
+/* wydarzenia: Dziś (duża) + Jutro i Weekend (małe) */
+.wydarzenia { display: grid; gap: 18px; margin: 8px 0 44px; grid-template-columns: 1fr; }
+@media (min-width: 860px) { .wydarzenia { grid-template-columns: 1.7fr 1fr; align-items: start; } }
+.wydarzenia-ladowanie { min-height: 220px; }
+.wyd-glowna {
+  background: var(--slonce); border: 2px solid var(--tusz); border-radius: 28px 28px 28px 8px;
+  box-shadow: 6px 6px 0 var(--tusz); padding: 22px 22px 18px;
+}
+.wyd-boczne { display: grid; gap: 18px; }
+.wyd-mala { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 16px 18px; }
+.wyd-tytul { font: 700 clamp(30px, 5vw, 40px)/1 var(--font-display); margin: 0; letter-spacing: -0.015em; }
+.wyd-tytul-maly { font: 700 22px/1.1 var(--font-display); margin: 0; }
+.wyd-data { margin: 4px 0 14px; font-size: 14px; color: var(--tusz-2); }
+.wyd-glowna .wyd-data { color: var(--tusz); opacity: .75; }
+.wyd-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.wyd { display: grid; grid-template-columns: 96px 1fr; gap: 10px; align-items: baseline; }
+.wyd-godz { font: 700 16px/1.2 var(--font-display); }
+.wyd-duza { background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px; padding: 10px 14px; grid-template-columns: 78px 1fr; }
+.wyd-duza .wyd-godz { font-size: 22px; }
+.wyd-nazwa { margin: 0; font-weight: 600; font-size: 15px; line-height: 1.3; }
+.wyd-duza .wyd-nazwa { font: 700 18px/1.2 var(--font-display); }
+.wyd-miejsce { margin: 2px 0 0; font-size: 13px; color: var(--tusz-2); }
+.wyd-info { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
+.wyd-info a { font-weight: 600; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.wyd-pusto { margin: 0; font-size: 15px; }
+.wyd-mala .wyd-pusto { color: var(--tusz-2); font-size: 14px; }
+/* Dziś blisko ciebie + Dziś w kinach */
+.blisko-kina { display: grid; gap: 18px; margin: -18px 0 48px; grid-template-columns: 1fr; }
+@media (min-width: 860px) { .blisko-kina { grid-template-columns: 1.4fr 1fr; align-items: start; } }
+.blisko { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 5px 5px 0 var(--slonce); padding: 18px; }
+.blisko-start .przycisk { margin-top: 4px; }
+.przycisk:disabled { opacity: .6; cursor: progress; }
+.blisko-chipy { margin: 10px 0 12px; }
+.blisko-lista { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 2px; }
+.blisko-item { display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 2px solid var(--kreda); }
+.blisko-item:last-child { border-bottom: 0; }
+.blisko-wyd { background: #FFF6DE; border-radius: 12px; padding: 9px 10px; border-bottom: 0; margin-bottom: 4px; }
+.blisko-ikona { font-size: 20px; text-align: center; }
+.blisko-tekst { display: flex; flex-direction: column; min-width: 0; }
+.blisko-tekst strong { font-weight: 600; font-size: 15px; line-height: 1.3; overflow-wrap: anywhere; }
+.blisko-tekst small { font-size: 13px; color: var(--tusz-2); }
+.kina { background: var(--tusz); color: var(--papier); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 18px; }
+.kina .wyd-tytul-maly { color: var(--papier); margin-bottom: 12px; }
+.kina-lista { display: grid; gap: 14px; }
+.kino-nazwa { margin: 0 0 6px; font: 700 17px/1.2 var(--font-display); color: var(--slonce); }
+.kino ul, .kina-linki { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.kino li { display: grid; grid-template-columns: 52px 1fr; gap: 8px; font-size: 14px; }
+.kino-godz { font-weight: 700; }
+.kina a { color: var(--papier); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.kino small { color: #C9CDD4; }
+.kina-pusto { margin: 0 0 12px; font-size: 14px; color: #D8DBE0; }
+.kina-linki li { font-size: 15px; font-weight: 500; }
+
+.sekcja { font: 700 30px/1.1 var(--font-display); margin: 0 0 14px; letter-spacing: -0.01em; }
+
+/* strefy — duże pigułki */
+.strefy { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.strefa {
+  height: 48px; padding: 0 22px; border-radius: 999px; cursor: pointer;
+  border: 2px solid var(--tusz); background: var(--biel);
+  font: 600 16px/1 var(--font-display); font-size: 18px;
+}
+.strefa[aria-pressed="true"] { background: var(--tusz); color: var(--papier); }
+
+/* panel filtrów */
+.panel { display: grid; gap: 12px; margin-bottom: 18px; }
+.szukaj input {
+  width: 100%; height: 52px; padding: 0 18px; border-radius: 16px;
+  border: 2px solid var(--tusz); background: var(--biel); font-size: 16px;
+}
+.szukaj input::placeholder { color: #8A909B; }
+.chipy { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  height: 40px; padding: 0 16px; border-radius: 999px; cursor: pointer;
+  border: 2px solid var(--kreda); background: var(--biel); font-weight: 500; font-size: 15px;
+}
+.chip[aria-pressed="true"].chip-all { border-color: var(--tusz); background: var(--kreda); }
+.chip[aria-pressed="true"].chip-dach { border-color: var(--tusz); background: var(--slonce); }
+.chip[aria-pressed="true"].chip-pole { border-color: var(--tusz); background: var(--mak); color: var(--biel); }
+.selecty { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.selecty select {
+  height: 44px; padding: 0 12px; border-radius: 12px; border: 2px solid var(--kreda);
+  background: var(--biel); font-size: 15px; min-width: 0;
 }
 
-.wrap { max-width: 760px; margin: 0 auto; padding: 1.25rem 1.1rem 3rem; }
+.wynik { font-size: 14px; color: var(--tusz-2); margin: 0 0 14px; }
 
-header { display: flex; align-items: baseline; margin-bottom: .4rem; }
-.brand { font-family: 'Baloo 2', system-ui, sans-serif; font-weight: 700; font-size: 26px; }
-.tagline { color: var(--ink-soft); margin-bottom: 1.4rem; }
+/* karty-naklejki */
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .lista { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .lista { grid-template-columns: 1fr 1fr 1fr; } }
 
-.notice {
-  background: #fff3cd; border: 1px solid #ffe08a; border-radius: 8px;
-  padding: .75rem 1rem; margin-bottom: 1rem; font-size: 14px;
+.karta {
+  --akcent: var(--slonce);
+  background: var(--biel); border: 2px solid var(--tusz);
+  border-radius: 22px 22px 22px 6px;
+  box-shadow: 5px 5px 0 var(--akcent);
+  padding: 16px 18px 14px; display: flex; flex-direction: column; min-width: 0;
 }
-
-.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
-.filters input, .filters select {
-  height: 38px; border: 1px solid var(--line); border-radius: 8px;
-  background: var(--card); color: var(--ink); font: 400 14px 'Inter'; padding: 0 10px;
+.karta-pole { --akcent: var(--mak); border-radius: 22px 22px 6px 22px; }
+.karta-gora { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.typ { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--tusz-2); }
+.typ span { font-size: 16px; }
+.znaczek {
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: var(--slonce); border: 1.5px solid var(--tusz);
 }
-.filters input { flex: 1 1 200px; }
+.nazwa { font: 700 21px/1.15 var(--font-display); margin: 0 0 4px; overflow-wrap: anywhere; }
+.adres { font-size: 14px; color: var(--tusz-2); margin: 0 0 14px; }
+.dol { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 13px; }
+.ocena { font-weight: 600; }
+.ocena small { font-weight: 400; color: var(--tusz-2); font-size: 12px; }
+.info { color: var(--tusz-2); }
+.link { font-weight: 600; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--akcent); text-decoration-thickness: 3px; text-underline-offset: 3px; }
 
-.count { color: var(--ink-soft); font-size: 13px; margin: 0 0 .8rem; }
-
-.list { display: flex; flex-direction: column; gap: 10px; }
-.card {
-  background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--leaf);
-  border-radius: 10px; padding: .9rem 1rem;
+/* przyciski */
+.przycisk {
+  height: 48px; padding: 0 24px; border-radius: 999px; cursor: pointer;
+  border: 2px solid var(--tusz); background: var(--slonce);
+  font: 600 17px/1 var(--font-display); box-shadow: 3px 3px 0 var(--tusz);
 }
-.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.name { font-size: 16px; font-weight: 500; margin: 0; }
-.meta { font-size: 12.5px; color: var(--ink-soft); margin: 4px 0 8px; }
+.przycisk:active { transform: translate(3px, 3px); box-shadow: none; }
+.wiecej { display: flex; justify-content: center; margin-top: 28px; }
+.pusto { text-align: center; padding: 48px 16px; border: 2px dashed var(--kreda); border-radius: 22px; }
+.pusto p { margin: 0 0 16px; font-size: 17px; }
 
-.tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.tag {
-  font-size: 11.5px; background: var(--bg); border: 1px solid var(--line);
-  border-radius: 6px; padding: 2px 8px; color: var(--ink-soft); text-decoration: none;
-}
-.tag.urodziny { background: var(--sun); color: #5C3E0F; border-color: var(--sun); }
-.tag.link { color: var(--leaf); font-weight: 500; }
+.stopka { margin-top: 56px; padding-top: 20px; border-top: 2px solid var(--kreda); font-size: 13px; color: var(--tusz-2); }
 
-.tabs { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
-.tab {
-  height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line);
-  background: var(--card); color: var(--ink); font: 500 14px 'Inter', system-ui, sans-serif; cursor: pointer;
+@media (max-width: 480px) {
+  .wyd-glowna { padding: 18px 14px 14px; }
+  .wyd-duza { grid-template-columns: 58px 1fr; padding: 10px 12px; }
+  .wyd-duza .wyd-godz { font-size: 18px; }
+  .wyd { grid-template-columns: 84px 1fr; }
+  .selecty { grid-template-columns: 1fr; }
+  .strefy { flex-wrap: nowrap; overflow-x: auto; margin-right: -20px; padding-right: 20px; scrollbar-width: none; }
+  .strefy::-webkit-scrollbar { display: none; }
+  .strefa { flex: 0 0 auto; height: 44px; padding: 0 16px; font-size: 16px; }
 }
-.tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
