@@ -50,3 +50,10 @@ header { display: flex; align-items: baseline; margin-bottom: .4rem; }
 }
 .tag.urodziny { background: var(--sun); color: #5C3E0F; border-color: var(--sun); }
 .tag.link { color: var(--leaf); font-weight: 500; }
+
+.tabs { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+.tab {
+  height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--card); color: var(--ink); font: 500 14px 'Inter', system-ui, sans-serif; cursor: pointer;
+}
+.tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
