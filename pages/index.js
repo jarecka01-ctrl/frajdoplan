@@ -1,9 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import Papa from 'papaparse';
 import Wydarzenia from '../components/Wydarzenia';
 import BliskoIKina from '../components/BliskoIKina';
 import { IKONY } from '../lib/ikony';
+
+// Mapa ładuje się tylko w przeglądarce (Leaflet nie działa na serwerze).
+const Mapa = dynamic(() => import('../components/Mapa'), {
+  ssr: false,
+  loading: () => <div className="mapa mapa-ladowanie">Ładuję mapę…</div>,
+});
 
 const SHEET_CSV_URL = process.env.SHEET_CSV_URL;
 const SHEET_EVENTS_CSV_URL = process.env.SHEET_EVENTS_CSV_URL;
@@ -102,6 +109,7 @@ export default function Home({ places, wydarzenia = [], missingConfig, fetchErro
   const [gmina, setGmina] = useState('');
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(NA_STRONE);
+  const [widok, setWidok] = useState('lista');
 
   useEffect(() => setLimit(NA_STRONE), [strefa, kategoria, podkategoria, gmina, query]);
 
@@ -213,12 +221,20 @@ export default function Home({ places, wydarzenia = [], missingConfig, fetchErro
           </div>
         </div>
 
-        <p className="wynik" aria-live="polite">
-          {filtered.length} {odmianaMiejsc(filtered.length)}
-          {strefa === 'Pod Krakowem' && ', najbliższe na górze'}
-        </p>
+        <div className="wynik-pasek">
+          <p className="wynik" aria-live="polite">
+            {filtered.length} {odmianaMiejsc(filtered.length)}
+            {strefa === 'Pod Krakowem' && widok === 'lista' && ', najbliższe na górze'}
+          </p>
+          <div className="widok" role="group" aria-label="Widok">
+            <button className="widok-btn" aria-pressed={widok === 'lista'} onClick={() => setWidok('lista')}>Lista</button>
+            <button className="widok-btn" aria-pressed={widok === 'mapa'} onClick={() => setWidok('mapa')}>Mapa</button>
+          </div>
+        </div>
 
-        {filtered.length === 0 ? (
+        {widok === 'mapa' && filtered.length > 0 ? (
+          <Mapa miejsca={filtered} />
+        ) : filtered.length === 0 ? (
           <div className="pusto">
             <p>Nic tu nie pasuje do tych filtrów.</p>
             <button className="przycisk" onClick={wyczysc}>Wyczyść filtry</button>
@@ -258,7 +274,7 @@ export default function Home({ places, wydarzenia = [], missingConfig, fetchErro
           </ul>
         )}
 
-        {filtered.length > limit && (
+        {widok === 'lista' && filtered.length > limit && (
           <div className="wiecej">
             <button className="przycisk" onClick={() => setLimit((l) => l + NA_STRONE)}>
               Pokaż kolejne {Math.min(NA_STRONE, filtered.length - limit)}
