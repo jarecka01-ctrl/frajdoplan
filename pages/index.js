@@ -27,6 +27,10 @@ export async function getStaticProps() {
         reviews: row.reviews || '',
         website: row.website || '',
         urodziny: (row.organizuje_urodziny || '').toLowerCase() === 'tak',
+        strefa: row.strefa || 'Kraków i okolice',
+        km: Number.isFinite(parseFloat(String(row.odleglosc_km || '').replace(',', '.')))
+          ? parseFloat(String(row.odleglosc_km).replace(',', '.'))
+          : null,
       }));
 
     return { props: { places, missingConfig: false }, revalidate: 3600 };
@@ -38,7 +42,14 @@ export async function getStaticProps() {
 const KATEGORIA_LABEL = { 'Plener': 'Na polu', 'Pod dachem': 'Pod dachem' };
 const displayKategoria = (k) => KATEGORIA_LABEL[k] || k;
 
+const STREFY = [
+  { id: 'Kraków i okolice', label: 'Kraków i okolice' },
+  { id: 'Pod Krakowem', label: 'Pod Krakowem' },
+  { id: '', label: 'Wszystko' },
+];
+
 export default function Home({ places, missingConfig, fetchError }) {
+  const [strefa, setStrefa] = useState('Kraków i okolice');
   const [kategoria, setKategoria] = useState('');
   const [podkategoria, setPodkategoria] = useState('');
   const [gmina, setGmina] = useState('');
@@ -55,12 +66,14 @@ export default function Home({ places, missingConfig, fetchError }) {
   }, [places]);
 
   const filtered = places.filter((p) => {
+    if (strefa && p.strefa !== strefa) return false;
     if (kategoria && p.kategoria !== kategoria) return false;
     if (podkategoria && p.podkategoria !== podkategoria) return false;
     if (gmina && p.gmina !== gmina) return false;
     if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
     return true;
   });
+  if (strefa === 'Pod Krakowem') filtered.sort((a, b) => (a.km ?? 999) - (b.km ?? 999));
 
   return (
     <div className="wrap">
@@ -79,6 +92,23 @@ export default function Home({ places, missingConfig, fetchError }) {
         <div className="notice">
           Nie udało się pobrać danych z arkusza — sprawdź, czy link CSV nadal działa.
         </div>
+      )}
+
+      <div className="tabs" role="tablist">
+        {STREFY.map((z) => (
+          <button
+            key={z.label}
+            role="tab"
+            aria-selected={strefa === z.id}
+            className={strefa === z.id ? 'tab active' : 'tab'}
+            onClick={() => setStrefa(z.id)}
+          >
+            {z.label}
+          </button>
+        ))}
+      </div>
+      {strefa === 'Pod Krakowem' && (
+        <p className="count">Wycieczki na jeden dzień: 20–80 km od Rynku, posortowane od najbliższych.</p>
       )}
 
       <div className="filters">
@@ -122,6 +152,9 @@ export default function Home({ places, missingConfig, fetchError }) {
             <div className="tags">
               {p.rating && <span className="tag">★ {p.rating} ({p.reviews})</span>}
               {p.pogoda && <span className="tag">{p.pogoda}</span>}
+              {p.strefa === 'Pod Krakowem' && p.km != null && (
+                <span className="tag">{Math.round(p.km)} km od Krakowa</span>
+              )}
               {p.website && (
                 <a className="tag link" href={p.website} target="_blank" rel="noreferrer">
                   strona
