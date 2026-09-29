@@ -100,11 +100,13 @@ export default function Katalog({ places, tytul, pokazDachPole = true, placehold
 
         <div className="rodzaje" role="group" aria-label="Rodzaj miejsca">
           <button className="rodzaj" aria-pressed={wybrane.length === 0} onClick={() => setWybrane([])}>
-            {wybrane.length ? `Wyczyść wybór (${wybrane.length})` : 'Wszystkie rodzaje'}
+            <span className="rodzaj-nazwa">{wybrane.length ? `Wyczyść wybór (${wybrane.length})` : 'Wszystkie rodzaje'}</span>
           </button>
           {rodzaje.map(([r, n]) => (
             <button key={r} className="rodzaj" aria-pressed={wybrane.includes(r)} onClick={() => przelacz(r)}>
-              <span aria-hidden="true">{IKONY[r] || '📍'}</span> {SKROTY[r] || r} <small>{n}</small>
+              <span className="rodzaj-ikona" aria-hidden="true">{IKONY[r] || '📍'}</span>
+              <span className="rodzaj-nazwa">{SKROTY[r] || r}</span>
+              <small>{n}</small>
             </button>
           ))}
         </div>
