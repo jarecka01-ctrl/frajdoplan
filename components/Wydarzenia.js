@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 /*
@@ -92,7 +91,7 @@ export default function Wydarzenia({ wydarzenia }) {
   return (
     <section className="wydarzenia" aria-label="Wydarzenia">
       <div className="wyd-glowna">
-        <h2 className="wyd-tytul">Dziś w Krakowie</h2>
+        <h2 className="wyd-tytul">Dziś dla dzieci w Krakowie</h2>
         <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
         {dzis.length ? (
           <ul className="wyd-lista">{dzis.slice(0, 6).map((w) => <Karta key={w.id} w={w} duza />)}</ul>
@@ -103,7 +102,7 @@ export default function Wydarzenia({ wydarzenia }) {
 
       <div className="wyd-boczne">
         <div className="wyd-mala">
-          <h2 className="wyd-tytul-maly">Jutro w Krakowie</h2>
+          <h2 className="wyd-tytul-maly">Jutro dla dzieci w Krakowie</h2>
           <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
           {jutroLista.length ? (
             <ul className="wyd-lista">{jutroLista.slice(0, 4).map((w) => <Karta key={w.id} w={w} />)}</ul>
@@ -112,7 +111,7 @@ export default function Wydarzenia({ wydarzenia }) {
           )}
         </div>
         <div className="wyd-mala">
-          <h2 className="wyd-tytul-maly">{wWeekend ? 'Kolejny weekend' : 'Najbliższy weekend'}</h2>
+          <h2 className="wyd-tytul-maly">{wWeekend ? 'Kolejny weekend dla dzieci w Krakowie' : 'Najbliższy weekend dla dzieci w Krakowie'}</h2>
           <p className="wyd-data">{zakresDat(sob, nd)}</p>
           {weekend.length ? (
             <ul className="wyd-lista">
