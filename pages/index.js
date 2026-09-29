@@ -1,18 +1,56 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import Head from 'next/head';
 import Papa from 'papaparse';
+import Wydarzenia from '../components/Wydarzenia';
+import BliskoIKina from '../components/BliskoIKina';
+import { IKONY } from '../lib/ikony';
 
 const SHEET_CSV_URL = process.env.SHEET_CSV_URL;
+const SHEET_EVENTS_CSV_URL = process.env.SHEET_EVENTS_CSV_URL;
+
+// Zakładka „Wydarzenia" z arkusza. Brak linku lub błąd = pusta lista (strona działa dalej).
+async function pobierzWydarzenia(places) {
+  if (!SHEET_EVENTS_CSV_URL) return [];
+  try {
+    const res = await fetch(SHEET_EVENTS_CSV_URL);
+    const rows = Papa.parse(await res.text(), { header: true, skipEmptyLines: true }).data;
+    const poId = Object.fromEntries(places.map((p) => [p.id, p]));
+    const ok = new Set(['', 'aktywne', 'zatwierdzone']);
+    return rows
+      .filter((r) => r.nazwa && r.data_regula && ok.has(String(r.status || '').trim().toLowerCase()))
+      .map((r, i) => {
+        const miejsce = poId[r.powiazane_miejsce_id];
+        return {
+          id: r.id || `w${i}`,
+          nazwa: r.nazwa,
+          data_regula: r.data_regula,
+          godzina: (r.godzina || '').trim(),
+          miejsce: r.miejsce || (miejsce ? miejsce.name : ''),
+          wiek: r.grupa_wiekowa || '',
+          cena: r.cena || '',
+          link: r.link_biletow || '',
+          miejsceId: miejsce ? miejsce.id : '',
+          kino: (miejsce && miejsce.podkategoria === 'Kino') || /kino|seans|film/i.test(r.kategoria || ''),
+        };
+      });
+  } catch (e) {
+    return [];
+  }
+}
+const NA_STRONE = 24;
 
 export async function getStaticProps() {
   if (!SHEET_CSV_URL) {
     return { props: { places: [], missingConfig: true }, revalidate: 3600 };
   }
-
   try {
     const res = await fetch(SHEET_CSV_URL);
     const text = await res.text();
     const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
-
+    const liczba = (v) => {
+      const n = parseFloat(String(v || '').replace(',', '.'));
+      return Number.isFinite(n) ? n : null;
+    };
     const places = parsed.data
       .filter((row) => row.name)
       .map((row, i) => ({
@@ -20,154 +58,222 @@ export async function getStaticProps() {
         name: row.name,
         kategoria: row.kategoria_glowna || '',
         podkategoria: row.podkategoria || '',
-        pogoda: row.pogoda || '',
         adres: row.street || '',
         gmina: row.gmina_aglomeracja || 'Kraków',
-        rating: row.rating || '',
-        reviews: row.reviews || '',
+        rating: liczba(row.rating),
+        reviews: liczba(row.reviews),
         website: row.website || '',
         urodziny: (row.organizuje_urodziny || '').toLowerCase() === 'tak',
         strefa: row.strefa || 'Kraków i okolice',
-        km: Number.isFinite(parseFloat(String(row.odleglosc_km || '').replace(',', '.')))
-          ? parseFloat(String(row.odleglosc_km).replace(',', '.'))
-          : null,
+        km: liczba(row.odleglosc_km),
+        lat: liczba(row.lat),
+        lon: liczba(row.lon),
       }));
-
-    return { props: { places, missingConfig: false }, revalidate: 3600 };
+    const wydarzenia = await pobierzWydarzenia(places);
+    return { props: { places, wydarzenia, missingConfig: false }, revalidate: 3600 };
   } catch (e) {
     return { props: { places: [], missingConfig: false, fetchError: true }, revalidate: 600 };
   }
 }
 
-const KATEGORIA_LABEL = { 'Plener': 'Na polu', 'Pod dachem': 'Pod dachem' };
-const displayKategoria = (k) => KATEGORIA_LABEL[k] || k;
 
 const STREFY = [
-  { id: 'Kraków i okolice', label: 'Kraków i okolice' },
+  { id: 'Kraków i okolice', label: 'Kraków' },
   { id: 'Pod Krakowem', label: 'Pod Krakowem' },
   { id: '', label: 'Wszystko' },
 ];
 
-export default function Home({ places, missingConfig, fetchError }) {
+const KATEGORIE = [
+  { id: '', label: 'Wszystko' },
+  { id: 'Pod dachem', label: 'Pod dachem' },
+  { id: 'Plener', label: 'Na polu' },
+];
+
+const odmianaMiejsc = (n) => {
+  if (n === 1) return 'miejsce';
+  const r10 = n % 10, r100 = n % 100;
+  return r10 >= 2 && r10 <= 4 && !(r100 >= 12 && r100 <= 14) ? 'miejsca' : 'miejsc';
+};
+
+export default function Home({ places, wydarzenia = [], missingConfig, fetchError }) {
   const [strefa, setStrefa] = useState('Kraków i okolice');
   const [kategoria, setKategoria] = useState('');
   const [podkategoria, setPodkategoria] = useState('');
   const [gmina, setGmina] = useState('');
   const [query, setQuery] = useState('');
+  const [limit, setLimit] = useState(NA_STRONE);
+
+  useEffect(() => setLimit(NA_STRONE), [strefa, kategoria, podkategoria, gmina, query]);
 
   const podkategorie = useMemo(() => {
-    const set = new Set(places.map((p) => p.podkategoria).filter(Boolean));
-    return [...set].sort();
-  }, [places]);
+    const set = new Set(
+      places
+        .filter((p) => (!strefa || p.strefa === strefa) && (!kategoria || p.kategoria === kategoria))
+        .map((p) => p.podkategoria)
+        .filter(Boolean)
+    );
+    return [...set].sort((a, b) => a.localeCompare(b, 'pl'));
+  }, [places, strefa, kategoria]);
 
   const gminy = useMemo(() => {
-    const set = new Set(places.map((p) => p.gmina).filter(Boolean));
-    return [...set].sort();
-  }, [places]);
+    const set = new Set(places.filter((p) => !strefa || p.strefa === strefa).map((p) => p.gmina).filter(Boolean));
+    return [...set].sort((a, b) => a.localeCompare(b, 'pl'));
+  }, [places, strefa]);
 
-  const filtered = places.filter((p) => {
-    if (strefa && p.strefa !== strefa) return false;
-    if (kategoria && p.kategoria !== kategoria) return false;
-    if (podkategoria && p.podkategoria !== podkategoria) return false;
-    if (gmina && p.gmina !== gmina) return false;
-    if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
-    return true;
-  });
-  if (strefa === 'Pod Krakowem') filtered.sort((a, b) => (a.km ?? 999) - (b.km ?? 999));
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const out = places.filter((p) => {
+      if (strefa && p.strefa !== strefa) return false;
+      if (kategoria && p.kategoria !== kategoria) return false;
+      if (podkategoria && p.podkategoria !== podkategoria) return false;
+      if (gmina && p.gmina !== gmina) return false;
+      if (q && !`${p.name} ${p.adres} ${p.podkategoria}`.toLowerCase().includes(q)) return false;
+      return true;
+    });
+    if (strefa === 'Pod Krakowem') out.sort((a, b) => (a.km ?? 999) - (b.km ?? 999));
+    else out.sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0));
+    return out;
+  }, [places, strefa, kategoria, podkategoria, gmina, query]);
+
+  const wyczysc = () => {
+    setKategoria(''); setPodkategoria(''); setGmina(''); setQuery('');
+  };
 
   return (
-    <div className="wrap">
-      <header>
-        <div className="brand">Frajdoplan</div>
-      </header>
-      <p className="tagline">Co robić z dzieckiem w Krakowie, dziś i w ten weekend.</p>
+    <>
+      <Head>
+        <title>Frajdoplan — gdzie dziś idziemy z dzieckiem w Krakowie</title>
+        {/* Wersja testowa: nie indeksuj. Usuń tę linię po podpięciu domeny frajdoplan.pl. */}
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="description" content="Sale zabaw, place zabaw, muzea, baseny i wycieczki pod Krakowem. Sprawdź, gdzie iść z dzieckiem dziś i w weekend." />
+      </Head>
 
-      {missingConfig && (
-        <div className="notice">
-          Brak zmiennej środowiskowej <code>SHEET_CSV_URL</code> — ustaw ją w panelu Vercel
-          (Settings → Environment Variables), wskazując opublikowany link CSV z Arkusza Google.
-        </div>
-      )}
-      {fetchError && (
-        <div className="notice">
-          Nie udało się pobrać danych z arkusza — sprawdź, czy link CSV nadal działa.
-        </div>
-      )}
+      <div className="wrap">
+        <header className="top">
+          <span className="brand">Frajdoplan</span>
+        </header>
 
-      <div className="tabs" role="tablist">
-        {STREFY.map((z) => (
-          <button
-            key={z.label}
-            role="tab"
-            aria-selected={strefa === z.id}
-            className={strefa === z.id ? 'tab active' : 'tab'}
-            onClick={() => setStrefa(z.id)}
-          >
-            {z.label}
-          </button>
-        ))}
-      </div>
-      {strefa === 'Pod Krakowem' && (
-        <p className="count">Wycieczki na jeden dzień: 20–80 km od Rynku, posortowane od najbliższych.</p>
-      )}
+        <section className="hero">
+          <h1>Gdzie dziś idziemy?</h1>
+          <p className="lead">
+            {places.length > 0
+              ? `${places.length} miejsc w Krakowie i pod Krakowem: od sal zabaw po wycieczki na cały dzień.`
+              : 'Miejsca w Krakowie i pod Krakowem: od sal zabaw po wycieczki na cały dzień.'}
+          </p>
+        </section>
 
-      <div className="filters">
-        <input
-          type="text"
-          placeholder="Szukaj miejsca..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <select value={kategoria} onChange={(e) => setKategoria(e.target.value)}>
-          <option value="">Wszystkie kategorie</option>
-          <option value="Pod dachem">Pod dachem</option>
-          <option value="Plener">Na polu</option>
-        </select>
-        <select value={podkategoria} onChange={(e) => setPodkategoria(e.target.value)}>
-          <option value="">Wszystkie podkategorie</option>
-          {podkategorie.map((p) => (
-            <option key={p} value={p}>{p}</option>
-          ))}
-        </select>
-        <select value={gmina} onChange={(e) => setGmina(e.target.value)}>
-          <option value="">Kraków + aglomeracja</option>
-          {gminy.map((g) => (
-            <option key={g} value={g}>{g}</option>
-          ))}
-        </select>
-      </div>
-
-      <p className="count">{filtered.length} miejsc pasuje do filtrów</p>
-
-      <div className="list">
-        {filtered.slice(0, 200).map((p) => (
-          <div className="card" key={p.id}>
-            <div className="row">
-              <p className="name">{p.name}</p>
-              {p.urodziny && <span className="tag urodziny">urodziny</span>}
-            </div>
-            <p className="meta">
-              {p.podkategoria || displayKategoria(p.kategoria)} · {p.adres} {p.adres && '·'} {p.gmina}
-            </p>
-            <div className="tags">
-              {p.rating && <span className="tag">★ {p.rating} ({p.reviews})</span>}
-              {p.pogoda && <span className="tag">{p.pogoda}</span>}
-              {p.strefa === 'Pod Krakowem' && p.km != null && (
-                <span className="tag">{Math.round(p.km)} km od Krakowa</span>
-              )}
-              {p.website && (
-                <a className="tag link" href={p.website} target="_blank" rel="noreferrer">
-                  strona
-                </a>
-              )}
-            </div>
+        {missingConfig && (
+          <div className="notice">
+            Brak zmiennej <code>SHEET_CSV_URL</code>. Ustaw ją w Vercel (Settings → Environment Variables) — link CSV z Arkusza Google.
           </div>
-        ))}
-      </div>
+        )}
+        {fetchError && <div className="notice">Nie udało się pobrać danych z arkusza. Sprawdź, czy link CSV nadal działa.</div>}
 
-      {filtered.length > 200 && (
-        <p className="count">Pokazano pierwsze 200 z {filtered.length} — dopracujemy paginację później.</p>
-      )}
-    </div>
+        <Wydarzenia wydarzenia={wydarzenia} />
+        <BliskoIKina places={places} wydarzenia={wydarzenia} />
+
+        <h2 className="sekcja">Miejsca na każdy dzień</h2>
+        <nav className="strefy" aria-label="Gdzie szukasz">
+          {STREFY.map((z) => (
+            <button key={z.label} className="strefa" aria-pressed={strefa === z.id} onClick={() => setStrefa(z.id)}>
+              {z.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="panel">
+          <label className="szukaj">
+            <span className="sr-only">Szukaj</span>
+            <input
+              type="search"
+              placeholder="Szukaj: basen, Nowa Huta, trampoliny…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </label>
+
+          <div className="chipy" role="group" aria-label="Pod dachem czy na polu">
+            {KATEGORIE.map((k) => (
+              <button
+                key={k.label}
+                className={`chip chip-${k.id === 'Plener' ? 'pole' : k.id === 'Pod dachem' ? 'dach' : 'all'}`}
+                aria-pressed={kategoria === k.id}
+                onClick={() => { setKategoria(k.id); setPodkategoria(''); }}
+              >
+                {k.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="selecty">
+            <select value={podkategoria} onChange={(e) => setPodkategoria(e.target.value)} aria-label="Rodzaj miejsca">
+              <option value="">Każdy rodzaj miejsca</option>
+              {podkategorie.map((p) => <option key={p} value={p}>{IKONY[p] ? `${IKONY[p]} ` : ''}{p}</option>)}
+            </select>
+            <select value={gmina} onChange={(e) => setGmina(e.target.value)} aria-label="Miejscowość">
+              <option value="">Każda miejscowość</option>
+              {gminy.map((g) => <option key={g} value={g}>{g}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <p className="wynik" aria-live="polite">
+          {filtered.length} {odmianaMiejsc(filtered.length)}
+          {strefa === 'Pod Krakowem' && ', najbliższe na górze'}
+        </p>
+
+        {filtered.length === 0 ? (
+          <div className="pusto">
+            <p>Nic tu nie pasuje do tych filtrów.</p>
+            <button className="przycisk" onClick={wyczysc}>Wyczyść filtry</button>
+          </div>
+        ) : (
+          <ul className="lista">
+            {filtered.slice(0, limit).map((p) => {
+              const pole = p.kategoria === 'Plener';
+              return (
+                <li key={p.id} className={`karta ${pole ? 'karta-pole' : 'karta-dach'}`}>
+                  <div className="karta-gora">
+                    <span className="typ">
+                      <span aria-hidden="true">{IKONY[p.podkategoria] || (pole ? '🌳' : '🏠')}</span>
+                      {p.podkategoria || (pole ? 'Na polu' : 'Pod dachem')}
+                    </span>
+                    {p.urodziny && <span className="znaczek">urodziny</span>}
+                  </div>
+                  <h3 className="nazwa">{p.name}</h3>
+                  <p className="adres">
+                    {[p.adres, p.gmina !== 'Kraków' || !p.adres ? p.gmina : null].filter(Boolean).join(', ')}
+                  </p>
+                  <div className="dol">
+                    {p.rating != null && (
+                      <span className="ocena" title={`${p.reviews ?? 0} opinii w Google`}>
+                        ★ {p.rating.toFixed(1)} <small>({p.reviews ?? 0})</small>
+                      </span>
+                    )}
+                    <span className="info">{pole ? 'na polu' : 'pod dachem'}</span>
+                    {p.strefa === 'Pod Krakowem' && p.km != null && <span className="info">{Math.round(p.km)} km od Krakowa</span>}
+                    {p.website && (
+                      <a className="link" href={p.website} target="_blank" rel="noreferrer">Strona miejsca</a>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        {filtered.length > limit && (
+          <div className="wiecej">
+            <button className="przycisk" onClick={() => setLimit((l) => l + NA_STRONE)}>
+              Pokaż kolejne {Math.min(NA_STRONE, filtered.length - limit)}
+            </button>
+          </div>
+        )}
+
+        <footer className="stopka">
+          Frajdoplan, Kraków. Dane o miejscach pochodzą z publicznych źródeł, m.in. Map Google.
+        </footer>
+      </div>
+    </>
   );
 }
