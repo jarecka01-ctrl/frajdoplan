@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IKONY } from '../lib/ikony';
 
 /*
@@ -31,6 +31,8 @@ export default function Mapa({ miejsca }) {
   const mapa = useRef(null);
   const warstwa = useRef(null);
   const Lref = useRef(null);
+  const rowery = useRef(null);
+  const [pokazRowery, setPokazRowery] = useState(false);
   const aktualne = useRef(miejsca);
   aktualne.current = miejsca;
 
@@ -65,6 +67,11 @@ export default function Mapa({ miejsca }) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(mapa.current);
       warstwa.current = L.layerGroup().addTo(mapa.current);
+      // Drogi rowerowe: przezroczysta nakładka CyclOSM (dane OpenStreetMap), włączana przełącznikiem.
+      rowery.current = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm-lite/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: 'drogi rowerowe: <a href="https://www.cyclosm.org">CyclOSM</a>',
+      });
       rysuj();
     });
     return () => {
@@ -75,11 +82,21 @@ export default function Mapa({ miejsca }) {
 
   useEffect(() => { rysuj(); }, [miejsca]);
 
+  useEffect(() => {
+    if (!mapa.current || !rowery.current) return;
+    if (pokazRowery) rowery.current.addTo(mapa.current);
+    else rowery.current.remove();
+  }, [pokazRowery]);
+
   const bezWspolrzednych = miejsca.filter((p) => p.lat == null || p.lon == null).length;
 
   return (
     <div className="mapa-wrap">
       <div ref={el} className="mapa" role="region" aria-label="Mapa miejsc" />
+      <label className="mapa-rowery">
+        <input type="checkbox" checked={pokazRowery} onChange={(e) => setPokazRowery(e.target.checked)} />
+        🚲 Pokaż drogi rowerowe
+      </label>
       <p className="mapa-legenda">
         <span className="kropka kropka-dach" /> pod dachem
         <span className="kropka kropka-pole" /> na polu

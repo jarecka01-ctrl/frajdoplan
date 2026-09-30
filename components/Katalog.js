@@ -25,8 +25,9 @@ const odmianaMiejsc = (n) => {
   return r10 >= 2 && r10 <= 4 && !(r100 >= 12 && r100 <= 14) ? 'miejsca' : 'miejsc';
 };
 
-export default function Katalog({ places, tytul, pokazDachPole = true, placeholder = 'Szukaj po nazwie lub ulicy…' }) {
-  const [strefa, setStrefa] = useState('Kraków i okolice');
+export default function Katalog({ places, tytul, pokazDachPole = true, pokazStrefy = true, grupuj = 'podkategoria', placeholder = 'Szukaj po nazwie lub ulicy…' }) {
+  const [strefa, setStrefa] = useState(pokazStrefy ? 'Kraków i okolice' : '');
+  const rodzajZ = (p) => p[grupuj] || p.podkategoria;
   const [kategoria, setKategoria] = useState('');
   const [wybrane, setWybrane] = useState([]); // kilka rodzajów naraz; pusto = wszystkie
   const [query, setQuery] = useState('');
@@ -39,8 +40,8 @@ export default function Katalog({ places, tytul, pokazDachPole = true, placehold
   const rodzaje = useMemo(() => {
     const licz = {};
     places
-      .filter((p) => (!strefa || p.strefa === strefa) && (!kategoria || p.kategoria === kategoria) && p.podkategoria)
-      .forEach((p) => { licz[p.podkategoria] = (licz[p.podkategoria] || 0) + 1; });
+      .filter((p) => (!strefa || p.strefa === strefa) && (!kategoria || p.kategoria === kategoria) && rodzajZ(p))
+      .forEach((p) => { const r = rodzajZ(p); licz[r] = (licz[r] || 0) + 1; });
     return Object.entries(licz).sort((a, b) => b[1] - a[1]);
   }, [places, strefa, kategoria]);
 
@@ -57,7 +58,7 @@ export default function Katalog({ places, tytul, pokazDachPole = true, placehold
     const out = places.filter((p) => {
       if (strefa && p.strefa !== strefa) return false;
       if (kategoria && p.kategoria !== kategoria) return false;
-      if (wybrane.length && !wybrane.includes(p.podkategoria)) return false;
+      if (wybrane.length && !wybrane.includes(rodzajZ(p))) return false;
       if (q && !`${p.name} ${p.adres} ${p.podkategoria}`.toLowerCase().includes(q)) return false;
       return true;
     });
@@ -71,11 +72,13 @@ export default function Katalog({ places, tytul, pokazDachPole = true, placehold
   return (
     <section aria-label={tytul}>
       <h2 className="sekcja">{tytul}</h2>
-      <nav className="strefy" aria-label="Gdzie szukasz">
-        {STREFY.map((z) => (
-          <button key={z.label} className="strefa" aria-pressed={strefa === z.id} onClick={() => setStrefa(z.id)}>{z.label}</button>
-        ))}
-      </nav>
+      {pokazStrefy && (
+        <nav className="strefy" aria-label="Gdzie szukasz">
+          {STREFY.map((z) => (
+            <button key={z.label} className="strefa" aria-pressed={strefa === z.id} onClick={() => setStrefa(z.id)}>{z.label}</button>
+          ))}
+        </nav>
+      )}
 
       <div className="panel">
         <label className="szukaj">
@@ -138,8 +141,8 @@ export default function Katalog({ places, tytul, pokazDachPole = true, placehold
               <li key={p.id} className={`karta ${pole ? 'karta-pole' : 'karta-dach'}`}>
                 <div className="karta-gora">
                   <span className="typ">
-                    <span aria-hidden="true">{IKONY[p.podkategoria] || (pole ? '🌳' : '🏠')}</span>
-                    {p.podkategoria || (pole ? 'Na polu' : 'Pod dachem')}
+                    <span aria-hidden="true">{IKONY[rodzajZ(p)] || (pole ? '🌳' : '🏠')}</span>
+                    {rodzajZ(p) || (pole ? 'Na polu' : 'Pod dachem')}
                   </span>
                   {p.urodziny && <span className="znaczek">urodziny</span>}
                 </div>

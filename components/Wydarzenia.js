@@ -13,18 +13,18 @@ const DNI = [
   [/niedziel/, 0], [/poniedzia/, 1], [/wtor/, 2], [/środ|sród|srod/, 3],
   [/czwart/, 4], [/piąt|piat/, 5], [/sobot/, 6],
 ];
-const MIESIACE = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'];
+export const MIESIACE = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'];
 const NAZWY_DNI = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
 
 // Dzisiejsza data w Krakowie jako YYYY-MM-DD (niezależnie od strefy czasowej telefonu).
 export const dzisWarszawa = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Warsaw' }).format(new Date());
-const plusDni = (iso, n) => {
+export const plusDni = (iso, n) => {
   const d = new Date(`${iso}T12:00:00Z`);
   d.setUTCDate(d.getUTCDate() + n);
   return d.toISOString().slice(0, 10);
 };
-const dzienTygodnia = (iso) => new Date(`${iso}T12:00:00Z`).getUTCDay();
-const ladnaData = (iso) => {
+export const dzienTygodnia = (iso) => new Date(`${iso}T12:00:00Z`).getUTCDay();
+export const ladnaData = (iso) => {
   const d = new Date(`${iso}T12:00:00Z`);
   return `${d.getUTCDate()} ${MIESIACE[d.getUTCMonth()]}`;
 };
@@ -40,7 +40,7 @@ export function trwaW(regula, iso) {
   return DNI.some(([wzor, nr]) => wzor.test(r) && nr === dz);
 }
 
-const zakresDat = (a, b) => {
+export const zakresDat = (a, b) => {
   const da = new Date(`${a}T12:00:00Z`), db = new Date(`${b}T12:00:00Z`);
   return da.getUTCMonth() === db.getUTCMonth()
     ? `${da.getUTCDate()}–${db.getUTCDate()} ${MIESIACE[db.getUTCMonth()]}`

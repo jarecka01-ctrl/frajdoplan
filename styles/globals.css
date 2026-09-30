@@ -64,13 +64,13 @@ button, input, select { font: inherit; color: inherit; }
 
 /* wydarzenia: Dziś (duża) + Jutro i Weekend (małe) */
 .wydarzenia { display: grid; gap: 18px; margin: 8px 0 44px; grid-template-columns: 1fr; }
-@media (min-width: 860px) { .wydarzenia { grid-template-columns: 1.7fr 1fr; align-items: start; } }
+@media (min-width: 860px) { .wydarzenia { grid-template-columns: 1.7fr 1fr; align-items: stretch; } }
 .wydarzenia-ladowanie { min-height: 220px; }
 .wyd-glowna {
   background: var(--slonce); border: 2px solid var(--tusz); border-radius: 28px 28px 28px 8px;
   box-shadow: 6px 6px 0 var(--tusz); padding: 22px 22px 18px;
 }
-.wyd-boczne { display: grid; gap: 18px; }
+.wyd-boczne { display: grid; gap: 18px; grid-template-rows: 1fr 1fr; }
 .wyd-mala { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 16px 18px; }
 .wyd-tytul { font: 700 clamp(30px, 5vw, 40px)/1 var(--font-display); margin: 0; letter-spacing: -0.015em; }
 .wyd-tytul-maly { font: 700 22px/1.1 var(--font-display); margin: 0; }
@@ -90,7 +90,7 @@ button, input, select { font: inherit; color: inherit; }
 .wyd-mala .wyd-pusto { color: var(--tusz-2); font-size: 14px; }
 /* Dziś blisko ciebie + Dziś w kinach */
 .blisko-kina { display: grid; gap: 18px; margin: -18px 0 48px; grid-template-columns: 1fr; }
-@media (min-width: 860px) { .blisko-kina { grid-template-columns: 1.4fr 1fr; align-items: start; } }
+@media (min-width: 860px) { .blisko-kina { grid-template-columns: 1.7fr 1fr; align-items: stretch; } }
 .blisko { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 5px 5px 0 var(--slonce); padding: 18px; }
 .blisko-start .przycisk { margin-top: 4px; }
 .przycisk:disabled { opacity: .6; cursor: progress; }
@@ -116,6 +116,59 @@ button, input, select { font: inherit; color: inherit; }
 .kina-linki li { font-size: 15px; font-weight: 500; }
 
 .sekcja { font: 700 30px/1.1 var(--font-display); margin: 0 0 14px; letter-spacing: -0.01em; }
+
+/* baner z głównymi wydarzeniami */
+.baner { margin: 0 0 32px; }
+.baner-slajd {
+  display: grid; grid-template-columns: 1fr; border: 2px solid var(--tusz); border-radius: 28px 28px 28px 8px;
+  box-shadow: 6px 6px 0 var(--tusz); overflow: hidden; min-height: 200px;
+}
+@media (min-width: 760px) { .baner-slajd.z-obrazkiem { grid-template-columns: 1.2fr 1fr; } }
+.baner-slonce { background: var(--slonce); color: var(--tusz); }
+.baner-mak { background: var(--mak); color: var(--biel); }
+.baner-tusz { background: var(--tusz); color: var(--papier); }
+.baner-tekst { padding: 24px 26px; display: flex; flex-direction: column; gap: 6px; }
+.baner-data { margin: 0; font-weight: 600; font-size: 14px; opacity: .85; }
+.baner-tytul { margin: 0; font: 700 clamp(28px, 5vw, 44px)/1.02 var(--font-display); letter-spacing: -0.015em; }
+.baner-opis { margin: 4px 0 0; font-size: 16px; max-width: 48ch; }
+.baner-info { margin: 0; display: flex; gap: 12px; font-size: 14px; }
+.baner-przycisk { align-self: flex-start; margin-top: 10px; display: inline-flex; align-items: center; text-decoration: none; color: var(--tusz); }
+.baner-mak .baner-przycisk, .baner-tusz .baner-przycisk { background: var(--papier); }
+.baner-obrazek { width: 100%; height: 100%; min-height: 200px; object-fit: cover; border-top: 2px solid var(--tusz); }
+@media (min-width: 760px) { .baner-obrazek { border-top: 0; border-left: 2px solid var(--tusz); } }
+.baner-kropki { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.baner-kropka { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); padding: 0; cursor: pointer; }
+.baner-kropka[aria-pressed="true"] { background: var(--tusz); }
+
+/* kalendarz miesiąca */
+.kalendarz { margin-top: 56px; }
+.kal-wrap { display: grid; gap: 18px; grid-template-columns: 1fr; }
+@media (min-width: 860px) { .kal-wrap { grid-template-columns: 1fr 1fr; align-items: start; } }
+.kal-miesiac { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 5px 5px 0 var(--slonce); padding: 16px; }
+.kal-naglowek { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.kal-tytul { margin: 0; font: 700 22px/1 var(--font-display); }
+.kal-nav { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); font-size: 22px; line-height: 1; cursor: pointer; }
+.kal-nav:disabled { opacity: .3; cursor: default; }
+.kal-siatka { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.kal-dzien-nazwa { text-align: center; font-size: 12px; color: var(--tusz-2); padding: 4px 0; }
+.kal-dzien {
+  position: relative; aspect-ratio: 1; border-radius: 12px; border: 2px solid transparent; background: var(--papier);
+  font-weight: 600; font-size: 15px; cursor: pointer;
+}
+.kal-dzien:hover { border-color: var(--kreda); }
+.kal-dzis { border-color: var(--tusz); }
+.kal-minione { color: #A5AAB3; }
+.kal-dzien[aria-pressed="true"] { background: var(--tusz); color: var(--papier); border-color: var(--tusz); }
+.kal-kropka {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); min-width: 8px; height: 8px; border-radius: 999px;
+  background: var(--mak); font-size: 9px; line-height: 8px; color: var(--biel); padding: 0 2px;
+}
+.kal-dzien[aria-pressed="true"] .kal-kropka { background: var(--slonce); color: var(--tusz); }
+.kal-lista-tytul { margin: 0 0 12px; font: 700 22px/1.1 var(--font-display); }
+
+/* przełącznik dróg rowerowych na mapie */
+.mapa-rowery { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.mapa-rowery input { width: 18px; height: 18px; accent-color: var(--tusz); }
 
 /* strefy — duże pigułki */
 .strefy { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }

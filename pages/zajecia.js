@@ -10,15 +10,15 @@ export default function Zajecia({ places, missingConfig, fetchError }) {
   return (
     <Uklad
       tytul="Zajęcia dla dzieci w Krakowie — Frajdoplan"
-      opis="Zajęcia sportowe, szkoły pływania, zajęcia edukacyjne i artystyczne, zajęcia dla maluchów z rodzicami oraz domy kultury w Krakowie."
+      opis="Zajęcia edukacyjne i artystyczne, zajęcia dla maluchów z rodzicami oraz domy kultury w Krakowie."
       missingConfig={missingConfig}
       fetchError={fetchError}
     >
       <section className="hero">
         <h1>Zajęcia dla dzieci</h1>
-        <p className="lead">Sport, pływanie, zajęcia artystyczne i edukacyjne, zajęcia dla maluchów z rodzicami i domy kultury w Krakowie.</p>
+        <p className="lead">Zajęcia artystyczne i edukacyjne, zajęcia dla maluchów z rodzicami i domy kultury w Krakowie. Treningi sportowe znajdziesz w zakładce Treningi.</p>
       </section>
-      <Katalog places={places} tytul="Gdzie zapisać dziecko" pokazDachPole={false} placeholder="Szukaj: judo, taniec, robotyka, Bronowice…" />
+      <Katalog places={places} tytul="Gdzie zapisać dziecko" pokazDachPole={false} pokazStrefy={false} placeholder="Szukaj: robotyka, ceramika, angielski, Bronowice…" />
     </Uklad>
   );
 }

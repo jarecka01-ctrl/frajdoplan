@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 const MENU = [
   { href: '/', label: 'Gdzie iść' },
+  { href: '/treningi', label: 'Treningi' },
   { href: '/zajecia', label: 'Zajęcia' },
   { href: '/polkolonie', label: 'Półkolonie' },
 ];
