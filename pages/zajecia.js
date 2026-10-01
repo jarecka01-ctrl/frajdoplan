@@ -16,7 +16,7 @@ export default function Zajecia({ places, missingConfig, fetchError }) {
     >
       <section className="hero">
         <h1>Zajęcia dla dzieci</h1>
-        <p className="lead">Zajęcia artystyczne i edukacyjne, zajęcia dla maluchów z rodzicami i domy kultury w Krakowie. Treningi sportowe znajdziesz w zakładce Treningi.</p>
+        <p className="lead">Zajęcia artystyczne i edukacyjne, zajęcia dla maluchów z rodzicami i domy kultury w Krakowie. Sport znajdziesz w zakładce Sport.</p>
       </section>
       <Katalog places={places} tytul="Gdzie zapisać dziecko" pokazDachPole={false} pokazStrefy={false} placeholder="Szukaj: robotyka, ceramika, angielski, Bronowice…" />
     </Uklad>

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const MENU = [
-  { href: '/', label: 'Gdzie iść' },
-  { href: '/treningi', label: 'Treningi' },
+  { href: '/', label: 'Atrakcje' },
+  { href: '/treningi', label: 'Sport' },
   { href: '/zajecia', label: 'Zajęcia' },
   { href: '/polkolonie', label: 'Półkolonie' },
 ];

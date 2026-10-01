@@ -9,13 +9,13 @@ export async function getStaticProps() {
 export default function Treningi({ places, missingConfig, fetchError }) {
   return (
     <Uklad
-      tytul="Treningi i zajęcia sportowe dla dzieci w Krakowie — Frajdoplan"
+      tytul="Sport dla dzieci w Krakowie: treningi i zajęcia sportowe — Frajdoplan"
       opis="Pływanie, taniec, sztuki walki, piłka nożna, tenis, gimnastyka, jazda konna i inne treningi dla dzieci w Krakowie."
       missingConfig={missingConfig}
       fetchError={fetchError}
     >
       <section className="hero">
-        <h1>Treningi dla dzieci</h1>
+        <h1>Sport dla dzieci</h1>
         <p className="lead">Pływanie, taniec, sztuki walki, piłka nożna, tenis i inne sporty. Wybierz jedną lub kilka dyscyplin.</p>
       </section>
       <Katalog places={places} tytul="Gdzie zapisać dziecko na trening" pokazDachPole={false} pokazStrefy={false} grupuj="dyscyplina" placeholder="Szukaj: judo, balet, Bronowice…" />
