@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { IKONY, SKROTY } from '../lib/ikony';
+import { DZIALY, kategoriaRodzaju } from '../lib/kategorie';
 
 // Mapa ładuje się tylko w przeglądarce (Leaflet nie działa na serwerze).
 const Mapa = dynamic(() => import('./Mapa'), {
@@ -25,16 +26,22 @@ const odmianaMiejsc = (n) => {
   return r10 >= 2 && r10 <= 4 && !(r100 >= 12 && r100 <= 14) ? 'miejsca' : 'miejsc';
 };
 
-export default function Katalog({ places, tytul, pokazDachPole = true, pokazStrefy = true, grupuj = 'podkategoria', placeholder = 'Szukaj po nazwie lub ulicy…' }) {
-  const [strefa, setStrefa] = useState(pokazStrefy ? 'Kraków i okolice' : '');
+// Na hubie kafelki rodzajów to linki do kategorii, ale zwykłe kliknięcie zaznacza je (można kilka naraz).
+// Na stronie kategorii (`kategoria` + `kategorie` z serwera) kafelki po prostu przenoszą do innej kategorii.
+export default function Katalog({
+  places, tytul, pokazDachPole = true, pokazStrefy = true, grupuj = 'podkategoria', placeholder = 'Szukaj po nazwie lub ulicy…',
+  dzial, kategorie, kategoria: aktywna, naStrone = NA_STRONE,
+}) {
+  // Na stronie kategorii pokazujemy od razu całą listę (bez zawężania do Krakowa), żeby była w HTML.
+  const [strefa, setStrefa] = useState(pokazStrefy && !aktywna ? 'Kraków i okolice' : '');
   const rodzajZ = (p) => p[grupuj] || p.podkategoria;
   const [kategoria, setKategoria] = useState('');
   const [wybrane, setWybrane] = useState([]); // kilka rodzajów naraz; pusto = wszystkie
   const [query, setQuery] = useState('');
-  const [limit, setLimit] = useState(NA_STRONE);
+  const [limit, setLimit] = useState(naStrone);
   const [widok, setWidok] = useState('lista');
 
-  useEffect(() => setLimit(NA_STRONE), [strefa, kategoria, wybrane, query]);
+  useEffect(() => setLimit(naStrone), [strefa, kategoria, wybrane, query, naStrone]);
 
   // Rodzaje miejsc z liczbą — tylko te, które są w wybranej strefie i kategorii.
   const rodzaje = useMemo(() => {
@@ -52,6 +59,12 @@ export default function Katalog({ places, tytul, pokazDachPole = true, pokazStre
   }, [rodzaje, wybrane]);
 
   const przelacz = (r) => setWybrane((w) => (w.includes(r) ? w.filter((x) => x !== r) : [...w, r]));
+  // zwykłe kliknięcie = zaznacz; Ctrl/środkowy przycisk = otwórz stronę kategorii
+  const klikKafelka = (e, r) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    przelacz(r);
+  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -101,18 +114,44 @@ export default function Katalog({ places, tytul, pokazDachPole = true, pokazStre
           </div>
         )}
 
-        <div className="rodzaje" role="group" aria-label="Rodzaj miejsca">
-          <button className="rodzaj" aria-pressed={wybrane.length === 0} onClick={() => setWybrane([])}>
-            <span className="rodzaj-nazwa">{wybrane.length ? `Wyczyść wybór (${wybrane.length})` : 'Wszystkie rodzaje'}</span>
-          </button>
-          {rodzaje.map(([r, n]) => (
-            <button key={r} className="rodzaj" aria-pressed={wybrane.includes(r)} onClick={() => przelacz(r)}>
-              <span className="rodzaj-ikona" aria-hidden="true">{IKONY[r] || '📍'}</span>
-              <span className="rodzaj-nazwa">{SKROTY[r] || r}</span>
-              <small>{n}</small>
+        {aktywna && kategorie ? (
+          <nav className="rodzaje" aria-label="Rodzaj miejsca">
+            <a className="rodzaj" href={DZIALY[dzial].hub}>
+              <span className="rodzaj-nazwa">Wszystkie rodzaje</span>
+            </a>
+            {kategorie.map((k) => (
+              <a key={k.slug} className="rodzaj" href={k.href} aria-current={k.slug === aktywna.slug ? 'page' : undefined}>
+                <span className="rodzaj-ikona" aria-hidden="true">{IKONY[k.rodzaj] || '📍'}</span>
+                <span className="rodzaj-nazwa">{k.nazwa}</span>
+                <small>{k.liczba}</small>
+              </a>
+            ))}
+          </nav>
+        ) : (
+          <div className="rodzaje" role="group" aria-label="Rodzaj miejsca">
+            <button className="rodzaj" aria-pressed={wybrane.length === 0} onClick={() => setWybrane([])}>
+              <span className="rodzaj-nazwa">{wybrane.length ? `Wyczyść wybór (${wybrane.length})` : 'Wszystkie rodzaje'}</span>
             </button>
-          ))}
-        </div>
+            {rodzaje.map(([r, n]) => {
+              const tresc = (
+                <>
+                  <span className="rodzaj-ikona" aria-hidden="true">{IKONY[r] || '📍'}</span>
+                  <span className="rodzaj-nazwa">{SKROTY[r] || r}</span>
+                  <small>{n}</small>
+                </>
+              );
+              return dzial ? (
+                <a key={r} className="rodzaj" href={kategoriaRodzaju(dzial, r).href} role="button" aria-pressed={wybrane.includes(r)} onClick={(e) => klikKafelka(e, r)}>
+                  {tresc}
+                </a>
+              ) : (
+                <button key={r} className="rodzaj" aria-pressed={wybrane.includes(r)} onClick={() => przelacz(r)}>
+                  {tresc}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <div className="wynik-pasek">
@@ -166,8 +205,8 @@ export default function Katalog({ places, tytul, pokazDachPole = true, pokazStre
 
       {widok === 'lista' && filtered.length > limit && (
         <div className="wiecej">
-          <button className="przycisk" onClick={() => setLimit((l) => l + NA_STRONE)}>
-            Pokaż kolejne {Math.min(NA_STRONE, filtered.length - limit)}
+          <button className="przycisk" onClick={() => setLimit((l) => l + naStrone)}>
+            Pokaż kolejne {Math.min(naStrone, filtered.length - limit)}
           </button>
         </div>
       )}

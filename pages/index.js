@@ -25,7 +25,7 @@ export default function Home({ places, wydarzenia = [], missingConfig, fetchErro
       </section>
       <Wydarzenia wydarzenia={wydarzenia} />
       <BliskoIKina places={places} wydarzenia={wydarzenia} />
-      <Katalog places={places} tytul="Miejsca na każdy dzień" placeholder="Szukaj: sala zabaw, Nowa Huta, trampoliny…" />
+      <Katalog places={places} dzial="atrakcje" tytul="Miejsca na każdy dzień" placeholder="Szukaj: sala zabaw, Nowa Huta, trampoliny…" />
       <Kalendarz wydarzenia={wydarzenia} />
     </Uklad>
   );

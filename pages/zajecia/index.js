@@ -1,6 +1,6 @@
-import Uklad from '../components/Uklad';
-import Katalog from '../components/Katalog';
-import { pobierzDane } from '../lib/dane';
+import Uklad from '../../components/Uklad';
+import Katalog from '../../components/Katalog';
+import { pobierzDane } from '../../lib/dane';
 
 export async function getStaticProps() {
   return pobierzDane({ sekcja: 'zajecia' });
@@ -18,7 +18,7 @@ export default function Zajecia({ places, missingConfig, fetchError }) {
         <h1>Zajęcia dla dzieci</h1>
         <p className="lead">Zajęcia artystyczne i edukacyjne, zajęcia dla maluchów z rodzicami i domy kultury w Krakowie. Sport znajdziesz w zakładce Sport.</p>
       </section>
-      <Katalog places={places} tytul="Gdzie zapisać dziecko" pokazDachPole={false} pokazStrefy={false} placeholder="Szukaj: robotyka, ceramika, angielski, Bronowice…" />
+      <Katalog places={places} dzial="zajecia" tytul="Gdzie zapisać dziecko" pokazDachPole={false} pokazStrefy={false} placeholder="Szukaj: robotyka, ceramika, angielski, Bronowice…" />
     </Uklad>
   );
 }
