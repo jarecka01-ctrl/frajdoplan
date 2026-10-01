@@ -281,3 +281,10 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
   .strefa { flex: 0 0 auto; height: 44px; padding: 0 16px; font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* okruszki nawigacji */
+.okruszki { margin: -20px 0 14px; font-size: 14px; color: var(--tusz-2); }
+.okruszki ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.okruszki li + li::before { content: '›'; margin-right: 4px; }
+.okruszki a { color: var(--tusz-2); text-decoration: underline; text-underline-offset: 2px; }
+.okruszki a:hover { color: var(--tusz); }

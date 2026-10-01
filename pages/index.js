@@ -7,21 +7,26 @@ import Kalendarz from '../components/Kalendarz';
 import { pobierzDane } from '../lib/dane';
 
 export async function getStaticProps() {
-  return pobierzDane({ sekcja: 'z-marszu', zWydarzeniami: true });
+  return pobierzDane({
+    sekcja: 'z-marszu',
+    zWydarzeniami: true,
+    adres: '/',
+    teksty: {
+      tytul: 'Atrakcje dla dzieci w Krakowie: gdzie dziś iść z dzieckiem | Frajdoplan',
+      opis: 'Sale zabaw, place zabaw, muzea, kina i wycieczki pod Krakowem. Sprawdź, gdzie iść z dzieckiem dziś i w weekend.',
+      h1: 'Gdzie dziś idziemy?',
+      wstep: 'Miejsca dla dzieci w Krakowie i okolicy: od sal zabaw po wycieczki za miasto.',
+    },
+  });
 }
 
-export default function Home({ places, wydarzenia = [], missingConfig, fetchError }) {
+export default function Home({ places, wydarzenia = [], seo, missingConfig, fetchError }) {
   return (
-    <Uklad
-      tytul="Frajdoplan — gdzie dziś idziemy z dzieckiem w Krakowie"
-      opis="Sale zabaw, place zabaw, muzea, kina i wycieczki pod Krakowem. Sprawdź, gdzie iść z dzieckiem dziś i w weekend."
-      missingConfig={missingConfig}
-      fetchError={fetchError}
-    >
+    <Uklad seo={seo} missingConfig={missingConfig} fetchError={fetchError}>
       <Baner wydarzenia={wydarzenia} />
       <section className="hero">
-        <h1>Gdzie dziś idziemy?</h1>
-        <p className="lead">Miejsca dla dzieci w Krakowie i okolicy: od sal zabaw po wycieczki za miasto.</p>
+        <h1>{seo.h1}</h1>
+        <p className="lead">{seo.wstep}</p>
       </section>
       <Wydarzenia wydarzenia={wydarzenia} />
       <BliskoIKina places={places} wydarzenia={wydarzenia} />

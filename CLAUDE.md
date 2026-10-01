@@ -11,12 +11,16 @@ Właścicielka nie jest programistką. Odpowiadaj po polsku, prosto, bez żargon
 ## Zmienne środowiskowe (Vercel)
 - `SHEET_CSV_URL` — zakładka „Miejsca" (CSV).
 - `SHEET_EVENTS_CSV_URL` — zakładka „Wydarzenia" (CSV).
+- `SHEET_SEO_CSV_URL` — zakładka „Strony_SEO" (CSV, kolumny: adres, tytul_seo, opis_meta, h1, wstep; `{liczba}` = liczba miejsc). Bez niej działają teksty domyślne.
+- `SITE_URL` — adres serwisu do canonical i Open Graph (domyślnie https://frajdoplan.pl).
 
 ## Struktura
 - `lib/dane.js` — pobieranie miejsc i wydarzeń, przypisanie sekcji (`z-marszu`, `treningi`, `zajecia`, `polkolonie`) i dyscyplin.
 - `lib/ikony.js` — ikony podkategorii/dyscyplin i skróty nazw na kafelkach.
-- `components/` — `Uklad` (menu, stopka), `Katalog` (filtry, kafelki rodzajów z wielokrotnym wyborem, lista, mapa), `Mapa`, `Wydarzenia` (Dziś / Jutro / Weekend + pomocnicze funkcje dat), `BliskoIKina`, `Baner`, `Kalendarz`.
-- `pages/` — `index` (Gdzie iść), `treningi`, `zajecia`, `polkolonie`.
+- `lib/kategorie.js` — adresy kategorii (slugi, nazwy do tytułów) dla działów atrakcje / sport / zajecia.
+- `lib/seo.js` — teksty stron z „Strony_SEO" + canonical; `lib/jsonld.js` — dane strukturalne (BreadcrumbList, ItemList).
+- `components/` — `Uklad` (menu, stopka, meta i Open Graph), `Okruszki`, `StronaKategorii`, `Katalog` (filtry, kafelki rodzajów z wielokrotnym wyborem, lista, mapa), `Mapa`, `Wydarzenia` (Dziś / Jutro / Weekend + pomocnicze funkcje dat), `BliskoIKina`, `Baner`, `Kalendarz`.
+- `pages/` — `index` (Gdzie iść), huby `atrakcje`, `sport` (dawne `/treningi`, przekierowanie 301), `zajecia`, `polkolonie` oraz podstrony kategorii `atrakcje/[kategoria]`, `sport/[dyscyplina]`, `zajecia/[kategoria]`.
 - `styles/globals.css` — cały wygląd.
 
 ## Dane

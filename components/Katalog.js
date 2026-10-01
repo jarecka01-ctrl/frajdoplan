@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { IKONY, SKROTY } from '../lib/ikony';
-import { DZIALY, kategoriaRodzaju } from '../lib/kategorie';
+import { DZIALY, kategoriaRodzaju, odmianaMiejsc } from '../lib/kategorie';
 
 // Mapa ładuje się tylko w przeglądarce (Leaflet nie działa na serwerze).
 const Mapa = dynamic(() => import('./Mapa'), {
@@ -20,11 +20,6 @@ const KATEGORIE = [
   { id: 'Pod dachem', label: 'Pod dachem' },
   { id: 'Plener', label: 'Na polu' },
 ];
-const odmianaMiejsc = (n) => {
-  if (n === 1) return 'miejsce';
-  const r10 = n % 10, r100 = n % 100;
-  return r10 >= 2 && r10 <= 4 && !(r100 >= 12 && r100 <= 14) ? 'miejsca' : 'miejsc';
-};
 
 // Na hubie kafelki rodzajów to linki do kategorii, ale zwykłe kliknięcie zaznacza je (można kilka naraz).
 // Na stronie kategorii (`kategoria` + `kategorie` z serwera) kafelki po prostu przenoszą do innej kategorii.

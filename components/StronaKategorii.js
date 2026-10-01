@@ -1,21 +1,22 @@
 import Uklad from './Uklad';
 import Katalog from './Katalog';
+import Okruszki from './Okruszki';
 import { DZIALY } from '../lib/kategorie';
+import { listaMiejscJsonLd } from '../lib/jsonld';
 
 // Wspólny wygląd podstron kategorii: /atrakcje/…, /sport/…, /zajecia/…
-export default function StronaKategorii({ dzial, places, kategorie, kategoria, missingConfig, fetchError }) {
+export default function StronaKategorii({ dzial, places, kategorie, kategoria, seo, missingConfig, fetchError }) {
+  const d = DZIALY[dzial];
   const atrakcje = dzial === 'atrakcje';
-  const fraza = `${kategoria.fraza} w Krakowie`;
   return (
-    <Uklad
-      tytul={`${fraza} | Frajdoplan`}
-      opis={`${kategoria.fraza} w Krakowie i okolicy: adresy, oceny i mapa. ${places.length} sprawdzonych miejsc w jednym miejscu.`}
-      missingConfig={missingConfig}
-      fetchError={fetchError}
-    >
+    <Uklad seo={seo} jsonLd={[listaMiejscJsonLd(places, seo.h1)]} missingConfig={missingConfig} fetchError={fetchError}>
+      <Okruszki
+        sciezka={[{ nazwa: d.nazwa, href: d.hub }, { nazwa: kategoria.nazwa, href: kategoria.href }]}
+        siteUrl={seo.siteUrl}
+      />
       <section className="hero">
-        <h1>{fraza}</h1>
-        <p className="lead">{kategoria.fraza} w Krakowie i okolicy: adresy, oceny z Google i mapa w jednym miejscu.</p>
+        <h1>{seo.h1}</h1>
+        <p className="lead">{seo.wstep}</p>
       </section>
       <Katalog
         places={places}
@@ -23,11 +24,10 @@ export default function StronaKategorii({ dzial, places, kategorie, kategoria, m
         kategorie={kategorie}
         kategoria={kategoria}
         naStrone={100}
-        tytul={`${DZIALY[dzial].nazwa}: ${kategoria.nazwa.toLowerCase()}`}
-        grupuj={DZIALY[dzial].pole}
+        tytul={atrakcje ? 'Lista miejsc' : 'Gdzie zapisać dziecko'}
+        grupuj={d.pole}
         pokazDachPole={atrakcje}
         pokazStrefy={atrakcje}
-        placeholder="Szukaj po nazwie lub ulicy…"
       />
     </Uklad>
   );
