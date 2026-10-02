@@ -1,8 +1,8 @@
 # Rozpoznanie źródeł repertuaru kin (etap 1)
 
-Sprawdzono 2 października 2026 (piątek). Zapytania szły po kolei, nie częściej niż raz na sekundę. Nie omijano żadnych zabezpieczeń ani logowania. Nic nie zostało zapisane w serwisie, to tylko rozpoznanie.
+Sprawdzono 2 października 2026 (piątek). Tego samego dnia, po odblokowaniu domen, dosprawdzono Kijów i Mikro. Zapytania szły po kolei, nie częściej niż raz na sekundę. Nie omijano żadnych zabezpieczeń ani logowania. Nic nie zostało zapisane w serwisie, to tylko rozpoznanie.
 
-**Ograniczenie tej sesji:** sieć środowiska przepuszcza tylko część domen. Zablokowane były m.in. `okn.edu.pl` (Sfinks), `kupbilet.kijow.pl` (Kijów), `bilety.kinomikro.pl` i `kmk.systembiletowy.pl` (Mikro), `bilety.kinoagrafka.pl` i `kijowcentrum.pl`. Takie kina oznaczono jako „nie sprawdzone” zamiast zgadywać. Nie było też dostępu do arkusza „Miejsca”, więc pod uwagę wzięto tylko kina wymienione w zadaniu.
+**Ograniczenie tej sesji:** sieć środowiska przepuszcza tylko część domen. Po dodaniu `kupbilet.kijow.pl`, `bilety.kinomikro.pl` i `okn.edu.pl` dało się sprawdzić Kijów i Mikro. Nadal zablokowane są `kinosfinks.okn.edu.pl` (wpis `okn.edu.pl` nie obejmuje poddomen), `kmk.systembiletowy.pl`, `bilety.kinoagrafka.pl`, `bilety.kinoparadox.pl` i `kijowcentrum.pl`. Kina, których nie dało się sprawdzić, oznaczono jako „nie sprawdzone” zamiast zgadywać. Nie było też dostępu do arkusza „Miejsca”, więc pod uwagę wzięto tylko kina wymienione w zadaniu.
 
 ## Podsumowanie
 
@@ -11,13 +11,13 @@ Sprawdzono 2 października 2026 (piątek). Zapytania szły po kolei, nie częśc
 | Pod Baranami | zwykły HTML `repertuar.php` | wszystko dozwolone | nie znaleziono | **bezpieczne** |
 | Agrafka | zwykły HTML `rep.php` | brak pliku (= brak zakazów) | brak (jest tylko regulamin konkursu z 2018) | **bezpieczne** |
 | Paradox | zwykły HTML `/repertuar/` + strona filmu | dozwolone (poza `/wp-admin/`) | brak (jest tylko polityka prywatności) | **bezpieczne** |
+| Kijów.Centrum | HTML + lista seansów w kodzie strony (`RepertoireEvents`) na `kupbilet.kijow.pl` | `kupbilet`: brak pliku; `kijow.pl`: wszystko dozwolone | tylko regulamin sprzedaży biletów, bez zakazu | **bezpieczne** |
+| Mikro (Lea, Bronowice) | publiczny JSON `bilety.kinomikro.pl/service.php/repertoire/list.json` | reguły wykomentowane (brak zakazów) | nie znaleziono | **bezpieczne** |
 | Cinema City (Bonarka, Kazimierz, Zakopianka) | publiczne JSON API, z którego korzysta sama strona | dozwolone (zakaz tylko `/booking`) | ogólny zapis: treści i „wszelkie inne dane” nie powinny być powielane bez zgody | **wątpliwe** |
 | Multikino | — | dozwolone | — | **niemożliwe** (zabezpieczenie Cloudflare) |
-| Kijów.Centrum | repertuar na `kupbilet.kijow.pl` | `kijow.pl`: wszystko dozwolone | regulamin sprzedaży biletów nie dotyczy pobierania | nie sprawdzone (blokada sieci) |
-| Mikro | JSON `bilety.kinomikro.pl/service.php/repertoire/list.json`, ładowany skryptem | `kinomikro.pl`: dozwolone | nie znaleziono | nie sprawdzone (blokada sieci) |
-| Sfinks | `kinosfinks.okn.edu.pl` | — | — | nie sprawdzone (blokada sieci) |
+| Sfinks | `kinosfinks.okn.edu.pl` | `okn.edu.pl`: repertuaru nie dotyczy | — | nie sprawdzone (poddomena zablokowana) |
 
-**Bezpieczne: 3 kina (Pod Baranami, Agrafka, Paradox).** Cinema City to technicznie najłatwiejsze źródło i ma najwięcej seansów dla dzieci, ale jego regulamin trzeba rozstrzygnąć.
+**Bezpieczne: 5 kin (Pod Baranami, Agrafka, Paradox, Kijów.Centrum, Mikro).** Cinema City to technicznie najłatwiejsze źródło i ma najwięcej seansów dla dzieci, ale jego regulamin trzeba rozstrzygnąć.
 
 ## Szczegóły
 
@@ -63,21 +63,30 @@ Sprawdzono 2 października 2026 (piątek). Zapytania szły po kolei, nie częśc
 - `robots.txt` jest dostępny (zakazy m.in. `/showing/`, `/screening/`, `/zamowienie/`), ale każda strona repertuaru (`/repertuar/krakow`) zwraca 403 z ekranem „Just a moment…” (Cloudflare, `cf-mitigated: challenge`). Ten ekran ma zatrzymywać automaty, a jego omijanie jest wykluczone. Ocena: **niemożliwe**, chyba że Multikino udostępni dane w inny sposób, np. na prośbę.
 
 ### Kijów.Centrum
-- `kijow.pl` to WordPress, a `robots.txt` pozwala na wszystko. Strona `/repertuar/` jest pusta: repertuar i bilety są w systemie `kupbilet.kijow.pl/MSI/mvc/pl`, który był zablokowany w tej sesji.
-- Regulamin sprzedaży biletów dotyczy tylko biletów (zakaz kopiowania samych biletów), o pobieraniu repertuaru nic nie mówi.
-- Do sprawdzenia po odblokowaniu `kupbilet.kijow.pl`.
+- **Repertuar:** https://kupbilet.kijow.pl/MSI/mvc/pl (system sprzedaży MSI). Strona `kijow.pl/repertuar/` tylko do niego odsyła. Dane są w HTML (oś czasu: „03 paź 10:30”, tytuł, krótki opis) i dodatkowo w kodzie strony jako gotowa lista `var RepertoireEvents = [{ 'Id', 'Name', 'Date': '02.10.2026', 'Hour': '12:30', … }]`. Najwygodniej czytać tę listę, bo ma pełną datę z rokiem.
+- **robots.txt:** `kupbilet.kijow.pl/robots.txt` daje 404 (brak zakazów), `kijow.pl` pozwala na wszystko.
+- **Regulamin:** jest tylko regulamin sprzedaży biletów online (zakaz kopiowania samych biletów). O pobieraniu repertuaru nic nie mówi.
+- **Pola:** tytuł, data, godzina, wersja w tytule („2D DUBBING”), link do biletu (`/MSI/Default.aspx?event_id=…`), strona opisu (`/MSI/mvc/pl/details/<id>`). Sali, gatunku i kategorii wiekowej brak. W repertuarze są też spektakle i transmisje oper (tytuły zaczynają się od „SPEKTAKL” / „OPERA”).
+- **Filtr dla dzieci:** „dubbing” w tytule plus lista `wymus`/`ukryj`.
+- **Zakres:** tydzień piątek–czwartek (2–8.10: 14–26 seansów dziennie), dalej pojedyncze wydarzenia do końca miesiąca.
+- **Dla dzieci w najbliższym tygodniu:** 45 seansów („Zapomniana wyspa”, „Tedi i magiczna lampa”, „Luna i rozgadana świnka”, „Pucio kocha zwierzaki”, wszystkie z dubbingiem).
 
-### Mikro
-- `kinomikro.pl` to WordPress, a `robots.txt` blokuje tylko `/wp-admin/`. Strona repertuaru ładuje dane skryptem z publicznego JSON: `https://bilety.kinomikro.pl/service.php/repertoire/list.json?limit=300&advanced=1`. To dobry znak, bo JSON wprost to najprostszy przypadek.
-- Ta domena była zablokowana w sesji, więc nie dało się sprawdzić pól ani robots.txt systemu biletowego. Regulaminu strony nie znaleziono.
-- Agrafka i Paradox prawdopodobnie korzystają z tego samego systemu biletowego (adresy `…/repertoire.html?id=…`). Jeśli ma on podobny plik `list.json`, byłby to lepsze źródło niż HTML (z gatunkiem i wiekiem). Do sprawdzenia po odblokowaniu domen `bilety.*`.
+### Mikro (Lea 5, Galeria Bronowice)
+- **Repertuar:** strona `kinomikro.pl/repertuar/` ładuje dane skryptem z publicznego JSON https://bilety.kinomikro.pl/service.php/repertoire/list.json?limit=300&advanced=1. Jedno zapytanie daje cały repertuar (99 seansów).
+- **robots.txt:** na `bilety.kinomikro.pl` reguły są wykomentowane (`#Disallow:`), czyli brak zakazów. `kinomikro.pl` blokuje tylko `/wp-admin/`.
+- **Regulamin:** na stronie i w systemie biletowym nie znaleziono regulaminu korzystania z serwisu.
+- **Pola:** tytuł (wersja czasem w tytule, np. „Marsupilami- dubbing”), data i godzina z strefą czasową, sala / lokalizacja (Sala Mikro, Sala Mikroffala, Galeria Bronowice) z adresem, link do biletu (`/kup-bilet/…`), cena, liczba wolnych miejsc. Pola `category`, `year`, `country` są puste, kategorii wiekowej brak. Opis jest w HTML, ale go nie bierzemy.
+- **Filtr dla dzieci:** po tytule („dubbing”) plus lista `wymus`.
+- **Zakres:** tydzień piątek–czwartek (2–8.10: 10–14 seansów dziennie), dalej pojedyncze wydarzenia do końca listopada.
+- **Dla dzieci w najbliższym tygodniu:** 8 seansów („Marsupilami” w Bronowicach, „Pucio kocha zwierzaki” w Sali Mikroffala).
+- Agrafka i Paradox mają adresy biletów w tym samym stylu (`…/repertoire.html?id=…`). Jeśli to ten sam system, ich `bilety.*` mogą mieć podobny plik `list.json`, prostszy od HTML. Do sprawdzenia po odblokowaniu `bilety.kinoagrafka.pl` i `bilety.kinoparadox.pl`.
 
 ### Sfinks
-- Domena `okn.edu.pl` zablokowana w sesji. Nie sprawdzone.
+- `okn.edu.pl` (Ośrodek Kultury Norwida) jest już dostępny, ale strona ośrodka tylko odsyła do serwisu kina. Repertuar jest na `kinosfinks.okn.edu.pl`, a ta poddomena nadal jest zablokowana. `okn.edu.pl/robots.txt` nie zakazuje stron z repertuarem. Nie sprawdzone.
 
 ## Dni publikacji i harmonogram
 
-Wszystkie sprawdzone kina mają tydzień repertuarowy piątek–czwartek. 2 października (piątek) Pod Baranami, Agrafka i Paradox miały pełny program do czwartku 8.10, a Cinema City do poniedziałku 12.10.
+Wszystkie sprawdzone kina mają tydzień repertuarowy piątek–czwartek. 2 października (piątek) Pod Baranami, Agrafka, Paradox, Kijów i Mikro miały pełny program do czwartku 8.10, a Cinema City do poniedziałku 12.10.
 
 Jednorazowe sprawdzenie nie pokazuje, w który dzień kino publikuje następny tydzień. Zwyczajowo kina robią to we wtorek–środę przed piątkiem. Proponowany harmonogram z zadania (wtorek wieczorem, czwartek wieczorem, opcjonalnie sobota rano) do tego pasuje. Dokładny dzień można potwierdzić, zapisując przez 2 tygodnie, kiedy pojawia się kolejny piątek.
 
@@ -87,8 +96,8 @@ Jednorazowe sprawdzenie nie pokazuje, w który dzień kino publikuje następny t
    - napisać do Cinema City z prośbą o zgodę na pokazywanie godzin seansów z linkiem do zakupu biletu (to dla nich darmowa reklama),
    - albo zaakceptować ryzyko, bo pobieramy tylko fakty, bez plakatów i opisów.
 
-   Bez Cinema City lista seansów dla dzieci będzie krótka.
+   Bez Cinema City zostaje ok. 58 seansów dla dzieci tygodniowo (głównie Kijów i Mikro) zamiast ok. 340.
 2. **Multikino:** jedyna droga to prośba o dane (np. plik z repertuarem albo zgoda na dostęp).
-3. **Kijów, Mikro, Sfinks:** żeby je ocenić, trzeba dopuścić w ustawieniach sieci środowiska domeny `kupbilet.kijow.pl`, `bilety.kinomikro.pl`, `kmk.systembiletowy.pl`, `okn.edu.pl` (i ewentualnie `bilety.kinoagrafka.pl`, `bilety.kinoparadox.pl`).
+3. **Sfinks:** żeby go ocenić, trzeba dopuścić `kinosfinks.okn.edu.pl` (sam `okn.edu.pl` nie wystarcza). Opcjonalnie `bilety.kinoagrafka.pl` i `bilety.kinoparadox.pl`, żeby sprawdzić, czy mają wygodniejszy JSON. GitHub Actions nie ma tych blokad, one dotyczą tylko tej sesji.
 4. **Lista `ukryj`:** na start „Folwark zwierzęcy” (animacja, ale 10+).
-5. **Pod Baranami:** filtr dla dzieci trzeba oprzeć na cyklu „Baranki Dzieciom”, bo kategorii wiekowej tam nie ma.
+5. **Kina bez kategorii wiekowej** (Pod Baranami, Kijów, Mikro, Agrafka): filtr dla dzieci trzeba oprzeć na dubbingu, cyklach („Baranki Dzieciom”, „Czytamy i oglądamy”) i liście `wymus`, bo reguła „wiek 0–7” tam nie zadziała.
