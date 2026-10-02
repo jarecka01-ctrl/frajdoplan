@@ -1,0 +1,67 @@
+# Repertuar kin studyjnych (Kijów, Mikro, Agrafka, Pod Baranami, Paradox, Sfinks) → data/repertuar.json.
+# Wszystkie te kina mają tydzień repertuarowy piątek–czwartek i publikują go przed piątkiem
+# (docs/rozpoznanie-kin.md), więc jeden harmonogram wystarcza dla wszystkich.
+#
+# Godziny w cron są w UTC. Podane niżej godziny polskie dotyczą czasu letniego;
+# zimą (CET) wszystko przesuwa się o 1 h wcześniej (np. 21:00 → 20:00).
+name: Repertuar kin
+
+on:
+  schedule:
+    - cron: '0 19 * * 2' # wtorek 21:00 — zwykle jest już repertuar na kolejny tydzień
+    - cron: '0 19 * * 4' # czwartek 21:00 — ostatnie poprawki przed piątkiem
+    - cron: '0 6 * * 6'  # sobota 8:00 — zmiany na weekend
+  workflow_dispatch: # ręczne uruchomienie: Actions → Repertuar kin → Run workflow
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repertuar-kin
+  cancel-in-progress: false
+
+jobs:
+  aktualizuj:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci --ignore-scripts
+
+      - name: Pobierz repertuar
+        id: skrypt
+        env:
+          # adres do kontaktu w nagłówku User-Agent (zmienna albo sekret repozytorium); bez niego: „FrajdoplanBot"
+          CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || secrets.CONTACT_EMAIL }}
+        run: |
+          set +e
+          node scripts/repertuar/uruchom.mjs
+          echo "kod=$?" >> "$GITHUB_OUTPUT"
+
+      # Zapis tylko przy zmianie pliku. Commit zrobiony tokenem GITHUB_TOKEN nie uruchamia ponownie
+      # workflow (brak pętli), a Vercel wdroży nową wersję strony.
+      - name: Zapisz zmiany
+        run: |
+          if git diff --quiet -- data/repertuar.json; then
+            echo "Repertuar bez zmian."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/repertuar.json
+          git commit -m "Repertuar kin: aktualizacja"
+          git push
+
+      # Błąd któregoś źródła: plik ma jego poprzednie dane (ok: false), a workflow kończy się „failed",
+      # więc GitHub wysyła e-mail do właścicielki repozytorium.
+      - name: Sprawdź błędy źródeł
+        if: steps.skrypt.outputs.kod != '0'
+        run: |
+          echo "::error::Co najmniej jedno źródło repertuaru nie zadziałało. Szczegóły w kroku „Pobierz repertuar”."
+          exit 1

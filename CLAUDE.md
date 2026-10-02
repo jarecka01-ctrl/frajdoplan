@@ -22,6 +22,7 @@ Właścicielka nie jest programistką. Odpowiadaj po polsku, prosto, bez żargon
 - `components/` — `Uklad` (menu, stopka, meta i Open Graph), `Okruszki`, `StronaKategorii`, `Katalog` (filtry, kafelki rodzajów z wielokrotnym wyborem, lista, mapa), `Mapa`, `Wydarzenia` (Dziś / Jutro / Weekend + pomocnicze funkcje dat), `BliskoIKina`, `Baner`, `Kalendarz`.
 - `pages/` — `index` (Gdzie iść), huby `atrakcje`, `sport` (dawne `/treningi`, przekierowanie 301), `zajecia`, `polkolonie` oraz podstrony kategorii `atrakcje/[kategoria]`, `sport/[dyscyplina]`, `zajecia/[kategoria]`.
 - `styles/globals.css` — cały wygląd.
+- `scripts/repertuar/` — skrypt repertuaru kin studyjnych (`npm run repertuar`): moduł na kino w `zrodla/`, wynik w `data/repertuar.json`, wyjątki w `data/wyjatki.json` (`wymus` / `ukryj`). Uruchamia go `.github/workflows/repertuar-kin.yml` (wt. i czw. wieczorem, sob. rano). Cinema City i Multikino nie są pobierane — w „Dziś w kinach" mają stałe linki. Raport źródeł: `docs/rozpoznanie-kin.md`.
 
 ## Dane
 Kolumny „Miejsca": place_id, name, type, street, city, gmina_aglomeracja, rating, reviews, phone, website, photo, lat, lon, flag, queries, kategoria_glowna (Pod dachem / Plener), podkategoria, pogoda, strefa (Kraków i okolice / Pod Krakowem), odleglosc_km, sekcja, dyscyplina, zrodlo_wydarzen, organizuje_urodziny.
