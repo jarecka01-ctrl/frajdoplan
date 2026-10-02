@@ -39,6 +39,8 @@ jobs:
         env:
           # adres do kontaktu w nagłówku User-Agent (zmienna albo sekret repozytorium); bez niego: „FrajdoplanBot"
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || secrets.CONTACT_EMAIL }}
+          # adres CSV zakładki „Miejsca" (ten sam co w Vercel) — z niego bierzemy place_id kin; bez niego pole zostaje puste
+          SHEET_CSV_URL: ${{ vars.SHEET_CSV_URL || secrets.SHEET_CSV_URL }}
         run: |
           set +e
           node scripts/repertuar/uruchom.mjs

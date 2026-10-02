@@ -21,10 +21,14 @@ export async function pobierz(url, opcje = {}) {
   }
 }
 
-async function pobierzRaz(url, { kodowanie = 'utf-8', json = false } = {}) {
+async function odstep() {
   const teraz = Date.now();
   if (teraz - ostatnie < ODSTEP_MS) await czekaj(ODSTEP_MS - (teraz - ostatnie));
   ostatnie = Date.now();
+}
+
+async function pobierzRaz(url, { kodowanie = 'utf-8', json = false } = {}) {
+  await odstep();
   const res = await fetch(url, {
     headers: { 'User-Agent': USER_AGENT, Accept: json ? 'application/json' : 'text/html,*/*' },
     redirect: 'follow',
@@ -34,6 +38,32 @@ async function pobierzRaz(url, { kodowanie = 'utf-8', json = false } = {}) {
   const bufor = await res.arrayBuffer();
   const tekst = new TextDecoder(kodowanie).decode(bufor);
   return json ? JSON.parse(tekst) : tekst;
+}
+
+// Czy adres zwraca działającą stronę. Zwraca { ok: true } albo { ok: false, powod }, a gdy nie udało się
+// sprawdzić (brak połączenia, przekroczony czas) — { ok: null, powod }: wtedy nie ruszamy linku.
+// Niedziałające: kod 4xx/5xx, przekierowanie na stronę błędu (np. Error.aspx) albo na stronę główną.
+export async function sprawdz(url) {
+  await odstep();
+  let res;
+  try {
+    res = await fetch(url, {
+      headers: { 'User-Agent': USER_AGENT, Accept: 'text/html,*/*' },
+      redirect: 'follow',
+      signal: AbortSignal.timeout(20000),
+    });
+  } catch (e) {
+    return { ok: null, powod: `nie udało się połączyć (${e.cause?.code || e.message})` };
+  }
+  try { await res.body?.cancel(); } catch (e) { /* bez znaczenia */ }
+  // 401/403/429: serwer nie wpuszcza botów — dla człowieka link może działać, więc go nie ruszamy
+  if ([401, 403, 429].includes(res.status)) return { ok: null, powod: `serwer odmawia dostępu botom (HTTP ${res.status})` };
+  if (!res.ok) return { ok: false, powod: `HTTP ${res.status}` };
+  const koniec = new URL(res.url);
+  const poczatek = new URL(url);
+  if (/error|b[lł]ad|not[-_]?found|404/i.test(koniec.pathname)) return { ok: false, powod: `przekierowanie na stronę błędu (${koniec.pathname})` };
+  if (koniec.pathname === '/' && poczatek.pathname !== '/') return { ok: false, powod: 'przekierowanie na stronę główną' };
+  return { ok: true };
 }
 
 // Data i czas w Krakowie.

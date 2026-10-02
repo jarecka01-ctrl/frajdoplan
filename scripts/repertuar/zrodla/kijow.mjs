@@ -1,6 +1,7 @@
 // Kino Kijów.Centrum — system sprzedaży MSI (kupbilet.kijow.pl).
 // Strona miesiąca ma w kodzie gotową listę `var RepertoireEvents = [{ 'Id', 'Name', 'Date', 'Hour', … }]`.
-import { pobierz, dzisWarszawa, godzina, rozbierzTytul, pad } from '../wspolne.mjs';
+import * as cheerio from 'cheerio';
+import { pobierz, dzisWarszawa, godzina, rozbierzTytul, pad, slugZ } from '../wspolne.mjs';
 
 const BAZA = 'https://kupbilet.kijow.pl';
 const tekstPola = (blok, pole) => {
@@ -8,10 +9,19 @@ const tekstPola = (blok, pole) => {
   return m ? m[1].replace(/\\'/g, "'") : '';
 };
 
+// Strona filmu na kijow.pl (wpis WordPressa o tytule filmu) — link do kupbilet.kijow.pl nie działa bez sesji.
+async function stronaFilmu(seans) {
+  const wyniki = await pobierz(`https://kijow.pl/wp-json/wp/v2/search?subtype=post&per_page=10&search=${encodeURIComponent(seans.tytul)}`, { json: true });
+  const szukany = slugZ(seans.tytul);
+  const traf = wyniki.find((w) => slugZ(cheerio.load(w.title || '').text()) === szukany);
+  return traf ? traf.url : '';
+}
+
 export default {
   id: 'kijow',
   nazwa: 'Kino Kijów',
   url: 'https://kijow.pl/repertuar/',
+  stronaFilmu,
   async pobierz() {
     const [r, m] = dzisWarszawa().split('-').map(Number);
     const miesiace = [`${r}-${pad(m)}`, m === 12 ? `${r + 1}-01` : `${r}-${pad(m + 1)}`];

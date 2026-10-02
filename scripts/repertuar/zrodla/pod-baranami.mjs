@@ -28,6 +28,7 @@ export default {
         sala: spacje(sala),
         wersja,
         link: `${BAZA}/rezerwacja_start.php?event_id=${id}`,
+        film: li.find('a[href*="film.php"]').first().attr('href') ? `${BAZA}/${li.find('a[href*="film.php"]').first().attr('href')}` : '',
         // cykl „Baranki Dzieciom" (bajki i warsztaty, zwykle niedziela 11:00)
         dlaDzieci: /dzieciom|dla dzieci|dla najmłodszych/i.test(cykl),
       });

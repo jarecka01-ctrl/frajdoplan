@@ -11,6 +11,8 @@ import agrafka from './zrodla/agrafka.mjs';
 import podBaranami from './zrodla/pod-baranami.mjs';
 import paradox from './zrodla/paradox.mjs';
 import sfinks from './zrodla/sfinks.mjs';
+import { naprawLinki } from './linki.mjs';
+import { idKin } from './miejsca.mjs';
 
 const ZRODLA = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 const KATALOG = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'data');
@@ -40,7 +42,7 @@ export function dlaDzieci(s, wyjatki) {
   return Boolean(s.dlaDzieci) || wiekDlaMalych(s.wiek) || /animac|animowan|familijn/i.test(s.gatunek || '');
 }
 
-const naWydarzenie = (zrodlo, s) => ({
+const naWydarzenie = (zrodlo, s, idMiejsc = {}) => ({
   id: `${zrodlo.id}-${slugZ(s.miejsce)}-${slugZ(s.tytul)}-${s.data}T${s.godzina}`,
   typ: 'seans',
   kino: true,
@@ -48,9 +50,9 @@ const naWydarzenie = (zrodlo, s) => ({
   data_regula: s.data,
   godzina: s.godzina,
   miejsce: s.miejsce,
-  powiazane_miejsce_id: '',
-  grupa_wiekowa: s.wiek || '',
-  cena: '',
+  powiazane_miejsce_id: idMiejsc[s.miejsce] || '',
+  grupa_wiekowa: s.wiek || '', // tylko gdy źródło ją podaje
+  cena: s.cena || '', // tylko gdy źródło ją podaje
   link_biletow: s.link || '',
   zrodlo: zrodlo.id,
   status: 'zatwierdzone',
@@ -62,9 +64,23 @@ async function main() {
   const poprzedni = await czytajJson(PLIK, { zrodla: {}, wydarzenia: [] });
   const wyjatki = await czytajJson(WYJATKI, { wymus: [], ukryj: [] });
 
+  // place_id kin z arkusza „Miejsca" (SHEET_CSV_URL). Bez arkusza zostają wartości z poprzedniego pliku.
+  const idMiejsc = {};
+  for (const w of poprzedni.wydarzenia || []) if (w.powiazane_miejsce_id) idMiejsc[w.miejsce] = w.powiazane_miejsce_id;
+  if (process.env.SHEET_CSV_URL) {
+    try {
+      Object.assign(idMiejsc, await idKin(process.env.SHEET_CSV_URL));
+    } catch (e) {
+      console.warn(`Uwaga: nie pobrano place_id kin z arkusza (${e.message}); zostają wartości z poprzedniego pliku.`);
+    }
+  } else {
+    console.warn('Uwaga: brak SHEET_CSV_URL — powiazane_miejsce_id zostaje takie jak w poprzednim pliku (puste, jeśli go nie było).');
+  }
+
   const zrodla = {};
   const wydarzenia = [];
   const bledy = [];
+  const tabela = [];
 
   for (const zrodlo of ZRODLA) {
     const stare = poprzedni.zrodla?.[zrodlo.id] || {};
@@ -85,7 +101,14 @@ async function main() {
       wydarzenia.push(...stareWydarzenia); // zostaw poprzednie dane
       continue;
     }
-    const dzieciece = seanse.filter((s) => dlaDzieci(s, wyjatki)).map((s) => naWydarzenie(zrodlo, s));
+    const wybrane = seanse.filter((s) => dlaDzieci(s, wyjatki));
+    // wiek ze strony filmu (jeśli źródło go tam podaje) i sprawdzenie linków tylko dla seansów, które zostają
+    try { if (zrodlo.uzupelnij) await zrodlo.uzupelnij(wybrane); } catch (e) { console.warn(`${zrodlo.id}: nie uzupełniono danych seansów (${e.message})`); }
+    const { zastapione, niesprawdzone, uwagi } = await naprawLinki(zrodlo, wybrane);
+    uwagi.forEach((u) => console.log(`  link: ${u}`));
+    if (niesprawdzone) console.warn(`  ${zrodlo.id}: ${niesprawdzone} linków nie udało się sprawdzić (zostają bez zmian)`);
+    const dzieciece = wybrane.map((s) => naWydarzenie(zrodlo, s, idMiejsc));
+    tabela.push({ kino: zrodlo.nazwa, seansow: dzieciece.length, zastapione, niesprawdzone });
     zrodla[zrodlo.id] = {
       nazwa: zrodlo.nazwa,
       url: zrodlo.url,
@@ -93,6 +116,7 @@ async function main() {
       pobrano: teraz,
       wszystkich: seanse.length,
       dla_dzieci: dzieciece.length,
+      linki_zastapione: zastapione,
     };
     wydarzenia.push(...dzieciece);
     console.log(`${zrodlo.id}: ${seanse.length} seansów, dla dzieci ${dzieciece.length}`);
@@ -110,6 +134,7 @@ async function main() {
   const wynik = { zaktualizowano: teraz, zrodla, wydarzenia: unikalne };
   await mkdir(KATALOG, { recursive: true });
   await writeFile(PLIK, `${JSON.stringify(wynik, null, 2)}\n`);
+  console.table(tabela.map((t) => ({ kino: t.kino, 'liczba seansów': t.seansow, 'zastąpione linki': t.zastapione, 'niesprawdzone linki': t.niesprawdzone })));
   console.log(`Zapisano ${unikalne.length} seansów dla dzieci do data/repertuar.json`);
 
   if (bledy.length) {

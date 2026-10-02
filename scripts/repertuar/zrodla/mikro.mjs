@@ -12,6 +12,11 @@ export default {
     return Object.values(dane.repertoires || {}).map((r) => {
       const { tytul, wersja } = rozbierzTytul(r.title);
       const opis = String(r.event?.description || '').replace(/<[^>]+>/g, ' ');
+      // Cena: bilet normalny z systemu sprzedaży („27,00" → „27 zł"). Wiek tylko, gdy opis go podaje („wiek: 16+").
+      const produkty = r.info?.products || [];
+      const bilet = produkty.find((p) => /normaln/i.test(p.name)) || produkty[0];
+      const cena = bilet && bilet.price ? `${String(bilet.price).replace(/,00$/, '')} zł` : '';
+      const wiek = (opis.match(/wiek:\s*(\d{1,2})\s*\+/i) || [])[1];
       const bronowice = /bronowice/i.test(`${r.location?.name} ${r.location?.institution_name}`);
       return {
         tytul,
@@ -21,6 +26,8 @@ export default {
         sala: r.location?.name || '',
         wersja,
         gatunek: r.event?.category || '',
+        cena,
+        wiek: wiek ? `${wiek}+` : '',
         link: r.url ? `${BAZA}${r.url}` : '',
         // Mikro nie podaje wieku. Dla dzieci: dubbing albo opis o animacji / przedszkolakach.
         dlaDzieci: wersja === 'dubbing' || /animacj|animowan|familijn|przedszkol|dla najmłodszych/i.test(opis),

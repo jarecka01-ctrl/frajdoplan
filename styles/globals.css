@@ -109,8 +109,10 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .kina-lista { display: grid; gap: 14px; }
 .kino-nazwa { margin: 0 0 6px; font: 700 17px/1.2 var(--font-display); color: var(--slonce); }
 .kino ul, .kina-linki { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.kino li { display: grid; grid-template-columns: 52px 1fr; gap: 8px; font-size: 14px; }
-.kino-godz { font-weight: 700; }
+.kino li { font-size: 14px; }
+.kino-film { font-weight: 700; }
+.kino-film::after { content: ': '; }
+.kino-godziny a { font-weight: 600; }
 .kina a { color: var(--papier); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .kino small { color: #C9CDD4; }
 .kina-pusto { margin: 0 0 12px; font-size: 14px; color: #D8DBE0; }
