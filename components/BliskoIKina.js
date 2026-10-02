@@ -1,108 +1,7 @@
 import { useEffect, useState } from 'react';
-import { IKONY } from '../lib/ikony';
-import { dzisWarszawa, trwaW, poGodzinie, ladnaData } from './Wydarzenia';
-import Spektakle from './Spektakle';
+import { dzisWarszawa, godzinaWarszawa, plusDni, trwaW, poGodzinie, ladnaData } from './Wydarzenia';
+import NajblizszeWydarzenia from './NajblizszeWydarzenia';
 import u from '../styles/Sekcja.module.css';
-
-// Odległość w km między dwoma punktami (wzór haversine).
-function km(a, b) {
-  const R = 6371, r = (x) => (x * Math.PI) / 180;
-  const dLat = r(b.lat - a.lat), dLon = r(b.lon - a.lon);
-  const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dLon / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(h));
-}
-const ladnieKm = (d) => (d < 1 ? `${Math.round(d * 1000 / 50) * 50} m` : `${d.toFixed(1).replace('.', ',')} km`);
-const trasa = (p) => `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}`;
-
-function BliskoCiebie({ places, wydarzenia, dzis }) {
-  const [stan, setStan] = useState('start'); // start | szukam | ok | brak-zgody | blad
-  const [ja, setJa] = useState(null);
-  const [tylkoDach, setTylkoDach] = useState(false);
-
-  const znajdz = () => {
-    if (!('geolocation' in navigator)) { setStan('blad'); return; }
-    setStan('szukam');
-    navigator.geolocation.getCurrentPosition(
-      (poz) => { setJa({ lat: poz.coords.latitude, lon: poz.coords.longitude }); setStan('ok'); },
-      (err) => setStan(err.code === 1 ? 'brak-zgody' : 'blad'),
-      { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 }
-    );
-  };
-
-  let wydarzeniaObok = [], miejscaObok = [];
-  if (ja) {
-    const poId = Object.fromEntries(places.map((p) => [p.id, p]));
-    wydarzeniaObok = wydarzenia
-      .filter((w) => !w.kino && w.miejsceId && trwaW(w.data_regula, dzis))
-      .map((w) => ({ ...w, p: poId[w.miejsceId] }))
-      .filter((w) => w.p && w.p.lat != null)
-      .map((w) => ({ ...w, d: km(ja, w.p) }))
-      .filter((w) => w.d <= 5)
-      .sort(poGodzinie)
-      .slice(0, 3);
-    miejscaObok = places
-      .filter((p) => p.lat != null && p.lon != null && (!tylkoDach || p.kategoria === 'Pod dachem'))
-      .map((p) => ({ ...p, d: km(ja, p) }))
-      .sort((a, b) => a.d - b.d)
-      .slice(0, 6);
-  }
-
-  return (
-    <div className="blisko">
-      <h2 className="wyd-tytul-maly">Dziś blisko ciebie</h2>
-
-      {stan !== 'ok' && (
-        <div className="blisko-start">
-          <p className="wyd-data">
-            {stan === 'brak-zgody'
-              ? 'Przeglądarka nie udostępniła lokalizacji. Zezwól na nią w ustawieniach strony albo użyj filtrów poniżej.'
-              : stan === 'blad'
-              ? 'Nie udało się ustalić lokalizacji. Spróbuj ponownie za chwilę albo użyj filtrów poniżej.'
-              : 'Pokażemy najbliższe miejsca i dzisiejsze wydarzenia w okolicy. Lokalizacja zostaje w twojej przeglądarce.'}
-          </p>
-          <button className="przycisk" onClick={znajdz} disabled={stan === 'szukam'}>
-            {stan === 'szukam' ? 'Szukam…' : 'Pokaż miejsca blisko mnie'}
-          </button>
-        </div>
-      )}
-
-      {stan === 'ok' && (
-        <>
-          <div className="chipy blisko-chipy">
-            <button className="chip chip-all" aria-pressed={!tylkoDach} onClick={() => setTylkoDach(false)}>Wszystko</button>
-            <button className="chip chip-dach" aria-pressed={tylkoDach} onClick={() => setTylkoDach(true)}>Tylko pod dachem</button>
-          </div>
-          {wydarzeniaObok.length > 0 && (
-            <ul className="blisko-lista">
-              {wydarzeniaObok.map((w) => (
-                <li key={w.id} className="blisko-item blisko-wyd">
-                  <span className="blisko-ikona" aria-hidden="true">📅</span>
-                  <span className="blisko-tekst">
-                    <strong>{w.godzina ? `${w.godzina} ` : ''}{w.nazwa}</strong>
-                    <small>{w.p.name}, {ladnieKm(w.d)}</small>
-                  </span>
-                  <a className="link" href={trasa(w.p)} target="_blank" rel="noreferrer">Trasa</a>
-                </li>
-              ))}
-            </ul>
-          )}
-          <ul className="blisko-lista">
-            {miejscaObok.map((p) => (
-              <li key={p.id} className="blisko-item">
-                <span className="blisko-ikona" aria-hidden="true">{IKONY[p.podkategoria] || '📍'}</span>
-                <span className="blisko-tekst">
-                  <strong>{p.name}</strong>
-                  <small>{p.podkategoria || (p.kategoria === 'Plener' ? 'Na polu' : 'Pod dachem')}, {ladnieKm(p.d)}</small>
-                </span>
-                <a className="link" href={trasa(p)} target="_blank" rel="noreferrer">Trasa</a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-    </div>
-  );
-}
 
 // Seanse jednego kina (już posortowane po godzinie) → filmy z godzinami obok siebie.
 function filmy(lista) {
@@ -115,8 +14,15 @@ function filmy(lista) {
 }
 
 // `info` (z lib/dane.js): kiedy skrypt zaktualizował repertuar, stan źródeł i stałe linki do sieciówek.
-function DzisWKinach({ places, wydarzenia, dzis, info }) {
-  const seanse = wydarzenia.filter((w) => w.kino && trwaW(w.data_regula, dzis)).sort(poGodzinie);
+function DzisWKinach({ places, wydarzenia, dzis, godz, info }) {
+  const [wybor, setWybor] = useState(null); // null = wybór automatyczny: dziś, a gdy nic nie zostało, jutro
+  const kinowe = wydarzenia.filter((w) => w.kino);
+  // „Dziś": tylko seanse, które jeszcze się nie zaczęły
+  const dzisiejsze = kinowe.filter((w) => trwaW(w.data_regula, dzis) && (!w.godzina || w.godzina > godz)).sort(poGodzinie);
+  const jutrzejsze = kinowe.filter((w) => trwaW(w.data_regula, plusDni(dzis, 1))).sort(poGodzinie);
+  const dzisPusto = dzisiejsze.length === 0;
+  const dzien = wybor || (dzisPusto ? 'jutro' : 'dzis');
+  const seanse = dzien === 'dzis' ? dzisiejsze : jutrzejsze;
   const kina = {};
   seanse.forEach((s) => { (kina[s.miejsce || 'Kino'] = kina[s.miejsce || 'Kino'] || []).push(s); });
   const listaKin = places
@@ -131,6 +37,11 @@ function DzisWKinach({ places, wydarzenia, dzis, info }) {
   return (
     <div className="kina">
       <h2 className="wyd-tytul-maly">Dziś w kinach</h2>
+      <div className="kina-dni" role="group" aria-label="Dzień seansów">
+        <button type="button" aria-pressed={dzien === 'dzis'} onClick={() => setWybor('dzis')}>Dziś</button>
+        <button type="button" aria-pressed={dzien === 'jutro'} onClick={() => setWybor('jutro')}>Jutro</button>
+      </div>
+      {dzisPusto && <p className="kina-pusto">Na dziś seansów już nie ma. Pokazujemy repertuar na jutro.</p>}
       {seanse.length ? (
         <div className="kina-lista">
           {Object.entries(kina).slice(0, 4).map(([kino, lista]) => {
@@ -160,7 +71,7 @@ function DzisWKinach({ places, wydarzenia, dzis, info }) {
         </div>
       ) : info && zrodla.length ? (
         <>
-          <p className="kina-pusto">Dziś nie ma seansów dla dzieci w kinach studyjnych. Repertuar sprawdzisz bezpośrednio:</p>
+          <p className="kina-pusto">{dzien === 'dzis' ? 'Dziś' : 'Jutro'} nie ma seansów dla dzieci w kinach studyjnych. Repertuar sprawdzisz bezpośrednio:</p>
           <ul className="kina-linki">
             {zrodla.filter((z) => z.url).map((z) => (
               <li key={z.id}><a href={z.url} target="_blank" rel="noreferrer">{z.nazwa}</a></li>
@@ -197,15 +108,39 @@ function DzisWKinach({ places, wydarzenia, dzis, info }) {
   );
 }
 
-export default function BliskoIKina({ places, wydarzenia, kina = null }) {
-  const [dzis, setDzis] = useState(null);
-  useEffect(() => setDzis(dzisWarszawa()), []);
-  if (!dzis) return <section className="blisko-kina" aria-hidden="true" />;
+export default function BliskoIKina({ places, wydarzenia, kina = null, muzyka = [] }) {
+  const [czas, setCzas] = useState(null); // { dzis, godz } liczone w przeglądarce
+  useEffect(() => setCzas({ dzis: dzisWarszawa(), godz: godzinaWarszawa() }), []);
+  if (!czas) return <section className="blisko-kina" aria-hidden="true" />;
   return (
-    <section className={`blisko-kina ${u.trzy}`} aria-label="Blisko ciebie, kina i spektakle">
-      <BliskoCiebie places={places} wydarzenia={wydarzenia} dzis={dzis} />
-      <DzisWKinach places={places} wydarzenia={wydarzenia} dzis={dzis} info={kina} />
-      <Spektakle places={places} wydarzenia={wydarzenia} />
+    <section className={`blisko-kina ${u.trzy}`} aria-label="Kina, spektakle i koncerty">
+      <DzisWKinach places={places} wydarzenia={wydarzenia} dzis={czas.dzis} godz={czas.godz} info={kina} />
+      <NajblizszeWydarzenia
+        places={places}
+        wydarzenia={wydarzenia}
+        tytul="Najbliższe spektakle"
+        podtytul="Dla dzieci, do zaplanowania na weekend"
+        etykieta="Najbliższe spektakle dla dzieci"
+        podkategoria="Teatr"
+        wzorNazwy={/spektakl|teatr/i}
+        wyprzedzenie={60}
+        pusto="Repertuar pojawi się tutaj, gdy włączymy automatyczne pobieranie. Na razie sprawdzisz go na stronach teatrów:"
+        strony={places.filter((p) => p.podkategoria === 'Teatr' && p.website).sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0)).slice(0, 5)}
+        wiecej={{ href: '/atrakcje/teatry', tekst: 'Wszystkie teatry →' }}
+      />
+      <NajblizszeWydarzenia
+        places={places}
+        wydarzenia={wydarzenia}
+        tytul="Najbliższe koncerty"
+        podtytul="Dla dzieci, do zaplanowania z wyprzedzeniem"
+        etykieta="Najbliższe koncerty dla dzieci"
+        podkategoria="Koncerty dla dzieci"
+        wzorNazwy={/koncert/i}
+        wyprzedzenie={180}
+        pusto="Nie mamy teraz koncertów dla dzieci w kalendarzu. Program sprawdzisz na stronach:"
+        strony={muzyka}
+        wiecej={{ href: '/atrakcje/koncerty', tekst: 'Wszystkie koncerty →' }}
+      />
     </section>
   );
 }
