@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IKONY } from '../lib/ikony';
-import { dzisWarszawa, trwaW, poGodzinie } from './Wydarzenia';
+import { dzisWarszawa, trwaW, poGodzinie, ladnaData } from './Wydarzenia';
 import Spektakle from './Spektakle';
 import u from '../styles/Sekcja.module.css';
 
@@ -104,7 +104,8 @@ function BliskoCiebie({ places, wydarzenia, dzis }) {
   );
 }
 
-function DzisWKinach({ places, wydarzenia, dzis }) {
+// `info` (z lib/dane.js): kiedy skrypt zaktualizował repertuar, stan źródeł i stałe linki do sieciówek.
+function DzisWKinach({ places, wydarzenia, dzis, info }) {
   const seanse = wydarzenia.filter((w) => w.kino && trwaW(w.data_regula, dzis)).sort(poGodzinie);
   const kina = {};
   seanse.forEach((s) => { (kina[s.miejsce || 'Kino'] = kina[s.miejsce || 'Kino'] || []).push(s); });
@@ -112,27 +113,43 @@ function DzisWKinach({ places, wydarzenia, dzis }) {
     .filter((p) => p.podkategoria === 'Kino' && p.website)
     .sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0))
     .slice(0, 6);
+  const zrodla = info ? info.zrodla : [];
+  const zrodloSeansu = (lista) => zrodla.find((z) => z.id === lista[0].zrodlo);
+  const nieaktualne = zrodla.filter((z) => !z.ok);
+  const stale = info ? info.stale : [];
 
   return (
     <div className="kina">
       <h2 className="wyd-tytul-maly">Dziś w kinach</h2>
       {seanse.length ? (
         <div className="kina-lista">
-          {Object.entries(kina).slice(0, 4).map(([kino, lista]) => (
-            <div key={kino} className="kino">
-              <p className="kino-nazwa">{kino}</p>
-              <ul>
-                {lista.slice(0, 4).map((s) => (
-                  <li key={s.id}>
-                    <span className="kino-godz">{s.godzina}</span>
-                    {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.nazwa}</a> : <span>{s.nazwa}</span>}
-                    {s.wiek && <small> {s.wiek}</small>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {Object.entries(kina).slice(0, 4).map(([kino, lista]) => {
+            const z = zrodloSeansu(lista);
+            return (
+              <div key={kino} className="kino">
+                <p className="kino-nazwa">{z && z.url ? <a href={z.url} target="_blank" rel="noreferrer">{kino}</a> : kino}</p>
+                <ul>
+                  {lista.slice(0, 4).map((s) => (
+                    <li key={s.id}>
+                      <span className="kino-godz">{s.godzina}</span>
+                      {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.nazwa}</a> : <span>{s.nazwa}</span>}
+                      {s.wiek && <small> {s.wiek}</small>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
+      ) : info && zrodla.length ? (
+        <>
+          <p className="kina-pusto">Dziś nie ma seansów dla dzieci w kinach studyjnych. Repertuar sprawdzisz bezpośrednio:</p>
+          <ul className="kina-linki">
+            {zrodla.filter((z) => z.url).map((z) => (
+              <li key={z.id}><a href={z.url} target="_blank" rel="noreferrer">{z.nazwa}</a></li>
+            ))}
+          </ul>
+        </>
       ) : (
         <>
           <p className="kina-pusto">Seanse dla dzieci pojawią się tutaj, gdy włączymy automatyczne pobieranie repertuaru. Na razie repertuar sprawdzisz bezpośrednio:</p>
@@ -143,18 +160,34 @@ function DzisWKinach({ places, wydarzenia, dzis }) {
           </ul>
         </>
       )}
+      {nieaktualne.map((z) => (
+        <p key={z.id} className="kina-pusto">
+          {z.nazwa}: nie udało się odświeżyć repertuaru{z.pobrano ? `, dane z ${ladnaData(z.pobrano.slice(0, 10))}` : ''}.{' '}
+          {z.url && <a href={z.url} target="_blank" rel="noreferrer">Sprawdź na stronie kina</a>}
+        </p>
+      ))}
+      {stale.length > 0 && (
+        <ul className="kina-linki">
+          {stale.map((k) => (
+            <li key={k.nazwa}><a href={k.url} target="_blank" rel="noreferrer">{k.nazwa}: repertuar</a></li>
+          ))}
+        </ul>
+      )}
+      {info && info.zaktualizowano && (
+        <p className="kina-pusto">Repertuar zaktualizowany: {ladnaData(info.zaktualizowano.slice(0, 10))}</p>
+      )}
     </div>
   );
 }
 
-export default function BliskoIKina({ places, wydarzenia }) {
+export default function BliskoIKina({ places, wydarzenia, kina = null }) {
   const [dzis, setDzis] = useState(null);
   useEffect(() => setDzis(dzisWarszawa()), []);
   if (!dzis) return <section className="blisko-kina" aria-hidden="true" />;
   return (
     <section className={`blisko-kina ${u.trzy}`} aria-label="Blisko ciebie, kina i spektakle">
       <BliskoCiebie places={places} wydarzenia={wydarzenia} dzis={dzis} />
-      <DzisWKinach places={places} wydarzenia={wydarzenia} dzis={dzis} />
+      <DzisWKinach places={places} wydarzenia={wydarzenia} dzis={dzis} info={kina} />
       <Spektakle places={places} wydarzenia={wydarzenia} />
     </section>
   );

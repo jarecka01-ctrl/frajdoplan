@@ -24,12 +24,12 @@ export default function Kalendarz({ wydarzenia }) {
   const pierwszy = `${r}-${pad(m)}-01`;
   const przesuniecie = (dzienTygodnia(pierwszy) + 6) % 7; // poniedziałek = 0
 
-  const bezKina = wydarzenia.filter((w) => !w.kino);
+  // w kalendarzu są też seanse dla dzieci z kin studyjnych (data/repertuar.json)
   const dni = Array.from({ length: ileDni }, (_, i) => {
     const iso = `${r}-${pad(m)}-${pad(i + 1)}`;
-    return { iso, n: i + 1, ile: bezKina.filter((w) => trwaW(w.data_regula, iso)).length };
+    return { iso, n: i + 1, ile: wydarzenia.filter((w) => trwaW(w.data_regula, iso)).length };
   });
-  const naWybrany = wybrany ? bezKina.filter((w) => trwaW(w.data_regula, wybrany)).sort(poGodzinie) : [];
+  const naWybrany = wybrany ? wydarzenia.filter((w) => trwaW(w.data_regula, wybrany)).sort(poGodzinie) : [];
   const d = wybrany ? new Date(`${wybrany}T12:00:00Z`) : null;
 
   return (
@@ -73,7 +73,7 @@ export default function Kalendarz({ wydarzenia }) {
                       <p className="wyd-info">
                         {w.wiek && <span>{w.wiek}</span>}
                         {w.cena && <span>{w.cena}</span>}
-                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">Zapisy i szczegóły</a>}
+                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">{w.kino ? 'Bilety' : 'Zapisy i szczegóły'}</a>}
                       </p>
                     )}
                   </div>

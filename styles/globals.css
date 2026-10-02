@@ -114,6 +114,9 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .kina a { color: var(--papier); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .kino small { color: #C9CDD4; }
 .kina-pusto { margin: 0 0 12px; font-size: 14px; color: #D8DBE0; }
+.kino-nazwa a { color: inherit; }
+.kina-linki + .kina-linki, .kina-lista + .kina-linki, .kina-lista + .kina-pusto, .kina-pusto + .kina-linki { margin-top: 12px; }
+.kina-linki + .kina-pusto { margin: 12px 0 0; }
 .kina-linki li { font-size: 15px; font-weight: 500; }
 
 .sekcja { font: 700 30px/1.1 var(--font-display); margin: 0 0 14px; letter-spacing: -0.01em; }

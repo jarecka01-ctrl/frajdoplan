@@ -20,7 +20,7 @@ export async function getStaticProps() {
   });
 }
 
-export default function Home({ places, wydarzenia = [], seo, missingConfig, fetchError }) {
+export default function Home({ places, wydarzenia = [], kina = null, seo, missingConfig, fetchError }) {
   return (
     <Uklad seo={seo} missingConfig={missingConfig} fetchError={fetchError}>
       <Baner wydarzenia={wydarzenia} />
@@ -29,7 +29,7 @@ export default function Home({ places, wydarzenia = [], seo, missingConfig, fetc
         <p className="lead">{seo.wstep}</p>
       </section>
       <Wydarzenia wydarzenia={wydarzenia} />
-      <BliskoIKina places={places} wydarzenia={wydarzenia} />
+      <BliskoIKina places={places} wydarzenia={wydarzenia} kina={kina} />
       <Katalog places={places} dzial="atrakcje" tytul="Miejsca na każdy dzień" placeholder="Szukaj: sala zabaw, Nowa Huta, trampoliny…" />
       <Kalendarz wydarzenia={wydarzenia} />
     </Uklad>
