@@ -4,6 +4,12 @@ import { pobierz, godzina, spacje, zdaniowo, MIESIACE_DOPELNIACZ, pad } from '..
 
 const URL = 'http://kinoagrafka.pl/rep.php';
 
+// Kategoria wiekowa jest tylko na stronie filmu („Kategoria wiekowa: 6+").
+async function wiekFilmu(adres) {
+  const $ = cheerio.load(await pobierz(adres));
+  return (spacje($('body').text()).match(/Kategoria wiekowa:\s*([^\s]+(?:\s*\+)?)/i) || [])[1] || '';
+}
+
 export default {
   id: 'agrafka',
   nazwa: 'Kino Agrafka',
@@ -36,11 +42,20 @@ export default {
           wersja,
           gatunek,
           link: $(tr).find('td.link a').attr('href') || '',
+          film: tytulLink.attr('href') ? new globalThis.URL(tytulLink.attr('href'), URL).href : '',
           // cykle dla najmłodszych: „Czytamy i oglądamy", „dla najmłodszych"
           dlaDzieci: /czytamy i oglądamy|dla najmłodszych/i.test(tekst),
         });
       });
     });
     return seanse;
+  },
+  // Dla wybranych seansów (dla dzieci): wiek ze strony filmu, jedno zapytanie na film.
+  async uzupelnij(seanse) {
+    const wieki = {};
+    for (const adres of [...new Set(seanse.map((s) => s.film).filter(Boolean))]) {
+      try { wieki[adres] = await wiekFilmu(adres); } catch (e) { wieki[adres] = ''; }
+    }
+    seanse.forEach((s) => { if (!s.wiek) s.wiek = (wieki[s.film] || '').replace(/\s+/g, ''); });
   },
 };

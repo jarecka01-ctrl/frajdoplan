@@ -1,71 +1,62 @@
 {
-  "zaktualizowano": "2026-10-02T14:14:11+02:00",
+  "zaktualizowano": "2026-10-02T22:01:22+02:00",
   "zrodla": {
     "kijow": {
       "nazwa": "Kino Kijów",
       "url": "https://kijow.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T14:14:11+02:00",
-      "wszystkich": 141,
-      "dla_dzieci": 43
+      "pobrano": "2026-10-02T22:01:22+02:00",
+      "wszystkich": 131,
+      "dla_dzieci": 42,
+      "linki_zastapione": 42
     },
     "mikro": {
       "nazwa": "Kino Mikro",
       "url": "https://kinomikro.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T14:14:11+02:00",
-      "wszystkich": 95,
-      "dla_dzieci": 7
+      "pobrano": "2026-10-02T22:01:22+02:00",
+      "wszystkich": 87,
+      "dla_dzieci": 7,
+      "linki_zastapione": 0
     },
     "agrafka": {
       "nazwa": "Kino Agrafka",
       "url": "http://kinoagrafka.pl/rep.php",
       "ok": true,
-      "pobrano": "2026-10-02T14:14:11+02:00",
+      "pobrano": "2026-10-02T22:01:22+02:00",
       "wszystkich": 20,
-      "dla_dzieci": 4
+      "dla_dzieci": 4,
+      "linki_zastapione": 0
     },
     "pod-baranami": {
       "nazwa": "Kino Pod Baranami",
       "url": "https://www.kinopodbaranami.pl/repertuar.php",
       "ok": true,
-      "pobrano": "2026-10-02T14:14:11+02:00",
-      "wszystkich": 161,
-      "dla_dzieci": 4
+      "pobrano": "2026-10-02T22:01:22+02:00",
+      "wszystkich": 148,
+      "dla_dzieci": 4,
+      "linki_zastapione": 3
     },
     "paradox": {
       "nazwa": "Kino Paradox",
       "url": "https://kinoparadox.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T14:14:11+02:00",
+      "pobrano": "2026-10-02T22:01:22+02:00",
       "wszystkich": 29,
-      "dla_dzieci": 0
+      "dla_dzieci": 0,
+      "linki_zastapione": 0
     },
     "sfinks": {
       "nazwa": "Kino Sfinks",
       "url": "https://kinosfinks.okn.edu.pl/wydarzenia-kategoria-158.html",
       "ok": true,
-      "pobrano": "2026-10-02T14:14:11+02:00",
+      "pobrano": "2026-10-02T22:01:22+02:00",
       "wszystkich": 72,
-      "dla_dzieci": 1
+      "dla_dzieci": 1,
+      "linki_zastapione": 0
     }
   },
   "wydarzenia": [
-    {
-      "id": "kijow-kino-kijow-zapomniana-wyspa-2026-10-02T16:15",
-      "typ": "seans",
-      "kino": true,
-      "nazwa": "Zapomniana wyspa (dubbing)",
-      "data_regula": "2026-10-02",
-      "godzina": "16:15",
-      "miejsce": "Kino Kijów",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79646&typetran=0",
-      "zrodlo": "kijow",
-      "status": "zatwierdzone"
-    },
     {
       "id": "kijow-kino-kijow-tedi-i-magiczna-lampa-2026-10-03T10:30",
       "typ": "seans",
@@ -77,7 +68,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79649&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -90,7 +81,7 @@
       "godzina": "11:00",
       "miejsce": "Kino Agrafka",
       "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
+      "grupa_wiekowa": "6+",
       "cena": "",
       "link_biletow": "https://bilety.kinoagrafka.pl/repertoire.html?id=92596",
       "zrodlo": "agrafka",
@@ -107,7 +98,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79530&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -122,7 +113,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79623&typetran=0",
+      "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -137,7 +128,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79587&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -152,7 +143,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79624&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -167,7 +158,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79650&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -181,7 +172,7 @@
       "miejsce": "Kino Mikro",
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
-      "cena": "",
+      "cena": "22 zł",
       "link_biletow": "https://bilety.kinomikro.pl/kup-bilet/pucio-kocha-zwierzaki-2026-08-22-13-00-1-1",
       "zrodlo": "mikro",
       "status": "zatwierdzone"
@@ -196,7 +187,7 @@
       "miejsce": "Kino Mikro Bronowice",
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
-      "cena": "",
+      "cena": "27 zł",
       "link_biletow": "https://bilety.kinomikro.pl/kup-bilet/marsupilami-dubbing-2026-10-01-12-45-2",
       "zrodlo": "mikro",
       "status": "zatwierdzone"
@@ -210,7 +201,7 @@
       "godzina": "13:00",
       "miejsce": "Kino Agrafka",
       "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
+      "grupa_wiekowa": "6+",
       "cena": "",
       "link_biletow": "https://bilety.kinoagrafka.pl/repertoire.html?id=92602",
       "zrodlo": "agrafka",
@@ -227,7 +218,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79625&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -242,7 +233,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79549&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -257,7 +248,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79652&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -272,7 +263,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79655&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -287,7 +278,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79553&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -300,7 +291,7 @@
       "godzina": "11:00",
       "miejsce": "Kino Agrafka",
       "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
+      "grupa_wiekowa": "5+",
       "cena": "",
       "link_biletow": "https://bilety.kinoagrafka.pl/repertoire.html?id=92597",
       "zrodlo": "agrafka",
@@ -332,7 +323,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79593&typetran=0",
+      "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -347,7 +338,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79656&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -362,7 +353,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79554&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -376,7 +367,7 @@
       "miejsce": "Kino Mikro",
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
-      "cena": "",
+      "cena": "22 zł",
       "link_biletow": "https://bilety.kinomikro.pl/kup-bilet/pucio-kocha-zwierzaki-2026-08-22-13-00-1-2",
       "zrodlo": "mikro",
       "status": "zatwierdzone"
@@ -390,7 +381,7 @@
       "godzina": "13:30",
       "miejsce": "Kino Agrafka",
       "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
+      "grupa_wiekowa": "6+",
       "cena": "",
       "link_biletow": "https://bilety.kinoagrafka.pl/repertoire.html?id=92600",
       "zrodlo": "agrafka",
@@ -407,7 +398,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79658&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -422,7 +413,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79599&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -437,7 +428,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79629&typetran=0",
+      "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -452,7 +443,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79630&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -467,7 +458,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79662&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -482,7 +473,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79533&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -496,7 +487,7 @@
       "miejsce": "Kino Mikro Bronowice",
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
-      "cena": "",
+      "cena": "21 zł",
       "link_biletow": "https://bilety.kinomikro.pl/kup-bilet/marsupilami-dubbing-2026-10-05-12-45",
       "zrodlo": "mikro",
       "status": "zatwierdzone"
@@ -512,7 +503,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79559&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -527,7 +518,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79631&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -542,7 +533,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79664&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -557,7 +548,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79667&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -572,7 +563,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79605&typetran=0",
+      "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -587,7 +578,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79606&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -602,7 +593,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79668&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -616,7 +607,7 @@
       "miejsce": "Kino Mikro Bronowice",
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
-      "cena": "",
+      "cena": "27 zł",
       "link_biletow": "https://bilety.kinomikro.pl/kup-bilet/marsupilami-dubbing-2026-10-01-12-45-4",
       "zrodlo": "mikro",
       "status": "zatwierdzone"
@@ -632,7 +623,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79564&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -647,7 +638,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79635&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -662,7 +653,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79670&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -677,7 +668,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79611&typetran=0",
+      "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -692,7 +683,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79612&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -707,7 +698,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79674&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -721,7 +712,7 @@
       "miejsce": "Kino Mikro Bronowice",
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
-      "cena": "",
+      "cena": "27 zł",
       "link_biletow": "https://bilety.kinomikro.pl/kup-bilet/marsupilami-dubbing-2026-10-01-12-45-5",
       "zrodlo": "mikro",
       "status": "zatwierdzone"
@@ -737,7 +728,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79639&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -752,7 +743,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79569&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -767,7 +758,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79676&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -782,7 +773,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79679&typetran=0",
+      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -797,7 +788,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79572&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -812,7 +803,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79617&typetran=0",
+      "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -827,7 +818,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79680&typetran=0",
+      "link_biletow": "https://kijow.pl/luna-i-rozgadana-swinka-premiera-25-09/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -842,7 +833,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79573&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -856,7 +847,7 @@
       "miejsce": "Kino Mikro Bronowice",
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
-      "cena": "",
+      "cena": "27 zł",
       "link_biletow": "https://bilety.kinomikro.pl/kup-bilet/marsupilami-dubbing-2026-10-01-12-45-6",
       "zrodlo": "mikro",
       "status": "zatwierdzone"
@@ -872,7 +863,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://kupbilet.kijow.pl/MSI/Default.aspx?event_id=79682&typetran=0",
+      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
       "zrodlo": "kijow",
       "status": "zatwierdzone"
     },
@@ -887,7 +878,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://www.kinopodbaranami.pl/rezerwacja_start.php?event_id=126757",
+      "link_biletow": "https://www.kinopodbaranami.pl/film.php?film_id=13031",
       "zrodlo": "pod-baranami",
       "status": "zatwierdzone"
     },
@@ -902,7 +893,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://www.kinopodbaranami.pl/rezerwacja_start.php?event_id=126758",
+      "link_biletow": "https://www.kinopodbaranami.pl/film.php?film_id=13030",
       "zrodlo": "pod-baranami",
       "status": "zatwierdzone"
     },
@@ -917,7 +908,7 @@
       "powiazane_miejsce_id": "",
       "grupa_wiekowa": "",
       "cena": "",
-      "link_biletow": "https://www.kinopodbaranami.pl/rezerwacja_start.php?event_id=126759",
+      "link_biletow": "https://www.kinopodbaranami.pl/film.php?film_id=6418",
       "zrodlo": "pod-baranami",
       "status": "zatwierdzone"
     },

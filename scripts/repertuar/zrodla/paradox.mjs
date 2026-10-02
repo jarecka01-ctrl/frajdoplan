@@ -37,6 +37,7 @@ export default {
         miejsce: 'Kino Paradox',
         wersja,
         link: $(wiersz).find('.item-button a').attr('href') || '',
+        film: tytulEl.attr('href') || '',
         strona: tytulEl.attr('href') || '',
       });
     });

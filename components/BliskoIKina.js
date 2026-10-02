@@ -104,6 +104,16 @@ function BliskoCiebie({ places, wydarzenia, dzis }) {
   );
 }
 
+// Seanse jednego kina (już posortowane po godzinie) → filmy z godzinami obok siebie.
+function filmy(lista) {
+  const poNazwie = new Map();
+  lista.forEach((s) => {
+    if (!poNazwie.has(s.nazwa)) poNazwie.set(s.nazwa, { nazwa: s.nazwa, wiek: s.wiek, seanse: [] });
+    poNazwie.get(s.nazwa).seanse.push(s);
+  });
+  return [...poNazwie.values()];
+}
+
 // `info` (z lib/dane.js): kiedy skrypt zaktualizował repertuar, stan źródeł i stałe linki do sieciówek.
 function DzisWKinach({ places, wydarzenia, dzis, info }) {
   const seanse = wydarzenia.filter((w) => w.kino && trwaW(w.data_regula, dzis)).sort(poGodzinie);
@@ -129,11 +139,18 @@ function DzisWKinach({ places, wydarzenia, dzis, info }) {
               <div key={kino} className="kino">
                 <p className="kino-nazwa">{z && z.url ? <a href={z.url} target="_blank" rel="noreferrer">{kino}</a> : kino}</p>
                 <ul>
-                  {lista.slice(0, 4).map((s) => (
-                    <li key={s.id}>
-                      <span className="kino-godz">{s.godzina}</span>
-                      {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.nazwa}</a> : <span>{s.nazwa}</span>}
-                      {s.wiek && <small> {s.wiek}</small>}
+                  {filmy(lista).slice(0, 4).map((f) => (
+                    <li key={f.nazwa}>
+                      <span className="kino-film">{f.nazwa}</span>
+                      <span className="kino-godziny">
+                        {f.seanse.map((s, i) => (
+                          <span key={s.id}>
+                            {i > 0 && ', '}
+                            {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.godzina}</a> : s.godzina}
+                          </span>
+                        ))}
+                        {f.wiek && <small> {f.wiek}</small>}
+                      </span>
                     </li>
                   ))}
                 </ul>
