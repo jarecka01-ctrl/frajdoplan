@@ -89,24 +89,15 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .wyd-info a { font-weight: 600; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 3px; text-underline-offset: 3px; }
 .wyd-pusto { margin: 0; font-size: 15px; }
 .wyd-mala .wyd-pusto { color: var(--tusz-2); font-size: 14px; }
-/* Dziś blisko ciebie + Dziś w kinach */
+/* Dziś w kinach, spektakle, koncerty */
 .blisko-kina { display: grid; gap: 18px; margin: -18px 0 48px; grid-template-columns: 1fr; }
-@media (min-width: 860px) { .blisko-kina { grid-template-columns: 1.7fr 1fr; align-items: stretch; } }
-.blisko { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 5px 5px 0 var(--slonce); padding: 18px; }
-.blisko-start .przycisk { margin-top: 4px; }
 .przycisk:disabled { opacity: .6; cursor: progress; }
-.blisko-chipy { margin: 10px 0 12px; }
-.blisko-lista { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 2px; }
-.blisko-item { display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 2px solid var(--kreda); }
-.blisko-item:last-child { border-bottom: 0; }
-.blisko-wyd { background: #FFF6DE; border-radius: 12px; padding: 9px 10px; border-bottom: 0; margin-bottom: 4px; }
-.blisko-ikona { font-size: 20px; text-align: center; }
-.blisko-tekst { display: flex; flex-direction: column; min-width: 0; }
-.blisko-tekst strong { font-weight: 600; font-size: 15px; line-height: 1.3; overflow-wrap: anywhere; }
-.blisko-tekst small { font-size: 13px; color: var(--tusz-2); }
 .kina { background: var(--tusz); color: var(--papier); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 18px; }
 .kina .wyd-tytul-maly { color: var(--papier); margin-bottom: 12px; }
 .kina-lista { display: grid; gap: 14px; }
+.kina-dni { display: inline-flex; margin: 0 0 12px; border: 2px solid var(--papier); border-radius: 999px; overflow: hidden; }
+.kina-dni button { height: 34px; padding: 0 16px; border: 0; background: transparent; color: var(--papier); cursor: pointer; font-weight: 600; font-size: 14px; }
+.kina-dni button[aria-pressed="true"] { background: var(--papier); color: var(--tusz); }
 .kino-nazwa { margin: 0 0 6px; font: 700 17px/1.2 var(--font-display); color: var(--slonce); }
 .kino ul, .kina-linki { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .kino li { font-size: 14px; }
@@ -208,8 +199,10 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 
 .wynik { font-size: 14px; color: var(--tusz-2); margin: 0; }
 .wynik-pasek { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 14px; }
+.wynik-przyciski { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .widok { display: inline-flex; border: 2px solid var(--tusz); border-radius: 999px; overflow: hidden; background: var(--biel); }
 .widok-btn { height: 38px; padding: 0 16px; border: 0; background: transparent; cursor: pointer; font-weight: 600; font-size: 14px; }
+.widok-btn:disabled { opacity: .6; cursor: progress; }
 .widok-btn[aria-pressed="true"] { background: var(--tusz); color: var(--papier); }
 
 /* mapa */

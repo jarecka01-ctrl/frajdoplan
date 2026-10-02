@@ -10,6 +10,15 @@ const Mapa = dynamic(() => import('./Mapa'), {
 });
 
 const NA_STRONE = 24;
+
+// Odległość w km między dwoma punktami (wzór haversine).
+function km(a, b) {
+  const R = 6371, r = (x) => (x * Math.PI) / 180;
+  const dLat = r(b.lat - a.lat), dLon = r(b.lon - a.lon);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+const ladnieKm = (d) => (d < 1 ? `${Math.max(50, Math.round(d * 1000 / 50) * 50)} m` : `${d.toFixed(1).replace('.', ',')} km`);
 const STREFY = [
   { id: 'Kraków i okolice', label: 'Kraków' },
   { id: 'Pod Krakowem', label: 'Pod Krakowem' },
@@ -35,6 +44,20 @@ export default function Katalog({
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(naStrone);
   const [widok, setWidok] = useState('lista');
+  const [ja, setJa] = useState(null); // położenie użytkownika, gdy kliknął „Blisko mnie" i się zgodził
+  const [szukam, setSzukam] = useState(false);
+
+  // Prosi o zgodę na lokalizację. Przy odmowie albo błędzie nic się nie zmienia. Drugie kliknięcie wyłącza sortowanie.
+  const bliskoMnie = () => {
+    if (ja) { setJa(null); return; }
+    if (!('geolocation' in navigator)) return;
+    setSzukam(true);
+    navigator.geolocation.getCurrentPosition(
+      (poz) => { setJa({ lat: poz.coords.latitude, lon: poz.coords.longitude }); setSzukam(false); },
+      () => setSzukam(false),
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 }
+    );
+  };
 
   useEffect(() => setLimit(naStrone), [strefa, kategoria, wybrane, query, naStrone]);
 
@@ -61,6 +84,11 @@ export default function Katalog({
     przelacz(r);
   };
 
+  // odległość od użytkownika dla każdego miejsca (Infinity = brak współrzędnych, takie lądują na końcu)
+  const odleglosci = useMemo(() => (ja
+    ? Object.fromEntries(places.map((p) => [p.id, p.lat != null && p.lon != null ? km(ja, p) : Infinity]))
+    : null), [places, ja]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const out = places.filter((p) => {
@@ -70,10 +98,11 @@ export default function Katalog({
       if (q && !`${p.name} ${p.adres} ${p.podkategoria}`.toLowerCase().includes(q)) return false;
       return true;
     });
-    if (strefa === 'Pod Krakowem') out.sort((a, b) => (a.km ?? 999) - (b.km ?? 999));
+    if (odleglosci) out.sort((a, b) => odleglosci[a.id] - odleglosci[b.id]);
+    else if (strefa === 'Pod Krakowem') out.sort((a, b) => (a.km ?? 999) - (b.km ?? 999));
     else out.sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0));
     return out;
-  }, [places, strefa, kategoria, wybrane, query]);
+  }, [places, strefa, kategoria, wybrane, query, odleglosci]);
 
   const wyczysc = () => { setKategoria(''); setWybrane([]); setQuery(''); };
 
@@ -152,11 +181,18 @@ export default function Katalog({
       <div className="wynik-pasek">
         <p className="wynik" aria-live="polite">
           {filtered.length} {odmianaMiejsc(filtered.length)}
-          {strefa === 'Pod Krakowem' && widok === 'lista' && ', najbliższe na górze'}
+          {(ja || strefa === 'Pod Krakowem') && widok === 'lista' && ', najbliższe na górze'}
         </p>
+        <div className="wynik-przyciski">
+        <div className="widok" role="group" aria-label="Odległość">
+          <button className="widok-btn" aria-pressed={Boolean(ja)} disabled={szukam} onClick={bliskoMnie}>
+            {szukam ? 'Szukam…' : 'Blisko mnie'}
+          </button>
+        </div>
         <div className="widok" role="group" aria-label="Widok">
           <button className="widok-btn" aria-pressed={widok === 'lista'} onClick={() => setWidok('lista')}>Lista</button>
           <button className="widok-btn" aria-pressed={widok === 'mapa'} onClick={() => setWidok('mapa')}>Mapa</button>
+        </div>
         </div>
       </div>
 
@@ -189,6 +225,7 @@ export default function Katalog({
                     </span>
                   )}
                   {pokazDachPole && <span className="info">{pole ? 'na polu' : 'pod dachem'}</span>}
+                  {odleglosci && odleglosci[p.id] !== Infinity && <span className="info">{ladnieKm(odleglosci[p.id])} od ciebie</span>}
                   {p.strefa === 'Pod Krakowem' && p.km != null && <span className="info">{Math.round(p.km)} km od Krakowa</span>}
                   {p.website && <a className="link" href={p.website} target="_blank" rel="noreferrer">Strona miejsca</a>}
                 </div>

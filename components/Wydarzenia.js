@@ -18,6 +18,8 @@ const NAZWY_DNI = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek',
 
 // Dzisiejsza data w Krakowie jako YYYY-MM-DD (niezależnie od strefy czasowej telefonu).
 export const dzisWarszawa = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Warsaw' }).format(new Date());
+// Godzina w Krakowie jako HH:MM (do porównań z godziną seansu).
+export const godzinaWarszawa = () => new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date());
 export const plusDni = (iso, n) => {
   const d = new Date(`${iso}T12:00:00Z`);
   d.setUTCDate(d.getUTCDate() + n);
@@ -70,6 +72,7 @@ function Karta({ w, duza }) {
 
 export default function Wydarzenia({ wydarzenia }) {
   const [teraz, setTeraz] = useState(null); // liczone w przeglądarce, żeby „dziś" zawsze było dzisiaj
+  const [glowny, setGlowny] = useState('dzis'); // co pokazuje duża sekcja: dziś albo (po kliknięciu) jutro
 
   useEffect(() => setTeraz(dzisWarszawa()), []);
 
@@ -91,12 +94,30 @@ export default function Wydarzenia({ wydarzenia }) {
   return (
     <section className="wydarzenia" aria-label="Wydarzenia">
       <div className="wyd-glowna">
-        <h2 className="wyd-tytul">Dziś dla dzieci w Krakowie</h2>
-        <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
-        {dzis.length ? (
-          <ul className="wyd-lista">{dzis.slice(0, 6).map((w) => <Karta key={w.id} w={w} duza />)}</ul>
+        {glowny === 'dzis' ? (
+          <>
+            <h2 className="wyd-tytul">Dziś dla dzieci w Krakowie</h2>
+            <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
+            {dzis.length ? (
+              <ul className="wyd-lista">{dzis.slice(0, 6).map((w) => <Karta key={w.id} w={w} duza />)}</ul>
+            ) : (
+              <>
+                <p className="wyd-pusto">Na dziś to już wszystko. Zobacz, co jest jutro</p>
+                <p><button type="button" className="przycisk" onClick={() => setGlowny('jutro')}>Jutro dla dzieci w Krakowie</button></p>
+              </>
+            )}
+          </>
         ) : (
-          <p className="wyd-pusto">Na dziś nie mamy jeszcze wydarzeń w kalendarzu. Poniżej znajdziesz miejsca, które są otwarte na co dzień.</p>
+          <>
+            <h2 className="wyd-tytul">Jutro dla dzieci w Krakowie</h2>
+            <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
+            {jutroLista.length ? (
+              <ul className="wyd-lista">{jutroLista.slice(0, 6).map((w) => <Karta key={w.id} w={w} duza />)}</ul>
+            ) : (
+              <p className="wyd-pusto">Na jutro też nie mamy jeszcze wydarzeń w kalendarzu.</p>
+            )}
+            <p><button type="button" className="przycisk" onClick={() => setGlowny('dzis')}>Wróć do dziś</button></p>
+          </>
         )}
       </div>
 
