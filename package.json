@@ -5,13 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "repertuar": "node scripts/repertuar/uruchom.mjs"
   },
   "dependencies": {
+    "leaflet": "1.9.4",
     "next": "14.2.5",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
     "papaparse": "5.4.1",
-    "leaflet": "1.9.4"
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
   }
 }
