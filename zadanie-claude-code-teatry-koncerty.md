@@ -11,15 +11,18 @@ Skrypt kinowy już działa (`scripts/repertuar/`, `data/repertuar.json`, `data/w
 - Pomocniczo: karnet.krakowculture.pl (kalendarz zbiorczy). Ocenia się go tylko jako uzupełnienie.
 Dla każdego źródła zapisz: adres repertuaru, jak są dane (JSON, schema.org `Event`, HTML, ładowane skryptem), `robots.txt` i regulamin, czy repertuar ma oznaczenie „dla dzieci" / wiek / kategorię, z jakim wyprzedzeniem jest publikowany, ocena: „bezpieczne" / „wątpliwe" / „niemożliwe". Nie więcej niż jedno zapytanie na sekundę. Po raporcie zatrzymaj się i pokaż podsumowanie.
 
+## Wyprzedzenie
+Spektakle: 60 dni do przodu. **Koncerty: 180 dni do przodu** (na popularne wydarzenia bilety kupuje się z dużym wyprzedzeniem, a kafelek „Najbliższe koncerty" ma pokazywać także odleglejsze terminy).
+
 ## Etap 2: budowa (po moim potwierdzeniu, tylko źródła „bezpieczne")
 - Nowe moduły w `scripts/repertuar/zrodla/`, ten sam wspólny format wydarzenia co dla kin (pola jak w `data/repertuar.json`), `typ`: `spektakl` lub `koncert`, `kino`: false.
 - Filtr „dla dzieci": oznaczenie na stronie źródła (dla dzieci, wiek do 12 lat, nazwy cykli typu „bajka", „dla maluchów"), plus lista `wymus` / `ukryj` w `data/wyjatki.json`. Przy niepewności (nie wiadomo, czy dla dzieci) NIE publikuj: zapisz w osobnej sekcji `do_weryfikacji` w pliku i w podsumowaniu workflow (GitHub Actions summary), a właścicielka dopisuje tytuł do `wymus`.
 - `powiazane_miejsce_id`: uzupełnij z `place_id` miejsc w CSV „Miejsca" (podkategorie „Teatr" i „Koncerty dla dzieci"), dopasowując po nazwie. Jeśli teatr ma kilka scen (np. Ludowy), użyj nazwy sceny w polu `miejsce`.
 - Pola `grupa_wiekowa`, `cena`, `link_biletow` wypełniaj, gdy źródło je podaje. Link biletów musi działać: sprawdź go bez sesji, a niedziałające zastąp stroną spektaklu lub repertuaru (jak przy kinach).
-- Seanse z minionych dni nie trafiają do pliku. Pokaż w logu tabelę: źródło, liczba wydarzeń dla dzieci na najbliższe 60 dni, liczba w „do_weryfikacji".
+- Seanse z minionych dni nie trafiają do pliku. Pokaż w logu tabelę: źródło, liczba wydarzeń dla dzieci na najbliższe 60 dni (koncerty: 180 dni), liczba w „do_weryfikacji".
 
 ## Etap 3: automat
-- Osobny workflow (`repertuar-teatry-koncerty.yml`): raz w tygodniu (poniedziałek wieczorem) plus `workflow_dispatch`, wyprzedzenie 60 dni. Te same zasady co przy kinach: commit tylko przy zmianie pliku, błąd źródła nie nadpisuje poprzednich danych, status „failed" przy awarii.
+- Osobny workflow (`repertuar-teatry-koncerty.yml`): raz w tygodniu (poniedziałek wieczorem) plus `workflow_dispatch`, wyprzedzenie 60 dni dla spektakli i 180 dni dla koncertów. Te same zasady co przy kinach: commit tylko przy zmianie pliku, błąd źródła nie nadpisuje poprzednich danych, status „failed" przy awarii.
 - Strona czyta wydarzenia z `data/repertuar.json` (już zrobione dla kin). Sprawdź, że kafelki „Najbliższe spektakle" i „Najbliższe koncerty" dostają te dane, a kalendarz miesiąca pokazuje je razem z kinami.
 
 ## Czego NIE robić
