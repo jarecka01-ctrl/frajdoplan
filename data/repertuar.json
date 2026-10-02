@@ -1,27 +1,27 @@
 {
-  "zaktualizowano": "2026-10-02T12:54:12+02:00",
+  "zaktualizowano": "2026-10-02T14:14:11+02:00",
   "zrodla": {
     "kijow": {
       "nazwa": "Kino Kijów",
       "url": "https://kijow.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T12:54:12+02:00",
-      "wszystkich": 142,
+      "pobrano": "2026-10-02T14:14:11+02:00",
+      "wszystkich": 141,
       "dla_dzieci": 43
     },
     "mikro": {
       "nazwa": "Kino Mikro",
       "url": "https://kinomikro.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T12:54:12+02:00",
-      "wszystkich": 98,
+      "pobrano": "2026-10-02T14:14:11+02:00",
+      "wszystkich": 95,
       "dla_dzieci": 7
     },
     "agrafka": {
       "nazwa": "Kino Agrafka",
       "url": "http://kinoagrafka.pl/rep.php",
       "ok": true,
-      "pobrano": "2026-10-02T12:54:12+02:00",
+      "pobrano": "2026-10-02T14:14:11+02:00",
       "wszystkich": 20,
       "dla_dzieci": 4
     },
@@ -29,15 +29,15 @@
       "nazwa": "Kino Pod Baranami",
       "url": "https://www.kinopodbaranami.pl/repertuar.php",
       "ok": true,
-      "pobrano": "2026-10-02T12:54:12+02:00",
-      "wszystkich": 164,
+      "pobrano": "2026-10-02T14:14:11+02:00",
+      "wszystkich": 161,
       "dla_dzieci": 4
     },
     "paradox": {
       "nazwa": "Kino Paradox",
       "url": "https://kinoparadox.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T12:54:12+02:00",
+      "pobrano": "2026-10-02T14:14:11+02:00",
       "wszystkich": 29,
       "dla_dzieci": 0
     },
@@ -45,7 +45,7 @@
       "nazwa": "Kino Sfinks",
       "url": "https://kinosfinks.okn.edu.pl/wydarzenia-kategoria-158.html",
       "ok": true,
-      "pobrano": "2026-10-02T12:54:12+02:00",
+      "pobrano": "2026-10-02T14:14:11+02:00",
       "wszystkich": 72,
       "dla_dzieci": 1
     }
