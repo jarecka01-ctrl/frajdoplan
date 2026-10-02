@@ -75,7 +75,7 @@ Sprawdzono 2 października 2026 (piątek). Tego samego dnia, po odblokowaniu dom
 - **Repertuar:** strona `kinomikro.pl/repertuar/` ładuje dane skryptem z publicznego JSON https://bilety.kinomikro.pl/service.php/repertoire/list.json?limit=300&advanced=1. Jedno zapytanie daje cały repertuar (99 seansów).
 - **robots.txt:** na `bilety.kinomikro.pl` reguły są wykomentowane (`#Disallow:`), czyli brak zakazów. `kinomikro.pl` blokuje tylko `/wp-admin/`.
 - **Regulamin:** na stronie i w systemie biletowym nie znaleziono regulaminu korzystania z serwisu.
-- **Pola:** tytuł (wersja czasem w tytule, np. „Marsupilami- dubbing”), data i godzina z strefą czasową, sala / lokalizacja (Sala Mikro, Sala Mikroffala, Galeria Bronowice) z adresem, link do biletu (`/kup-bilet/…`), cena, liczba wolnych miejsc. Pola `category`, `year`, `country` są puste, kategorii wiekowej brak. Opis jest w HTML, ale go nie bierzemy.
+- **Pola:** tytuł (wersja czasem w tytule, np. „Marsupilami- dubbing”), data i godzina ze strefą czasową, sala / lokalizacja (Sala Mikro, Sala Mikroffala, Galeria Bronowice) z adresem, link do biletu (`/kup-bilet/…`), cena, liczba wolnych miejsc. Pola `category`, `year`, `country` są puste, kategorii wiekowej brak. Opis jest w HTML, ale go nie bierzemy.
 - **Filtr dla dzieci:** po tytule („dubbing”) plus lista `wymus`.
 - **Zakres:** tydzień piątek–czwartek (2–8.10: 10–14 seansów dziennie), dalej pojedyncze wydarzenia do końca listopada.
 - **Dla dzieci w najbliższym tygodniu:** 8 seansów („Marsupilami” w Bronowicach, „Pucio kocha zwierzaki” w Sali Mikroffala).
