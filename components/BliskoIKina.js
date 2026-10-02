@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { IKONY } from '../lib/ikony';
 import { dzisWarszawa, trwaW, poGodzinie } from './Wydarzenia';
+import Spektakle from './Spektakle';
+import u from '../styles/Sekcja.module.css';
 
 // Odległość w km między dwoma punktami (wzór haversine).
 function km(a, b) {
@@ -150,9 +152,10 @@ export default function BliskoIKina({ places, wydarzenia }) {
   useEffect(() => setDzis(dzisWarszawa()), []);
   if (!dzis) return <section className="blisko-kina" aria-hidden="true" />;
   return (
-    <section className="blisko-kina" aria-label="Blisko ciebie i w kinach">
+    <section className={`blisko-kina ${u.trzy}`} aria-label="Blisko ciebie, kina i spektakle">
       <BliskoCiebie places={places} wydarzenia={wydarzenia} dzis={dzis} />
       <DzisWKinach places={places} wydarzenia={wydarzenia} dzis={dzis} />
+      <Spektakle places={places} wydarzenia={wydarzenia} />
     </section>
   );
 }
