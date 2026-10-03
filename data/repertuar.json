@@ -1,12 +1,12 @@
 {
-  "zaktualizowano": "2026-10-02T22:01:22+02:00",
+  "zaktualizowano": "2026-10-03T08:15:43+02:00",
   "zrodla": {
     "kijow": {
       "nazwa": "Kino Kijów",
       "url": "https://kijow.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T22:01:22+02:00",
-      "wszystkich": 131,
+      "pobrano": "2026-10-03T08:15:43+02:00",
+      "wszystkich": 132,
       "dla_dzieci": 42,
       "linki_zastapione": 42
     },
@@ -14,7 +14,7 @@
       "nazwa": "Kino Mikro",
       "url": "https://kinomikro.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T22:01:22+02:00",
+      "pobrano": "2026-10-03T08:15:43+02:00",
       "wszystkich": 87,
       "dla_dzieci": 7,
       "linki_zastapione": 0
@@ -23,8 +23,8 @@
       "nazwa": "Kino Agrafka",
       "url": "http://kinoagrafka.pl/rep.php",
       "ok": true,
-      "pobrano": "2026-10-02T22:01:22+02:00",
-      "wszystkich": 20,
+      "pobrano": "2026-10-03T08:15:43+02:00",
+      "wszystkich": 18,
       "dla_dzieci": 4,
       "linki_zastapione": 0
     },
@@ -32,7 +32,7 @@
       "nazwa": "Kino Pod Baranami",
       "url": "https://www.kinopodbaranami.pl/repertuar.php",
       "ok": true,
-      "pobrano": "2026-10-02T22:01:22+02:00",
+      "pobrano": "2026-10-03T08:15:43+02:00",
       "wszystkich": 148,
       "dla_dzieci": 4,
       "linki_zastapione": 3
@@ -41,16 +41,16 @@
       "nazwa": "Kino Paradox",
       "url": "https://kinoparadox.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-02T22:01:22+02:00",
-      "wszystkich": 29,
-      "dla_dzieci": 0,
+      "pobrano": "2026-10-03T08:15:43+02:00",
+      "wszystkich": 27,
+      "dla_dzieci": 1,
       "linki_zastapione": 0
     },
     "sfinks": {
       "nazwa": "Kino Sfinks",
       "url": "https://kinosfinks.okn.edu.pl/wydarzenia-kategoria-158.html",
       "ok": true,
-      "pobrano": "2026-10-02T22:01:22+02:00",
+      "pobrano": "2026-10-03T08:15:43+02:00",
       "wszystkich": 72,
       "dla_dzieci": 1,
       "linki_zastapione": 0
@@ -895,6 +895,21 @@
       "cena": "",
       "link_biletow": "https://www.kinopodbaranami.pl/film.php?film_id=13030",
       "zrodlo": "pod-baranami",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "paradox-kino-paradox-dmuchawce-2026-10-22T19:00",
+      "typ": "seans",
+      "kino": true,
+      "nazwa": "Dmuchawce (dubbing)",
+      "data_regula": "2026-10-22",
+      "godzina": "19:00",
+      "miejsce": "Kino Paradox",
+      "powiazane_miejsce_id": "",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://bilety.kinoparadox.pl/index.php/repertoire.html?id=7707",
+      "zrodlo": "paradox",
       "status": "zatwierdzone"
     },
     {
