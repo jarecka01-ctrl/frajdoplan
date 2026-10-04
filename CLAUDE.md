@@ -26,7 +26,7 @@ Właścicielka nie jest programistką. Odpowiadaj po polsku, prosto, bez żargon
 
 ## Dane
 Kolumny „Miejsca": place_id, name, type, street, city, gmina_aglomeracja, rating, reviews, phone, website, photo, lat, lon, flag, queries, kategoria_glowna (Pod dachem / Plener), podkategoria, pogoda, strefa (Kraków i okolice / Pod Krakowem), odleglosc_km, sekcja, dyscyplina, zrodlo_wydarzen, organizuje_urodziny.
-Kolumny „Wydarzenia": id, nazwa, typ, data_regula (`2026-10-03` / `2026-10-01 do 2026-10-05` / `co sobotę` / `codziennie`), godzina, powiazane_miejsce_id, grupa_wiekowa, cena, link_biletow, zrodlo, status (puste / aktywne / zatwierdzone = widoczne), kategoria (opcjonalna: koncert, spektakl, warsztaty, jarmark, festyn, wystawa, inne — filtry w kalendarzu), poziom_pewnosci, miejsce, wyrozniony (tak = baner), obrazek, opis.
+Kolumny „Wydarzenia": id, nazwa, typ, data_regula (`2026-10-03` / `2026-10-01 do 2026-10-05` / `co sobotę` / `codziennie`), godzina, powiazane_miejsce_id, grupa_wiekowa, cena, link_biletow, zrodlo, status (puste / aktywne / zatwierdzone = widoczne), kategoria (opcjonalna: koncert, spektakl, warsztaty, pokaz, czytanie, wystawa, jarmark, festyn, sport, spacer, inne — filtry w kalendarzu; wartość spoza listy = inne), poziom_pewnosci, miejsce, wyrozniony (tak = baner), obrazek, opis.
 Daty liczymy w strefie Europe/Warsaw, w przeglądarce.
 
 ## Wygląd („Plac Zabaw")
