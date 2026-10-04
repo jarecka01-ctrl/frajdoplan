@@ -2,8 +2,10 @@
 // bierzemy rodzaje z oznaczeniem dziecięcym (Koncerty dla Dzieci / familijny, Muzyczne Bobasy, Bajki muzyką pisane,
 // Przygody w Muzogrodzie, Nutka DaNutka, Dzieci dzieciom, Kamishibai-ka, opera dziecięca Brundibár).
 // „Audycje muzyczne" to koncerty szkolne, więc ich nie bierzemy. Koncerty publikowane są z dużym wyprzedzeniem.
+// Poranki w dni robocze przed 13:00 (np. „Bajki muzyką pisane" w poniedziałki o 8:30, 10:30 i 12:30) to koncerty dla
+// szkół i przedszkoli — oznaczamy je `dlaGrup`; weekendowe są dla wszystkich.
 import * as cheerio from 'cheerio';
-import { pobierz, spacje, godzina, dataPL, pad } from '../wspolne.mjs';
+import { pobierz, spacje, godzina, dataPL, dzienTygodnia } from '../wspolne.mjs';
 
 const BAZA = 'https://filharmoniakrakow.pl';
 const RODZAJE_DLA_DZIECI = [32, 67, 71, 72, 73, 98, 100, 105, 106];
@@ -27,17 +29,20 @@ export function parsuj(html) {
     const szczegoly = $(wiersz).find('a.get-content').first().attr('href') || '';
     // pierwszy człon opisu często mówi, o czym jest koncert („Kartonowy plac budowy"); bierzemy go do nazwy
     const podtytul = spacje($(wiersz).find('.repRow-description p').first().text());
+    const godz = godzina($(wiersz).find('.calendar-hour').first().text());
+    const dzienTyg = dzienTygodnia(data);
     wydarzenia.push({
       tytul: podtytul && podtytul.length <= 80 ? `${tytul}: ${podtytul}` : tytul,
       cykl: tytul,
       data,
-      godzina: godzina($(wiersz).find('.calendar-hour').first().text()),
+      godzina: godz,
       miejsce: 'Filharmonia Krakowska',
       kategoria: 'koncert',
       typ: 'koncert',
       link: spacje($(wiersz).find('a.primary-btn').first().attr('href') || '').replace(/&amp;/g, '&'),
       strona: szczegoly ? new URL(szczegoly, BAZA).href : '',
       dlaDzieci: true,
+      dlaGrup: dzienTyg >= 1 && dzienTyg <= 5 && Boolean(godz) && godz < '13:00',
     });
   });
   return wydarzenia;
