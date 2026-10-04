@@ -74,6 +74,10 @@ export function ocen(strony) {
   const wylacznie = w.some((s) => s.wylacznie);
 
   if (wylacznie && !wiek) return { wynik: 'tylko dorośli', wiek: '', dowod: 'strona mówi, że zajęcia są wyłącznie dla dorosłych', adres: stronaDowodu((s) => s.wylacznie) };
+  // samo „junior" / „kids" bez wieku bywa nazwą poziomu zaawansowania, więc to za mało na „tak"
+  if (mocne.length && !wiek && mocne.every((m) => m === 'junior')) {
+    return { wynik: 'prawdopodobnie', wiek: '', dowod: 'tylko słowo „junior”, bez wieku i bez „dla dzieci”', adres: stronaDowodu((s) => s.mocne.length) };
+  }
   if (mocne.length) {
     const opis = [wiek ? `podany wiek ${wiek}` : '', `słowa: ${mocne.slice(0, 3).join(', ')}`].filter(Boolean).join('; ');
     // oferta dla dzieci razem z ofertą dla dorosłych to wciąż oferta dla dzieci
