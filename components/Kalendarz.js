@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { dzisWarszawa, trwaW, poGodzinie, dzienTygodnia, MIESIACE } from './Wydarzenia';
 
 /*
@@ -8,9 +8,25 @@ import { dzisWarszawa, trwaW, poGodzinie, dzienTygodnia, MIESIACE } from './Wyda
 
 const MIANOWNIK = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
 const DNI_KROTKO = ['pon', 'wt', 'śr', 'czw', 'pt', 'sob', 'niedz'];
+const KATEGORIE = [
+  { id: 'koncert', nazwa: 'Koncerty', ikona: '🎵' },
+  { id: 'spektakl', nazwa: 'Spektakle', ikona: '🎭' },
+  { id: 'warsztaty', nazwa: 'Warsztaty', ikona: '🎨' },
+  { id: 'jarmark', nazwa: 'Jarmarki', ikona: '🛍️' },
+  { id: 'festyn', nazwa: 'Festyny', ikona: '🎪' },
+  { id: 'wystawa', nazwa: 'Wystawy', ikona: '🖼️' },
+];
 const pad = (n) => String(n).padStart(2, '0');
 
-export default function Kalendarz({ wydarzenia }) {
+export default function Kalendarz({ wydarzenia: wszystkie }) {
+  const [rodzaje, setRodzaje] = useState([]); // kilka kategorii naraz; pusto = wszystkie
+  // seanse kinowe są tylko w kafelku „Dziś w kinach"
+  const bezKin = useMemo(() => wszystkie.filter((w) => !w.kino), [wszystkie]);
+  // filtry pokazujemy tylko, gdy arkusz ma wypełnioną kolumnę `kategoria`
+  const dostepne = KATEGORIE.filter((k) => bezKin.some((w) => w.kategoria === k.id));
+  const wydarzenia = rodzaje.length ? bezKin.filter((w) => rodzaje.includes(w.kategoria)) : bezKin;
+  const ikonaKat = (w) => (KATEGORIE.find((k) => k.id === w.kategoria) || {}).ikona;
+
   const [dzis, setDzis] = useState(null);
   const [przesun, setPrzesun] = useState(0); // 0 = bieżący miesiąc, maks. 2
   const [wybrany, setWybrany] = useState(null);
@@ -24,7 +40,6 @@ export default function Kalendarz({ wydarzenia }) {
   const pierwszy = `${r}-${pad(m)}-01`;
   const przesuniecie = (dzienTygodnia(pierwszy) + 6) % 7; // poniedziałek = 0
 
-  // w kalendarzu są też seanse dla dzieci z kin studyjnych (data/repertuar.json)
   const dni = Array.from({ length: ileDni }, (_, i) => {
     const iso = `${r}-${pad(m)}-${pad(i + 1)}`;
     return { iso, n: i + 1, ile: wydarzenia.filter((w) => trwaW(w.data_regula, iso)).length };
@@ -35,6 +50,24 @@ export default function Kalendarz({ wydarzenia }) {
   return (
     <section className="kalendarz" aria-label="Kalendarz wydarzeń">
       <h2 className="sekcja">Kalendarz wydarzeń dla dzieci</h2>
+      {dostepne.length > 0 && (
+        <div className="rodzaje" role="group" aria-label="Rodzaj wydarzenia">
+          <button className="rodzaj" aria-pressed={rodzaje.length === 0} onClick={() => setRodzaje([])}>
+            <span className="rodzaj-nazwa">Wszystkie</span>
+          </button>
+          {dostepne.map((k) => (
+            <button
+              key={k.id}
+              className="rodzaj"
+              aria-pressed={rodzaje.includes(k.id)}
+              onClick={() => setRodzaje((r) => (r.includes(k.id) ? r.filter((x) => x !== k.id) : [...r, k.id]))}
+            >
+              <span className="rodzaj-ikona" aria-hidden="true">{k.ikona}</span>
+              <span className="rodzaj-nazwa">{k.nazwa}</span>
+            </button>
+          ))}
+        </div>
+      )}
       <div className="kal-wrap">
         <div className="kal-miesiac">
           <div className="kal-naglowek">
@@ -67,13 +100,13 @@ export default function Kalendarz({ wydarzenia }) {
                 <li key={w.id} className="wyd wyd-duza">
                   <span className="wyd-godz">{w.godzina || 'cały dzień'}</span>
                   <div className="wyd-tresc">
-                    <p className="wyd-nazwa">{w.nazwa}</p>
+                    <p className="wyd-nazwa">{ikonaKat(w) && <span aria-hidden="true" title={w.kategoria}>{ikonaKat(w)} </span>}{w.nazwa}</p>
                     {w.miejsce && <p className="wyd-miejsce">{w.miejsce}</p>}
                     {(w.wiek || w.cena || w.link) && (
                       <p className="wyd-info">
                         {w.wiek && <span>{w.wiek}</span>}
                         {w.cena && <span>{w.cena}</span>}
-                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">{w.kino ? 'Bilety' : 'Zapisy i szczegóły'}</a>}
+                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">Zapisy i szczegóły</a>}
                       </p>
                     )}
                   </div>
