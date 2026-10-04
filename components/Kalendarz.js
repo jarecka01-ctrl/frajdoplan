@@ -12,9 +12,14 @@ const KATEGORIE = [
   { id: 'koncert', nazwa: 'Koncerty', ikona: '🎵' },
   { id: 'spektakl', nazwa: 'Spektakle', ikona: '🎭' },
   { id: 'warsztaty', nazwa: 'Warsztaty', ikona: '🎨' },
-  { id: 'jarmark', nazwa: 'Jarmarki', ikona: '🛍️' },
-  { id: 'festyn', nazwa: 'Festyny', ikona: '🎪' },
+  { id: 'pokaz', nazwa: 'Pokazy', ikona: '✨' },
+  { id: 'czytanie', nazwa: 'Czytanie', ikona: '📚' },
   { id: 'wystawa', nazwa: 'Wystawy', ikona: '🖼️' },
+  { id: 'jarmark', nazwa: 'Jarmarki', ikona: '🎪' },
+  { id: 'festyn', nazwa: 'Festyny', ikona: '🎈' },
+  { id: 'sport', nazwa: 'Sport', ikona: '⚽' },
+  { id: 'spacer', nazwa: 'Spacery', ikona: '🥾' },
+  { id: 'inne', nazwa: 'Inne', ikona: '➕' },
 ];
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -22,9 +27,6 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
   const [rodzaje, setRodzaje] = useState([]); // kilka kategorii naraz; pusto = wszystkie
   // seanse kinowe są tylko w kafelku „Dziś w kinach"
   const bezKin = useMemo(() => wszystkie.filter((w) => !w.kino), [wszystkie]);
-  // filtry pokazujemy tylko, gdy arkusz ma wypełnioną kolumnę `kategoria`
-  const dostepne = KATEGORIE.filter((k) => bezKin.some((w) => w.kategoria === k.id));
-  const wydarzenia = rodzaje.length ? bezKin.filter((w) => rodzaje.includes(w.kategoria)) : bezKin;
   const ikonaKat = (w) => (KATEGORIE.find((k) => k.id === w.kategoria) || {}).ikona;
 
   const [dzis, setDzis] = useState(null);
@@ -40,6 +42,12 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
   const pierwszy = `${r}-${pad(m)}-01`;
   const przesuniecie = (dzienTygodnia(pierwszy) + 6) % 7; // poniedziałek = 0
 
+  // filtry: tylko kategorie z wydarzeniami w oglądanym miesiącu (gdy arkusz nie ma kolumny `kategoria`, ich nie ma)
+  const wMiesiacu = bezKin.filter((w) => Array.from({ length: ileDni }, (_, i) => `${r}-${pad(m)}-${pad(i + 1)}`).some((iso) => trwaW(w.data_regula, iso)));
+  const dostepne = KATEGORIE.filter((k) => wMiesiacu.some((w) => w.kategoria === k.id));
+  const aktywne = rodzaje.filter((id) => dostepne.some((k) => k.id === id));
+  const wydarzenia = aktywne.length ? bezKin.filter((w) => aktywne.includes(w.kategoria)) : bezKin;
+
   const dni = Array.from({ length: ileDni }, (_, i) => {
     const iso = `${r}-${pad(m)}-${pad(i + 1)}`;
     return { iso, n: i + 1, ile: wydarzenia.filter((w) => trwaW(w.data_regula, iso)).length };
@@ -51,16 +59,16 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
     <section className="kalendarz" aria-label="Kalendarz wydarzeń">
       <h2 className="sekcja">Kalendarz wydarzeń dla dzieci</h2>
       {dostepne.length > 0 && (
-        <div className="rodzaje" role="group" aria-label="Rodzaj wydarzenia">
-          <button className="rodzaj" aria-pressed={rodzaje.length === 0} onClick={() => setRodzaje([])}>
+        <div className="rodzaje kal-filtry" role="group" aria-label="Rodzaj wydarzenia">
+          <button className="rodzaj" aria-pressed={aktywne.length === 0} onClick={() => setRodzaje([])}>
             <span className="rodzaj-nazwa">Wszystkie</span>
           </button>
           {dostepne.map((k) => (
             <button
               key={k.id}
               className="rodzaj"
-              aria-pressed={rodzaje.includes(k.id)}
-              onClick={() => setRodzaje((r) => (r.includes(k.id) ? r.filter((x) => x !== k.id) : [...r, k.id]))}
+              aria-pressed={aktywne.includes(k.id)}
+              onClick={() => setRodzaje(aktywne.includes(k.id) ? aktywne.filter((x) => x !== k.id) : [...aktywne, k.id])}
             >
               <span className="rodzaj-ikona" aria-hidden="true">{k.ikona}</span>
               <span className="rodzaj-nazwa">{k.nazwa}</span>
