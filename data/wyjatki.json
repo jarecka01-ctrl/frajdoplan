@@ -1,5 +1,33 @@
 {
-  "_opis": "wymus: tytuły zawsze traktowane jako dla dzieci. ukryj: tytuły zawsze pomijane. Wystarczy początek tytułu, wielkość liter nie ma znaczenia.",
+  "_opis": "wymus: tytuły zawsze traktowane jako dla dzieci. ukryj: tytuły zawsze pomijane. Wystarczy początek tytułu, wielkość liter nie ma znaczenia. Wpisy w polu „zrodla.<id>” dotyczą tylko jednego źródła, wpisy na górze wszystkich (kin i innych).",
   "wymus": ["Dzieci z Bullerbyn"],
-  "ukryj": ["Folwark zwierzęcy"]
+  "ukryj": ["Folwark zwierzęcy"],
+  "zrodla": {
+    "_uwaga": "PROPOZYCJA DO ZATWIERDZENIA przez właścicielkę: listy poniżej wpisał Claude na podstawie danych z 4 października 2026.",
+    "ludowy": {
+      "_jak_dziala": "Wiek bierzemy ze strony spektaklu („Spektakl dla widzów 6+”); dla dzieci = do 12 lat. Spektakle bez podanego wieku trafiają do „do weryfikacji”.",
+      "wymus": ["Pippi", "Calineczka", "Pyza na polskich dróżkach", "Królowa Śniegu", "Kulawa kaczka i ślepa kura", "Lokomotywą przez świat", "Trik Patryka", "Mały Książę"],
+      "ukryj": []
+    },
+    "filharmonia": {
+      "_jak_dziala": "Moduł bierze rodzaje koncertów z oznaczeniem dziecięcym: Koncerty dla Dzieci / familijny, Dzieci dzieciom, Bajki muzyką pisane, Przygody w Muzogrodzie, Nutka DaNutka, Muzyczne Bobasy, Kamishibai-ka, opera dziecięca Brundibár. „Audycje muzyczne” (koncerty szkolne) pomijamy. Poranki w dni robocze przed 13:00 są oznaczane jako dla grup i ukryte.",
+      "wymus": [],
+      "ukryj": []
+    },
+    "ckpodgorza": {
+      "_jak_dziala": "Bierzemy wydarzenia z grupą wiekową „dla dzieci” ze strony Centrum Kultury Podgórza. Niektóre z nich wyglądają na dorosłe albo mieszane — poniżej propozycja do ukrycia.",
+      "wymus": [],
+      "ukryj": [
+        "Debata: Czy życie literackie",
+        "Poezja z Podgórza",
+        "Kryminalna Poezja Migowa",
+        "Wernisaż wystawy",
+        "Podgórski spacer literacki",
+        "Kiszonki - fermentacja"
+      ]
+    },
+    "kultureska": { "_jak_dziala": "Cały repertuar jest dla dzieci, ale poranki w dni robocze to spektakle dla szkół i przedszkoli (rezerwacja mailowa), więc są ukryte.", "wymus": [], "ukryj": [] },
+    "wspolczesny": { "_jak_dziala": "Znaczek „Dla dzieci” albo wiek do 12 lat w opisie. Godziny z biletami „dla grup” są ukryte.", "wymus": [], "ukryj": [] },
+    "szczescie": { "_jak_dziala": "Kategoria „Dla dzieci, młodzieży i rodziców”.", "wymus": [], "ukryj": [] }
+  }
 }

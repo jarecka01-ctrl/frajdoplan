@@ -1,10 +1,12 @@
-# Repertuar kin studyjnych (Kijów, Mikro, Agrafka, Pod Baranami, Paradox, Sfinks) → data/repertuar.json.
+# Repertuar kin studyjnych (Kijów, Mikro, Agrafka, Pod Baranami, Paradox, Sfinks) oraz wydarzenia dla dzieci
+# (teatry, koncerty, domy kultury, biblioteki) → data/repertuar.json. Wynik uruchomienia (tabela źródeł i lista
+# „do weryfikacji") jest w zakładce Summary uruchomienia.
 # Wszystkie te kina mają tydzień repertuarowy piątek–czwartek i publikują go przed piątkiem
 # (docs/rozpoznanie-kin.md), więc jeden harmonogram wystarcza dla wszystkich.
 #
 # Godziny w cron są w UTC. Podane niżej godziny polskie dotyczą czasu letniego;
 # zimą (CET) wszystko przesuwa się o 1 h wcześniej (np. 21:00 → 20:00).
-name: Repertuar kin
+name: Repertuar kin i wydarzeń
 
 on:
   schedule:
@@ -23,7 +25,7 @@ concurrency:
 jobs:
   aktualizuj:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45 # kina + ok. 10 źródeł wydarzeń, 1 zapytanie na sekundę
     steps:
       - uses: actions/checkout@v4
 
@@ -39,7 +41,7 @@ jobs:
         env:
           # adres do kontaktu w nagłówku User-Agent (zmienna albo sekret repozytorium); bez niego: „FrajdoplanBot"
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || secrets.CONTACT_EMAIL }}
-          # adres CSV zakładki „Miejsca" (ten sam co w Vercel) — z niego bierzemy place_id kin; bez niego pole zostaje puste
+          # adres CSV zakładki „Miejsca" (ten sam co w Vercel) — z niego bierzemy place_id kin, teatrów, domów kultury itd.; bez niego pole zostaje puste
           SHEET_CSV_URL: ${{ vars.SHEET_CSV_URL || secrets.SHEET_CSV_URL }}
         run: |
           set +e
@@ -48,6 +50,7 @@ jobs:
 
       # Zapis tylko przy zmianie pliku. Commit zrobiony tokenem GITHUB_TOKEN nie uruchamia ponownie
       # workflow (brak pętli), a Vercel wdroży nową wersję strony.
+      # Obejmuje też wydarzenia (data/repertuar.json to jeden plik).
       - name: Zapisz zmiany
         run: |
           if git diff --quiet -- data/repertuar.json; then

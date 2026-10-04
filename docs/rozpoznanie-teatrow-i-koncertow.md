@@ -2,7 +2,9 @@
 
 Sprawdzono 4 października 2026 (niedziela). Zapytania szły po kolei, nie częściej niż raz na sekundę, z nagłówkiem `frajdoplan-rozpoznanie/1.0`. Nie omijano żadnych zabezpieczeń ani logowania. Nic nie zostało zapisane w serwisie, to tylko rozpoznanie.
 
-**Ograniczenia tej sesji (ważne):**
+**Aktualizacja z 4 października (po odblokowaniu domen):** sprawdzono Groteskę, Variété i Auditorium Maximum, a Praska 52 jest pokryta kalendarzem Centrum Kultury Podgórza. Nadal nie da się sprawdzić `slowacki.krakow.pl`, `teatrpraska52.pl`, `audytorium.uj.edu.pl` i `karnet.krakowculture.pl` (blokada środowiska). Od tej aktualizacji skrypt **najpierw czyta `robots.txt`** serwisu i nic nie pobiera, gdy jest zakaz albo gdy pliku nie da się pobrać. **Zbudowane moduły:** Współczesny, Szczęście, Kultureska, Ludowy, Filharmonia i Sinfonietta (patrz sekcja „Co zbudowano” na końcu).
+
+**Ograniczenia pierwszej części (stan z rana):**
 - Sieć środowiska przepuszcza tylko część domen. **Nie dało się sprawdzić:** Groteska (`groteska.pl`, także `www.`), Teatr Słowackiego (`slowacki.krakow.pl`), Variété (`teatrvariete.pl`), Praska 52 (`teatrpraska52.pl`), Teatr Figur (`teatrfigur.pl`), `karnet.krakowculture.pl`, `radiokrakow.pl` i Auditorium Maximum (`uj.edu.pl`). Zostały oznaczone „nie sprawdzone”, bez zgadywania.
 - Przy `ludowy.pl` pobranie `robots.txt` kilka razy kończyło się zerwaniem połączenia (strona repertuaru działała). Ocena Ludowego jest więc warunkowa.
 - W trakcie wstępnego testu dostępności pobrałem stronę główną także czterech serwisów, które w `robots.txt` mają `Disallow: /` (Stary, Bagatela, KTO, Centrum Muzyki). Zrobiłem to raz na serwis, zanim przeczytałem ich robots. Dalej nic z nich nie pobierano.
@@ -25,10 +27,10 @@ Sprawdzono 4 października 2026 (niedziela). Zapytania szły po kolei, nie czę�
 | Bagatela (`bagatela.pl`) | HTML | **`Disallow: /` dla wszystkich** | — | **niemożliwe** |
 | KTO (`teatrkto.pl`) | jest publiczne API kalendarza (Tribe Events) i iCal | **`Disallow: /` dla wszystkich** | jest dział „Dla dzieci” | **niemożliwe** |
 | Stary (`stary.pl`) | HTML, bilety w `bilety.stary.pl` | **`Disallow: /` dla wszystkich** | — | **niemożliwe** |
-| Groteska | — | — | — | nie sprawdzone (domena zablokowana) |
-| Słowackiego (`slowacki.krakow.pl`) | — | — | — | nie sprawdzone (domena zablokowana) |
-| Variété | — | — | — | nie sprawdzone (domena zablokowana) |
-| Praska 52 | — | — | — | nie sprawdzone (domena zablokowana) |
+| Groteska (`www.groteska.pl`) | zwykły HTML `/repertuar` (miesiące; dzień, godzina, tytuł, sala; adres spektaklu ma kategorię `dla-dzieci`) | `User-agent: *` bez zakazów | tak, w adresie spektaklu (`/spektakle/dla-dzieci/…`); szkolne poranki mają „rezerwację tel.” | **bezpieczne** (nie zbudowane: nie było na liście do budowy) |
+| Słowackiego (`slowacki.krakow.pl`) | — | — | — | nie sprawdzone (domena nadal zablokowana w środowisku; jest też `teatrwkrakowie.pl`, patrz wyżej) |
+| Variété (`www.teatrvariete.pl`) | HTML `/repertuar/spektakle` (opisy spektakli), terminy w „sprawdź repertuar” | zakazy tylko dla Googlebota, dla pozostałych brak | brak oznaczeń dla dzieci na liście | **wątpliwe** (nie ma znacznika „dla dzieci”; bez AI albo ręcznej listy nie da się wybrać) |
+| Praska 52 (`teatrpraska52.pl`) | domena zablokowana w środowisku, **ale jej spektakle są w kalendarzu Centrum Kultury Podgórza** (lokalizacja „Teatr Praska 52”) | — | z kalendarza CKP | pokryte przez źródło CKP |
 
 **Teatry: 6 bezpiecznych** (Współczesny, Szczęście, Kultureska, Ludowy, Łaźnia Nowa, STU; w tym STU bez żadnych spektakli dla dzieci i Łaźnia z niewieloma), **1 wątpliwe** (teatrwkrakowie.pl), **3 niemożliwe** (Bagatela, KTO, Stary: robots zabrania pobierania, więc nie pobieramy), **1 bez kalendarza** (Magic), **4 nie sprawdzone** (Groteska, Słowackiego, Variété, Praska 52).
 
@@ -43,8 +45,8 @@ Sprawdzono 4 października 2026 (niedziela). Zapytania szły po kolei, nie czę�
 | Opera Kameralna (`kok.art.pl`) | HTML `/repertuar/`, ale to głównie archiwum | zakaz tylko `/wp-admin/` | brak | bez bieżących wydarzeń |
 | Centrum Muzyki (`centremusic.pl`) | HTML `/program` | **`Disallow: /` dla wszystkich** | — | **niemożliwe** |
 | ICE Kraków (`icekrakow.pl`) | brak kalendarza w kodzie strony, tylko aktualności; bilety w zewnętrznych systemach | brak pliku | brak | **niemożliwe** (nie ma czego pobrać) |
-| Auditorium Maximum UJ (`uj.edu.pl`) | — | — | — | nie sprawdzone (domena zablokowana) |
-| `karnet.krakowculture.pl` (pomocniczo) | — | — | — | nie sprawdzone (domena zablokowana) |
+| Auditorium Maximum UJ | `uj.edu.pl`: **`Disallow: /` dla wszystkich** (zakazane są tylko wybrane boty wyszukiwarek) | — | — | **niemożliwe** (robots zabrania; `audytorium.uj.edu.pl` jest dodatkowo zablokowane w środowisku) |
+| `karnet.krakowculture.pl` (pomocniczo) | — | — | — | nie sprawdzone (domena nadal zablokowana w środowisku) |
 | Studio Koncertowe Radia Kraków | — | — | — | nie sprawdzone (domena zablokowana) |
 
 **Koncerty: 3 bezpieczne** (Filharmonia, Sinfonietta, Capella; tylko Filharmonia ma sporo dla dzieci), **1 wątpliwe** (Opera Krakowska), **2 niemożliwe** (Centrum Muzyki, ICE), **1 bez bieżących wydarzeń** (Opera Kameralna), **3 nie sprawdzone**.
@@ -138,3 +140,20 @@ Rozstrzyga się to inaczej niż „dla dzieci” w danych źródła, więc potrz
 1. Odblokować domeny z listy „nie sprawdzone” (albo dać środowisku szerszy dostęp do sieci) i dokończyć: Groteska, Variété, Praska 52, Słowackiego, Auditorium Maximum, Karnet.
 2. Dwa teatry z grupy „niemożliwe” z zablokowaną całą stroną w robots (Bagatela, KTO) i Stary mają ciekawy repertuar dla dzieci. Warto zapytać o zgodę.
 3. Dla etapu 2 najpierw: Współczesny, Szczęście, Ludowy, Kultureska, Filharmonia.
+
+## Co zbudowano (etap 2, 4 października)
+
+Moduły w `scripts/repertuar/zrodla/`, wynik w `data/repertuar.json` (to samo co kina; `kino: false`, `typ` = spektakl / koncert, `kategoria`, `powiazane_miejsce_id` z arkusza „Miejsca”). Wyprzedzenie: spektakle 60 dni, koncerty 180.
+
+| Źródło | Co bierzemy | Wynik próby z 4.10 | Uwagi |
+|---|---|---|---|
+| Teatr Ludowy | spektakle z wiekiem do 12 lat na stronie spektaklu | 18 terminów dla dzieci + 14 poranków dla grup (ukryte) w 3 miesiącach | spektakle bez podanego wieku trafiają do „do weryfikacji” |
+| Teatr Kultureska | cały repertuar | 0 widocznych, 26 poranków dla grup (ukryte) | wszystkie terminy to dni robocze rano, więc rodzice ich nie zobaczą (zgodnie z poleceniem) |
+| Teatr Współczesny | znaczek „Dla dzieci” albo wiek do 12 lat | 1 widoczny, 47 poranków dla grup (ukryte) | godziny bez linku do biletów online to sprzedaż grupowa |
+| Teatr Szczęście | kategoria „Dla dzieci, młodzieży i rodziców” | 4 terminy | |
+| Filharmonia Krakowska | rodzaje koncertów dziecięcych (boBasy, Bajki muzyką pisane, Kamishibai-ka itd.) | 62 koncerty (w tym poranki szkolne oznaczane jako dla grup po poprawce) | linki do biletów (vectorsoft) nie dają się sprawdzić bez sesji, więc zostają bez zmian |
+| Sinfonietta Cracovia | cykl „Sinfonietka” | 0 widocznych, 2 poranki szkolne (ukryte) | pozostałe koncerty to koncerty dla dorosłych |
+
+Linki biletów są sprawdzane jak przy kinach: niedziałający albo brakujący zastępuje strona spektaklu, a w ostateczności repertuar teatru. Nie użyto Claude API. Źródeł „wątpliwych” i „niemożliwych” nie zbudowano.
+
+**Lista tytułów dziecięcych do zatwierdzenia:** `data/wyjatki.json`, pole `zrodla` (Ludowy: 8 tytułów, Centrum Kultury Podgórza: 6 propozycji do ukrycia).
