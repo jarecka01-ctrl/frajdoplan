@@ -68,8 +68,9 @@ export default {
     }
     for (const w of wyniki) {
       w.wiek = wieki.get(w.strona) || '';
-      // wiek ze strony spektaklu rozstrzyga; bez niego scena dziecięca TIM; w innym wypadku nie wiadomo
-      w.dlaDzieci = w.wiek ? wiekDlaDzieci(w.wiek) : (w.scenaDzieci ? true : null);
+      // wiek ze strony spektaklu rozstrzyga; bez wieku nie wiadomo (scena TIM to też młodzież i dorośli),
+      // więc tytuł trafia do „do weryfikacji"
+      w.dlaDzieci = w.wiek ? wiekDlaDzieci(w.wiek) : null;
       delete w.scenaDzieci;
     }
     return wyniki;
