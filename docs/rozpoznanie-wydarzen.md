@@ -9,7 +9,7 @@ Sprawdzono 4 października 2026 (niedziela), w dwóch częściach: rano (większ
 | Ocena | Źródła | Liczba |
 |---|---|---|
 | **bezpieczne i proste** | Ośrodek Kultury Norwida, Centrum Kultury Podgórza, Biblioteka Kraków, ZIS „Dzieciaki na start” (krakow.pl: proste technicznie, ale niska jakość; patrz niżej) | **4** (+1) |
-| **bezpieczne, ale wymaga AI** | Dworek Białoprądnicki (11 klubów i kilka wspólnych kalendarzy), Muzeum Instytutu Techniki | **2 operatory** |
+| **bezpieczne, ale wymaga AI** | Dworek Białoprądnicki (11 klubów i kilka wspólnych kalendarzy), Muzeum Inżynierii i Techniki (MIT) | **2 operatory** |
 | **bezpieczne, do dalszego rozpoznania** (robots pozwala, kalendarz wygląda sensownie, nie zbudowano) | MNK, Muzeum Krakowa | 2 |
 | wątpliwe | `krakow.pl` jako źródło wydarzeń (ogłoszenia, powtórki innych źródeł) | 1 |
 | niemożliwe | `cep.uj.edu.pl` (`Disallow: /`), Nowohuckie Centrum Kultury (robots 500, więc nie pobieramy; do ponownej próby) | 2 |
