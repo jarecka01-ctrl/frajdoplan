@@ -124,6 +124,7 @@ export default function BliskoIKina({ places, wydarzenia, kina = null, muzyka = 
         podkategoria="Teatr"
         wzorNazwy={/spektakl|teatr/i}
         typ="spektakl"
+        wariant="ceglany"
         wyprzedzenie={60}
         pusto="Repertuar pojawi się tutaj, gdy włączymy automatyczne pobieranie. Na razie sprawdzisz go na stronach teatrów:"
         strony={places.filter((p) => p.podkategoria === 'Teatr' && p.website).sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0)).slice(0, 5)}
@@ -138,6 +139,7 @@ export default function BliskoIKina({ places, wydarzenia, kina = null, muzyka = 
         podkategoria="Koncerty dla dzieci"
         wzorNazwy={/koncert/i}
         typ="koncert"
+        wariant="kreda"
         wyprzedzenie={180}
         pusto="Nie mamy teraz koncertów dla dzieci w kalendarzu. Program sprawdzisz na stronach:"
         strony={muzyka}

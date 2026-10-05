@@ -150,6 +150,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
   return (
     <section className="wydarzenia" aria-label="Wydarzenia">
       <div className="wyd-glowna">
+        <span className="stempel">{glowny === 'dzis' ? 'Dziś' : 'Jutro'}</span>
         {glowny === 'dzis' ? (
           <>
             <h2 className="wyd-tytul">Dziś dla dzieci w Krakowie</h2>
@@ -179,6 +180,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
 
       <div className="wyd-boczne">
         <div className="wyd-mala">
+          <span className="stempel">Jutro</span>
           <h2 className="wyd-tytul-maly">Jutro dla dzieci w Krakowie</h2>
           <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
           <Slajdy
@@ -190,6 +192,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
           />
         </div>
         <div className="wyd-mala">
+          <span className="stempel stempel-weekend">Weekend</span>
           <h2 className="wyd-tytul-maly">{wWeekend ? 'Kolejny weekend dla dzieci w Krakowie' : 'Najbliższy weekend dla dzieci w Krakowie'}</h2>
           <p className="wyd-data">{zakresDat(sob, nd)}</p>
           <Slajdy

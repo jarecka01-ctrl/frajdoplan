@@ -20,13 +20,21 @@ export async function getStaticProps() {
   });
 }
 
+// Słowo „dziś" w nagłówku dostaje żółty marker (tekst nagłówka nadal pochodzi z seo.h1).
+function zakreslDzis(h1) {
+  return String(h1).split(/(dziś)/i).map((c, i) => (/^dziś$/i.test(c) ? <span key={i} className="marker">{c}</span> : c));
+}
+
 export default function Home({ places, wydarzenia = [], kina = null, muzyka = [], seo, missingConfig, fetchError }) {
   return (
     <Uklad seo={seo} missingConfig={missingConfig} fetchError={fetchError}>
       <Baner wydarzenia={wydarzenia} />
-      <section className="hero">
-        <h1>{seo.h1}</h1>
-        <p className="lead">{seo.wstep}</p>
+      <section className="hero hero-glowna">
+        <div className="hero-tekst">
+          <h1>{zakreslDzis(seo.h1)}</h1>
+          <p className="lead">{seo.wstep}</p>
+        </div>
+        <img className="hero-baner" src="/brand/krakow-baner.png" alt="" width="1406" height="349" />
       </section>
       <Wydarzenia wydarzenia={wydarzenia} places={places} />
       <BliskoIKina places={places} wydarzenia={wydarzenia} kina={kina} muzyka={muzyka} />

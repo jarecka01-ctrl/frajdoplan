@@ -16,22 +16,38 @@
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0; background: var(--papier); color: var(--tusz);
+  margin: 0; color: var(--tusz);
+  background-color: var(--papier);
+  background-image: radial-gradient(rgba(32, 36, 43, .10) 1.1px, transparent 1.3px);
+  background-size: 22px 22px;
   font: 400 16px/1.55 var(--font-body);
 }
 button, input, select { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--tusz); outline-offset: 3px; border-radius: 6px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.wrap { max-width: 1040px; margin: 0 auto; padding: 20px 20px 64px; }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 18px 20px 0; position: relative; }
 
-/* nagłówek */
-.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
-.brand { font: 700 26px/1 var(--font-display); letter-spacing: -0.01em; color: var(--tusz); text-decoration: none; }
-.menu { display: flex; gap: 6px; flex-wrap: wrap; }
-.menu-link { padding: 8px 14px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 15px; }
+/* nagłówek: logo + smok na końcu nazwy, wychylony z przerywanej linii */
+.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px; border-bottom: 2px dashed #d6cdb8; }
+.brand { display: flex; align-items: flex-end; text-decoration: none; }
+.brand-logo { display: block; margin-bottom: 9px; }
+.brand-logo img { display: block; height: 66px; width: auto; }
+.brand-smok { height: 96px; width: auto; margin-left: 6px; display: block; }
+.menu { display: flex; gap: 6px; margin-bottom: 12px; }
+.menu-link { padding: 8px 15px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 14px; }
 .menu-link:hover { border-color: var(--kreda); }
 .menu-link[aria-current="page"] { border-color: var(--tusz); background: var(--slonce); }
+@media (max-width: 640px) {
+  .top { flex-wrap: wrap; row-gap: 0; }
+  .brand { width: 100%; }
+  /* na telefonie bez hasła pod nazwą: obcinamy dolną część obrazka logo */
+  .brand-logo { height: 36px; overflow: hidden; margin-bottom: 6px; }
+  .brand-logo img { height: 45px; }
+  .brand-smok { height: 52px; margin-left: 4px; }
+  .menu { gap: 2px; margin: 0 -8px 8px; }
+  .menu-link { padding: 6px 10px; font-size: 13px; }
+}
 
 /* rodzaje miejsc: równe kafelki z ikonami, tyle rzędów, ile trzeba; można wybrać kilka */
 .rodzaje { display: grid; grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); gap: 8px; padding: 4px 0 8px; }
@@ -63,19 +79,28 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
   letter-spacing: -0.025em; margin: 0 0 16px;
 }
 .lead { font-size: 18px; color: var(--tusz-2); margin: 0; max-width: 56ch; }
+.hero-glowna { max-width: none; display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 10px; margin: 18px 0 22px; }
+.hero-glowna h1 { font-size: clamp(44px, 6.4vw, 68px); line-height: 1; letter-spacing: -0.03em; margin-bottom: 12px; }
+.marker { background: linear-gradient(transparent 62%, var(--slonce) 62%, var(--slonce) 92%, transparent 92%); padding: 0 4px; }
+.hero-glowna .lead { font-size: 17px; max-width: 44ch; }
+.hero-baner { width: 100%; height: auto; display: block; }
+@media (max-width: 760px) {
+  .hero-glowna { grid-template-columns: 1fr; gap: 14px; margin-top: 10px; }
+  .hero-glowna h1 { font-size: clamp(40px, 12vw, 52px); }
+}
 
 .notice { background: #FFF1CC; border: 2px solid var(--tusz); border-radius: 14px; padding: 12px 16px; margin-bottom: 20px; font-size: 14px; }
 
 /* wydarzenia: Dziś (duża) + Jutro i Weekend (małe) */
 .wydarzenia { display: grid; gap: 18px; margin: 8px 0 44px; grid-template-columns: 1fr; }
-@media (min-width: 860px) { .wydarzenia { grid-template-columns: 1.7fr 1fr; align-items: stretch; } }
+@media (min-width: 860px) { .wydarzenia { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: stretch; } }
 .wydarzenia-ladowanie { min-height: 220px; }
 .wyd-glowna {
   background: var(--slonce); border: 2px solid var(--tusz); border-radius: 28px 28px 28px 8px;
-  box-shadow: 6px 6px 0 var(--tusz); padding: 22px 22px 18px;
+  box-shadow: 6px 6px 0 var(--tusz); padding: 22px 22px 18px; position: relative;
 }
 .wyd-boczne { display: grid; gap: 18px; grid-template-rows: 1fr 1fr; }
-.wyd-mala { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 16px 18px; }
+.wyd-mala { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 16px 18px; position: relative; min-width: 0; }
 .wyd-tytul { font: 700 clamp(30px, 5vw, 40px)/1 var(--font-display); margin: 0; letter-spacing: -0.015em; }
 .wyd-tytul-maly { font: 700 22px/1.1 var(--font-display); margin: 0; }
 .wyd-data { margin: 4px 0 14px; font-size: 14px; color: var(--tusz-2); }
@@ -83,8 +108,12 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .wyd-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .wyd { display: grid; grid-template-columns: 96px 1fr; gap: 10px; align-items: baseline; }
 .wyd-godz { font: 700 16px/1.2 var(--font-display); }
-.wyd-duza { background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px; padding: 10px 14px; grid-template-columns: 78px 1fr; }
-.wyd-duza .wyd-godz { font-size: 22px; }
+.wyd-duza { position: relative; background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px; padding: 10px 14px; grid-template-columns: 78px 1fr; align-items: center; }
+.wyd-duza .wyd-godz { font-size: 22px; align-self: stretch; display: flex; align-items: center; border-right: 2px dashed #d6cdb8; }
+/* wcięcia jak w bilecie, na linii oddzielającej godzinę */
+.wyd-duza::before, .wyd-duza::after { content: ""; position: absolute; left: 84px; width: 14px; height: 14px; background: var(--slonce); border: 2px solid var(--tusz); border-radius: 50%; }
+.wyd-duza::before { top: -9px; clip-path: inset(50% 0 0 0); }
+.wyd-duza::after { bottom: -9px; clip-path: inset(0 0 50% 0); }
 .wyd-nazwa { margin: 0; font-weight: 600; font-size: 15px; line-height: 1.3; }
 .wyd-duza .wyd-nazwa { font: 700 18px/1.2 var(--font-display); }
 .wyd-miejsce { margin: 2px 0 0; font-size: 13px; color: var(--tusz-2); }
@@ -93,17 +122,18 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 /* strony /koncerty i /spektakle */
 .wyd-miesiac { margin: 0 0 34px; }
 .wyd-lista-strona .wyd-duza { grid-template-columns: 132px 1fr; }
+.wyd-lista-strona .wyd-duza::before, .wyd-lista-strona .wyd-duza::after { display: none; }
 .wyd-lista-strona .wyd-godz { font-size: 18px; }
 .wyd-lista-strona .wyd-nazwa a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 3px; text-underline-offset: 3px; }
 .wyd-lista-strona .wyd-miejsce a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 2px; }
 @media (max-width: 480px) { .wyd-lista-strona .wyd-duza { grid-template-columns: 1fr; gap: 4px; } }
 /* małe kafelki Jutro i Weekend: stała wysokość, 3 wydarzenia na slajd, strzałki ‹ › */
-.slajdy-okno { height: 148px; overflow: hidden; touch-action: pan-y; }
+.slajdy-okno { height: 184px; overflow: hidden; touch-action: pan-y; }
 .slajdy-lista { gap: 8px; }
-.slajd { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 8px; align-items: start; height: 44px; overflow: hidden; }
+.slajd { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 8px; align-items: start; height: 56px; overflow: hidden; }
 .slajd-godz { font: 700 14px/1.3 var(--font-display); }
 .slajd-tresc { display: flex; flex-direction: column; min-width: 0; }
-.slajd-nazwa { font-weight: 600; font-size: 15px; line-height: 1.3; color: var(--tusz); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slajd-nazwa { font-weight: 600; font-size: 15px; line-height: 1.25; color: var(--tusz); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow-wrap: anywhere; }
 a.slajd-nazwa { text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .slajd-miejsce { font-size: 12px; color: var(--tusz-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .slajdy-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
@@ -289,11 +319,16 @@ a.slajd-nazwa { text-decoration: underline; text-decoration-color: var(--mak); t
 .pusto { text-align: center; padding: 48px 16px; border: 2px dashed var(--kreda); border-radius: 22px; }
 .pusto p { margin: 0 0 16px; font-size: 17px; }
 
-.stopka { margin-top: 56px; padding-top: 20px; border-top: 2px solid var(--kreda); font-size: 13px; color: var(--tusz-2); }
+/* stopka: przerywana linia i smok wychylający się zza dolnej krawędzi */
+.stopka { position: relative; margin-top: 30px; height: 170px; overflow: hidden; border-top: 2px dashed #d6cdb8; font-size: 13px; color: var(--tusz-2); }
+.stopka p { margin: 18px 0; max-width: 46ch; }
+.stopka-smok { position: absolute; right: 30px; bottom: -14px; width: 150px; height: auto; }
+@media (max-width: 480px) { .stopka-smok { right: 6px; width: 110px; } .stopka p { max-width: 24ch; } }
 
 @media (max-width: 480px) {
   .wyd-glowna { padding: 18px 14px 14px; }
   .wyd-duza { grid-template-columns: 58px 1fr; padding: 10px 12px; }
+  .wyd-duza::before, .wyd-duza::after { left: 62px; }
   .wyd-duza .wyd-godz { font-size: 18px; }
   .wyd { grid-template-columns: 84px 1fr; }
   .selecty { grid-template-columns: 1fr; }
@@ -304,8 +339,18 @@ a.slajd-nazwa { text-decoration: underline; text-decoration-color: var(--mak); t
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 /* okruszki nawigacji */
-.okruszki { margin: -20px 0 14px; font-size: 14px; color: var(--tusz-2); }
+.okruszki { margin: -8px 0 14px; font-size: 14px; color: var(--tusz-2); }
 .okruszki ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
 .okruszki li + li::before { content: '›'; margin-right: 4px; }
 .okruszki a { color: var(--tusz-2); text-decoration: underline; text-underline-offset: 2px; }
 .okruszki a:hover { color: var(--tusz); }
+
+/* naklejki DZIŚ / JUTRO / WEEKEND: stempel z przerywaną ramką w prawym górnym rogu kafelka */
+.stempel {
+  position: absolute; right: -6px; top: -13px; z-index: 1;
+  font: 700 13px/1 var(--font-display); letter-spacing: .06em; text-transform: uppercase;
+  color: var(--mak); background: #fff3f0; border: 2.5px dashed var(--mak); border-radius: 6px; padding: 5px 9px;
+  transform: rotate(-5deg);
+}
+.wyd-glowna .stempel { right: -8px; top: -14px; font-size: 15px; }
+.stempel-weekend { color: #B87500; border-color: #B87500; background: #fff7e0; transform: rotate(4deg); }

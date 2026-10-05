@@ -16,3 +16,15 @@ a.nazwa { text-decoration: underline; text-decoration-color: #E4483A; text-decor
 .linki a { color: #20242B; text-decoration: underline; text-decoration-color: #E4483A; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .wiecej { margin: auto 0 0; padding-top: 12px; font-size: 13px; font-weight: 600; }
 .wiecej a { color: #20242B; text-decoration: underline; text-decoration-color: #E4483A; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* spektakle: tło ceglane z delikatnym wzorem kurtyny; wiersze zostają kremowe */
+.ceglany {
+  background-color: #B03A2E;
+  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 16px, rgba(255,255,255,.04) 16px 32px);
+  color: #FFFDF7; box-shadow: 5px 5px 0 #20242B;
+}
+.ceglany .tytul, .ceglany .podtytul, .ceglany .pusto { color: #FFFDF7; }
+.ceglany .podtytul { opacity: .85; }
+.ceglany .linki a, .ceglany .wiecej a { color: #FFFDF7; text-decoration-color: #F7B32B; }
+/* koncerty: kreda z żółtym cieniem */
+.kreda { background: #EFE7D6; box-shadow: 5px 5px 0 #F7B32B; border-radius: 6px 22px 22px 22px; }
