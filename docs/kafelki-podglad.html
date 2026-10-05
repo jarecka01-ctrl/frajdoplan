@@ -1,0 +1,53 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><style>
+:root{--tusz:#20242B;--papier:#FFFDF7;--slonce:#F7B32B;--mak:#E4483A;--kreda:#EFE7D6;--d:'Baloo 2','Trebuchet MS',sans-serif;--b:Inter,'Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;padding:34px 20px;color:var(--tusz);font:400 14px/1.5 var(--b);background-color:var(--papier);
+background-image:radial-gradient(rgba(32,36,43,.10) 1.1px,transparent 1.3px);background-size:22px 22px}
+.wrap{max-width:1060px;margin:0 auto}
+.trzy{display:grid;gap:18px;grid-template-columns:1.1fr 1fr 1fr}
+/* WSPÓLNE dla trzech kafelków */
+.k{position:relative;border:2px solid var(--tusz);border-radius:22px 22px 22px 6px;padding:20px 18px 16px;min-width:0;display:flex;flex-direction:column}
+.k h3{font:700 21px/1.1 var(--d);margin:0 0 3px;letter-spacing:-.01em}
+.k .pod{font-size:12.5px;margin:0 0 12px;opacity:.8}
+.k ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.k li{background:var(--papier);color:var(--tusz);border-radius:12px;padding:8px 11px;min-width:0}
+.k .data{display:block;font:700 12.5px/1.3 var(--d);color:var(--tusz);text-transform:none}
+.k .nazwa{display:block;font:600 14px/1.3 var(--b);color:var(--tusz);overflow-wrap:anywhere}
+.k a.nazwa{text-decoration:underline;text-decoration-color:var(--mak);text-decoration-thickness:2px;text-underline-offset:3px}
+.k .miejsce{display:block;font-size:12px;color:#5B6270}
+.k .wiecej{margin:auto 0 0;padding-top:12px;font-weight:600;font-size:13px}
+.k .wiecej a{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+/* KINO: atrament + perforacja taśmy filmowej */
+.kino{background-color:var(--tusz);color:var(--papier);box-shadow:5px 5px 0 var(--mak);padding-top:30px;padding-bottom:30px;
+background-image:radial-gradient(rgba(255,253,247,.07) 1px,transparent 1.4px);background-size:18px 18px}
+.kino:before,.kino:after{content:"";position:absolute;left:18px;right:18px;height:7px;background:repeating-linear-gradient(90deg,rgba(255,253,247,.2) 0 8px,transparent 8px 17px);border-radius:2px}
+.kino:before{top:10px}.kino:after{bottom:10px}
+.kino h3,.kino .pod{color:var(--papier)}
+.kino .wiecej a{color:var(--papier);text-decoration-color:var(--slonce)}
+/* SPEKTAKLE: ceglana kurtyna */
+.sp{background-color:#B03A2E;color:var(--papier);box-shadow:5px 5px 0 var(--tusz);
+background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 16px,rgba(255,255,255,.04) 16px 32px)}
+.sp h3,.sp .pod{color:var(--papier)}
+.sp .wiecej a{color:var(--papier);text-decoration-color:var(--slonce)}
+/* KONCERTY: kreda + pięciolinia i nutki */
+.ko{background-color:#2F5D3A;color:var(--papier);box-shadow:5px 5px 0 var(--slonce);background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27520%27%20height%3D%27520%27%20viewBox%3D%270%200%20520%20520%27%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%2718%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.340%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%2740%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.314%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%2762%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.288%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%2784%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.262%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%27106%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.236%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%27128%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.210%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%27150%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.184%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%27172%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.158%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%27194%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.132%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%27216%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.106%27%20stroke-width%3D%271.6%27/%3E%3Ccircle%20cx%3D%27260%27%20cy%3D%27260%27%20r%3D%27238%27%20fill%3D%27none%27%20stroke%3D%27%239CCBA6%27%20stroke-opacity%3D%270.080%27%20stroke-width%3D%271.6%27/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:520px 520px}
+.ko h3,.ko .pod{color:var(--papier)}
+.ko .wiecej a{color:var(--papier);text-decoration-color:var(--slonce)}
+
+</style></head><body><div class="wrap"><div class="trzy">
+<section class="k kino"><h3>Dziś w kinach</h3><p class="pod">poniedziałek, 5 października</p><ul>
+<li><span class="nazwa">Zapomniana wyspa (dubbing)</span><span class="miejsce">Kino Kijów · 14:15, 16:15, 17:30</span></li>
+<li><span class="nazwa">Tedi i magiczna lampa</span><span class="miejsce">Kino Kijów · 12:15, 15:00</span></li>
+<li><span class="nazwa">Marsupilami (dubbing)</span><span class="miejsce">Kino Mikro · 12:45</span></li></ul>
+<p class="wiecej"><a>Cinema City: repertuar</a> · <a>Multikino: repertuar</a></p></section>
+<section class="k sp"><h3>Najbliższe spektakle</h3><p class="pod">Dla dzieci, do zaplanowania na weekend</p><ul>
+<li><span class="data">sob. 10.10 · 11:00, 13:00</span><a class="nazwa">Piękna i Bestia</a><span class="miejsce">Teatr Groteska, od 4 lat</span></li>
+<li><span class="data">niedz. 25.10 · 12:00</span><a class="nazwa">W zdrowym ciele zdrowy żuk</a><span class="miejsce">Teatr KTO, 4+</span></li>
+<li><span class="data">niedz. 15.11 · 12:00</span><a class="nazwa">Maks chce psa</a><span class="miejsce">Teatr KTO, każdy wiek</span></li></ul>
+<p class="wiecej"><a>Wszystkie spektakle →</a></p></section>
+<section class="k ko"><h3>Najbliższe koncerty</h3><p class="pod">Z wyprzedzeniem do pół roku</p><ul>
+<li><span class="data">niedz. 11.10 · 11:00</span><a class="nazwa">Muzyczne boBasy</a><span class="miejsce">Filharmonia Krakowska, 3+</span></li>
+<li><span class="data">sob. 24.10 · 10:30, 12:30</span><a class="nazwa">Akademia Pani Nutki</a><span class="miejsce">Studio Koncertowe Radia Kraków</span></li>
+<li><span class="data">sob. 17.10 · 12:00</span><a class="nazwa">Bajki muzyką pisane</a><span class="miejsce">Filharmonia Krakowska</span></li></ul>
+<p class="wiecej"><a>Wszystkie koncerty →</a></p></section>
+</div></div></body></html>
