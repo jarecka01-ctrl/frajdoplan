@@ -52,7 +52,6 @@ export default {
   nazwa: 'ICE Kraków',
   url: `${BAZA}/kalendarium`,
   rodzaj: 'wydarzenia',
-  goscinne: true, // hala, klub albo teatr z wydarzeniami gościnnymi; brakujące miejsca w arkuszu trafiają do podsumowania
   wyprzedzenieDni: 180,
   miejsca: [['ICE Kraków', /ice\s*krak/i]],
   async pobierz() {

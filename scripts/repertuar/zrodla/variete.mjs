@@ -75,9 +75,8 @@ export default {
   nazwa: 'Krakowski Teatr VARIETE',
   url: `${BAZA}/repertuar/sprawdz-repertuar`,
   rodzaj: 'wydarzenia',
-  goscinne: true, // hala, klub albo teatr z wydarzeniami gościnnymi; brakujące miejsca w arkuszu trafiają do podsumowania
   wyprzedzenieDni: 180,
-  miejsca: [['Krakowski Teatr VARIETE', /variet/i]],
+  miejsca: [['Krakowski Teatr VARIETE', /vari[eé]t[eé]/i]],
   async pobierz() {
     return parsuj(await pobierz(this.url, { robots: true }));
   },

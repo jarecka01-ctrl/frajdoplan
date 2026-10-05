@@ -249,3 +249,17 @@ export const plusDni = (iso, n) => {
   d.setUTCDate(d.getUTCDate() + n);
   return d.toISOString().slice(0, 10);
 };
+
+// Miesiące, które obejmuje okno od dziś (RRRR-MM-DD) do `dni` dni naprzód: [[rok, miesiąc], …]
+export function miesiaceOkna(dzis, dni = 60) {
+  const koniec = plusDni(dzis, dni);
+  const wynik = [];
+  let [r, m] = dzis.split('-').map(Number);
+  const [rk, mk] = koniec.split('-').map(Number);
+  while (r < rk || (r === rk && m <= mk)) {
+    wynik.push([r, m]);
+    m += 1;
+    if (m > 12) { m = 1; r += 1; }
+  }
+  return wynik;
+}

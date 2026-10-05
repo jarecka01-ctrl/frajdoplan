@@ -1,6 +1,6 @@
 # Repertuar kin studyjnych (Kijów, Mikro, Agrafka, Pod Baranami, Paradox, Sfinks) oraz wydarzenia dla dzieci
 # (teatry, koncerty, domy kultury, biblioteki, hale i kluby z wydarzeniami gościnnymi: TAURON Arena, ICE, Klub Studio,
-# Variété) → data/repertuar.json. Wynik uruchomienia (tabela źródeł i lista
+# Variété, Groteska, Teatr Figurki, Teatr Słowackiego, Opera Krakowska) → data/repertuar.json. Wynik uruchomienia (tabela źródeł i lista
 # „do weryfikacji") jest w zakładce Summary uruchomienia.
 # Wszystkie te kina mają tydzień repertuarowy piątek–czwartek i publikują go przed piątkiem
 # (docs/rozpoznanie-kin.md), więc jeden harmonogram wystarcza dla wszystkich.
@@ -26,7 +26,7 @@ concurrency:
 jobs:
   aktualizuj:
     runs-on: ubuntu-latest
-    timeout-minutes: 60 # kina + ok. 15 źródeł wydarzeń, 1 zapytanie na sekundę
+    timeout-minutes: 60 # kina + ok. 19 źródeł wydarzeń, 1 zapytanie na sekundę
     steps:
       - uses: actions/checkout@v4
 

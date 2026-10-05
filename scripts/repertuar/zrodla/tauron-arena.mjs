@@ -42,7 +42,6 @@ export default {
   nazwa: 'TAURON Arena Kraków',
   url: `${BAZA}/events/`,
   rodzaj: 'wydarzenia',
-  goscinne: true, // hala, klub albo teatr z wydarzeniami gościnnymi; brakujące miejsca w arkuszu trafiają do podsumowania
   wyprzedzenieDni: DNI,
   miejsca: [['TAURON Arena Kraków', /tauron\s*arena/i]],
   async pobierz() {
