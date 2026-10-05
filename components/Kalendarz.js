@@ -19,6 +19,7 @@ const KATEGORIE = [
   { id: 'festyn', nazwa: 'Festyny', ikona: '🎈' },
   { id: 'sport', nazwa: 'Sport', ikona: '⚽' },
   { id: 'spacer', nazwa: 'Spacery', ikona: '🥾' },
+  { id: 'planszowki', nazwa: 'Planszówki', ikona: '🎲' },
   { id: 'inne', nazwa: 'Inne', ikona: '➕' },
 ];
 const pad = (n) => String(n).padStart(2, '0');

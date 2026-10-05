@@ -25,6 +25,7 @@ import ckpodgorza from './zrodla/ckpodgorza.mjs';
 import zis from './zrodla/zis.mjs';
 import krakowPl from './zrodla/krakow-pl.mjs';
 import { naprawLinki } from './linki.mjs';
+import { dopracujKategorie } from './kategorie.mjs';
 import { idKin, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
@@ -81,7 +82,7 @@ const naWydarzenieInne = (zrodlo, s, idMiejsc = '') => ({
   id: `${zrodlo.id}-${slugZ(s.miejsce)}-${slugZ(s.tytul)}-${s.data}T${s.godzina}`,
   typ: s.typ || 'wydarzenie',
   kino: false,
-  kategoria: s.kategoria || 'inne',
+  kategoria: dopracujKategorie(s.kategoria, s.tytul), // planszówki przed sportem, sport tylko przy sportowych słowach
   nazwa: s.tytul,
   data_regula: s.dataDo ? `${s.data} do ${s.dataDo}` : s.data,
   godzina: s.godzina,
