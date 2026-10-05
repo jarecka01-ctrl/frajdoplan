@@ -29,7 +29,7 @@ function najblizsze(lista, dzis, wyprzedzenie) {
 /*
   Propsy:
     tytul, podtytul, etykieta — teksty kafelka;
-    podkategoria, wzorNazwy   — które wydarzenia bierzemy (miejsce z podkategorii, nazwa pasuje do wzoru albo `typ` z data/repertuar.json);
+    podkategoria, wzorNazwy   — które wydarzenia bierzemy (miejsce z podkategorii, nazwa pasuje do wzoru albo `typ` z data/repertuar.json; `typ` może być listą);
     wyprzedzenie              — ile dni do przodu szukamy;
     pusto                     — informacja, gdy nie ma wydarzeń; strony — [{ id, name, website }] linki pod nią;
     wiecej                    — { href, tekst } link na dole;
@@ -46,7 +46,7 @@ export default function NajblizszeWydarzenia({
   const pasujace = wydarzenia.filter((w) => {
     if (w.kino) return false;
     const m = w.miejsceId && poId[w.miejsceId];
-    return (typ && w.typ === typ) || (m && m.podkategoria === podkategoria) || w.miejscePodkat === podkategoria || wzorNazwy.test(w.nazwa);
+    return (typ && [].concat(typ).includes(w.typ)) || (m && m.podkategoria === podkategoria) || w.miejscePodkat === podkategoria || wzorNazwy.test(w.nazwa);
   });
   const wiersze = najblizsze(pasujace, dzis, wyprzedzenie);
 

@@ -24,15 +24,19 @@ import biblioteka from './zrodla/biblioteka.mjs';
 import ckpodgorza from './zrodla/ckpodgorza.mjs';
 import zis from './zrodla/zis.mjs';
 import krakowPl from './zrodla/krakow-pl.mjs';
+import tauronArena from './zrodla/tauron-arena.mjs';
+import iceKrakow from './zrodla/ice-krakow.mjs';
+import klubStudio from './zrodla/klub-studio.mjs';
+import variete from './zrodla/variete.mjs';
 import { naprawLinki } from './linki.mjs';
 import { dopracujKategorie } from './kategorie.mjs';
 import { idKin, idKinZCsv, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 // Źródła wydarzeń (nie kina). Moduł z `wlaczone: false` jest gotowy, ale pomijany.
-const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl]
+const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl, tauronArena, iceKrakow, klubStudio, variete]
   .filter((z) => z.wlaczone !== false);
-const WYPRZEDZENIE_DNI = { spektakl: 60, koncert: 180, domyslnie: 60 }; // jak daleko do przodu zapisujemy wydarzenia
+const WYPRZEDZENIE_DNI = { spektakl: 60, koncert: 180, widowisko: 180, domyslnie: 60 }; // jak daleko do przodu zapisujemy wydarzenia (źródło może mieć własne `wyprzedzenieDni`)
 const KATALOG = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'data');
 const PLIK = process.env.REPERTUAR_PLIK || join(KATALOG, 'repertuar.json'); // REPERTUAR_PLIK: do prób, bez ruszania prawdziwego pliku
 const WYJATKI = join(KATALOG, 'wyjatki.json');
@@ -94,6 +98,7 @@ const naWydarzenieInne = (zrodlo, s, idMiejsc = '') => ({
   zrodlo: zrodlo.id,
   status: 'zatwierdzone',
   ...(s.dlaGrup ? { dla_grup: true } : {}), // poranki dla szkół: zostają w pliku, strona ich nie pokazuje
+  ...(s.kandydatBanera ? { kandydat_banera: true } : {}), // duże widowisko rodzinne: o banerze (`wyrozniony`) decyduje właścicielka
 });
 
 // wymus / ukryj: ogólne (kina i wszystkie źródła) oraz własne źródła (`zrodla.<id>`)
@@ -109,8 +114,8 @@ export function ocenaDlaDzieci(s, wyjatki) {
   return s.dlaDzieci === undefined ? null : s.dlaDzieci;
 }
 
-const doKiedy = (dzis, s) => {
-  const dni = WYPRZEDZENIE_DNI[s.typ] || WYPRZEDZENIE_DNI.domyslnie;
+const doKiedy = (dzis, s, zrodlo = {}) => {
+  const dni = zrodlo.wyprzedzenieDni || WYPRZEDZENIE_DNI[s.typ] || WYPRZEDZENIE_DNI.domyslnie;
   const d = new Date(`${dzis}T12:00:00Z`);
   d.setUTCDate(d.getUTCDate() + dni);
   return d.toISOString().slice(0, 10);
@@ -152,6 +157,7 @@ async function main() {
   const tabela = [];
   const tabelaInne = [];
   const doWeryfikacji = [];
+  const bezMiejsca = new Set(); // hale i kluby (źródła gościnne), których nie ma w arkuszu „Miejsca"
 
   for (const zrodlo of ZRODLA_KIN) {
     const stare = poprzedni.zrodla?.[zrodlo.id] || {};
@@ -201,7 +207,7 @@ async function main() {
     let surowe = null;
     let blad = '';
     try {
-      surowe = (await zrodlo.pobierz()).filter((s) => s.tytul && /^\d{4}-\d{2}-\d{2}$/.test(s.data) && (s.dataDo || s.data) >= dzis && s.data <= doKiedy(dzis, s));
+      surowe = (await zrodlo.pobierz()).filter((s) => s.tytul && /^\d{4}-\d{2}-\d{2}$/.test(s.data) && (s.dataDo || s.data) >= dzis && s.data <= doKiedy(dzis, s, zrodlo));
     } catch (e) {
       blad = e.message;
     }
@@ -230,6 +236,7 @@ async function main() {
     uwagi.forEach((u) => console.log(`  link: ${u}`));
     if (niesprawdzone) console.warn(`  ${zrodlo.id}: ${niesprawdzone} linków nie udało się sprawdzić (zostają bez zmian)`);
     const gotowe = wybrane.map((s) => naWydarzenieInne(zrodlo, s, idMiejsca(zrodlo, s, wiersze) || idZPoprzedniego[`${zrodlo.id}|${s.miejsce}`] || ''));
+    if (zrodlo.goscinne && gotowe.some((w) => !w.powiazane_miejsce_id)) bezMiejsca.add(zrodlo.nazwa);
     const dlaGrup = gotowe.filter((w) => w.dla_grup).length;
     const wWeryfikacji = doWeryfikacji.filter((w) => w.zrodlo === zrodlo.id).length;
     tabelaInne.push({ źródło: zrodlo.nazwa, 'dla dzieci': gotowe.length - dlaGrup, 'dla grup (ukryte)': dlaGrup, 'do weryfikacji': wWeryfikacji, 'zastąpione linki': zastapione });
@@ -250,8 +257,17 @@ async function main() {
     console.log(`${zrodlo.id}: ${surowe.length} wydarzeń, dla dzieci ${gotowe.length - dlaGrup} (+${dlaGrup} dla grup), do weryfikacji ${wWeryfikacji}`);
   }
 
-  // duplikaty (ten sam film, kino i godzina)
-  const unikalne = [...new Map(wydarzenia.map((w) => [w.id, w])).values()]
+  // duplikaty (ten sam film, kino i godzina), a dla wydarzeń z różnych źródeł: ten sam tytuł, dzień i miejsce
+  // (zostaje wydarzenie ze źródła wcześniejszego na liście)
+  const widziane = new Map();
+  const bezDubli = [...new Map(wydarzenia.map((w) => [w.id, w])).values()].filter((w) => {
+    const klucz = `${slugZ(w.miejsce)}|${slugZ(w.nazwa)}|${w.data_regula}`;
+    const pierwsze = widziane.get(klucz);
+    if (pierwsze && pierwsze !== w.zrodlo) return false;
+    widziane.set(klucz, w.zrodlo);
+    return true;
+  });
+  const unikalne = bezDubli
     .sort((a, b) => `${a.data_regula}${a.godzina}${a.miejsce}`.localeCompare(`${b.data_regula}${b.godzina}${b.miejsce}`));
 
   if (unikalne.length === 0 && (poprzedni.wydarzenia || []).length > 0) {
@@ -267,7 +283,11 @@ async function main() {
   console.table(tabela.map((t) => ({ kino: t.kino, 'liczba seansów': t.seansow, 'zastąpione linki': t.zastapione, 'niesprawdzone linki': t.niesprawdzone })));
   if (tabelaInne.length) console.table(tabelaInne);
   console.log(`Zapisano ${unikalne.length} wydarzeń (seansów i innych) do data/repertuar.json; do weryfikacji: ${weryfikacja.length}`);
-  await podsumowanieGithub(tabela, tabelaInne, weryfikacja);
+  const brakujaceMiejsca = [...bezMiejsca].sort((a, b) => a.localeCompare(b, 'pl'));
+  if (brakujaceMiejsca.length) console.log(`Miejsca bez place_id w arkuszu „Miejsca": ${brakujaceMiejsca.join(', ')}`);
+  const kandydaci = [...new Set(unikalne.filter((w) => w.kandydat_banera).map((w) => `${w.nazwa} (${w.data_regula})`))];
+  if (kandydaci.length) console.log(`Kandydaci na baner (decyduje właścicielka, kolumna wyrozniony): ${kandydaci.join('; ')}`);
+  await podsumowanieGithub(tabela, tabelaInne, weryfikacja, brakujaceMiejsca, kandydaci);
 
   if (bledy.length) {
     console.error(`Błędy źródeł:\n- ${bledy.join('\n- ')}`);
@@ -276,7 +296,7 @@ async function main() {
 }
 
 // Podsumowanie w GitHub Actions (zakładka „Summary" uruchomienia): tabela źródeł i lista „do weryfikacji".
-async function podsumowanieGithub(kina, inne, weryfikacja) {
+async function podsumowanieGithub(kina, inne, weryfikacja, brakujaceMiejsca = [], kandydaci = []) {
   if (!process.env.GITHUB_STEP_SUMMARY) return;
   const wiersz = (...k) => `| ${k.join(' | ')} |`;
   const linie = ['## Repertuar: wynik', ''];
@@ -287,6 +307,8 @@ async function podsumowanieGithub(kina, inne, weryfikacja) {
       wiersz('źródło', 'tytuł', 'pierwszy termin', 'wiek'), wiersz('---', '---', '---', '---'),
       ...[...new Map(weryfikacja.map((w) => [`${w.zrodlo}|${w.tytul}`, w])).values()].map((w) => wiersz(w.zrodlo, w.tytul, w.data, w.wiek || '—')), '');
   }
+  if (brakujaceMiejsca.length) linie.push('### Miejsca bez wpisu w arkuszu „Miejsca"', 'Wydarzenia z tych miejsc nie mają `powiazane_miejsce_id`. Dodaj miejsce do arkusza (potem `uzupelnij-miejsca.mjs`):', '', ...brakujaceMiejsca.map((m) => `- ${m}`), '');
+  if (kandydaci.length) linie.push('### Kandydaci na baner (duże widowiska rodzinne)', 'O banerze decyduje właścicielka: w arkuszu „Wydarzenia" wpisz `tak` w kolumnie `wyrozniony`.', '', ...kandydaci.map((k) => `- ${k}`), '');
   const { appendFile } = await import('node:fs/promises');
   await appendFile(process.env.GITHUB_STEP_SUMMARY, `${linie.join('\n')}\n`);
 }

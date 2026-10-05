@@ -13,6 +13,7 @@ const czekaj = (ms) => new Promise((r) => setTimeout(r, ms));
 // Opcje: kodowanie, json (odpowiedź jako JSON), metoda + cialo (POST: obiekt wysyłany jako JSON albo
 // URLSearchParams jako formularz), robots (najpierw sprawdź robots.txt serwisu; zakaz = wyjątek).
 export async function pobierz(url, opcje = {}) {
+  zakazanySerwis(url);
   if (opcje.robots) await upewnijSieZeDozwolone(url);
   try {
     return await pobierzRaz(url, opcje);
@@ -67,7 +68,9 @@ async function upewnijSieZeDozwolone(url) {
   if (!robotsPamiec.has(serwis)) {
     await odstep();
     try {
-      const res = await fetch(`${serwis}/robots.txt`, { headers: { 'User-Agent': USER_AGENT }, redirect: 'follow', signal: AbortSignal.timeout(20000) });
+      const pobierzRobots = () => fetch(`${serwis}/robots.txt`, { headers: { 'User-Agent': USER_AGENT }, redirect: 'follow', signal: AbortSignal.timeout(20000) });
+      let res = await pobierzRobots();
+      if (res.status >= 500) { await czekaj(5000); res = await pobierzRobots(); } // chwilowy błąd serwera: jedna ponowna próba
       if (res.status >= 500) robotsPamiec.set(serwis, { blad: `robots.txt: HTTP ${res.status}` });
       else if (!res.ok) robotsPamiec.set(serwis, []); // brak pliku = brak zakazów
       else {
@@ -111,10 +114,19 @@ async function pobierzRaz(url, { kodowanie = 'utf-8', json = false, metoda = 'GE
   return json ? JSON.parse(tekst) : tekst;
 }
 
+// Serwisy, z których nie pobieramy niczego (zakaz automatycznego pobierania albo brak zgody na współpracę):
+// kupbilecik.pl, biletomat.pl i serwisy KICKET, Facebook, Instagram. Linki do nich zostają w danych, ale ich nie odpytujemy.
+const ZAKAZANE_SERWISY = /(^|\.)(kupbilecik\.pl|biletomat\.pl|kicket\.pl|facebook\.com|fb\.com|fb\.me|instagram\.com)$/i;
+export const zakazanyAdres = (url) => { try { return ZAKAZANE_SERWISY.test(new URL(url).hostname); } catch (e) { return false; } };
+function zakazanySerwis(url) {
+  if (zakazanyAdres(url)) throw new Error(`${url}: z tego serwisu niczego nie pobieramy`);
+}
+
 // Czy adres zwraca działającą stronę. Zwraca { ok: true } albo { ok: false, powod }, a gdy nie udało się
 // sprawdzić (brak połączenia, przekroczony czas) — { ok: null, powod }: wtedy nie ruszamy linku.
 // Niedziałające: kod 4xx/5xx, przekierowanie na stronę błędu (np. Error.aspx) albo na stronę główną.
 export async function sprawdz(url) {
+  if (zakazanyAdres(url)) return { ok: null, powod: 'serwis, z którego niczego nie pobieramy' };
   await odstep();
   let res;
   try {
