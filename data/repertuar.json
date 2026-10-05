@@ -166,10 +166,10 @@
       "ok": true,
       "pobrano": "2026-10-05T11:17:56+02:00",
       "wszystkich": 28,
-      "dla_dzieci": 24,
+      "dla_dzieci": 20,
       "dla_grup": 1,
       "do_weryfikacji": 0,
-      "pominiete": 3,
+      "pominiete": 7,
       "linki_zastapione": 24
     },
     "zis": {
@@ -525,22 +525,6 @@
       "cena": "",
       "link_biletow": "https://biblioteka.krakow.pl/wydarzenia/em-przepraszam-nie-chcialam-przepraszam-nie-chcialem-em-spotkanie-z-bajka-edukacyjna/2430",
       "zrodlo": "biblioteka",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "ckpodgorza-strefa-sokolska-pracownia-drugiego-obiegu-warsztaty-upcyklingowe-2026-10-06T18:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "warsztaty",
-      "nazwa": "Pracownia drugiego obiegu – warsztaty upcyklingowe",
-      "data_regula": "2026-10-06",
-      "godzina": "18:00",
-      "miejsce": "Strefa Sokolska",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "wstęp wolny",
-      "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/pracownia-drugiego-obiegu",
-      "zrodlo": "ckpodgorza",
       "status": "zatwierdzone"
     },
     {
@@ -1332,22 +1316,6 @@
       "status": "zatwierdzone"
     },
     {
-      "id": "ckpodgorza-strefa-sokolska-pracownia-drugiego-obiegu-warsztaty-upcyklingowe-2026-10-13T18:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "warsztaty",
-      "nazwa": "Pracownia drugiego obiegu – warsztaty upcyklingowe",
-      "data_regula": "2026-10-13",
-      "godzina": "18:00",
-      "miejsce": "Strefa Sokolska",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "wstęp wolny",
-      "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/pracownia-drugiego-obiegu",
-      "zrodlo": "ckpodgorza",
-      "status": "zatwierdzone"
-    },
-    {
       "id": "biblioteka-biblioteka-krakow-filia-nr-8-dzien-lodzi-2026-10-14T15:00",
       "typ": "wydarzenie",
       "kino": false,
@@ -2073,22 +2041,6 @@
       "cena": "",
       "link_biletow": "https://biblioteka.krakow.pl/wydarzenia",
       "zrodlo": "biblioteka",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "ckpodgorza-strefa-sokolska-pracownia-drugiego-obiegu-warsztaty-upcyklingowe-2026-10-20T18:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "warsztaty",
-      "nazwa": "Pracownia drugiego obiegu – warsztaty upcyklingowe",
-      "data_regula": "2026-10-20",
-      "godzina": "18:00",
-      "miejsce": "Strefa Sokolska",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "wstęp wolny",
-      "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/pracownia-drugiego-obiegu",
-      "zrodlo": "ckpodgorza",
       "status": "zatwierdzone"
     },
     {
@@ -2907,22 +2859,6 @@
       "zrodlo": "wspolczesny",
       "status": "zatwierdzone",
       "dla_grup": true
-    },
-    {
-      "id": "ckpodgorza-strefa-sokolska-pracownia-drugiego-obiegu-warsztaty-upcyklingowe-2026-10-27T18:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "warsztaty",
-      "nazwa": "Pracownia drugiego obiegu – warsztaty upcyklingowe",
-      "data_regula": "2026-10-27",
-      "godzina": "18:00",
-      "miejsce": "Strefa Sokolska",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "wstęp wolny",
-      "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/pracownia-drugiego-obiegu",
-      "zrodlo": "ckpodgorza",
-      "status": "zatwierdzone"
     },
     {
       "id": "wspolczesny-teatr-wspolczesny-chlopcy-z-placu-broni-2026-10-28T09:00",
