@@ -61,6 +61,16 @@ export default function Katalog({
 
   useEffect(() => setLimit(naStrone), [strefa, kategoria, wybrane, query, naStrone]);
 
+  // Link z kafelka wydarzeń (`/#miejsce-<id>`): pokaż tylko tę kartę i przewiń do niej.
+  useEffect(() => {
+    const id = (window.location.hash.match(/^#miejsce-(.+)$/) || [])[1];
+    const miejsce = id && places.find((p) => p.id === decodeURIComponent(id));
+    if (!miejsce) return;
+    setStrefa(''); setKategoria(''); setWybrane([]); setQuery(miejsce.name);
+    setTimeout(() => document.getElementById(`miejsce-${miejsce.id}`)?.scrollIntoView({ block: 'center' }), 50);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Rodzaje miejsc z liczbą — tylko te, które są w wybranej strefie i kategorii.
   const rodzaje = useMemo(() => {
     const licz = {};
@@ -208,7 +218,7 @@ export default function Katalog({
           {filtered.slice(0, limit).map((p) => {
             const pole = p.kategoria === 'Plener';
             return (
-              <li key={p.id} className={`karta ${pole ? 'karta-pole' : 'karta-dach'}`}>
+              <li key={p.id} id={`miejsce-${p.id}`} className={`karta ${pole ? 'karta-pole' : 'karta-dach'}`}>
                 <div className="karta-gora">
                   <span className="typ">
                     <span aria-hidden="true">{IKONY[rodzajZ(p)] || (pole ? '🌳' : '🏠')}</span>

@@ -70,13 +70,67 @@ function Karta({ w, duza }) {
   );
 }
 
-export default function Wydarzenia({ wydarzenia }) {
+// Tytuł wydarzenia jako link: do biletów (link_biletow), a gdy go brak — do karty miejsca na stronie głównej
+// (powiazane_miejsce_id); gdy i tego brak, zwykły tekst.
+function Tytul({ w, miejsca }) {
+  if (w.link) return <a className="slajd-nazwa" href={w.link} target="_blank" rel="noreferrer" title={w.nazwa}>{w.nazwa}</a>;
+  if (w.miejsceId && miejsca.has(w.miejsceId)) return <a className="slajd-nazwa" href={`/#miejsce-${w.miejsceId}`} title={w.nazwa}>{w.nazwa}</a>;
+  return <span className="slajd-nazwa" title={w.nazwa}>{w.nazwa}</span>;
+}
+
+// Małe kafelki „Jutro" i „Weekend": stała wysokość, po 3 wydarzenia na slajd, strzałki ‹ › i przesunięcie palcem.
+const NA_SLAJD = 3;
+function Slajdy({ pozycje, miejsca, pusto, etykieta }) {
+  const [nr, setNr] = useState(0);
+  const [start, setStart] = useState(null);
+  const ile = Math.max(1, Math.ceil(pozycje.length / NA_SLAJD));
+  const biezacy = Math.min(nr, ile - 1);
+  const idz = (krok) => setNr(Math.min(ile - 1, Math.max(0, biezacy + krok)));
+  if (!pozycje.length) return <p className="wyd-pusto">{pusto}</p>;
+  const widoczne = pozycje.slice(biezacy * NA_SLAJD, (biezacy + 1) * NA_SLAJD);
+  return (
+    <div className="slajdy" aria-roledescription="karuzela" aria-label={etykieta}>
+      <div
+        className="slajdy-okno"
+        onTouchStart={(e) => setStart(e.touches[0].clientX)}
+        onTouchEnd={(e) => {
+          if (start === null) return;
+          const dx = e.changedTouches[0].clientX - start;
+          setStart(null);
+          if (Math.abs(dx) > 40) idz(dx < 0 ? 1 : -1);
+        }}
+      >
+        <ul className="wyd-lista slajdy-lista" aria-live="polite">
+          {widoczne.map((w) => (
+            <li key={`${w.id}-${w.dzien || ''}`} className="slajd">
+              <span className="slajd-godz">{w.godzina}</span>
+              <span className="slajd-tresc">
+                <Tytul w={w} miejsca={miejsca} />
+                {w.miejsce && <small className="slajd-miejsce">{w.miejsce}</small>}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {ile > 1 && (
+        <div className="slajdy-nav">
+          <button type="button" className="slajdy-strzalka" onClick={() => idz(-1)} disabled={biezacy === 0} aria-label="Poprzednie wydarzenia">‹</button>
+          <span className="slajdy-licznik" aria-label={`Strona ${biezacy + 1} z ${ile}`}>{biezacy + 1} / {ile}</span>
+          <button type="button" className="slajdy-strzalka" onClick={() => idz(1)} disabled={biezacy === ile - 1} aria-label="Następne wydarzenia">›</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function Wydarzenia({ wydarzenia, places = [] }) {
   const [teraz, setTeraz] = useState(null); // liczone w przeglądarce, żeby „dziś" zawsze było dzisiaj
   const [glowny, setGlowny] = useState('dzis'); // co pokazuje duża sekcja: dziś albo (po kliknięciu) jutro
 
   useEffect(() => setTeraz(dzisWarszawa()), []);
 
   if (!teraz) return <section className="wydarzenia wydarzenia-ladowanie" aria-hidden="true" />;
+  const miejsca = new Set(places.map((p) => p.id)); // karty miejsc, do których można linkować na stronie głównej
 
   const jutro = plusDni(teraz, 1);
   // najbliższa sobota po dzisiejszym dniu (w piątek to jutro; w weekend — kolejny tydzień)
@@ -125,22 +179,24 @@ export default function Wydarzenia({ wydarzenia }) {
         <div className="wyd-mala">
           <h2 className="wyd-tytul-maly">Jutro dla dzieci w Krakowie</h2>
           <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
-          {jutroLista.length ? (
-            <ul className="wyd-lista">{jutroLista.slice(0, 4).map((w) => <Karta key={w.id} w={w} />)}</ul>
-          ) : (
-            <p className="wyd-pusto">Brak wydarzeń w kalendarzu.</p>
-          )}
+          <Slajdy
+            key={`jutro-${jutroLista.length}`}
+            pozycje={jutroLista.map((w) => ({ ...w, godzina: w.godzina || 'cały dzień' }))}
+            miejsca={miejsca}
+            pusto="Brak wydarzeń w kalendarzu."
+            etykieta="Wydarzenia jutro"
+          />
         </div>
         <div className="wyd-mala">
           <h2 className="wyd-tytul-maly">{wWeekend ? 'Kolejny weekend dla dzieci w Krakowie' : 'Najbliższy weekend dla dzieci w Krakowie'}</h2>
           <p className="wyd-data">{zakresDat(sob, nd)}</p>
-          {weekend.length ? (
-            <ul className="wyd-lista">
-              {weekend.slice(0, 5).map((w) => <Karta key={`${w.id}-${w.dzien}`} w={{ ...w, godzina: `${w.dzien} ${w.godzina || ''}`.trim() }} />)}
-            </ul>
-          ) : (
-            <p className="wyd-pusto">Brak wydarzeń w kalendarzu.</p>
-          )}
+          <Slajdy
+            key={`weekend-${weekend.length}`}
+            pozycje={weekend.map((w) => ({ ...w, godzina: `${w.dzien} ${w.godzina || ''}`.trim() }))}
+            miejsca={miejsca}
+            pusto="Brak wydarzeń w kalendarzu."
+            etykieta="Wydarzenia w najbliższy weekend"
+          />
         </div>
       </div>
     </section>
