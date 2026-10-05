@@ -32,10 +32,11 @@ function najblizsze(lista, dzis, wyprzedzenie) {
     podkategoria, wzorNazwy   — które wydarzenia bierzemy (miejsce z podkategorii, nazwa pasuje do wzoru albo `typ` z data/repertuar.json);
     wyprzedzenie              — ile dni do przodu szukamy;
     pusto                     — informacja, gdy nie ma wydarzeń; strony — [{ id, name, website }] linki pod nią;
-    wiecej                    — { href, tekst } link na dole.
+    wiecej                    — { href, tekst } link na dole;
+    wariant                   — wygląd kafelka: 'ceglany' (spektakle) albo 'kreda' (koncerty).
 */
 export default function NajblizszeWydarzenia({
-  places, wydarzenia, tytul, podtytul, etykieta, podkategoria, wzorNazwy, typ, wyprzedzenie, pusto, strony, wiecej,
+  places, wydarzenia, tytul, podtytul, etykieta, podkategoria, wzorNazwy, typ, wyprzedzenie, pusto, strony, wiecej, wariant,
 }) {
   const [dzis, setDzis] = useState(null);
   useEffect(() => setDzis(dzisWarszawa()), []);
@@ -50,7 +51,7 @@ export default function NajblizszeWydarzenia({
   const wiersze = najblizsze(pasujace, dzis, wyprzedzenie);
 
   return (
-    <section className={s.kafel} aria-label={etykieta}>
+    <section className={`${s.kafel} ${wariant ? s[wariant] : ''}`} aria-label={etykieta}>
       <h2 className={s.tytul}>{tytul}</h2>
       <p className={s.podtytul}>{podtytul}</p>
       {wiersze.length ? (

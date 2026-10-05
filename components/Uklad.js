@@ -39,14 +39,21 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         <meta property="og:image" content={seo.obrazek} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Frajdoplan: co robić z dzieckiem w Krakowie" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seo.tytul} />
+        <meta name="twitter:description" content={seo.opis} />
+        <meta name="twitter:image" content={seo.obrazek} />
         {jsonLd.map((obiekt, i) => (
           <script key={`ld-${i}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdTekst(obiekt) }} />
         ))}
       </Head>
       <div className="wrap">
         <header className="top">
-          <Link href="/" className="brand">Frajdoplan</Link>
+          <Link href="/" className="brand" aria-label="Frajdoplan: co robić z dzieckiem w Krakowie, strona główna">
+            <span className="brand-logo"><img src="/brand/logo-frajdoplan.png" alt="Frajdoplan" width="1254" height="316" /></span>
+            <img className="brand-smok" src="/brand/smok.png" alt="" width="626" height="683" />
+          </Link>
           <nav className="menu" aria-label="Główne menu">
             {MENU.map((m) => (
               <Link key={m.href} href={m.href} className="menu-link" aria-current={aktywna(m, pathname) ? 'page' : undefined}>
@@ -58,7 +65,10 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {missingConfig && <div className="notice">Brak zmiennej <code>SHEET_CSV_URL</code>. Ustaw ją w Vercel (Settings → Environment Variables).</div>}
         {fetchError && <div className="notice">Nie udało się pobrać danych z arkusza. Sprawdź, czy link CSV nadal działa.</div>}
         {children}
-        <footer className="stopka">Frajdoplan, Kraków. Dane o miejscach pochodzą z publicznych źródeł, m.in. Map Google.</footer>
+        <footer className="stopka">
+          <p>Frajdoplan, Kraków. Dane o miejscach pochodzą z publicznych źródeł, m.in. Map Google.</p>
+          <img className="stopka-smok" src="/brand/smok.png" alt="" width="626" height="683" />
+        </footer>
       </div>
     </>
   );
