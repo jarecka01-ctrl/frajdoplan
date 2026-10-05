@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { dzisWarszawa, godzinaWarszawa, plusDni, trwaW, poGodzinie, ladnaData } from './Wydarzenia';
+import { dzisWarszawa, godzinaWarszawa, plusDni, trwaW, poGodzinie, ladnaData, dzienTygodnia, NAZWY_DNI } from './Wydarzenia';
 import NajblizszeWydarzenia from './NajblizszeWydarzenia';
 import u from '../styles/Sekcja.module.css';
 
@@ -22,6 +22,7 @@ function DzisWKinach({ places, wydarzenia, dzis, godz, info }) {
   const jutrzejsze = kinowe.filter((w) => trwaW(w.data_regula, plusDni(dzis, 1))).sort(poGodzinie);
   const dzisPusto = dzisiejsze.length === 0;
   const dzien = wybor || (dzisPusto ? 'jutro' : 'dzis');
+  const dataDnia = dzien === 'dzis' ? dzis : plusDni(dzis, 1);
   const seanse = dzien === 'dzis' ? dzisiejsze : jutrzejsze;
   const kina = {};
   seanse.forEach((s) => { (kina[s.miejsce || 'Kino'] = kina[s.miejsce || 'Kino'] || []).push(s); });
@@ -35,40 +36,36 @@ function DzisWKinach({ places, wydarzenia, dzis, godz, info }) {
   const stale = info ? info.stale : [];
 
   return (
-    <div className="kina">
-      <h2 className="wyd-tytul-maly">Dziś w kinach</h2>
+    <div className="k k-kino">
+      <h2 className="k-tytul">Dziś w kinach</h2>
+      <p className="k-pod">{NAZWY_DNI[dzienTygodnia(dataDnia)]}, {ladnaData(dataDnia)}</p>
       <div className="kina-dni" role="group" aria-label="Dzień seansów">
         <button type="button" aria-pressed={dzien === 'dzis'} onClick={() => setWybor('dzis')}>Dziś</button>
         <button type="button" aria-pressed={dzien === 'jutro'} onClick={() => setWybor('jutro')}>Jutro</button>
       </div>
       {dzisPusto && <p className="kina-pusto">Na dziś seansów już nie ma. Pokazujemy repertuar na jutro.</p>}
       {seanse.length ? (
-        <div className="kina-lista">
-          {Object.entries(kina).slice(0, 4).map(([kino, lista]) => {
+        <ul className="k-lista">
+          {Object.entries(kina).slice(0, 4).flatMap(([kino, lista]) => {
             const z = zrodloSeansu(lista);
-            return (
-              <div key={kino} className="kino">
-                <p className="kino-nazwa">{z && z.url ? <a href={z.url} target="_blank" rel="noreferrer">{kino}</a> : kino}</p>
-                <ul>
-                  {filmy(lista).slice(0, 4).map((f) => (
-                    <li key={f.nazwa}>
-                      <span className="kino-film">{f.nazwa}</span>
-                      <span className="kino-godziny">
-                        {f.seanse.map((s, i) => (
-                          <span key={s.id}>
-                            {i > 0 && ', '}
-                            {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.godzina}</a> : s.godzina}
-                          </span>
-                        ))}
-                        {f.wiek && <small> {f.wiek}</small>}
-                      </span>
-                    </li>
+            return filmy(lista).slice(0, 4).map((f) => (
+              <li key={`${kino}-${f.nazwa}`} className="k-wiersz">
+                <span className="k-nazwa">{f.nazwa}</span>
+                <span className="k-miejsce">
+                  {z && z.url ? <a href={z.url} target="_blank" rel="noreferrer">{kino}</a> : kino}
+                  {' · '}
+                  {f.seanse.map((s, i) => (
+                    <span key={s.id}>
+                      {i > 0 && ', '}
+                      {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.godzina}</a> : s.godzina}
+                    </span>
                   ))}
-                </ul>
-              </div>
-            );
+                  {f.wiek && <small> {f.wiek}</small>}
+                </span>
+              </li>
+            ));
           })}
-        </div>
+        </ul>
       ) : info && zrodla.length ? (
         <>
           <p className="kina-pusto">{dzien === 'dzis' ? 'Dziś' : 'Jutro'} nie ma seansów dla dzieci w kinach studyjnych. Repertuar sprawdzisz bezpośrednio:</p>
@@ -95,11 +92,14 @@ function DzisWKinach({ places, wydarzenia, dzis, godz, info }) {
         </p>
       ))}
       {stale.length > 0 && (
-        <ul className="kina-linki">
-          {stale.map((k) => (
-            <li key={k.nazwa}><a href={k.url} target="_blank" rel="noreferrer">{k.nazwa}: repertuar</a></li>
+        <p className="k-wiecej k-wiecej-kina">
+          {stale.map((k, i) => (
+            <span key={k.nazwa}>
+              {i > 0 && ' · '}
+              <a href={k.url} target="_blank" rel="noreferrer">{k.nazwa}: repertuar</a>
+            </span>
           ))}
-        </ul>
+        </p>
       )}
       {info && info.zaktualizowano && (
         <p className="kina-pusto">Repertuar zaktualizowany: {ladnaData(info.zaktualizowano.slice(0, 10))}</p>

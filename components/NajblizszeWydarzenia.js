@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import s from '../styles/NajblizszeWydarzenia.module.css';
 import { dzisWarszawa, trwaW, plusDni } from './Wydarzenia';
 import { grupujTerminy, krotkaData } from '../lib/grupowanie';
 
@@ -40,7 +39,7 @@ export default function NajblizszeWydarzenia({
 }) {
   const [dzis, setDzis] = useState(null);
   useEffect(() => setDzis(dzisWarszawa()), []);
-  if (!dzis) return <div className={s.kafel} aria-hidden="true" />;
+  if (!dzis) return <div className="k" aria-hidden="true" />;
 
   const poId = Object.fromEntries(places.map((p) => [p.id, p]));
   const pasujace = wydarzenia.filter((w) => {
@@ -51,24 +50,24 @@ export default function NajblizszeWydarzenia({
   const wiersze = najblizsze(pasujace, dzis, wyprzedzenie);
 
   return (
-    <section className={`${s.kafel} ${wariant ? s[wariant] : ''}`} aria-label={etykieta}>
-      <h2 className={s.tytul}>{tytul}</h2>
-      <p className={s.podtytul}>{podtytul}</p>
+    <section className={`k ${wariant === 'ceglany' ? 'k-spektakle' : 'k-koncerty'}`} aria-label={etykieta}>
+      <h2 className="k-tytul">{tytul}</h2>
+      <p className="k-pod">{podtytul}</p>
       {wiersze.length ? (
-        <ul className={s.lista}>
+        <ul className="k-lista">
           {wiersze.map((w) => (
-            <li key={`${w.id}-${w.dzien}`} className={s.wiersz}>
-              <span className={s.data}>{krotkaData(w.dzien)}{w.godziny.length ? ` · ${w.godziny.map((g) => g.godzina).join(', ')}` : ''}</span>
-              {w.link ? <a href={w.link} target="_blank" rel="noreferrer" className={s.nazwa}>{w.nazwa}</a> : <strong className={s.nazwa}>{w.nazwa}</strong>}
-              {w.miejsce && <small>{w.miejsce}{w.wiek ? `, ${w.wiek}` : ''}</small>}
+            <li key={`${w.id}-${w.dzien}`} className="k-wiersz">
+              <span className="k-data">{krotkaData(w.dzien)}{w.godziny.length ? ` · ${w.godziny.map((g) => g.godzina).join(', ')}` : ''}</span>
+              {w.link ? <a href={w.link} target="_blank" rel="noreferrer" className="k-nazwa">{w.nazwa}</a> : <strong className="k-nazwa">{w.nazwa}</strong>}
+              {w.miejsce && <span className="k-miejsce">{w.miejsce}{w.wiek ? `, ${w.wiek}` : ''}</span>}
             </li>
           ))}
         </ul>
       ) : (
         <>
-          <p className={s.pusto}>{pusto}</p>
+          <p className="k-pusto">{pusto}</p>
           {strony.length > 0 && (
-            <ul className={s.linki}>
+            <ul className="k-linki">
               {strony.map((t) => (
                 <li key={t.id}><a href={t.website} target="_blank" rel="noreferrer">{t.name}</a></li>
               ))}
@@ -76,7 +75,7 @@ export default function NajblizszeWydarzenia({
           )}
         </>
       )}
-      <p className={s.wiecej}><a href={wiecej.href}>{wiecej.tekst}</a></p>
+      <p className="k-wiecej"><a href={wiecej.href}>{wiecej.tekst}</a></p>
     </section>
   );
 }
