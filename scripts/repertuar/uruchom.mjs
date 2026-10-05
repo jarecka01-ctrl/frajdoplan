@@ -28,13 +28,17 @@ import tauronArena from './zrodla/tauron-arena.mjs';
 import iceKrakow from './zrodla/ice-krakow.mjs';
 import klubStudio from './zrodla/klub-studio.mjs';
 import variete from './zrodla/variete.mjs';
+import groteska from './zrodla/groteska.mjs';
+import figurki from './zrodla/figurki.mjs';
+import slowacki from './zrodla/slowacki.mjs';
+import operaKrakowska from './zrodla/opera-krakowska.mjs';
 import { naprawLinki } from './linki.mjs';
 import { dopracujKategorie } from './kategorie.mjs';
 import { idKin, idKinZCsv, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 // Źródła wydarzeń (nie kina). Moduł z `wlaczone: false` jest gotowy, ale pomijany.
-const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl, tauronArena, iceKrakow, klubStudio, variete]
+const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl, tauronArena, iceKrakow, klubStudio, variete, groteska, figurki, slowacki, operaKrakowska]
   .filter((z) => z.wlaczone !== false);
 const WYPRZEDZENIE_DNI = { spektakl: 60, koncert: 180, widowisko: 180, domyslnie: 60 }; // jak daleko do przodu zapisujemy wydarzenia (źródło może mieć własne `wyprzedzenieDni`)
 const KATALOG = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'data');
@@ -236,7 +240,7 @@ async function main() {
     uwagi.forEach((u) => console.log(`  link: ${u}`));
     if (niesprawdzone) console.warn(`  ${zrodlo.id}: ${niesprawdzone} linków nie udało się sprawdzić (zostają bez zmian)`);
     const gotowe = wybrane.map((s) => naWydarzenieInne(zrodlo, s, idMiejsca(zrodlo, s, wiersze) || idZPoprzedniego[`${zrodlo.id}|${s.miejsce}`] || ''));
-    if (zrodlo.goscinne && gotowe.some((w) => !w.powiazane_miejsce_id)) bezMiejsca.add(zrodlo.nazwa);
+    if (gotowe.some((w) => !w.powiazane_miejsce_id)) bezMiejsca.add(zrodlo.nazwa);
     const dlaGrup = gotowe.filter((w) => w.dla_grup).length;
     const wWeryfikacji = doWeryfikacji.filter((w) => w.zrodlo === zrodlo.id).length;
     tabelaInne.push({ źródło: zrodlo.nazwa, 'dla dzieci': gotowe.length - dlaGrup, 'dla grup (ukryte)': dlaGrup, 'do weryfikacji': wWeryfikacji, 'zastąpione linki': zastapione });
