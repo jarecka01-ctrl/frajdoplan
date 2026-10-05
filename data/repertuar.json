@@ -1,5 +1,5 @@
 {
-  "zaktualizowano": "2026-10-05T21:49:48+02:00",
+  "zaktualizowano": "2026-10-05T22:06:01+02:00",
   "zrodla": {
     "kijow": {
       "nazwa": "Kino Kijów",
@@ -10,13 +10,13 @@
       "dla_dzieci": 25,
       "linki_zastapione": 25,
       "blad": "https://kupbilet.kijow.pl/MSI/mvc/pl?sort=Date&date=2026-10 → HTTP 503",
-      "sprawdzono": "2026-10-05T21:49:48+02:00"
+      "sprawdzono": "2026-10-05T22:06:01+02:00"
     },
     "mikro": {
       "nazwa": "Kino Mikro",
       "url": "https://kinomikro.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 51,
       "dla_dzieci": 3,
       "linki_zastapione": 0
@@ -25,7 +25,7 @@
       "nazwa": "Kino Agrafka",
       "url": "http://kinoagrafka.pl/rep.php",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 8,
       "dla_dzieci": 0,
       "linki_zastapione": 0
@@ -34,7 +34,7 @@
       "nazwa": "Kino Pod Baranami",
       "url": "https://www.kinopodbaranami.pl/repertuar.php",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 86,
       "dla_dzieci": 3,
       "linki_zastapione": 2
@@ -43,7 +43,7 @@
       "nazwa": "Kino Paradox",
       "url": "https://kinoparadox.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 19,
       "dla_dzieci": 1,
       "linki_zastapione": 0
@@ -52,7 +52,7 @@
       "nazwa": "Kino Sfinks",
       "url": "https://kinosfinks.okn.edu.pl/wydarzenia-kategoria-158.html",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 72,
       "dla_dzieci": 1,
       "linki_zastapione": 0
@@ -62,7 +62,7 @@
       "url": "https://okn.edu.pl/wydarzenia.html",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 1,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -75,7 +75,7 @@
       "url": "https://ludowy.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 96,
       "dla_dzieci": 19,
       "dla_grup": 14,
@@ -88,7 +88,7 @@
       "url": "https://kultureska.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 29,
       "dla_dzieci": 0,
       "dla_grup": 29,
@@ -101,7 +101,7 @@
       "url": "https://teatrkrakow.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 129,
       "dla_dzieci": 1,
       "dla_grup": 47,
@@ -114,7 +114,7 @@
       "url": "https://teatrszczescie.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 13,
       "dla_dzieci": 4,
       "dla_grup": 0,
@@ -127,7 +127,7 @@
       "url": "https://filharmoniakrakow.pl/public/program",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 64,
       "dla_dzieci": 49,
       "dla_grup": 15,
@@ -140,7 +140,7 @@
       "url": "https://sinfonietta.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 7,
       "dla_dzieci": 0,
       "dla_grup": 2,
@@ -153,7 +153,7 @@
       "url": "https://biblioteka.krakow.pl/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 66,
       "dla_dzieci": 66,
       "dla_grup": 0,
@@ -166,7 +166,7 @@
       "url": "https://www.ckpodgorza.pl/oferta/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 27,
       "dla_dzieci": 19,
       "dla_grup": 1,
@@ -179,7 +179,7 @@
       "url": "https://zis.krakow.pl/dzieciaki-na-start",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 5,
       "dla_dzieci": 5,
       "dla_grup": 0,
@@ -192,11 +192,11 @@
       "url": "https://www.tauronarenakrakow.pl/events/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 36,
-      "dla_dzieci": 0,
+      "dla_dzieci": 2,
       "dla_grup": 0,
-      "do_weryfikacji": 2,
+      "do_weryfikacji": 0,
       "pominiete": 34,
       "linki_zastapione": 0
     },
@@ -205,12 +205,12 @@
       "url": "https://icekrakow.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
-      "wszystkich": 16,
+      "pobrano": "2026-10-05T22:06:01+02:00",
+      "wszystkich": 15,
       "dla_dzieci": 0,
       "dla_grup": 0,
       "do_weryfikacji": 0,
-      "pominiete": 16,
+      "pominiete": 15,
       "linki_zastapione": 0
     },
     "klub-studio": {
@@ -218,7 +218,7 @@
       "url": "https://www.klubstudio.pl/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 60,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -231,7 +231,7 @@
       "url": "https://www.teatrvariete.pl/repertuar/sprawdz-repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 68,
       "dla_dzieci": 10,
       "dla_grup": 26,
@@ -244,12 +244,12 @@
       "url": "https://www.groteska.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 92,
-      "dla_dzieci": 29,
+      "dla_dzieci": 32,
       "dla_grup": 45,
-      "do_weryfikacji": 7,
-      "pominiete": 11,
+      "do_weryfikacji": 0,
+      "pominiete": 15,
       "linki_zastapione": 3
     },
     "figurki": {
@@ -257,7 +257,7 @@
       "url": "https://teatrfigurki.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 9,
       "dla_dzieci": 9,
       "dla_grup": 0,
@@ -270,7 +270,7 @@
       "url": "https://teatrwkrakowie.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 95,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -283,11 +283,11 @@
       "url": "https://opera.krakow.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-05T21:49:48+02:00",
+      "pobrano": "2026-10-05T22:06:01+02:00",
       "wszystkich": 33,
-      "dla_dzieci": 3,
-      "dla_grup": 0,
-      "do_weryfikacji": 6,
+      "dla_dzieci": 7,
+      "dla_grup": 2,
+      "do_weryfikacji": 0,
       "pominiete": 24,
       "linki_zastapione": 0
     }
@@ -685,6 +685,22 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "opera-krakowska-opera-krakowska-duszek-w-operze-2026-10-07T10:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Duszek w Operze",
+      "data_regula": "2026-10-07",
+      "godzina": "10:00",
+      "miejsce": "Opera Krakowska",
+      "powiazane_miejsce_id": "ChIJHwP-ZRhbFkcRxBy0W78JAps",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://tickets.opera.krakow.pl/rezerwacja/rezerwacja/nienumerowane.html?id=477&idt=5a56ef18e50fcc35af6340374c732128",
+      "zrodlo": "opera-krakowska",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "kultureska-teatr-kultureska-granie-na-straganie-2026-10-07T10:00",
       "typ": "spektakl",
       "kino": false,
@@ -714,6 +730,22 @@
       "cena": "",
       "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
       "zrodlo": "kijow",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "opera-krakowska-opera-krakowska-duszek-w-operze-2026-10-07T11:30",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Duszek w Operze",
+      "data_regula": "2026-10-07",
+      "godzina": "11:30",
+      "miejsce": "Opera Krakowska",
+      "powiazane_miejsce_id": "ChIJHwP-ZRhbFkcRxBy0W78JAps",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://tickets.opera.krakow.pl/rezerwacja/rezerwacja/nienumerowane.html?id=478&idt=8566cf74952d475dc20dcb609cf34502",
+      "zrodlo": "opera-krakowska",
       "status": "zatwierdzone"
     },
     {
@@ -1284,6 +1316,22 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "groteska-teatr-groteska-kolysanka-dla-myszy-2026-10-10T13:30",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Kołysanka dla myszy",
+      "data_regula": "2026-10-10",
+      "godzina": "13:30",
+      "miejsce": "Teatr Groteska",
+      "powiazane_miejsce_id": "ChIJXyVLKQpbFkcR0luGkQ-2tVk",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=11014&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
+      "zrodlo": "groteska",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "ckpodgorza-osrodek-ruczaj-festiwal-marek-ach-to-ty-warsztaty-malarskie-i-edukacyjne-inspirowane-tworczoscia-marka-grechuty-2026-10-10T15:00",
       "typ": "wydarzenie",
       "kino": false,
@@ -1395,6 +1443,22 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "opera-krakowska-opera-krakowska-duszek-w-operze-2026-10-11T11:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Duszek w Operze",
+      "data_regula": "2026-10-11",
+      "godzina": "11:00",
+      "miejsce": "Opera Krakowska",
+      "powiazane_miejsce_id": "ChIJHwP-ZRhbFkcRxBy0W78JAps",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://tickets.opera.krakow.pl/rezerwacja/rezerwacja/nienumerowane.html?id=479&idt=94903d59ed6cb91986337da5cbc03469",
+      "zrodlo": "opera-krakowska",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "groteska-teatr-groteska-piekna-i-bestia-2026-10-11T11:00",
       "typ": "spektakl",
       "kino": false,
@@ -1456,6 +1520,22 @@
       "cena": "",
       "link_biletow": "https://biletyna.pl/event/view/id/689974",
       "zrodlo": "figurki",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "opera-krakowska-opera-krakowska-duszek-w-operze-2026-10-11T12:30",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Duszek w Operze",
+      "data_regula": "2026-10-11",
+      "godzina": "12:30",
+      "miejsce": "Opera Krakowska",
+      "powiazane_miejsce_id": "ChIJHwP-ZRhbFkcRxBy0W78JAps",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://tickets.opera.krakow.pl/rezerwacja/rezerwacja/nienumerowane.html?id=480&idt=fd2f9b487a5d5943b2dc1362fb431530",
+      "zrodlo": "opera-krakowska",
       "status": "zatwierdzone"
     },
     {
@@ -2776,6 +2856,39 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "tauron-arena-tauron-arena-krakow-harlem-globetrotters-2026-10-21T19:00",
+      "typ": "widowisko",
+      "kino": false,
+      "kategoria": "pokaz",
+      "nazwa": "Harlem Globetrotters",
+      "data_regula": "2026-10-21",
+      "godzina": "19:00",
+      "miejsce": "TAURON Arena Kraków",
+      "powiazane_miejsce_id": "",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://www.tauronarenakrakow.pl/event/harlem-globetrotters-2026/",
+      "zrodlo": "tauron-arena",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "opera-krakowska-opera-krakowska-duszek-w-operze-2026-10-22T09:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Duszek w Operze",
+      "data_regula": "2026-10-22",
+      "godzina": "09:00",
+      "miejsce": "Opera Krakowska",
+      "powiazane_miejsce_id": "ChIJHwP-ZRhbFkcRxBy0W78JAps",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://tickets.opera.krakow.pl/rezerwacja/rezerwacja/nienumerowane.html?id=481&idt=2b24d21fb05e0da8001158b1c0c33067",
+      "zrodlo": "opera-krakowska",
+      "status": "zatwierdzone",
+      "dla_grup": true
+    },
+    {
       "id": "groteska-teatr-groteska-dziewczyna-w-ogniu-2026-10-22T09:00",
       "typ": "spektakl",
       "kino": false,
@@ -2840,6 +2953,23 @@
       "cena": "40 zł/os.",
       "link_biletow": "",
       "zrodlo": "kultureska",
+      "status": "zatwierdzone",
+      "dla_grup": true
+    },
+    {
+      "id": "opera-krakowska-opera-krakowska-duszek-w-operze-2026-10-22T10:30",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Duszek w Operze",
+      "data_regula": "2026-10-22",
+      "godzina": "10:30",
+      "miejsce": "Opera Krakowska",
+      "powiazane_miejsce_id": "ChIJHwP-ZRhbFkcRxBy0W78JAps",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://tickets.opera.krakow.pl/rezerwacja/rezerwacja/nienumerowane.html?id=482&idt=96d976b0465d361f5e7b27a217636121",
+      "zrodlo": "opera-krakowska",
       "status": "zatwierdzone",
       "dla_grup": true
     },
@@ -3360,6 +3490,22 @@
       "grupa_wiekowa": "",
       "cena": "",
       "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=10888&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
+      "zrodlo": "groteska",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "groteska-teatr-groteska-klops-kolo-lokalnych-obroncow-polskich-smokow-2026-10-25T17:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Klops. Koło Lokalnych Obrońców Polskich Smoków",
+      "data_regula": "2026-10-25",
+      "godzina": "17:00",
+      "miejsce": "Teatr Groteska",
+      "powiazane_miejsce_id": "ChIJXyVLKQpbFkcR0luGkQ-2tVk",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=11021&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
       "zrodlo": "groteska",
       "status": "zatwierdzone"
     },
@@ -4018,6 +4164,22 @@
       "cena": "",
       "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/spacer-historyczny-z-grzybkiem-30-10-2026",
       "zrodlo": "ckpodgorza",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "groteska-teatr-groteska-halloween-w-grotesce-2026-10-31T17:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Halloween w Grotesce",
+      "data_regula": "2026-10-31",
+      "godzina": "17:00",
+      "miejsce": "Teatr Groteska",
+      "powiazane_miejsce_id": "ChIJXyVLKQpbFkcR0luGkQ-2tVk",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=11015&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
+      "zrodlo": "groteska",
       "status": "zatwierdzone"
     },
     {
@@ -6519,6 +6681,22 @@
       "dla_grup": true
     },
     {
+      "id": "tauron-arena-tauron-arena-krakow-home-alone-live-in-concert-2026-12-17T19:00",
+      "typ": "koncert",
+      "kino": false,
+      "kategoria": "koncert",
+      "nazwa": "Home Alone Live in Concert",
+      "data_regula": "2026-12-17",
+      "godzina": "19:00",
+      "miejsce": "TAURON Arena Kraków",
+      "powiazane_miejsce_id": "",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://www.tauronarenakrakow.pl/event/home-alone-live-in-concert/",
+      "zrodlo": "tauron-arena",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-w-ciemnosci-w-jasnosci-2026-12-19T10:00",
       "typ": "koncert",
       "kino": false,
@@ -7272,87 +7450,5 @@
       "status": "zatwierdzone"
     }
   ],
-  "do_weryfikacji": [
-    {
-      "zrodlo": "groteska",
-      "tytul": "Halloween w Grotesce",
-      "data": "2026-10-31",
-      "godzina": "17:00",
-      "miejsce": "Teatr Groteska",
-      "wiek": "",
-      "strona": "https://www.groteska.pl/spektakle/wydarzenia/halloween-w-grotesce"
-    },
-    {
-      "zrodlo": "groteska",
-      "tytul": "Klops. Koło Lokalnych Obrońców Polskich Smoków",
-      "data": "2026-10-25",
-      "godzina": "17:00",
-      "miejsce": "Teatr Groteska",
-      "wiek": "",
-      "strona": "https://www.groteska.pl/spektakle/CZYTANKI/klops-kolo-lokalnych-obroncow-polskich-smokow"
-    },
-    {
-      "zrodlo": "groteska",
-      "tytul": "Kołysanka dla myszy",
-      "data": "2026-10-10",
-      "godzina": "13:30",
-      "miejsce": "Teatr Groteska",
-      "wiek": "",
-      "strona": "https://www.groteska.pl/spektakle/Nowe%20Sztuki/kolysanka-dla-myszy"
-    },
-    {
-      "zrodlo": "groteska",
-      "tytul": "Krakowski Salon Literacki",
-      "data": "2026-11-26",
-      "godzina": "11:00",
-      "miejsce": "Teatr Groteska",
-      "wiek": "",
-      "strona": "https://www.groteska.pl/spektakle/wydarzenia/krakowski-salon-literacki"
-    },
-    {
-      "zrodlo": "groteska",
-      "tytul": "Michał Korkosz - Rozkoszny",
-      "data": "2026-10-19",
-      "godzina": "18:00",
-      "miejsce": "Teatr Groteska",
-      "wiek": "",
-      "strona": "https://www.groteska.pl/spektakle/kod-mistrzow/michal-korkosz-rozkoszny"
-    },
-    {
-      "zrodlo": "groteska",
-      "tytul": "Synchronizacja w Birkenwald",
-      "data": "2026-10-08",
-      "godzina": "18:00",
-      "miejsce": "Teatr Groteska",
-      "wiek": "",
-      "strona": "https://www.groteska.pl/spektakle/wydarzenia/synchronizacja-w-birkenwald"
-    },
-    {
-      "zrodlo": "opera-krakowska",
-      "tytul": "Duszek w Operze",
-      "data": "2026-10-22",
-      "godzina": "10:30",
-      "miejsce": "Opera Krakowska",
-      "wiek": "",
-      "strona": "https://opera.krakow.pl/spektakle/duszek-w-operze"
-    },
-    {
-      "zrodlo": "tauron-arena",
-      "tytul": "Harlem Globetrotters",
-      "data": "2026-10-21",
-      "godzina": "19:00",
-      "miejsce": "TAURON Arena Kraków",
-      "wiek": "",
-      "strona": "https://www.tauronarenakrakow.pl/event/harlem-globetrotters-2026/"
-    },
-    {
-      "zrodlo": "tauron-arena",
-      "tytul": "Home Alone Live in Concert",
-      "data": "2026-12-17",
-      "godzina": "19:00",
-      "miejsce": "TAURON Arena Kraków",
-      "wiek": "",
-      "strona": "https://www.tauronarenakrakow.pl/event/home-alone-live-in-concert/"
-    }
-  ]
+  "do_weryfikacji": []
 }

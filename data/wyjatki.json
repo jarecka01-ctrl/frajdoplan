@@ -29,6 +29,21 @@
     },
     "kultureska": { "_jak_dziala": "Cały repertuar jest dla dzieci, ale poranki w dni robocze to spektakle dla szkół i przedszkoli (rezerwacja mailowa), więc są ukryte.", "wymus": [], "ukryj": [] },
     "wspolczesny": { "_jak_dziala": "Znaczek „Dla dzieci” albo wiek do 12 lat w opisie. Godziny z biletami „dla grup” są ukryte.", "wymus": [], "ukryj": [] },
-    "szczescie": { "_jak_dziala": "Kategoria „Dla dzieci, młodzieży i rodziców”.", "wymus": [], "ukryj": [] }
+    "szczescie": { "_jak_dziala": "Kategoria „Dla dzieci, młodzieży i rodziców”.", "wymus": [], "ukryj": [] },
+    "groteska": {
+      "_jak_dziala": "Dla dzieci: kategoria „dla-dzieci” w adresie spektaklu. Pozostałe kategorie (wydarzenia, czytanki, nowe sztuki) rozstrzygają listy poniżej. Poranki dla grup (dzień roboczy przed 13:00, bez biletów online) są ukryte.",
+      "wymus": ["Halloween w Grotesce", "Klops", "Kołysanka dla myszy"],
+      "ukryj": ["Krakowski Salon Literacki", "Synchronizacja w Birkenwald", "Michał Korkosz"]
+    },
+    "opera-krakowska": {
+      "_jak_dziala": "Dla dzieci: rodzaje „Dla dzieci” i „Spektakl rodzinny”. Warsztaty edukacyjne rozstrzyga lista poniżej; terminy „Spektakl zamknięty” są dla grup i ukryte.",
+      "wymus": ["Duszek w Operze"],
+      "ukryj": []
+    },
+    "tauron-arena": {
+      "_jak_dziala": "Hala ma głównie wydarzenia dla dorosłych: publikujemy tylko przy wyraźnym sygnale dla dzieci albo gdy tytuł jest na liście wymus.",
+      "wymus": ["Harlem Globetrotters", "Home Alone Live in Concert"],
+      "ukryj": []
+    }
   }
 }
