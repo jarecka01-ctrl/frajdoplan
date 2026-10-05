@@ -1,53 +1,169 @@
-place_id,nazwa,domena,wynik,wiek,dowod,adres_dowodu
-ChIJ-0Kmk-9cFkcRKmuhCnNU1Dw,Studio Tańca I Ruchu M-Team,m-team.org,tak,3–4 lat,"podany wiek 3–4 lat; słowa: junior, dzieci i młodzież (oferta także dla dorosłych)",https://m-team.org/
-ChIJa2wUxhRbFkcR7Y0voS-CTnU,Krakowska Królewska Fundacja Baletu i Tańca,baletkrakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt: plik niedostępny lub błąd serwera,
-ChIJ5bxrCBlbFkcRZwVeKfRL19w,Szkoła Tańca AT,naukatanca.com,tylko dorośli,,oferta dla: dla par; dzieci nie wspomniano,https://naukatanca.com/
-ChIJ-XfMsVJaFkcRq0Mk9vKMlp4,Szkoła Tańca Dancefloor,szkoladancefloor.pl,tak,4–6 lat,"podany wiek 4–6 lat; słowa: dla dzieci, dzieci i młodzież, dzieci od N lat (oferta także dla dorosłych)",https://www.szkoladancefloor.pl/
-ChIJNz-EsGxbFkcRkdPzUA1yCDU,Krakowska Szkoła Tańca,krakowskaszkolatanca.pl,tylko dorośli,,oferta dla: dla par; dzieci nie wspomniano,https://www.krakowskaszkolatanca.pl/
-ChIJy1lxMAhbFkcR9SAczdl9LoM,Szkoła Tańca Nova,novaszkolatanca.pl,prawdopodobnie,,"tylko słowo „junior”, bez wieku i bez „dla dzieci”",https://www.novaszkolatanca.pl/krakow/
-ChIJN8PeFT9bFkcR60g9rbQkpog,Szkoła Tańca Egurrola Dance Studio Kraków,egurrola.com,tak,3–12 lat,"podany wiek 3–12 lat; słowa: dla dzieci, junior, maluchy (oferta także dla dorosłych)",https://egurrola.com/lokalizacje/szkola-tanca-krakow/
-ChIJXSf5_1ZbFkcRt8vH1o-suvM,Master Dance Kraków,masterdancegliwice.com,tylko dorośli,,oferta dla: dla par; dzieci nie wspomniano,https://www.masterdancegliwice.com/pro-am-krakow
-ChIJU_KFSBVbFkcRrCgoa761Lx4,Szkoła Tańca Sempre,sempretaniec.pl,tylko dorośli,,oferta dla: dla par; dzieci nie wspomniano,https://sempretaniec.pl/zajecia/mloda-para
-ChIJGTR6HWdbFkcRCXz4qUaxi5o,Dream Dance ® - Studio Tańca Kraków,dream-dance.pl,tylko dorośli,,oferta dla: dla par; dzieci nie wspomniano,https://www.dream-dance.pl/
-ChIJvWabhT5bFkcRFmhmSoTw7Gc,DANCE CENTER M.I.,centrumtancami.pl,tak,2–3 lat,"podany wiek 2–3 lat; słowa: dla dzieci, maluchy, przedszkolaki (oferta także dla dorosłych)",https://www.centrumtancami.pl/
-ChIJ0yvKN1JbFkcRasa3CnEFVBI,Szkoła Tańca FunkyFree Dance Studio,funkyfree.pl,tak,4–6 lat,"podany wiek 4–6 lat; słowa: dla dzieci, dzieci i młodzież, junior (oferta także dla dorosłych)",https://www.funkyfree.pl/oferta
-ChIJ2Q2iCBVdFkcR8B2I6u9zl_k,Elegants Dance Studio | Szkoła tańca Kraków,instagram.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",
-ChIJnYYuPatbFkcRoBqRP_A7t2Q,Szkoła Tańca Wild Dance Academy,wild-dance.pl,prawdopodobnie,,tylko wzmianki: uczniowie,https://www.wild-dance.pl/
-ChIJCTCuBaNcFkcRn0_Fc4d39hQ,Prima Dance - rozwój ruch taniec zmiana,primadance.pl,nie wiadomo,,słabe wzmianki (uczniowie) razem z ofertą dla dorosłych,https://www.primadance.pl/
-ChIJCbowprhEFkcRZsjUmcSBMCo,Centrum Sztuki Tańca,centrumsztukitanca.pl,tak,5–7 lat,"podany wiek 5–7 lat; słowa: dla dzieci, dzieci od N lat, dzieci i młodzież (oferta także dla dorosłych)",https://centrumsztukitanca.pl/
-ChIJgXJbssdbFkcRY_qbzf2TyIc,Kuźnia Tańca,kuzniatanca.pl,tak,od 4 lat,"podany wiek od 4 lat; słowa: dla dzieci, grupy dziecięce, dzieci i młodzież (oferta także dla dorosłych)",https://kuzniatanca.pl/
-ChIJVVUVsDxbFkcRej2tnz_lArw,Studio Ruchu New Move,newmove.pl,tak,4–6 lat,"podany wiek 4–6 lat; słowa: dla dzieci, junior, przedszkolaki (oferta także dla dorosłych)",https://www.newmove.pl/
-ChIJH3gAX69bFkcRxtetSoSuA7g,Szkoła Tańca Skalski Dance School,skalskidance.pl,nie wiadomo,,słabe wzmianki (uczniowie) razem z ofertą dla dorosłych,https://www.skalskidance.pl/
-ChIJ34CJP6BbFkcR3ZLq1j_Gc9g,Szkoła Tańca U2Dance,u2dance.pl,tylko dorośli,,oferta dla: dla par; dzieci nie wspomniano,https://www.u2dance.pl/
-ChIJxy9f9qddFkcR9051xG0mzx0,Elita Dance Center,taniec-elita.pl,tak,,"słowa: dla dzieci, przedszkolaki, junior (oferta także dla dorosłych)",https://www.taniec-elita.pl/
-ChIJcV8Ewh9bFkcRQxpdN5aiSSg,Studio Tańca Sihir,sihir.pl,tak,,"słowa: dla dzieci, dzieci i młodzież (oferta także dla dorosłych)",https://www.sihir.pl/
-ChIJP4W6DdxbFkcRmEDLjXphYXk,Step To Dance,steptodance.pl,tak,3–6 lat,"podany wiek 3–6 lat; słowa: dla dzieci, przedszkolaki, dzieci i młodzież (oferta także dla dorosłych)",https://steptodance.pl/
-ChIJYwY061xDFkcRtl3zMBK6E8M,Szkoła Tańca Wena,stwena.pl,nie sprawdzono (robots / błąd strony),,robots.txt: plik niedostępny lub błąd serwera,
-ChIJv6FcU-9aFkcR5W45AcSvPF8,Strefa 51 Studio Tańca,strefa51krakow.pl,tak,,słowa: dla dzieci,https://strefa51krakow.pl/
-ChIJx6sgBIlbFkcRdowxTAP4yIQ,Studio Tańca Flow,flowstudio.pl,tak,,"słowa: dla dzieci, przedszkolaki, dzieci i młodzież (oferta także dla dorosłych)",https://www.flowstudio.pl/
-ChIJaQycY_NbFkcRkBZEjkNeTec,Szkoła Tańca Myplace Sebastian Szul,myplace.dance,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.myplace.dance/
-ChIJLZhXRXxbFkcRXVMNynO22to,Studio Tańca - Roztańczeni,roztanczeni.pl,tak,od 3 lat,"podany wiek od 3 lat; słowa: dla dzieci, dzieci i młodzież, dzieci od N lat (oferta także dla dorosłych)",https://www.roztanczeni.pl/
-ChIJj1_g1jFbFkcRcczRz6yVqYQ,Szkoła Tańca Obsession 2.0 Sebastian Nabielec,obsessionclub.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (http://www.obsessionclub.pl/ → HTTP 403),
-ChIJ2T2ClfNbFkcRFDUvssodlZs,BNB Academy of dance - Szkoła Tańca Kraków,bnbacademyofdance.pl,prawdopodobnie,5–7 lat,"podany wiek 5–7 lat, bez wyraźnego „dla dzieci”",https://bnbacademyofdance.pl/
-ChIJLZOxyMhbFkcRy-F5HiNMuFY,"""A.S. Smoroń"" Szkoła Tańca Kraków",naukatanca.krakow.pl,tylko dorośli,,oferta dla: dla par; dzieci nie wspomniano,https://www.naukatanca.krakow.pl/
-ChIJI0A-XUpFFkcRvhLrxM5y9XM,Strefa 51 Gromadzka 46a | Studio Tańca,strefa51krakow.pl,tak,,słowa: dla dzieci,https://strefa51krakow.pl/
-ChIJ8x8MpQhbFkcR6-JsKWliwLY,HEAVEN Aerial Dance Studio Kraków,app.fitssey.com,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://app.fitssey.com/Heaven
-ChIJlUxoiUtaFkcRh7ASpKeSBC0,Studio Tańca Bolero,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",
-ChIJu07ADT1bFkcRAZ_3jvvIGSs,”L'Art de la Danse” Towarzystwo Wspierania i Rozwoju Sztuki Baletowej w Krakowie,balet-krakow.pl,tak,od 3 lat,"podany wiek od 3 lat; słowa: dla dzieci, dzieci od N lat, dzieci i młodzież",https://balet-krakow.pl/zajecia-programowe
-ChIJzdMAr0FFFkcRqsqWDDrQ-rY,StarTDance Szkoła Tańca,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",
-ChIJR6EAyw5bFkcRzOx4wyCC0lM,Studio Tańca Sabrosa,salsasabrosa.pl,tak,,"słowa: dla dzieci, dzieci i młodzież (oferta także dla dorosłych)",https://salsasabrosa.pl/wynajem-oferta-dla-firm
-ChIJ2a4-IlTDFUcRbXvD_zP7zf4,Studio Ruchu Simple,bellartekrakow.com,tak,4–6 lat,"podany wiek 4–6 lat; słowa: dla dzieci, junior, przedszkolaki",https://www.bellartekrakow.com/
-ChIJv2_S0wBbFkcRYEvmymxMtVE,"Studio Teatru, Muzyki i Tańca Elżbiety Armatys",stmit.pl,tak,4–6 lat,"podany wiek 4–6 lat; słowa: dla dzieci, grupy dziecięce, przedszkolaki",https://www.stmit.pl/
-ChIJD4jN66ZDFkcROjXKM57MN2Y,Studio Tańca - Roztańczeni,roztanczeni.pl,tak,od 3 lat,"podany wiek od 3 lat; słowa: dla dzieci, dzieci i młodzież, dzieci od N lat (oferta także dla dorosłych)",https://www.roztanczeni.pl/
-ChIJuy62vQJbFkcRqmfii-TuS8Y,Studio Tańca Annavi,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",
-ChIJnSuK4xRbFkcRKPVfkczKNiM,MyTap,mytap.pl,tak,od 7 lat,"podany wiek od 7 lat; słowa: dla dzieci, dzieci od N lat (oferta także dla dorosłych)",https://www.mytap.pl/
-ChIJv_f_565bFkcRweHaSOdKaN0,Gosza Studio Tańca,gosza.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.gosza.pl/
-ChIJLUHatgZFFkcR6ro5nY5p2Eg,Motyl Studio Ruchu,motylstudioruchu.pl,tak,,"słowa: dla dzieci, maluchy (oferta także dla dorosłych)",https://www.motylstudioruchu.pl/
-ChIJ6U1htFZdFkcReoNlFolyGXk,Motyl - Studio Baletowe,studiobaletowemotyl.pl,tak,od 4 lat,"podany wiek od 4 lat; słowa: dla dzieci, dzieci od N lat, maluchy (oferta także dla dorosłych)",https://www.studiobaletowemotyl.pl/
-ChIJy9_XglFaFkcRoG6qp-LwnoU,Studio Tańca Styl,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",
-ChIJz0f-P2NBFkcRI-WZ4txaBGQ,Małopolskie Centrum Tańca,mctwieliczka.pl,tak,od 4 lat,"podany wiek od 4 lat; słowa: dla dzieci, maluchy, przedszkolaki (oferta także dla dorosłych)",https://mctwieliczka.pl/
-ChIJx76K2tZaFkcRRruxln15Pnc,Szkoła Baletowa w Krakowie,szkolabaletowawkrakowie.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://szkolabaletowawkrakowie.pl/
-ChIJyd-GotBaFkcRXSKLHPM0RoQ,Studio Tańca Styl,studiostyl.com,nie wiadomo,,słabe wzmianki (rodzice z dziećmi) razem z ofertą dla dorosłych,https://studiostyl.com/category/nauka-tanca/oferta
-ChIJjxB0IK1DFkcREJxTkeKAZMs,Szkoła Tańca EVOLUTION,szkolatancaevolution.pl,tak,od 6 lat,"podany wiek od 6 lat; słowa: dla dzieci, przedszkolaki, dzieci od N lat (oferta także dla dorosłych)",https://www.szkolatancaevolution.pl/
-ChIJZVDh6YNbFkcRLPBCJpy7zB0,EVOLUTION.Szkoła Tańca,szkolatancaevolution.pl,tak,od 6 lat,"podany wiek od 6 lat; słowa: dla dzieci, przedszkolaki, dzieci od N lat (oferta także dla dorosłych)",https://www.szkolatancaevolution.pl/
-ChIJyVpqoXpbFkcRfHmSXIKPsgI,Teatr Tańca Terpsychora,terpsychora.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (https://terpsychora.pl/%23 → HTTP 404),
+place_id,nazwa,domena,wynik,wiek,dowod,adres_dowodu,uwaga
+ChIJC6MYxixdFkcRtMIRq9sr0yI,Kawiarnia Alicja Słodka Przygoda Kraków,alicjacafe.pl,tak,,sygnały: dla dzieci (oferta także dla dorosłych),https://www.alicjacafe.pl/urodziny,
+ChIJTahjvZlbFkcRJI8KsYdzGKg,PINO Garden,pinogarden.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJR9ZQPqBbFkcRXpeWj1t2-f0,Organic Coffee,organiccoffee.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJHzRV2Q1bFkcR2UyXHgIMC7Y,Pałac Pod Baranami,palacpodbaranami.pl,tylko dorośli,,wyraźne sygnały dorosłych: ślub / wesele; o dzieciach ani słowa,https://www.palacpodbaranami.pl/,
+ChIJB9OsejpbFkcRg90Q6hFyjVI,Katolicki Dom Kultury im. ks. kard. A. S. Sapiehy,kdksapieha.pl,tak,3–6 lat,podany wiek 3–6 lat; sygnały: dla dzieci (oferta także dla dorosłych),https://www.kdksapieha.pl/,
+ChIJD45BwIlDFkcRCoDvAEliSos,Eden. Katolicki Dom Kultury,srk9.diecezja-krakow.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.srk9.diecezja-krakow.pl/,
+ChIJ020zKT9bFkcRAzu-mD0k1js,Klub Strych. Krakowskie Forum Kultury,krakowskieforum.pl,tak,4–5 lat,"podany wiek 4–5 lat; sygnały: dla dzieci, dzieci i młodzież, kids (oferta także dla dorosłych)",https://krakowskieforum.pl/strona-3522-klub_strych.html,
+ChIJldiq-2pbFkcRFlhw0HnSw_w,JCC Kraków – Centrum Społeczności Żydowskiej,jcckrakow.org,tylko dorośli,,wyraźne sygnały dorosłych: seniorzy; o dzieciach ani słowa,https://www.jcckrakow.org/,
+ChIJvzBYI7hbFkcRIiZpXUlMSh4,Podgórski Underground,sokolska.ckpodgorza.pl,tak,2–3 lat,"podany wiek 2–3 lat; sygnały: dla dzieci, kids, maluchy (oferta także dla dorosłych)",https://sokolska.ckpodgorza.pl/o-strefie-sokolska,
+ChIJt8FdIzNbFkcRrxmk2fb5Apc,Królestwo Bez Kresu,peakd.com,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.peakd.com/%40krolestwo,
+ChIJ9fyaH9JbFkcRZYtiDlOIFmg,Krakowskie Centrum Równości DOM EQ,znakirownosci.org.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://znakirownosci.org.pl/,
+ChIJjUJnQWpbFkcRm3CjmSarY9E,Fundacja Judaica Centrum Kultury Żydowskiej,judaica.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.judaica.pl/,
+ChIJxUqjEgBbFkcRvT4LWm8WPSo,Klub Olsza,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJF6jmjWlbFkcRU7RdE8oYRcE,Dom Norymberski. Promocja Niemieckiej Kultury,dom-norymberski.com,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://dom-norymberski.com/,
+ChIJ1xJUA5ZbFkcRvMr4sr1aXfM,Pracownia Mistrza Twardowskiego,ckpodgorza.pl,tak,od 1 lat,"podany wiek od 1 lat; sygnały: dla dzieci, maluchy, dzieci i młodzież (oferta także dla dorosłych)",https://www.ckpodgorza.pl/o-nas/aktualnosci/sokolska/niezapomniane-urodziny-w-centrum-kultury-podgorza,
+ChIJpf1t5UZbFkcRoKHzDVutfq4,Warsztat – niezależne centrum społeczno-kulturalne,web.facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJrfln9rlbFkcRFYzRbmqXPes,Centrum Wielokulturowe w Krakowie / Multicultural Centre in Krakow,otwarty.krakow.pl,tak,,sygnały: dzieci i młodzież,"https://otwarty.krakow.pl/aktualnosci/333155,1992,komunikat,konkurs_na_najlepsze_projekty_polsko-ukrainskiej_rady_wymiany_mlodziezy_2016-2026_.html",
+ChIJlVjSwhJbFkcRuPPUBmuO1JQ,Włoski Instytut Kultury,iiccracovia.esteri.it,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://iiccracovia.esteri.it/iic_cracovia/it,
+ChIJO_BGmghbFkcRmi-ADbxhbPE,Centrum Kultury Latynoamerykańskiej/Centro Latino,centrolatino.org.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.centrolatino.org.pl/,
+ChIJKZrv_4RbFkcRSi7JVyI1Sac,Smok Arcade,smokarcade.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 404),,
+ChIJb2jcbxJbFkcRlHlcpFE3vx0,Krakowska Manufaktura Czekolady,chocolate.krakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJ-0Kmk-9cFkcRKmuhCnNU1Dw,Studio Tańca I Ruchu M-Team,m-team.org,tak,3–4 lat,"podany wiek 3–4 lat; sygnały: kids, dzieci i młodzież (oferta także dla dorosłych)",https://m-team.org/,
+ChIJeQEAUCgNFkcRdOOmVXTfE30,Małopolska Akademia Nabywania Umiejętności,manuonline.pl,tak,od 5 lat,"podany wiek od 5 lat; sygnały: dla dzieci, przedszkolaki, maluchy",https://manuonline.pl/,
+ChIJa2wUxhRbFkcR7Y0voS-CTnU,Krakowska Królewska Fundacja Baletu i Tańca,baletkrakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJ5bxrCBlbFkcRZwVeKfRL19w,Szkoła Tańca AT,naukatanca.com,prawdopodobnie,,"tylko słowa: akademia, junior, bez „dla dzieci”",https://naukatanca.com/,
+ChIJ-XfMsVJaFkcRq0Mk9vKMlp4,Szkoła Tańca Dancefloor,szkoladancefloor.pl,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: dla dzieci, dzieci i młodzież, dzieci od N lat (oferta także dla dorosłych)",https://www.szkoladancefloor.pl/,
+ChIJNz-EsGxbFkcRkdPzUA1yCDU,Krakowska Szkoła Tańca,krakowskaszkolatanca.pl,tylko dorośli,,"wyraźne sygnały dorosłych: pierwszy taniec, ślub / wesele; o dzieciach ani słowa",https://www.krakowskaszkolatanca.pl/,
+ChIJy1lxMAhbFkcR9SAczdl9LoM,Szkoła Tańca Nova,novaszkolatanca.pl,tak,8–11 lat,podany wiek 8–11 lat; sygnały: kids (oferta także dla dorosłych),https://www.novaszkolatanca.pl/krakow/,
+ChIJN8PeFT9bFkcR60g9rbQkpog,Szkoła Tańca Egurrola Dance Studio Kraków,egurrola.com,tak,3–12 lat,"podany wiek 3–12 lat; sygnały: dla dzieci, kids, maluchy (oferta także dla dorosłych)",https://egurrola.com/lokalizacje/szkola-tanca-krakow/,
+ChIJXSf5_1ZbFkcRt8vH1o-suvM,Master Dance Kraków,masterdancegliwice.com,prawdopodobnie,,"tylko słowa: akademia, bez „dla dzieci”",https://www.masterdancegliwice.com/contact-kontakt-turniej-pro-am,domena z innego miasta?
+ChIJU_KFSBVbFkcRrCgoa761Lx4,Szkoła Tańca Sempre,sempretaniec.pl,tylko dorośli,,"wyraźne sygnały dorosłych: pierwszy taniec, ślub / wesele; o dzieciach ani słowa",https://sempretaniec.pl/zajecia/mloda-para,
+ChIJGTR6HWdbFkcRCXz4qUaxi5o,Dream Dance ® - Studio Tańca Kraków,dream-dance.pl,tak,,sygnały: mini (grupa) (oferta także dla dorosłych),https://www.dream-dance.pl/,
+ChIJvWabhT5bFkcRFmhmSoTw7Gc,DANCE CENTER M.I.,centrumtancami.pl,tak,2–3 lat,"podany wiek 2–3 lat; sygnały: dla dzieci, maluchy, przedszkolaki (oferta także dla dorosłych)",https://www.centrumtancami.pl/,
+ChIJ0yvKN1JbFkcRasa3CnEFVBI,Szkoła Tańca FunkyFree Dance Studio,funkyfree.pl,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: dla dzieci, kids, dzieci i młodzież (oferta także dla dorosłych)",https://www.funkyfree.pl/krakowgrafik,
+ChIJ2Q2iCBVdFkcR8B2I6u9zl_k,Elegants Dance Studio | Szkoła tańca Kraków,instagram.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJnYYuPatbFkcRoBqRP_A7t2Q,Szkoła Tańca Wild Dance Academy,wild-dance.pl,tylko dorośli,,wyraźne sygnały dorosłych: seniorzy; o dzieciach ani słowa,https://wild-dance.pl/cennik,
+ChIJCTCuBaNcFkcRn0_Fc4d39hQ,Prima Dance - rozwój ruch taniec zmiana,primadance.pl,tylko dorośli,,"wyraźne sygnały dorosłych: pierwszy taniec, ślub / wesele; o dzieciach ani słowa",https://www.primadance.pl/,
+ChIJCbowprhEFkcRZsjUmcSBMCo,Centrum Sztuki Tańca,centrumsztukitanca.pl,tak,5–7 lat,"podany wiek 5–7 lat; sygnały: dla dzieci, dzieci od N lat, dzieci i młodzież (oferta także dla dorosłych)",https://centrumsztukitanca.pl/,
+ChIJgXJbssdbFkcRY_qbzf2TyIc,Kuźnia Tańca,kuzniatanca.pl,tak,od 4 lat,"podany wiek od 4 lat; sygnały: dla dzieci, grupa dziecięca, dzieci i młodzież (oferta także dla dorosłych)",https://kuzniatanca.pl/,
+ChIJVVUVsDxbFkcRej2tnz_lArw,Studio Ruchu New Move,newmove.pl,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: dla dzieci, kids, przedszkolaki (oferta także dla dorosłych)",https://www.newmove.pl/,
+ChIJH3gAX69bFkcRxtetSoSuA7g,Szkoła Tańca Skalski Dance School,skalskidance.pl,prawdopodobnie,,"tylko słowa: akademia, bez „dla dzieci”",https://www.skalskidance.pl/,
+ChIJ34CJP6BbFkcR3ZLq1j_Gc9g,Szkoła Tańca U2Dance,u2dance.pl,tylko dorośli,,"wyraźne sygnały dorosłych: pierwszy taniec, ślub / wesele; o dzieciach ani słowa",https://www.u2dance.pl/,
+ChIJxy9f9qddFkcR9051xG0mzx0,Elita Dance Center,taniec-elita.pl,tak,,"sygnały: dla dzieci, przedszkolaki, kids (oferta także dla dorosłych)",https://www.taniec-elita.pl/,
+ChIJcV8Ewh9bFkcRQxpdN5aiSSg,Studio Tańca Sihir,sihir.pl,tak,,"sygnały: dla dzieci, dzieci i młodzież (oferta także dla dorosłych)",https://www.sihir.pl/,
+ChIJP4W6DdxbFkcRmEDLjXphYXk,Step To Dance,steptodance.pl,tak,3–6 lat,"podany wiek 3–6 lat; sygnały: dla dzieci, przedszkolaki, dzieci i młodzież (oferta także dla dorosłych)",https://steptodance.pl/,
+ChIJYwY061xDFkcRtl3zMBK6E8M,Szkoła Tańca Wena,stwena.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJv6FcU-9aFkcR5W45AcSvPF8,Strefa 51 Studio Tańca,strefa51krakow.pl,tak,,sygnały: dla dzieci,https://strefa51krakow.pl/,
+ChIJx6sgBIlbFkcRdowxTAP4yIQ,Studio Tańca Flow,flowstudio.pl,tak,,"sygnały: dla dzieci, przedszkolaki, dzieci i młodzież (oferta także dla dorosłych)",https://www.flowstudio.pl/,
+ChIJaQycY_NbFkcRkBZEjkNeTec,Szkoła Tańca Myplace Sebastian Szul,myplace.dance,prawdopodobnie,,"tylko słowa: akademia, bez „dla dzieci”",https://www.myplace.dance/about_us,
+ChIJLZhXRXxbFkcRXVMNynO22to,Studio Tańca - Roztańczeni,roztanczeni.pl,tak,od 3 lat,"podany wiek od 3 lat; sygnały: dla dzieci, dzieci i młodzież, dzieci od N lat (oferta także dla dorosłych)",https://www.roztanczeni.pl/,
+ChIJj1_g1jFbFkcRcczRz6yVqYQ,Szkoła Tańca Obsession 2.0 Sebastian Nabielec,obsessionclub.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJ2T2ClfNbFkcRFDUvssodlZs,BNB Academy of dance - Szkoła Tańca Kraków,bnbacademyofdance.pl,prawdopodobnie,5–7 lat,"podany wiek 5–7 lat, bez wyraźnego „dla dzieci”",https://bnbacademyofdance.pl/,
+ChIJLZOxyMhbFkcRy-F5HiNMuFY,"""A.S. Smoroń"" Szkoła Tańca Kraków",naukatanca.krakow.pl,prawdopodobnie,,"tylko słowa: akademia, bez „dla dzieci”",https://www.naukatanca.krakow.pl/o-nas,
+ChIJI0A-XUpFFkcRvhLrxM5y9XM,Strefa 51 Gromadzka 46a | Studio Tańca,strefa51krakow.pl,tak,,sygnały: dla dzieci,https://strefa51krakow.pl/,
+ChIJ8x8MpQhbFkcR6-JsKWliwLY,HEAVEN Aerial Dance Studio Kraków,app.fitssey.com,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://app.fitssey.com/Heaven,
+ChIJlUxoiUtaFkcRh7ASpKeSBC0,Studio Tańca Bolero,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJu07ADT1bFkcRAZ_3jvvIGSs,”L'Art de la Danse” Towarzystwo Wspierania i Rozwoju Sztuki Baletowej w Krakowie,balet-krakow.pl,tak,od 3 lat,"podany wiek od 3 lat; sygnały: dla dzieci, dzieci od N lat, dzieci i młodzież",https://balet-krakow.pl/zajecia-programowe,
+ChIJzdMAr0FFFkcRqsqWDDrQ-rY,StarTDance Szkoła Tańca,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJR6EAyw5bFkcRzOx4wyCC0lM,Studio Tańca Sabrosa,salsasabrosa.pl,tak,,"sygnały: dla dzieci, dzieci i młodzież (oferta także dla dorosłych)",https://salsasabrosa.pl/wynajem-oferta-dla-firm,
+ChIJ2a4-IlTDFUcRbXvD_zP7zf4,Studio Ruchu Simple,bellartekrakow.com,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: dla dzieci, kids, przedszkolaki",https://www.bellartekrakow.com/,
+ChIJv2_S0wBbFkcRYEvmymxMtVE,"Studio Teatru, Muzyki i Tańca Elżbiety Armatys",stmit.pl,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: dla dzieci, grupa dziecięca, przedszkolaki (oferta także dla dorosłych)",https://www.stmit.pl/,
+ChIJD4jN66ZDFkcROjXKM57MN2Y,Studio Tańca - Roztańczeni,roztanczeni.pl,tak,od 3 lat,"podany wiek od 3 lat; sygnały: dla dzieci, dzieci i młodzież, dzieci od N lat (oferta także dla dorosłych)",https://www.roztanczeni.pl/,
+ChIJuy62vQJbFkcRqmfii-TuS8Y,Studio Tańca Annavi,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJnSuK4xRbFkcRKPVfkczKNiM,MyTap,mytap.pl,tak,od 7 lat,"podany wiek od 7 lat; sygnały: dla dzieci, dzieci od N lat (oferta także dla dorosłych)",https://www.mytap.pl/,
+ChIJv_f_565bFkcRweHaSOdKaN0,Gosza Studio Tańca,gosza.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.gosza.pl/,
+ChIJLUHatgZFFkcR6ro5nY5p2Eg,Motyl Studio Ruchu,motylstudioruchu.pl,tak,3–4 lat,"podany wiek 3–4 lat; sygnały: dla dzieci, maluchy (oferta także dla dorosłych)",https://www.motylstudioruchu.pl/,
+ChIJ6U1htFZdFkcReoNlFolyGXk,Motyl - Studio Baletowe,studiobaletowemotyl.pl,tak,od 4 lat,"podany wiek od 4 lat; sygnały: dla dzieci, dzieci od N lat, maluchy (oferta także dla dorosłych)",https://www.studiobaletowemotyl.pl/,
+ChIJy9_XglFaFkcRoG6qp-LwnoU,Studio Tańca Styl,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJz0f-P2NBFkcRI-WZ4txaBGQ,Małopolskie Centrum Tańca,mctwieliczka.pl,tak,od 4 lat,"podany wiek od 4 lat; sygnały: dla dzieci, maluchy, przedszkolaki (oferta także dla dorosłych)",https://mctwieliczka.pl/,domena z innego miasta?
+ChIJx76K2tZaFkcRRruxln15Pnc,Szkoła Baletowa w Krakowie,szkolabaletowawkrakowie.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://szkolabaletowawkrakowie.pl/,
+ChIJyd-GotBaFkcRXSKLHPM0RoQ,Studio Tańca Styl,studiostyl.com,tylko dorośli,,"wyraźne sygnały dorosłych: pierwszy taniec, ślub / wesele; o dzieciach ani słowa",https://studiostyl.com/category/nauka-tanca/oferta,
+ChIJjxB0IK1DFkcREJxTkeKAZMs,Szkoła Tańca EVOLUTION,szkolatancaevolution.pl,tak,od 6 lat,"podany wiek od 6 lat; sygnały: dla dzieci, przedszkolaki, dzieci od N lat (oferta także dla dorosłych)",https://www.szkolatancaevolution.pl/,
+ChIJpW7NyHhQFkcRm40sKnw6la0,EKOLAND,ekoland.edu.pl,tak,,"sygnały: dla dzieci, przedszkolaki, dzieci i młodzież (oferta także dla dorosłych)",https://www.ekoland.edu.pl/,
+ChIJZVDh6YNbFkcRLPBCJpy7zB0,EVOLUTION.Szkoła Tańca,szkolatancaevolution.pl,tak,od 6 lat,"podany wiek od 6 lat; sygnały: dla dzieci, przedszkolaki, dzieci od N lat (oferta także dla dorosłych)",https://www.szkolatancaevolution.pl/,
+ChIJyVpqoXpbFkcRfHmSXIKPsgI,Teatr Tańca Terpsychora,terpsychora.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 404),,
+ChIJR8etUVBaFkcRoPw0428I-A8,Klub Sportowy PODWAWELSKI,rocknroll.pl,tak,,"sygnały: dla dzieci, szkółka, przedszkolaki (oferta także dla dorosłych)",https://www.rocknroll.pl/,
+ChIJjTGKo4lDFkcR3tvLnfXVdNo,Bieżanowianka Kraków,biezanowianka.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJLbwxnRZFFkcRh6Om3iesosw,"Interschool Sport Centre Kraków ""East""",moswschod.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJEe8UIWxbFkcRcuXCdqkCCDo,Klub Sportowy Nadwiślan Kraków,nadwislan.com,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 403),,
+ChIJ59Aw9d9bFkcR67nBNx_a-mQ,CENTER,center-krakow.pl,tak,7–10 lat,"podany wiek 7–10 lat; sygnały: dla dzieci, dzieci od N lat, kids",https://center-krakow.pl/,
+ChIJOwOgMe5aFkcRz4Dta-O5D7A,Klub Sportowy Prądniczanka Kraków,pradniczanka.krakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJVcPiM2VEFkcRMVtbbtP2VE4,Klub Sportowy Petarda Kraków,kspetarda.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJBzJSEDVaFkcRtX_X6qm76zs,Krakowski Klub Szermierzy KKS Kraków,kks.krakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJBVS4ZjxFFkcRyCXfBLnzfTg,"Międzyszkolny Klub Sportowy ""Jordan"" Kraków",jordankrakow.com.pl,tak,10–11 lat,"podany wiek 10–11 lat; sygnały: żak / orlik / trampkarz / młodzik, szkółka",https://jordankrakow.com.pl/,
+ChIJ6TOOoFpDFkcRalgTwp5-F7w,Klub Sportowy Grappling Kraków,grapplingkrakow.pl,tak,od 3 lat,"podany wiek od 3 lat; sygnały: dla dzieci, przedszkolaki, dzieci od N lat (oferta także dla dorosłych)",https://grapplingkrakow.pl/,
+ChIJzbqa9PVaFkcRrx9OgbkyqQM,UMKS Olimpic Kraków,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJy9szIb1FFkcRkutHVL718Ro,"Klub Sportowy Grappling Kraków, Nowa Huta",grapplingkrakow.pl,tak,od 3 lat,"podany wiek od 3 lat; sygnały: dla dzieci, przedszkolaki, dzieci od N lat (oferta także dla dorosłych)",https://grapplingkrakow.pl/,
+ChIJ2fZJb2xFFkcRsMj6Re8fpjE,KS Wanda Kraków,wandakrakow.com.pl,tak,,"sygnały: żak / orlik / trampkarz / młodzik, sekcja / grupy młodzieżowe, kategorie U-8…U-19 (oferta także dla dorosłych)",https://wandakrakow.com.pl/,
+ChIJddTUeqtEFkcRarZ-dfRE-ak,Klub Sportowy Kabel Kraków,kskabel.pl,tak,U-12,"podany wiek U-12; sygnały: szkółka, żak / orlik / trampkarz / młodzik, kategorie U-8…U-19 (oferta także dla dorosłych)",https://kskabel.pl/,
+ChIJCxA6lfFaFkcR6oK9CLaRk0k,"Klub Sportowy Grappling Kraków, Prądnik",grapplingkrakow.pl,tak,od 3 lat,"podany wiek od 3 lat; sygnały: dla dzieci, przedszkolaki, dzieci od N lat (oferta także dla dorosłych)",https://grapplingkrakow.pl/,
+ChIJCyZJT7FEFkcRyBCFb15NIjU,Klub Sportowy Płaszowianka Kraków,plaszowianka.pl,tak,U-8,"podany wiek U-8; sygnały: dzieci i młodzież, żak / orlik / trampkarz / młodzik, junior młodszy (oferta także dla dorosły",https://plaszowianka.pl/,
+ChIJIYyy3lpbFkcRATgSWsBzH_E,Centrum Sportu Parkowa,parkowa-sport.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJJ3Z00oVbFkcRrsYAnoA35Ug,Klub Sportowy Hajime,hajime.com.pl,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: grupa dziecięca, przedszkolaki, sekcja / grupy młodzieżowe",https://hajime.com.pl/planzajec.html,
+ChIJ9T4TvHJbFkcRxVffJv7cLN4,Międzyszkolny Ośrodek Sportowy Kraków-Śródmieście,mos-zachod.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJlZlNaOxaFkcROPs6qsiY5Tg,Klub Sportowy Hala Prądniczanka,pradniczanka.krakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJMw8N07RcFkcRK08YzW_iHu8,Klub Sportowy Sportwise,sportwise.pl,tak,,"sygnały: dla dzieci, dzieci i młodzież, grupa dziecięca",https://www.sportwise.pl/,
+ChIJOQ5GWpVcFkcRMHzg-_ebXJ4,"Klub Sportowy „Borek""",ksborek.com.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (fetch failed),,
+ChIJv4Y7szFbFkcRD_rrnnHNNYI,Klub Szachowy Dwie Wieże Kraków,dwiewieze.krakow.pl,tak,,"sygnały: dla dzieci, dzieci i młodzież, przedszkolaki (oferta także dla dorosłych)",https://www.dwiewieze.krakow.pl/,
+ChIJSWc5pI1FFkcR0iVLmQ0mt9c,UKS Grot Judo Kraków,uksgrotjudo.com,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (fetch failed),,
+ChIJcT5KGmBbFkcRi3BISM_Rig0,RKS Garbarnia Kraków,garbarnia.krakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJCxGjthhFFkcRKqfQc1-U0-o,Klub Sportowy Albertus Kraków,ksalbertus.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJyza5EMhbFkcRaXND1BuRids,Yeti. Klub sportowy,yeti.org.pl,tak,7–10 lat,"podany wiek 7–10 lat; sygnały: dla dzieci, dzieci i młodzież (oferta także dla dorosłych)",https://yeti.org.pl/wyjazdy/lodowiec-i,
+ChIJpwAlPCxbFkcRdScAVlNw1dc,Dąbski Klub Sportowy Kraków,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJf9pGiO1bFkcROYB0A2Ccjs0,Kotwica MMA Team Kraków,kotwicammateam.pl,tak,od 6 lat,"podany wiek od 6 lat; sygnały: dla dzieci, kids (oferta także dla dorosłych)",https://www.kotwicammateam.pl/,
+ChIJZY9of2tbFkcRruLa0ZjHjzU,Stowarzyszenie Szkolny Klub Sportu i Turystyki GLOSATOR,glosator.pl,tak,4–18 lat,podany wiek 4–18 lat; sygnały: przedszkolaki,https://glosator.pl/kontakt,
+ChIJkQaTxqJEFkcRBH8-ZzYddTA,Klub Żeglarski Horn Kraków,hornkrakow.pl,tak,6–14 lat,"podany wiek 6–14 lat; sygnały: dla dzieci, przedszkolaki, dzieci i młodzież",https://www.hornkrakow.pl/,
+ChIJ2ferMTVaFkcRT66ac_kspcU,Ippon Judo Kraków,ippon-judo.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 403),,
+ChIJExtFuLBbFkcRIP8WqerQg5Q,Stowarzyszenie Zawsze w Ruchu,zwruchu.pl,tak,,"sygnały: dla dzieci, dzieci i młodzież",https://zwruchu.pl/,
+ChIJ93bCZdVbFkcR3cmvEX0DDAw,Klub Sportowy KN Lider Kraków,lider.krakow.pl,tak,od 6 lat,"podany wiek od 6 lat; sygnały: dzieci i młodzież, dla dzieci, dzieci od N lat (oferta także dla dorosłych)",https://www.lider.krakow.pl/,
+ChIJSRQblZlFFkcRzZDjcgfLJ8A,Klub Sportowy Yacht Club Kraków - Sekcja Kajakowa,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJs5f46UFbFkcRoboouDCDfIM,Capoeira Camangula,capoeira.krakow.pl,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: dla dzieci, maluchy",https://www.capoeira.krakow.pl/,
+ChIJX8YOUKNbFkcREPTnPePXVik,Judo Wisła Kraków,tswislajudo.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJ-2o8uM5bFkcRmryav22q9vI,Stowarzyszenie Futbolowe Fairant,fairant.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJZbyh_8z3owgRT3YjvbSrQuA,Aloha Riders Klub sportowy Kraków Snowboard - Koszykówka Zajęcia,alohapark.pl,tak,,sygnały: dla dzieci,https://alohapark.pl/,
+ChIJA8v1MQpbFkcRpRPvGlKZcKs,Slalom. Klub narciarski,slalom.krakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJrU6X_llbFkcRkJfS8TBE17g,MMA Academy Kraków,mmaacademykrakow.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (fetch failed),,
+ChIJEez9GWZbFkcRjSc_ic-sSR0,"Arcade Bee – Atrakcje, Restauracja i Cocktail Bar",arcadebee.com,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://arcadebee.com/,
+ChIJ02JQcFtbFkcRsfCny-kxrO0,Bestie Rugby Kraków,rugbykrakow.pl,tak,,"sygnały: dla dzieci, dzieci i młodzież (oferta także dla dorosłych)",https://rugbykrakow.pl/standardy-ochrony-maloletnich-w-klubie,
+ChIJ3aZPs5RbFkcRpccXrxzIolQ,Stadion Zwierzyniecki KS Kraków im. Mieczysława Wawrzusiaka,zwierzyniecki.pl,prawdopodobnie,,"tylko słowa: junior, bez „dla dzieci”",https://zwierzyniecki.pl/,
+ChIJIccoObpeFkcROJGqrOgeM9M,Akademia Sportu,akademia-sportu.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 403),,
+ChIJVVU-YBhbFkcRn0IjMrE6lvs,Muzykalnia,muzykalnia.com,tak,7–14 lat,podany wiek 7–14 lat; sygnały: dzieci od N lat (oferta także dla dorosłych),https://www.muzykalnia.com/pracownia,
+ChIJdbqdOZpbFkcRfuf6IfcG5DA,Szkoła Muzyczna I i II st. MOZART,centrummuzykikrakow.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJybcUzlhDFkcR6iiRFp_Nz40,Krakowskie Centrum Artystyczne,kcart.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://kcart.pl/,
+ChIJ3cI3nnRbFkcR2oZwcNFINEI,Szkoła Wokalno - Aktorska; Lekcje i Nauka śpiewu,wokal.art.pl,tak,7–13 lat,"podany wiek 7–13 lat; sygnały: dla dzieci, dzieci od N lat, dzieci i młodzież (oferta także dla dorosłych)",https://wokal.art.pl/lekcje-spiewu-krakow,
+ChIJg7xpq6pbFkcRTapbmFyzMNk,Szkoła Muzyczna Artyz – Kraków Prądnik Biały,artyz.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 404),,
+ChIJHYVuK3NbFkcRMW564qITeGE,MUSIC LAB Centrum Kursów Muzycznych,ckmmusiclab.pl,tak,od 5 lat,"podany wiek od 5 lat; sygnały: dla dzieci, dzieci od N lat, kids (oferta także dla dorosłych)",https://ckmmusiclab.pl/zajecia-muzyczne-dla-dzieci,
+ChIJYQYoZRJbFkcRqVTeT864yHY,Szkoła Perkusji Marimba Laboratory Kraków,marimbalaboratory.pl,nie wiadomo,,tylko słabe wzmianki (uczniowie),https://marimbalaboratory.pl/cennik,
+ChIJVVUltDRDFkcRu7dmOoXtMok,Harcownia,harcownia.com,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJNeHh9DdFFkcRLl-ZsRAFHNs,Kosmuz Pracownia Edukacyjna,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJaYWxxyNbFkcRWK9vwhzD4e4,Szkoła Perkusji Drumhouse,drumhouse.pl,prawdopodobnie,5–10 lat,"podany wiek 5–10 lat, bez wyraźnego „dla dzieci”",https://www.drumhouse.pl/,
+ChIJvwVpXA1dFkcR-9fbkuD1qM4,Studio BelCanto Szkoła Śpiewu,belcanto-casting.art,tak,od 4 lat,"podany wiek od 4 lat; sygnały: dla dzieci, kids, dzieci i młodzież",https://belcanto-casting.art/,
+ChIJ-SwvinVFFkcRMsIGPCJO8JY,Szkoła Muzyczna Artyz - Kraków Bieńczyce,artyz.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 404),,
+ChIJTcJXD_P_1YwRwWjbFbY_nYY,MuzOn Studio,muzonstudio.pl,tak,,sygnały: dla dzieci,https://muzonstudio.pl/,
+ChIJ027cnNBbFkcRES0hQl2kDD8,Bostonova – Centrum Muzyczne,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJ1wO1dQifoqQRoMI7egZeaJE,Nauka gry na skrzypcach - Danuta Brandys,danutabrandys.com.pl,prawdopodobnie,3–4 lat,"podany wiek 3–4 lat, bez wyraźnego „dla dzieci”",https://danutabrandys.com.pl/,
+ChIJm63mwSiUTgsR30nBKBYYm14,Studio Piosenki Kraków,ilonastudio.pl,tak,2–3 lat,"podany wiek 2–3 lat; sygnały: dla dzieci, przedszkolaki (oferta także dla dorosłych)",https://ilonastudio.pl/index.html,
+ChIJb5aEcENbFkcRkrrCOH-Qd-0,Szkoła Muzyczna I i II stopnia im. Bronisława Rutkowskiego,sm1krakow.eu,tak,,"sygnały: dla dzieci, dzieci i młodzież, przedszkolaki (oferta także dla dorosłych)",https://www.sm1krakow.eu/,
+ChIJ42EvQ1VbFkcR2crLyqpV9T4,Przestrzeń Muzyki,spaceofthemusic.pl,tak,2–6 lat,"podany wiek 2–6 lat; sygnały: dla dzieci, maluchy, przedszkolaki (oferta także dla dorosłych)",https://www.spaceofthemusic.pl/,
+ChIJO9cguxNbFkcRrVfVdxORLsc,Prywatna Profesjonalna Szkoła Muzyczna I st. im. Aleksandra Dębskiego,muzycznaszkola.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 403),,
+ChIJ8yXbYGJbFkcRtnd7tX2eIpg,Lekcje gry na pianinie Kraków,pianolekcje.pl,tak,od 5 lat,"podany wiek od 5 lat; sygnały: dla dzieci, dzieci od N lat (oferta także dla dorosłych)",https://pianolekcje.pl/,
+ChIJga__PzVdFkcRHPCgavID7Hs,PauliMuz - Lekcje pianina i teorii muzyki - stacjonarnie i online,e-korepetycje.net,tak,od 6 lat,"podany wiek od 6 lat; sygnały: dla dzieci, dzieci od N lat, przedszkolaki (oferta także dla dorosłych)",https://www.e-korepetycje.net/paulinam8/muzyka,
+ChIJb-yz7dxaFkcRAwls57Yo8NI,Szkoła muzyczna – Pilotów 51,wiechowicz.pl,tak,,sygnały: dla dzieci,https://wiechowicz.pl/rodzaj/chor-dzieciecy,
+ChIJvxYNEDBDFkcRf4sn85C0720,Małopolska Szkoła Rocka,szkolarocka.com,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://szkolarocka.com/,
+ChIJL6AtzHdbFkcRVHPdQmfFPww,Romanna Hunko MuzOn Studio,muzonstudio.pl,tak,,sygnały: dla dzieci,https://muzonstudio.pl/,
+ChIJdZyEkypbFkcRZbUdcju-AWo,Ola Wachtarczyk - studio wokalne,olawachtarczyk.com,nie wiadomo,,tylko słabe wzmianki (uczniowie),https://www.olawachtarczyk.com/,
+ChIJSW0n-IRbFkcR62e74rG5Z-o,PIANOTORIUM,instagram.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJZyGxtZ9bFkcRY7PODu9NMPI,StudioPiosenki.PL w Krakowie,studiopiosenki.pl,tak,3–4 lat,podany wiek 3–4 lat; sygnały: dla dzieci (oferta także dla dorosłych),https://www.studiopiosenki.pl/,
+ChIJW5Nwo_1bFkcRTZU6TI_QDYM,Stakkato – przestrzeń sztuki i studio muzyczne,stakkato.pl,tak,4–6 lat,"podany wiek 4–6 lat; sygnały: dla dzieci, sekcja / grupy młodzieżowe, dzieci od N lat",https://www.stakkato.pl/,
+ChIJF92I7o9bFkcRuiayKTAbdKo,Niepubliczna Szkoła Muzyczna I st. im. Karola Szymanowskiego w Krakowie,smszymanowski.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 403),,
+ChIJfX4mhCRXFkcRdcCPAjq2kjs,Stenart Studio Muzyczne,stenart.pl,tak,od 5 lat,"podany wiek od 5 lat; sygnały: dla dzieci, dzieci od N lat, dzieci i młodzież",https://stenart.pl/oferta,
+ChIJuwPUBMJbFkcRBfhXmQPo7X0,Sensory Side - Przestrzeń dla Dzieci i Rodziców,sensoryside.com.pl,tak,,"sygnały: dla dzieci, przedszkolaki, dzieci i młodzież",https://www.sensoryside.com.pl/,
+ChIJqaXr7hBbFkcR2FgXXEQHM5s,DOMIN Kraków – kurs rysunku,domin-krakow.pl,tak,8–10 lat,"podany wiek 8–10 lat; sygnały: dla dzieci, maluchy, dzieci i młodzież (oferta także dla dorosłych)",https://domin-krakow.pl/,
+ChIJ05fPlGpbFkcR-7cKf5mob24,Caha Art - Pracownia ceramiki w Krakowie,caha.art,nie wiadomo,,tylko słabe wzmianki (kurs dla par),https://www.caha.art/,
+ChIJz443TThbFkcRKoWH_NnC4mY,Centrum Edukacji Ekologicznej „Symbioza”,symbioza-krakow.pl,tak,,sygnały: dla dzieci,https://symbioza-krakow.pl/cennik,
+ChIJsWrWQuNbFkcR_S8VygEzClk,Krakowska Akademia Musicalu,kamkrakow.pl,prawdopodobnie,,"tylko słowa: akademia, bez „dla dzieci”",https://www.kamkrakow.pl/,
+ChIJqxveH0TOFkcRtIS_aoEzW8A,WARSZTAT - kurs rysunku Kraków,warsztat-rysunku.pl,prawdopodobnie,od 10 lat,"podany wiek od 10 lat; tylko słowa: akademia, bez „dla dzieci”",https://www.warsztat-rysunku.pl/,
+ChIJWd3j1fNFFkcR4PFNo8_chIo,Rollersi - nauka jazdy na rolkach,rollersi.pl,nie sprawdzono (robots / błąd strony),,strona główna nie odpowiada (HTTP 403),,
+ChIJBy-vggFDFkcRI7_7LY193NY,Sunny Bunny Wieliczka,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJRRkK-jRFFkcRJJAKN6eZ55I,AAK Akademia Aktywnych i Kreatywnych,aak.edu.pl,tak,1–3 lat,"podany wiek 1–3 lat; sygnały: dla dzieci, dzieci od N lat, kids (oferta także dla dorosłych)",https://www.aak.edu.pl/,
+ChIJtwWrY_ZbFkcRRjAiYvxLFcY,Game Park Kraków,facebook.com,nie sprawdzono (robots / błąd strony),,"adres to Facebook, Instagram lub podobny portal; pominięto zgodnie z zasadami",,
+ChIJbVilzHRbFkcRhCUvhgl9rDk,Pod Schodami. Kino letnie,kina.krakow.pl,prawdopodobnie,,tylko wzmianki: nastolatki,https://www.kina.krakow.pl/cinema_program/for_kids?date=2026-10-05,
+ChIJde9NVoNbFkcRCfEpuTCP59g,Mikro Bronowice,kinomikro.pl,tak,,sygnały: przedszkolaki (oferta także dla dorosłych),https://kinomikro.pl/oferta-dla-szkol,
+ChIJM0-ZXvJFFkcRbL1KEpGqkXQ,Kino Parafialne Arka,stronadobra.pl,prawdopodobnie,,"tylko słowa: akademia, bez „dla dzieci”",https://stronadobra.pl/kinoarka/,
+ChIJN62rrlxbFkcRCfQSILR8YZQ,Teatr Edukacji i Profilaktyki Z UŚMIECHEM,teatr-z-usmiechem.pl,nie wiadomo,,brak wzmianek o dzieciach i o dorosłych w przejrzanych stronach,https://www.teatr-z-usmiechem.pl/,
+ChIJEe0hYGxbFkcRtWSz4djnd-E,Młody Teatr Tańca Terpsychora,mttt.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJLbwxnRZFFkcRh6Om3iesosw-polk,"Interschool Sport Centre Kraków ""East""",moswschod.pl,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJVVUltDRDFkcRu7dmOoXtMok-polk,Harcownia,harcownia.com,nie sprawdzono (robots / błąd strony),,robots.txt niedostępny (brak połączenia),,
+ChIJkQaTxqJEFkcRBH8-ZzYddTA-polk,Klub Żeglarski Horn Kraków,hornkrakow.pl,tak,6–14 lat,"podany wiek 6–14 lat; sygnały: dla dzieci, przedszkolaki, dzieci i młodzież",https://www.hornkrakow.pl/,
