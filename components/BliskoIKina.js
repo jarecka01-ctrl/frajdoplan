@@ -138,7 +138,7 @@ export default function BliskoIKina({ places, wydarzenia, kina = null, muzyka = 
         etykieta="Najbliższe koncerty dla dzieci"
         podkategoria="Koncerty dla dzieci"
         wzorNazwy={/koncert/i}
-        typ="koncert"
+        typ={['koncert', 'widowisko']} // widowisko: trasy i pokazy z hal (TAURON Arena, ICE…)
         wariant="kreda"
         wyprzedzenie={180}
         pusto="Nie mamy teraz koncertów dla dzieci w kalendarzu. Program sprawdzisz na stronach:"
