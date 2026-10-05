@@ -90,6 +90,13 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .wyd-miejsce { margin: 2px 0 0; font-size: 13px; color: var(--tusz-2); }
 .wyd-info { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
 .wyd-info a { font-weight: 600; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+/* strony /koncerty i /spektakle */
+.wyd-miesiac { margin: 0 0 34px; }
+.wyd-lista-strona .wyd-duza { grid-template-columns: 132px 1fr; }
+.wyd-lista-strona .wyd-godz { font-size: 18px; }
+.wyd-lista-strona .wyd-nazwa a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.wyd-lista-strona .wyd-miejsce a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 2px; }
+@media (max-width: 480px) { .wyd-lista-strona .wyd-duza { grid-template-columns: 1fr; gap: 4px; } }
 /* małe kafelki Jutro i Weekend: stała wysokość, 3 wydarzenia na slajd, strzałki ‹ › */
 .slajdy-okno { height: 148px; overflow: hidden; touch-action: pan-y; }
 .slajdy-lista { gap: 8px; }

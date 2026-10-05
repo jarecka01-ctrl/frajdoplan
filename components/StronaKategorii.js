@@ -17,6 +17,9 @@ export default function StronaKategorii({ dzial, places, kategorie, kategoria, s
       <section className="hero">
         <h1>{seo.h1}</h1>
         <p className="lead">{seo.wstep}</p>
+        {dzial === 'atrakcje' && kategoria.slug === 'teatry' && (
+          <p className="lead"><a href="/spektakle">Repertuar teatrów dla dzieci: wszystkie spektakle →</a></p>
+        )}
       </section>
       <Katalog
         places={places}
