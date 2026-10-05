@@ -114,7 +114,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
                       <p className="wyd-info">
                         {w.wiek && <span>{w.wiek}</span>}
                         {w.cena && <span>{w.cena}</span>}
-                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">Zapisy i szczegóły</a>}
+                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>}
                       </p>
                     )}
                   </div>
