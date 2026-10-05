@@ -14,7 +14,7 @@ const DNI = [
   [/czwart/, 4], [/piąt|piat/, 5], [/sobot/, 6],
 ];
 export const MIESIACE = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'];
-const NAZWY_DNI = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
+export const NAZWY_DNI = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
 
 // Dzisiejsza data w Krakowie jako YYYY-MM-DD (niezależnie od strefy czasowej telefonu).
 export const dzisWarszawa = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Warsaw' }).format(new Date());

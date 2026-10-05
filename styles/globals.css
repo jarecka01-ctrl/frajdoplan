@@ -145,25 +145,63 @@ a.slajd-nazwa { text-decoration: underline; text-decoration-color: var(--mak); t
 /* Dziś w kinach, spektakle, koncerty */
 .blisko-kina { display: grid; gap: 18px; margin: -18px 0 48px; grid-template-columns: 1fr; }
 .przycisk:disabled { opacity: .6; cursor: progress; }
-.kina { background: var(--tusz); color: var(--papier); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 18px; }
-.kina .wyd-tytul-maly { color: var(--papier); margin-bottom: 12px; }
-.kina-lista { display: grid; gap: 14px; }
-.kina-dni { display: inline-flex; margin: 0 0 12px; border: 2px solid var(--papier); border-radius: 999px; overflow: hidden; }
+/* trzy kafelki pod „Dziś dla dzieci": wspólna baza (.k), potem kolory, cienie i wzory każdego z nich */
+.k { position: relative; border: 2px solid #20242B; border-radius: 22px 22px 22px 6px; padding: 20px 18px 16px; min-width: 0; display: flex; flex-direction: column; text-transform: none; }
+.k-tytul { font: 700 21px/1.1 var(--font-display); margin: 0 0 3px; letter-spacing: -0.01em; }
+.k-pod { font-size: 12.5px; margin: 0 0 12px; opacity: .8; }
+.k-lista, .k-linki { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+/* wiersze: jasne karty z ciemnym tekstem (kolor ustawiony jawnie, nie dziedziczony z kafelka) */
+.k-wiersz { display: flex; flex-direction: column; background: #FFFDF7; color: #20242B; border-radius: 12px; padding: 8px 11px; min-width: 0; }
+.k-data { display: block; font: 700 12.5px/1.3 var(--font-display); color: #20242B; text-transform: none; }
+.k-nazwa { display: block; font: 600 14px/1.3 var(--font-body); color: #20242B; overflow-wrap: anywhere; text-transform: none; }
+a.k-nazwa { text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.k-miejsce { display: block; font-size: 12px; line-height: 1.4; color: #20242B; text-transform: none; }
+.k-miejsce a { color: #20242B; font-weight: 600; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 2px; }
+.k-miejsce small { font-size: 12px; }
+.k-pusto { margin: 0 0 12px; font-size: 14px; }
+.k-linki li { font-size: 15px; font-weight: 600; }
+.k-wiecej { margin: auto 0 0; padding-top: 12px; font-size: 13px; font-weight: 600; }
+.k-wiecej + .kina-pusto { margin: 10px 0 0; }
+.k-linki a, .k-wiecej a { color: #20242B; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* kino: atrament, czerwony cień, perforacja taśmy filmowej u góry i u dołu */
+.k-kino {
+  background-color: var(--tusz); color: var(--papier); box-shadow: 5px 5px 0 var(--mak); padding-top: 30px; padding-bottom: 30px;
+  background-image: radial-gradient(rgba(255, 253, 247, .07) 1px, transparent 1.4px); background-size: 18px 18px;
+}
+.k-kino::before, .k-kino::after {
+  content: ""; position: absolute; left: 18px; right: 18px; height: 7px; border-radius: 2px;
+  background: repeating-linear-gradient(90deg, rgba(255, 253, 247, .2) 0 8px, transparent 8px 17px);
+}
+.k-kino::before { top: 10px; }
+.k-kino::after { bottom: 10px; }
+.k-kino .k-tytul, .k-kino .k-pod { color: var(--papier); }
+.k-kino .k-wiecej, .k-kino .k-wiecej-kina, .k-kino .kina-linki a, .k-kino .kina-pusto a, .k-kino .k-wiecej a { color: var(--papier); }
+.k-kino .k-wiecej a, .k-kino .kina-linki a, .k-kino .kina-pusto a { text-decoration-color: var(--slonce); }
+.k-lista + .kina-pusto { margin-top: 12px; }
+.kina-dni { display: inline-flex; margin: 0 0 12px; border: 2px solid var(--papier); border-radius: 999px; overflow: hidden; align-self: flex-start; }
 .kina-dni button { height: 34px; padding: 0 16px; border: 0; background: transparent; color: var(--papier); cursor: pointer; font-weight: 600; font-size: 14px; }
 .kina-dni button[aria-pressed="true"] { background: var(--papier); color: var(--tusz); }
-.kino-nazwa { margin: 0 0 6px; font: 700 17px/1.2 var(--font-display); color: var(--slonce); }
-.kino ul, .kina-linki { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.kino li { font-size: 14px; }
-.kino-film { font-weight: 700; }
-.kino-film::after { content: ': '; }
-.kino-godziny a { font-weight: 600; }
-.kina a { color: var(--papier); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.kino small { color: #C9CDD4; }
-.kina-pusto { margin: 0 0 12px; font-size: 14px; color: #D8DBE0; }
-.kino-nazwa a { color: inherit; }
-.kina-linki + .kina-linki, .kina-lista + .kina-linki, .kina-lista + .kina-pusto, .kina-pusto + .kina-linki { margin-top: 12px; }
-.kina-linki + .kina-pusto { margin: 12px 0 0; }
+.kina-linki { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .kina-linki li { font-size: 15px; font-weight: 500; }
+.kina-pusto { margin: 0 0 12px; font-size: 14px; color: #D8DBE0; }
+.kina-linki + .kina-pusto { margin: 12px 0 0; }
+.kina-pusto + .kina-linki, .kina-linki + .kina-linki { margin-top: 12px; }
+
+/* spektakle: ceglane tło z fałdami kurtyny, cień atramentowy */
+.k-spektakle {
+  background-color: #B03A2E; color: var(--papier); box-shadow: 5px 5px 0 var(--tusz);
+  background-image: repeating-linear-gradient(90deg, rgba(0, 0, 0, .08) 0 16px, rgba(255, 255, 255, .04) 16px 32px);
+}
+.k-spektakle .k-tytul, .k-spektakle .k-pod, .k-spektakle .k-pusto { color: var(--papier); }
+.k-spektakle .k-linki a, .k-spektakle .k-wiecej a { color: var(--papier); text-decoration-color: var(--slonce); }
+
+/* koncerty: beż z żółtym cieniem i pięciolinią z nutami (bardzo delikatnie) */
+.k-koncerty {
+  background-color: var(--kreda); color: var(--tusz); box-shadow: 5px 5px 0 var(--slonce);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22150%22%20height=%2270%22%20viewBox=%220%200%20150%2070%22%3E%3Cg%20stroke=%22%2320242B%22%20stroke-opacity=%220.15%22%20stroke-width=%220.9%22%20fill=%22none%22%3E%3Cpath%20d=%22M0%2010H150M0%2015H150M0%2020H150M0%2025H150M0%2030H150%22/%3E%3Cpath%20d=%22M0%2044H150M0%2049H150M0%2054H150M0%2059H150M0%2064H150%22/%3E%3C/g%3E%3Cg%20fill=%22%2320242B%22%20fill-opacity=%220.15%22%20stroke=%22%2320242B%22%20stroke-opacity=%220.15%22%20stroke-width=%221.2%22%3E%3Cellipse%20cx=%2222%22%20cy=%2225%22%20rx=%223.6%22%20ry=%222.7%22%20transform=%22rotate%28-20%2022%2025%29%22%20stroke=%22none%22/%3E%3Cpath%20d=%22M25.3%2024V8%22/%3E%3Cellipse%20cx=%2246%22%20cy=%2220%22%20rx=%223.6%22%20ry=%222.7%22%20transform=%22rotate%28-20%2046%2020%29%22%20stroke=%22none%22/%3E%3Cpath%20d=%22M49.3%2019V3%22/%3E%3Cellipse%20cx=%2270%22%20cy=%2230%22%20rx=%223.6%22%20ry=%222.7%22%20transform=%22rotate%28-20%2070%2030%29%22%20stroke=%22none%22/%3E%3Cpath%20d=%22M73.3%2029V13%22/%3E%3Cpath%20d=%22M49.3%203L73.3%2013%22%20stroke-width=%222.4%22/%3E%3Cellipse%20cx=%22104%22%20cy=%2259%22%20rx=%223.6%22%20ry=%222.7%22%20transform=%22rotate%28-20%20104%2059%29%22%20stroke=%22none%22/%3E%3Cpath%20d=%22M107.3%2058V42%22/%3E%3Cellipse%20cx=%22128%22%20cy=%2254%22%20rx=%223.6%22%20ry=%222.7%22%20transform=%22rotate%28-20%20128%2054%29%22%20stroke=%22none%22/%3E%3Cpath%20d=%22M131.3%2053V37%22/%3E%3Cpath%20d=%22M107.3%2042L131.3%2037%22%20stroke-width=%222.4%22/%3E%3C/g%3E%3C/svg%3E"); background-size: 150px 70px; background-repeat: repeat;
+}
+
 
 .sekcja { font: 700 30px/1.1 var(--font-display); margin: 0 0 14px; letter-spacing: -0.01em; }
 
