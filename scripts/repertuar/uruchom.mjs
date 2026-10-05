@@ -26,7 +26,7 @@ import zis from './zrodla/zis.mjs';
 import krakowPl from './zrodla/krakow-pl.mjs';
 import { naprawLinki } from './linki.mjs';
 import { dopracujKategorie } from './kategorie.mjs';
-import { idKin, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
+import { idKin, idKinZCsv, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 // Źródła wydarzeń (nie kina). Moduł z `wlaczone: false` jest gotowy, ale pomijany.
@@ -125,7 +125,9 @@ async function main() {
   // place_id kin z arkusza „Miejsca" (SHEET_CSV_URL). Bez arkusza zostają wartości z poprzedniego pliku.
   const idMiejsc = {};
   for (const w of poprzedni.wydarzenia || []) if (w.powiazane_miejsce_id) idMiejsc[w.miejsce] = w.powiazane_miejsce_id;
-  if (process.env.SHEET_CSV_URL) {
+  if (process.env.MIEJSCA_PLIK) { // do prób: lokalny plik CSV zamiast arkusza
+    Object.assign(idMiejsc, idKinZCsv(await readFile(process.env.MIEJSCA_PLIK, 'utf8')));
+  } else if (process.env.SHEET_CSV_URL) {
     try {
       Object.assign(idMiejsc, await idKin(process.env.SHEET_CSV_URL));
     } catch (e) {

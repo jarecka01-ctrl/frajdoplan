@@ -141,7 +141,9 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
 
   // seanse kinowe mają własną sekcję „Dziś w kinach"
   const naDzien = (iso) => wydarzenia.filter((w) => !w.kino && trwaW(w.data_regula, iso)).sort(poGodzinie);
-  const dzis = naDzien(teraz);
+  // „Dziś" to tylko to, co jeszcze się nie zaczęło (albo trwa cały dzień), tak samo jak w kafelku „Dziś w kinach"
+  const godz = godzinaWarszawa();
+  const dzis = naDzien(teraz).filter((w) => !w.godzina || w.godzina > godz);
   const jutroLista = naDzien(jutro);
   const weekend = [...naDzien(sob).map((w) => ({ ...w, dzien: 'sob.' })), ...naDzien(nd).map((w) => ({ ...w, dzien: 'niedz.' }))];
 
