@@ -45,7 +45,6 @@ export default {
   nazwa: 'Klub Studio',
   url: `${BAZA}/wydarzenia`,
   rodzaj: 'wydarzenia',
-  goscinne: true, // hala, klub albo teatr z wydarzeniami gościnnymi; brakujące miejsca w arkuszu trafiają do podsumowania
   wyprzedzenieDni: 180,
   miejsca: [['Klub Studio', /klub\s*studio/i]],
   async pobierz() {
