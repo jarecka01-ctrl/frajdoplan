@@ -25,7 +25,8 @@ import ckpodgorza from './zrodla/ckpodgorza.mjs';
 import zis from './zrodla/zis.mjs';
 import krakowPl from './zrodla/krakow-pl.mjs';
 import { naprawLinki } from './linki.mjs';
-import { idKin, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
+import { dopracujKategorie } from './kategorie.mjs';
+import { idKin, idKinZCsv, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 // Źródła wydarzeń (nie kina). Moduł z `wlaczone: false` jest gotowy, ale pomijany.
@@ -81,7 +82,7 @@ const naWydarzenieInne = (zrodlo, s, idMiejsc = '') => ({
   id: `${zrodlo.id}-${slugZ(s.miejsce)}-${slugZ(s.tytul)}-${s.data}T${s.godzina}`,
   typ: s.typ || 'wydarzenie',
   kino: false,
-  kategoria: s.kategoria || 'inne',
+  kategoria: dopracujKategorie(s.kategoria, s.tytul), // planszówki przed sportem, sport tylko przy sportowych słowach
   nazwa: s.tytul,
   data_regula: s.dataDo ? `${s.data} do ${s.dataDo}` : s.data,
   godzina: s.godzina,
@@ -124,7 +125,9 @@ async function main() {
   // place_id kin z arkusza „Miejsca" (SHEET_CSV_URL). Bez arkusza zostają wartości z poprzedniego pliku.
   const idMiejsc = {};
   for (const w of poprzedni.wydarzenia || []) if (w.powiazane_miejsce_id) idMiejsc[w.miejsce] = w.powiazane_miejsce_id;
-  if (process.env.SHEET_CSV_URL) {
+  if (process.env.MIEJSCA_PLIK) { // do prób: lokalny plik CSV zamiast arkusza
+    Object.assign(idMiejsc, idKinZCsv(await readFile(process.env.MIEJSCA_PLIK, 'utf8')));
+  } else if (process.env.SHEET_CSV_URL) {
     try {
       Object.assign(idMiejsc, await idKin(process.env.SHEET_CSV_URL));
     } catch (e) {

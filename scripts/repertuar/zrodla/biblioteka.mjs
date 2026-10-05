@@ -23,7 +23,7 @@ const KATEGORIE = [
   [/koncert|muzyk/i, 'koncert'],
   [/spektakl|teatr/i, 'spektakl'],
   [/pokaz|film/i, 'pokaz'],
-  [/gr[ay]|planszów|sport/i, 'sport'],
+  [/sport|piłk|bieg|trening|gimnastyk|pływ|rower|taniec|joga|fitness/i, 'sport'],
 ];
 const kategoriaZTagow = (tagi) => {
   const t = tagi.join(' ');

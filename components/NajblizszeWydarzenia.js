@@ -1,35 +1,29 @@
 import { useEffect, useState } from 'react';
 import s from '../styles/NajblizszeWydarzenia.module.css';
-import { dzisWarszawa, trwaW, plusDni, dzienTygodnia } from './Wydarzenia';
+import { dzisWarszawa, trwaW, plusDni } from './Wydarzenia';
+import { grupujTerminy, krotkaData } from '../lib/grupowanie';
 
 /*
-  Kafelek „Najbliższe …" (spektakle, koncerty): cztery najbliższe wydarzenia dla dzieci (każde raz, z najbliższym
-  terminem), z wyprzedzeniem, żeby można było zaplanować weekend. Bierze wydarzenia powiązane z miejscem
+  Kafelek „Najbliższe …" (spektakle, koncerty): cztery najbliższe wiersze (każde wydarzenie raz, z najbliższym
+  terminem; ten sam tytuł, dzień i miejsce = jeden wiersz z wieloma godzinami), z wyprzedzeniem, żeby można było zaplanować weekend. Bierze wydarzenia powiązane z miejscem
   z wybranej podkategorii albo z wzorem w nazwie. Kafelek jest zawsze widoczny: bez wydarzeń pokazuje
   krótką informację i linki do stron miejsc z bazy.
 */
 
-const DZIEN = ['niedz.', 'pon.', 'wt.', 'śr.', 'czw.', 'pt.', 'sob.'];
 const ILE = 4;
 
-const krotka = (iso) => {
-  const [, m, d] = iso.split('-').map(Number);
-  return `${DZIEN[dzienTygodnia(iso)]} ${d}.${String(m).padStart(2, '0')}`;
-};
-
-// Pierwszy termin każdego wydarzenia, od dziś do przodu, posortowane po dacie.
+// Pierwszy termin każdego wydarzenia od dziś do przodu; wydarzenia o tym samym tytule, w tym samym dniu
+// i miejscu to jeden wiersz z wieloma godzinami („sob. 17.10 · 11:00, 13:00"). Bierzemy ILE najbliższych wierszy.
 function najblizsze(lista, dzis, wyprzedzenie) {
-  const wynik = [];
+  const terminy = [];
   const widziane = new Set();
-  for (let i = 0; i <= wyprzedzenie && wynik.length < ILE * 3; i += 1) {
+  for (let i = 0; i <= wyprzedzenie; i += 1) {
     const d = plusDni(dzis, i);
     lista.forEach((w) => {
-      if (!widziane.has(w.id) && trwaW(w.data_regula, d)) { widziane.add(w.id); wynik.push({ ...w, dzien: d }); }
+      if (!widziane.has(w.id) && trwaW(w.data_regula, d)) { widziane.add(w.id); terminy.push({ ...w, dzien: d }); }
     });
   }
-  return wynik
-    .sort((a, b) => a.dzien.localeCompare(b.dzien) || (a.godzina || '99').localeCompare(b.godzina || '99'))
-    .slice(0, ILE);
+  return grupujTerminy(terminy).slice(0, ILE);
 }
 
 /*
@@ -63,7 +57,7 @@ export default function NajblizszeWydarzenia({
         <ul className={s.lista}>
           {wiersze.map((w) => (
             <li key={`${w.id}-${w.dzien}`} className={s.wiersz}>
-              <span className={s.data}>{krotka(w.dzien)}{w.godzina ? ` · ${w.godzina}` : ''}</span>
+              <span className={s.data}>{krotkaData(w.dzien)}{w.godziny.length ? ` · ${w.godziny.map((g) => g.godzina).join(', ')}` : ''}</span>
               {w.link ? <a href={w.link} target="_blank" rel="noreferrer" className={s.nazwa}>{w.nazwa}</a> : <strong className={s.nazwa}>{w.nazwa}</strong>}
               {w.miejsce && <small>{w.miejsce}{w.wiek ? `, ${w.wiek}` : ''}</small>}
             </li>

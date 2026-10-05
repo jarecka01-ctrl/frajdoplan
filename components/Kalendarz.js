@@ -19,6 +19,7 @@ const KATEGORIE = [
   { id: 'festyn', nazwa: 'Festyny', ikona: '🎈' },
   { id: 'sport', nazwa: 'Sport', ikona: '⚽' },
   { id: 'spacer', nazwa: 'Spacery', ikona: '🥾' },
+  { id: 'planszowki', nazwa: 'Planszówki', ikona: '🎲' },
   { id: 'inne', nazwa: 'Inne', ikona: '➕' },
 ];
 const pad = (n) => String(n).padStart(2, '0');
@@ -114,7 +115,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
                       <p className="wyd-info">
                         {w.wiek && <span>{w.wiek}</span>}
                         {w.cena && <span>{w.cena}</span>}
-                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">Zapisy i szczegóły</a>}
+                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>}
                       </p>
                     )}
                   </div>
