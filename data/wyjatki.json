@@ -15,7 +15,7 @@
       "ukryj": []
     },
     "ckpodgorza": {
-      "_jak_dziala": "Bierzemy wydarzenia z grupą wiekową „dla dzieci” ze strony Centrum Kultury Podgórza. Niektóre z nich wyglądają na dorosłe albo mieszane — poniżej propozycja do ukrycia.",
+      "_jak_dziala": "Bierzemy wydarzenia z grupą wiekową „dla dzieci” ze strony Centrum Kultury Podgórza. Niektóre z nich wyglądają na dorosłe albo mieszane — poniżej propozycja do ukrycia. Dodatkowo moduł sam ukrywa wydarzenia z sygnałem dla dorosłych (dla dorosłych, seniorzy, 18+, wernisaż, debata, spacer literacki).",
       "wymus": [],
       "ukryj": [
         "Debata: Czy życie literackie",
@@ -23,7 +23,8 @@
         "Kryminalna Poezja Migowa",
         "Wernisaż wystawy",
         "Podgórski spacer literacki",
-        "Kiszonki - fermentacja"
+        "Kiszonki - fermentacja",
+        "Pracownia drugiego obiegu"
       ]
     },
     "kultureska": { "_jak_dziala": "Cały repertuar jest dla dzieci, ale poranki w dni robocze to spektakle dla szkół i przedszkoli (rezerwacja mailowa), więc są ukryte.", "wymus": [], "ukryj": [] },

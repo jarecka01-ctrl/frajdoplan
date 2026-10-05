@@ -17,6 +17,11 @@ const KATEGORIE = [
   [/piknik|festyn|plenerow/i, 'festyn'],
   [/spacer|wycieczk/i, 'spacer'],
 ];
+// Sygnały, że wydarzenie jest dla dorosłych — ukrywamy je, nawet gdy operator zaznaczył „dla dzieci".
+// Tytuł mówiący o „dzieciach i dorosłych" (wydarzenie mieszane) nie jest sygnałem.
+const DLA_DOROSLYCH = /dla dorosłych|dorosłych|seniorzy|seniorów|senior|\b18\s*\+|wernisaż|debata|spacer literacki/i;
+const MIESZANE = /dzieci\s+i\s+dorosł|dorosłych\s+i\s+dzieci|dorosłych\s+z\s+dziećmi|rodzin/i;
+export const dlaDoroslych = (tekst) => DLA_DOROSLYCH.test(tekst) && !MIESZANE.test(tekst);
 const kategoria = (rodzaj) => (KATEGORIE.find(([w]) => w.test(rodzaj)) || [0, 'inne'])[1];
 
 export function parsuj(json, dzis = dzisWarszawa(), horyzontDni = 60) {
@@ -29,6 +34,7 @@ export function parsuj(json, dzis = dzisWarszawa(), horyzontDni = 60) {
     const zakres = spacje($(el).find('.date__day').first().text()); // „04.10.2026" albo „15.09.2026 - 27.10.2026"
     const godz = spacje($(el).find('.date__hour').first().text()); // „wtorek - 18:00"
     const rodzaj = spacje($(el).find('.category__type').first().text());
+    const cykl = spacje($(el).find('.category__place').first().text());
     const cena = spacje($(el).find('.bl__text').first().text());
     const href = $(el).attr('href') || '';
     const [od, doDnia] = zakres.split(/\s+-\s+/).map((d) => dataPL(d));
@@ -42,7 +48,8 @@ export function parsuj(json, dzis = dzisWarszawa(), horyzontDni = 60) {
       cena: /wstęp wolny|bezpłatn/i.test(cena) ? 'wstęp wolny' : '',
       strona: href ? new URL(href.trim(), BAZA).href : '',
       link: '',
-      dlaDzieci: true, // lista jest przefiltrowana do grupy „dla dzieci"
+      // lista jest przefiltrowana do grupy „dla dzieci", ale sygnał dla dorosłych (tytuł, rodzaj, nazwa cyklu) ma pierwszeństwo
+      dlaDzieci: !dlaDoroslych(`${tytul} ${rodzaj} ${cykl}`),
       // „Spektakl … (grupy zorganizowane)" to pokaz dla szkół i przedszkoli; „(odbiorcy indywidualni)" jest dla wszystkich
       dlaGrup: /\(grupy|dla grup|grup[ay] zorganizowan/i.test(tytul),
     };
