@@ -69,7 +69,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {children}
         <footer className="stopka">
           <p>Frajdoplan, Kraków. Dane o miejscach pochodzą z publicznych źródeł, m.in. Map Google.</p>
-          <img className="stopka-smok" src="/brand/smok.png" alt="" width="626" height="683" />
+          <img className="stopka-smok" src="/brand/smok.png" alt="" width="626" height="683" loading="lazy" />
         </footer>
       </div>
     </>
