@@ -15,13 +15,15 @@ const czekaj = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function pobierz(url, opcje = {}) {
   zakazanySerwis(url);
   if (opcje.robots) await upewnijSieZeDozwolone(url);
-  try {
-    return await pobierzRaz(url, opcje);
-  } catch (e) {
-    // jedna ponowna próba po chwilowym błędzie serwera (5xx) albo zerwanym połączeniu
-    if (/HTTP 4\d\d/.test(e.message)) throw e;
-    await czekaj(5000);
-    return pobierzRaz(url, opcje);
+  // do trzech prób po chwilowym błędzie serwera (5xx) albo zerwanym połączeniu: po 5 i po 20 sekundach (błąd 4xx od razu przerywa)
+  const przerwy = [5000, 20000];
+  for (let proba = 0; ; proba += 1) {
+    try {
+      return await pobierzRaz(url, opcje);
+    } catch (e) {
+      if (/HTTP 4\d\d/.test(e.message) || proba >= przerwy.length) throw e;
+      await czekaj(przerwy[proba]);
+    }
   }
 }
 
