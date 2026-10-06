@@ -9,7 +9,7 @@ export async function getStaticProps() {
     sekcja: 'z-marszu',
     adres: '/atrakcje',
     teksty: {
-      tytul: 'Atrakcje dla dzieci w Krakowie: sale zabaw, muzea, parki | Frajdoplan',
+      tytul: 'Atrakcje dla dzieci w Krakowie: lista miejsc | Frajdoplan',
       opis: 'Sale zabaw, place zabaw, parki, muzea, teatry, kina i baseny dla dzieci w Krakowie i okolicy.',
       h1: 'Atrakcje dla dzieci',
       wstep: 'Sale zabaw, place zabaw, parki, muzea, kina i wycieczki pod Krakowem. Wybierz jeden lub kilka rodzajów.',

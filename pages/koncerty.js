@@ -7,7 +7,7 @@ export async function getStaticProps() {
     adres: '/koncerty',
     teksty: {
       tytul: 'Koncerty dla dzieci w Krakowie: terminy | Frajdoplan',
-      opis: 'Wszystkie najbliższe koncerty dla dzieci w Krakowie: filharmonia, koncerty rodzinne i muzyczne zajęcia dla maluchów. Daty, godziny, miejsca i bilety w jednym miejscu.',
+      opis: 'Wszystkie najbliższe koncerty dla dzieci w Krakowie: filharmonia, koncerty rodzinne, zajęcia muzyczne dla maluchów. Daty, godziny, miejsca i bilety.',
       h1: 'Koncerty dla dzieci w Krakowie',
       wstep: 'Wszystkie terminy koncertów dla dzieci, od najbliższych, z biletami. Lista obejmuje także koncerty zapowiedziane z dużym wyprzedzeniem.',
     },

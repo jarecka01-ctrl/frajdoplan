@@ -12,7 +12,7 @@ export async function getStaticProps() {
     zWydarzeniami: true,
     adres: '/',
     teksty: {
-      tytul: 'Atrakcje dla dzieci w Krakowie: gdzie dziś iść z dzieckiem | Frajdoplan',
+      tytul: 'Atrakcje dla dzieci w Krakowie: co robić dziś | Frajdoplan',
       opis: 'Sale zabaw, place zabaw, muzea, kina i wycieczki pod Krakowem. Sprawdź, gdzie iść z dzieckiem dziś i w weekend.',
       h1: 'Gdzie dziś idziemy?',
       wstep: 'Miejsca dla dzieci w Krakowie i okolicy: od sal zabaw po wycieczki za miasto.',
