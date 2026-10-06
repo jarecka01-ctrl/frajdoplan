@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { IKONY, SKROTY } from '../lib/ikony';
 import { DZIALY, kategoriaRodzaju, odmianaMiejsc } from '../lib/kategorie';
 
@@ -226,7 +227,7 @@ export default function Katalog({
                   </span>
                   {p.urodziny && <span className="znaczek">urodziny</span>}
                 </div>
-                <h3 className="nazwa">{p.name}</h3>
+                <h3 className="nazwa">{p.slug ? <Link href={`/miejsce/${p.slug}`}>{p.name}</Link> : p.name}</h3>
                 <p className="adres">{[p.adres, p.gmina !== 'Kraków' || !p.adres ? p.gmina : null].filter(Boolean).join(', ')}</p>
                 <div className="dol">
                   {p.rating != null && (

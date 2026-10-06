@@ -19,8 +19,9 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
     <>
       <Head>
         <title>{seo.tytul}</title>
-        {/* Wersja testowa: nie indeksuj. Usuń tę linię po podpięciu domeny frajdoplan.pl. */}
-        <meta name="robots" content="noindex, nofollow" />
+        {/* index tylko na produkcji (lib/seo.js); na innych hostach dodatkowo nagłówek X-Robots-Tag z middleware.js */}
+        <meta name="robots" content={seo.robots} />
+        {seo.googleWeryfikacja && <meta name="google-site-verification" content={seo.googleWeryfikacja} />}
         <meta name="description" content={seo.opis} />
         <link rel="canonical" href={seo.canonical} />
         <link rel="icon" href="/favicon.ico" sizes="any" />

@@ -350,6 +350,14 @@ a.k-nazwa { text-decoration: underline; text-decoration-color: var(--mak); text-
   background: var(--slonce); border: 1.5px solid var(--tusz);
 }
 .nazwa { font: 700 21px/1.15 var(--font-display); margin: 0 0 4px; overflow-wrap: anywhere; }
+.nazwa a { color: inherit; text-decoration: none; }
+.nazwa a:hover { text-decoration: underline; text-decoration-color: var(--akcent); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.karta-szczegoly { max-width: 720px; margin-bottom: 28px; gap: 10px; }
+.karta-szczegoly p { margin: 0; }
+.karta-szczegoly .adres { font-size: 17px; margin: 0; }
+.karta-szczegoly .dol { font-size: 15px; }
+.podobne { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 8px; max-width: 720px; }
+.podobne a { font-weight: 600; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--slonce); text-decoration-thickness: 3px; text-underline-offset: 3px; }
 .adres { font-size: 14px; color: var(--tusz-2); margin: 0 0 14px; }
 .dol { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 13px; }
 .ocena { font-weight: 600; }
