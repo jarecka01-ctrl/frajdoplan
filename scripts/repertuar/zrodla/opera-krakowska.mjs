@@ -65,8 +65,11 @@ export function parsuj(json) {
   return wydarzenia;
 }
 
+// WYŁĄCZONE: z serwerów GitHub Actions opera.krakow.pl odpowiada HTTP 403 (blokada ruchu z serwerów; z innych sieci działa).
+// Blokady nie obchodzimy. Włączyć ponownie po uzyskaniu zgody Opery albo gdy blokada zniknie (usuń `wlaczone: false`).
 export default {
   id: 'opera-krakowska',
+  wlaczone: false,
   nazwa: 'Opera Krakowska',
   url: `${BAZA}/repertuar`,
   rodzaj: 'wydarzenia',
