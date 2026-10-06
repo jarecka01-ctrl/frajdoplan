@@ -282,6 +282,12 @@ async function main() {
   const weryfikacja = [...new Map(doWeryfikacji.map((w) => [`${w.zrodlo}|${w.tytul}`, w])).values()]
     .sort((a, b) => `${a.zrodlo}${a.tytul}`.localeCompare(`${b.zrodlo}${b.tytul}`, 'pl'));
   const wynik = { zaktualizowano: teraz, zrodla, wydarzenia: unikalne, do_weryfikacji: weryfikacja };
+  // Lokalny przebieg z błędem źródła nie nadpisuje pliku (inaczej na stronie zostaje komunikat o niedziałającym odświeżeniu).
+  // W GitHub Actions plik zapisujemy zawsze (źródło z błędem ma poprzednie dane i ok: false), lokalnie: ZAPISZ_MIMO_BLEDOW=1.
+  if (bledy.length && !process.env.GITHUB_ACTIONS && !process.env.ZAPISZ_MIMO_BLEDOW && !process.env.REPERTUAR_PLIK) {
+    console.error(`Błędy źródeł, więc nie zapisuję ${PLIK}:\n- ${bledy.join('\n- ')}\n(Wymuś zapis: ZAPISZ_MIMO_BLEDOW=1; do prób użyj REPERTUAR_PLIK=…)`);
+    process.exit(1);
+  }
   await mkdir(KATALOG, { recursive: true });
   await writeFile(PLIK, `${JSON.stringify(wynik, null, 2)}\n`);
   console.table(tabela.map((t) => ({ kino: t.kino, 'liczba seansów': t.seansow, 'zastąpione linki': t.zastapione, 'niesprawdzone linki': t.niesprawdzone })));
