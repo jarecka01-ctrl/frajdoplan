@@ -50,7 +50,7 @@ export default function Baner({ wydarzenia }) {
           </p>
           {w.link && <a className="przycisk baner-przycisk" href={w.link} target="_blank" rel="noreferrer">Bilety i szczegóły</a>}
         </div>
-        {w.obrazek && <img className="baner-obrazek" src={w.obrazek} alt="" loading="lazy" />}
+        {w.obrazek && <img className="baner-obrazek" src={w.obrazek} alt="" width="800" height="500" loading="lazy" />}
       </div>
       {lista.length > 1 && (
         <div className="baner-kropki">
