@@ -44,6 +44,8 @@ export default function Katalog({
   // Na stronie kategorii pokazujemy od razu całą listę (bez zawężania do Krakowa), żeby była w HTML.
   const [strefa, setStrefa] = useState(pokazStrefy && !aktywna ? 'Kraków i okolice' : '');
   const rodzajZ = (p) => p[grupuj] || p.podkategoria;
+  // Kafelek = kategoria z adresem (tak samo nazwana jak na jej stronie); rodzaje z jedną kategorią (np. dwa rodzaje boisk) są jednym kafelkiem.
+  const kluczZ = (p) => (dzial && rodzajZ(p) ? kategoriaRodzaju(dzial, rodzajZ(p)).slug : rodzajZ(p));
   const [kategoria, setKategoria] = useState('');
   const [wybrane, setWybrane] = useState([]); // kilka rodzajów naraz; pusto = wszystkie
   const [query, setQuery] = useState('');
@@ -81,13 +83,13 @@ export default function Katalog({
     const licz = {};
     places
       .filter((p) => (!strefa || strefaZ(p) === strefa) && (!kategoria || kategoriaZ(p) === kategoria) && rodzajZ(p))
-      .forEach((p) => { const r = rodzajZ(p); licz[r] = (licz[r] || 0) + 1; });
-    return Object.entries(licz).sort((a, b) => b[1] - a[1]);
+      .forEach((p) => { const k = kluczZ(p); licz[k] = licz[k] || { klucz: k, rodzaj: rodzajZ(p), n: 0 }; licz[k].n += 1; });
+    return Object.values(licz).sort((a, b) => b.n - a.n);
   }, [places, strefa, kategoria]);
 
   // usuń z wyboru rodzaje, których nie ma w nowej strefie lub kategorii
   useEffect(() => {
-    const dostepne = new Set(rodzaje.map(([r]) => r));
+    const dostepne = new Set(rodzaje.map((k) => k.klucz));
     if (wybrane.some((r) => !dostepne.has(r))) setWybrane(wybrane.filter((r) => dostepne.has(r)));
   }, [rodzaje, wybrane]);
 
@@ -109,7 +111,7 @@ export default function Katalog({
     const out = places.filter((p) => {
       if (strefa && strefaZ(p) !== strefa) return false;
       if (kategoria && kategoriaZ(p) !== kategoria) return false;
-      if (wybrane.length && !wybrane.includes(rodzajZ(p))) return false;
+      if (wybrane.length && !wybrane.includes(kluczZ(p))) return false;
       if (q && !`${p.name} ${p.adres || ''} ${p.podkategoria || ''}`.toLowerCase().includes(q)) return false;
       return true;
     });
@@ -171,20 +173,20 @@ export default function Katalog({
             <button className="rodzaj" aria-pressed={wybrane.length === 0} onClick={() => setWybrane([])}>
               <span className="rodzaj-nazwa">{wybrane.length ? `Wyczyść wybór (${wybrane.length})` : 'Wszystkie rodzaje'}</span>
             </button>
-            {rodzaje.map(([r, n]) => {
+            {rodzaje.map(({ klucz, rodzaj: r, n }) => {
               const tresc = (
                 <>
                   <span className="rodzaj-ikona" aria-hidden="true">{IKONY[r] || '📍'}</span>
-                  <span className="rodzaj-nazwa">{SKROTY[r] || r}</span>
+                  <span className="rodzaj-nazwa">{dzial ? kategoriaRodzaju(dzial, r).nazwa : SKROTY[r] || r}</span>
                   <small>{n}</small>
                 </>
               );
               return dzial ? (
-                <a key={r} className="rodzaj" href={kategoriaRodzaju(dzial, r).href} role="button" aria-pressed={wybrane.includes(r)} onClick={(e) => klikKafelka(e, r)}>
+                <a key={klucz} className="rodzaj" href={kategoriaRodzaju(dzial, r).href} role="button" aria-pressed={wybrane.includes(klucz)} onClick={(e) => klikKafelka(e, klucz)}>
                   {tresc}
                 </a>
               ) : (
-                <button key={r} className="rodzaj" aria-pressed={wybrane.includes(r)} onClick={() => przelacz(r)}>
+                <button key={klucz} className="rodzaj" aria-pressed={wybrane.includes(klucz)} onClick={() => przelacz(klucz)}>
                   {tresc}
                 </button>
               );
