@@ -54,14 +54,15 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
             <span className="brand-logo"><img src="/brand/logo-frajdoplan.png" alt="Frajdoplan" width="1254" height="316" /></span>
             <img className="brand-smok" src="/brand/smok.png" alt="" width="626" height="683" />
           </Link>
-          <nav className="menu" aria-label="Główne menu">
-            {MENU.map((m) => (
-              <Link key={m.href} href={m.href} className="menu-link" aria-current={aktywna(m, pathname) ? 'page' : undefined}>
-                {m.label}
-              </Link>
-            ))}
-          </nav>
+          <img className="top-krakow" src="/brand/krakow-baner.png" alt="" width="1406" height="349" />
         </header>
+        <nav className="menu" aria-label="Główne menu">
+          {MENU.map((m) => (
+            <Link key={m.href} href={m.href} className="menu-link" aria-current={aktywna(m, pathname) ? 'page' : undefined}>
+              {m.label}
+            </Link>
+          ))}
+        </nav>
         {missingConfig && <div className="notice">Brak zmiennej <code>SHEET_CSV_URL</code>. Ustaw ją w Vercel (Settings → Environment Variables).</div>}
         {fetchError && <div className="notice">Nie udało się pobrać danych z arkusza. Sprawdź, czy link CSV nadal działa.</div>}
         {children}

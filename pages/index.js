@@ -30,11 +30,8 @@ export default function Home({ places, wydarzenia = [], kina = null, muzyka = []
     <Uklad seo={seo} missingConfig={missingConfig} fetchError={fetchError}>
       <Baner wydarzenia={wydarzenia} />
       <section className="hero hero-glowna">
-        <div className="hero-tekst">
-          <h1>{zakreslDzis(seo.h1)}</h1>
-          <p className="lead">{seo.wstep}</p>
-        </div>
-        <img className="hero-baner" src="/brand/krakow-baner.png" alt="" width="1406" height="349" />
+        <h1>{zakreslDzis(seo.h1)}</h1>
+        <p className="lead">{seo.wstep}</p>
       </section>
       <Wydarzenia wydarzenia={wydarzenia} places={places} />
       <BliskoIKina places={places} wydarzenia={wydarzenia} kina={kina} muzyka={muzyka} />
