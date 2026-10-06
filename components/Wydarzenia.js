@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { adresKarty } from '../lib/miejsca';
 
 /*
   Wydarzenia z zakładki „Wydarzenia" w Arkuszu Google.
@@ -70,11 +71,11 @@ function Karta({ w, duza }) {
   );
 }
 
-// Tytuł wydarzenia jako link: do biletów (link_biletow), a gdy go brak — do karty miejsca na stronie głównej
+// Tytuł wydarzenia jako link: do biletów (link_biletow), a gdy go brak — do karty miejsca (/miejsce/…)
 // (powiazane_miejsce_id); gdy i tego brak, zwykły tekst.
 function Tytul({ w, miejsca }) {
   if (w.link) return <a className="slajd-nazwa" href={w.link} target="_blank" rel="noreferrer" title={w.nazwa}>{w.nazwa}</a>;
-  if (w.miejsceId && miejsca.has(w.miejsceId)) return <a className="slajd-nazwa" href={`/#miejsce-${w.miejsceId}`} title={w.nazwa}>{w.nazwa}</a>;
+  if (w.miejsceId && miejsca.has(w.miejsceId)) return <a className="slajd-nazwa" href={miejsca.get(w.miejsceId)} title={w.nazwa}>{w.nazwa}</a>;
   return <span className="slajd-nazwa" title={w.nazwa}>{w.nazwa}</span>;
 }
 
@@ -130,7 +131,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
   useEffect(() => setTeraz(dzisWarszawa()), []);
 
   if (!teraz) return <section className="wydarzenia wydarzenia-ladowanie" aria-hidden="true" />;
-  const miejsca = new Set(places.map((p) => p.id)); // karty miejsc, do których można linkować na stronie głównej
+  const miejsca = new Map(places.map((p) => [p.id, adresKarty(p)])); // karty miejsc, do których można linkować na stronie głównej
 
   const jutro = plusDni(teraz, 1);
   // najbliższa sobota po dzisiejszym dniu (w piątek to jutro; w weekend — kolejny tydzień)

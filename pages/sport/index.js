@@ -9,7 +9,7 @@ export async function getStaticProps() {
     sekcja: 'treningi',
     adres: '/sport',
     teksty: {
-      tytul: 'Sport dla dzieci w Krakowie: treningi i zajęcia sportowe | Frajdoplan',
+      tytul: 'Sport dla dzieci w Krakowie: treningi i zajęcia | Frajdoplan',
       opis: 'Pływanie, taniec, sztuki walki, piłka nożna, tenis, gimnastyka, jazda konna i inne treningi dla dzieci w Krakowie.',
       h1: 'Sport dla dzieci',
       wstep: 'Pływanie, taniec, sztuki walki, piłka nożna, tenis i inne sporty. Wybierz jedną lub kilka dyscyplin.',

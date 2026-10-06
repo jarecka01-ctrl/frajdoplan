@@ -19,8 +19,9 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
     <>
       <Head>
         <title>{seo.tytul}</title>
-        {/* Wersja testowa: nie indeksuj. Usuń tę linię po podpięciu domeny frajdoplan.pl. */}
-        <meta name="robots" content="noindex, nofollow" />
+        {/* Indeksowanie tylko na produkcji (seo.noindex z lib/seo.js); host sprawdza middleware.js. */}
+        {seo.noindex && <meta name="robots" content="noindex, nofollow" />}
+        {seo.weryfikacjaGoogle && <meta name="google-site-verification" content={seo.weryfikacjaGoogle} />}
         <meta name="description" content={seo.opis} />
         <link rel="canonical" href={seo.canonical} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -68,7 +69,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {children}
         <footer className="stopka">
           <p>Frajdoplan, Kraków. Dane o miejscach pochodzą z publicznych źródeł, m.in. Map Google.</p>
-          <img className="stopka-smok" src="/brand/smok.png" alt="" width="626" height="683" />
+          <img className="stopka-smok" src="/brand/smok.png" alt="" width="626" height="683" loading="lazy" />
         </footer>
       </div>
     </>

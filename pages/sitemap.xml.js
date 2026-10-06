@@ -1,26 +1,26 @@
 import { SITE_URL } from '../lib/seo';
-import { DZIALY } from '../lib/kategorie';
-import { sciezkiKategorii } from '../lib/dane';
+import { adresyDoMapy, dzisWarszawa } from '../lib/dane';
+import repertuar from '../data/repertuar.json';
 
-// Mapa strony (/sitemap.xml): strony główne działów, listy /koncerty i /spektakle oraz kategorie z danych.
+// Mapa strony (/sitemap.xml): strona główna, huby, listy /koncerty i /spektakle, kategorie z co najmniej 3 miejscami
+// i karty miejsc, które mogą się indeksować (bez stron z noindex). Odpowiedź trzymana w CDN godzinę (jak ISR, revalidate 3600).
 const STALE = ['/', '/atrakcje', '/sport', '/zajecia', '/polkolonie', '/koncerty', '/spektakle'];
-const NAGLOWEK_DZIALU = { atrakcje: 'kategoria', sport: 'dyscyplina', zajecia: 'kategoria' };
 
-const xml = (adresy) => `<?xml version="1.0" encoding="UTF-8"?>
+const xml = (wpisy) => `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${adresy.map((a) => `  <url><loc>${SITE_URL}${a === '/' ? '/' : a}</loc></url>`).join('\n')}
+${wpisy.map(([a, data]) => `  <url><loc>${SITE_URL}${a}</loc><lastmod>${data}</lastmod></url>`).join('\n')}
 </urlset>
 `;
 
 export async function getServerSideProps({ res }) {
-  const adresy = [...STALE];
-  for (const dzial of Object.keys(DZIALY)) {
-    const { paths } = await sciezkiKategorii(dzial, NAGLOWEK_DZIALU[dzial]);
-    paths.forEach((p) => adresy.push(`${DZIALY[dzial].hub}/${p.params[NAGLOWEK_DZIALU[dzial]]}`));
-  }
+  const dzis = dzisWarszawa();
+  const { kategorie, miejsca } = await adresyDoMapy();
+  const dataRepertuaru = String(repertuar.zaktualizowano || '').slice(0, 10) || dzis;
+  // lastmod: listy wydarzeń = ostatnia aktualizacja repertuaru, reszta = dzień odświeżenia danych z arkusza
+  const wpisy = [...new Set([...STALE, ...kategorie, ...miejsca])].map((a) => [a, a === '/koncerty' || a === '/spektakle' ? dataRepertuaru : dzis]);
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
   res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-  res.write(xml([...new Set(adresy)]));
+  res.write(xml(wpisy));
   res.end();
   return { props: {} };
 }
