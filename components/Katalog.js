@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { adresKarty } from '../lib/miejsca';
 import { IKONY, SKROTY } from '../lib/ikony';
 import { DZIALY, kategoriaRodzaju, odmianaMiejsc } from '../lib/kategorie';
 
@@ -10,6 +12,9 @@ const Mapa = dynamic(() => import('./Mapa'), {
 });
 
 const NA_STRONE = 24;
+// Dane z serwera pomijają najczęstsze wartości (lib/miejsca.js: doListy).
+const strefaZ = (p) => p.strefa ?? 'Kraków i okolice';
+const kategoriaZ = (p) => p.kategoria ?? 'Pod dachem';
 
 // Odległość w km między dwoma punktami (wzór haversine).
 function km(a, b) {
@@ -75,7 +80,7 @@ export default function Katalog({
   const rodzaje = useMemo(() => {
     const licz = {};
     places
-      .filter((p) => (!strefa || p.strefa === strefa) && (!kategoria || p.kategoria === kategoria) && rodzajZ(p))
+      .filter((p) => (!strefa || strefaZ(p) === strefa) && (!kategoria || kategoriaZ(p) === kategoria) && rodzajZ(p))
       .forEach((p) => { const r = rodzajZ(p); licz[r] = (licz[r] || 0) + 1; });
     return Object.entries(licz).sort((a, b) => b[1] - a[1]);
   }, [places, strefa, kategoria]);
@@ -102,10 +107,10 @@ export default function Katalog({
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const out = places.filter((p) => {
-      if (strefa && p.strefa !== strefa) return false;
-      if (kategoria && p.kategoria !== kategoria) return false;
+      if (strefa && strefaZ(p) !== strefa) return false;
+      if (kategoria && kategoriaZ(p) !== kategoria) return false;
       if (wybrane.length && !wybrane.includes(rodzajZ(p))) return false;
-      if (q && !`${p.name} ${p.adres} ${p.podkategoria}`.toLowerCase().includes(q)) return false;
+      if (q && !`${p.name} ${p.adres || ''} ${p.podkategoria || ''}`.toLowerCase().includes(q)) return false;
       return true;
     });
     if (odleglosci) out.sort((a, b) => odleglosci[a.id] - odleglosci[b.id]);
@@ -226,8 +231,8 @@ export default function Katalog({
                   </span>
                   {p.urodziny && <span className="znaczek">urodziny</span>}
                 </div>
-                <h3 className="nazwa">{p.name}</h3>
-                <p className="adres">{[p.adres, p.gmina !== 'Kraków' || !p.adres ? p.gmina : null].filter(Boolean).join(', ')}</p>
+                <h3 className="nazwa"><Link href={adresKarty(p)}>{p.name}</Link></h3>
+                <p className="adres">{[p.adres, (p.gmina || 'Kraków') !== 'Kraków' || !p.adres ? (p.gmina || 'Kraków') : null].filter(Boolean).join(', ')}</p>
                 <div className="dol">
                   {p.rating != null && (
                     <span className="ocena" title={`${p.reviews ?? 0} opinii w Google`}>
@@ -236,7 +241,7 @@ export default function Katalog({
                   )}
                   {pokazDachPole && <span className="info">{pole ? 'na polu' : 'pod dachem'}</span>}
                   {odleglosci && odleglosci[p.id] !== Infinity && <span className="info">{ladnieKm(odleglosci[p.id])} od ciebie</span>}
-                  {p.strefa === 'Pod Krakowem' && p.km != null && <span className="info">{Math.round(p.km)} km od Krakowa</span>}
+                  {strefaZ(p) === 'Pod Krakowem' && p.km != null && <span className="info">{Math.round(p.km)} km od Krakowa</span>}
                   {p.website && <a className="link" href={p.website} target="_blank" rel="noreferrer">Strona miejsca</a>}
                 </div>
               </li>
