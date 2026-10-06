@@ -18,8 +18,6 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; color: var(--tusz);
   background-color: var(--papier);
-  background-image: radial-gradient(rgba(32, 36, 43, .10) 1.1px, transparent 1.3px);
-  background-size: 22px 22px;
   font: 400 16px/1.55 var(--font-body);
 }
 button, input, select { font: inherit; color: inherit; }
@@ -29,7 +27,7 @@ button, input, select { font: inherit; color: inherit; }
 .wrap { max-width: 1060px; margin: 0 auto; padding: 18px 20px 0; position: relative; }
 
 /* nagłówek: logo + smok na końcu nazwy, wychylony z przerywanej linii */
-.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px; border-bottom: 2px dashed #d6cdb8; }
+.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
 .brand { display: flex; align-items: flex-end; text-decoration: none; }
 .brand-logo { display: block; margin-bottom: 9px; }
 .brand-logo img { display: block; height: 66px; width: auto; }
