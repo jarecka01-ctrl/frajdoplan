@@ -37,6 +37,7 @@ import kfk from './zrodla/kfk.mjs';
 import { naprawLinki } from './linki.mjs';
 import { dopracujKategorie } from './kategorie.mjs';
 import { idKin, idKinZCsv, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
+import { wyjatkiZCsv, wyjatkiZArkusza, polaczWyjatki } from './wyjatki.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 // Źródła wydarzeń (nie kina). Moduł z `wlaczone: false` jest gotowy, ale pomijany.
@@ -132,7 +133,22 @@ async function main() {
   const dzis = dzisWarszawa();
   const teraz = terazWarszawa();
   const poprzedni = await czytajJson(PLIK, { zrodla: {}, wydarzenia: [] });
-  const wyjatki = await czytajJson(WYJATKI, { wymus: [], ukryj: [] });
+  let wyjatki = await czytajJson(WYJATKI, { wymus: [], ukryj: [] });
+
+  // Wyjątki z zakładki „Wyjątki" (SHEET_WYJATKI_CSV_URL) dochodzą do tych z pliku data/wyjatki.json. Błąd arkusza to tylko ostrzeżenie.
+  try {
+    let zArkusza = null;
+    if (process.env.WYJATKI_PLIK) zArkusza = wyjatkiZCsv(await readFile(process.env.WYJATKI_PLIK, 'utf8')); // do prób: lokalny plik CSV zamiast arkusza
+    else if (process.env.SHEET_WYJATKI_CSV_URL) zArkusza = await wyjatkiZArkusza(process.env.SHEET_WYJATKI_CSV_URL);
+    if (zArkusza) {
+      wyjatki = polaczWyjatki(wyjatki, zArkusza);
+      const ile = zArkusza.wymus.length + zArkusza.ukryj.length + Object.values(zArkusza.zrodla).reduce((n, z) => n + z.wymus.length + z.ukryj.length, 0);
+      console.log(`Wyjątki z arkusza: ${ile} wpisów.`);
+      zArkusza.pominiete.forEach((o) => console.warn(`Uwaga: pominięto wyjątek z arkusza, ${o}.`));
+    }
+  } catch (e) {
+    console.warn(`Uwaga: nie pobrano wyjątków z arkusza (${e.message}); działają tylko te z pliku data/wyjatki.json.`);
+  }
 
   // place_id kin z arkusza „Miejsca" (SHEET_CSV_URL). Bez arkusza zostają wartości z poprzedniego pliku.
   const idMiejsc = {};
