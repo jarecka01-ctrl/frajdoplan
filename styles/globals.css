@@ -117,8 +117,8 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .tk::after { bottom: -11px; clip-path: inset(0 0 50% 0); }
 .tk .tt { align-self: stretch; border-right: 2px dashed #cfc4a8; padding-right: 8px; display: flex; flex-direction: column; justify-content: center; min-height: 36px; min-width: 0; }
 .tk .td { font: 600 11.5px/1.1 var(--font-body); color: var(--tusz-2); margin-bottom: 1px; white-space: nowrap; }
-.tk .tt b { font: 700 17px/1.1 var(--font-display); white-space: nowrap; }
-.tk .tt b.dl { font-size: 13px; line-height: 1.05; white-space: normal; }
+.tk .tt b { display: block; font: 700 17px/1.1 var(--font-display); }
+.tk .tt b.dl { font-size: 13px; line-height: 1.05; }
 .tk .tn { padding-left: 12px; min-width: 0; }
 .tk-nazwa { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font: 700 14.5px/1.2 var(--font-display); color: var(--tusz); }
 .tk .tn small { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font-size: 12px; line-height: 1.3; color: var(--tusz-2); margin-top: 1px; }
@@ -139,9 +139,9 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .k-koncerty .tk { --nb: #2F5D3A; --tw: 70px; --fk: var(--slonce); }
 @media (max-width: 480px) { .wyd-glowna .tk { --tw: 70px; --pl: 10px; } }
 /* małe kafelki Jutro i Weekend: stała wysokość, 3 wydarzenia na slajd, strzałki ‹ › */
-.slajdy-okno { height: 236px; overflow: hidden; touch-action: pan-y; }
+.slajdy-okno { min-height: 236px; overflow: hidden; touch-action: pan-y; }
 .slajdy-lista { gap: 10px; }
-.tk-s { height: 72px; box-sizing: border-box; }
+.tk-s { min-height: 72px; box-sizing: border-box; }
 .slajdy-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
 .slajdy-strzalka { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); font-size: 20px; line-height: 1; cursor: pointer; }
 .slajdy-strzalka:disabled { opacity: .3; cursor: default; }
