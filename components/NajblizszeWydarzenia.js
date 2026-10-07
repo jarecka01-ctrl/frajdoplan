@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { dzisWarszawa, trwaW, plusDni } from './Wydarzenia';
-import { grupujTerminy, krotkaData } from '../lib/grupowanie';
+import { grupujTerminy, krotkaDataBilet } from '../lib/grupowanie';
+import Bilet, { Nazwa, Szczegoly } from './Bilet';
 
 /*
   Kafelek „Najbliższe …" (spektakle, koncerty): cztery najbliższe wiersze (każde wydarzenie raz, z najbliższym
@@ -56,11 +57,13 @@ export default function NajblizszeWydarzenia({
       {wiersze.length ? (
         <ul className="k-lista">
           {wiersze.map((w) => (
-            <li key={`${w.id}-${w.dzien}`} className="k-wiersz">
-              <span className="k-data">{krotkaData(w.dzien)}{w.godziny.length ? ` · ${w.godziny.map((g) => g.godzina).join(', ')}` : ''}</span>
-              {w.link ? <a href={w.link} target="_blank" rel="noreferrer" className="k-nazwa">{w.nazwa}</a> : <strong className="k-nazwa">{w.nazwa}</strong>}
-              {w.miejsce && <span className="k-miejsce">{w.miejsce}{w.wiek ? `, ${w.wiek}` : ''}</span>}
-            </li>
+            <Bilet key={`${w.id}-${w.dzien}`} nad={krotkaDataBilet(w.dzien)} godzina={w.godziny[0] && w.godziny[0].godzina}>
+              <Nazwa nazwa={w.nazwa} href={w.link} />
+              <Szczegoly czesci={[
+                w.godziny.length > 1 && w.godziny.map((g) => g.godzina).join(', '),
+                w.miejsce && `${w.miejsce}${w.wiek ? `, ${w.wiek}` : ''}`,
+              ]} />
+            </Bilet>
           ))}
         </ul>
       ) : (

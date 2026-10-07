@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { dzisWarszawa, godzinaWarszawa, plusDni, trwaW, poGodzinie, ladnaData, dzienTygodnia, NAZWY_DNI } from './Wydarzenia';
 import NajblizszeWydarzenia from './NajblizszeWydarzenia';
+import Bilet, { Nazwa, Szczegoly } from './Bilet';
 import u from '../styles/Sekcja.module.css';
 
 // Seanse jednego kina (już posortowane po godzinie) → filmy z godzinami obok siebie.
@@ -48,22 +49,23 @@ function DzisWKinach({ places, wydarzenia, dzis, godz, info }) {
         <ul className="k-lista">
           {Object.entries(kina).slice(0, 4).flatMap(([kino, lista]) => {
             const z = zrodloSeansu(lista);
-            return filmy(lista).slice(0, 4).map((f) => (
-              <li key={`${kino}-${f.nazwa}`} className="k-wiersz">
-                <span className="k-nazwa">{f.nazwa}</span>
-                <span className="k-miejsce">
-                  {z && z.url ? <a href={z.url} target="_blank" rel="noreferrer">{kino}</a> : kino}
-                  {' · '}
-                  {f.seanse.map((s, i) => (
-                    <span key={s.id}>
-                      {i > 0 && ', '}
-                      {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.godzina}</a> : s.godzina}
-                    </span>
-                  ))}
-                  {f.wiek && <small> {f.wiek}</small>}
+            return filmy(lista).slice(0, 4).map((f) => {
+              const jeden = f.seanse.length === 1;
+              const kinoLink = z && z.url ? <a href={z.url} target="_blank" rel="noreferrer">{kino}</a> : kino;
+              const godziny = jeden ? null : f.seanse.map((s, i) => (
+                <span key={s.id}>
+                  {i > 0 && ', '}
+                  {s.link ? <a href={s.link} target="_blank" rel="noreferrer">{s.godzina}</a> : s.godzina}
                 </span>
-              </li>
-            ));
+              ));
+              // jeden seans: godzina jest na odcinku, a jego link obejmuje cały bilet (przez tytuł); kilka seansów: „od" i linki przy godzinach
+              return (
+                <Bilet key={`${kino}-${f.nazwa}`} nad={jeden ? undefined : 'od'} godzina={f.seanse[0].godzina}>
+                  <Nazwa nazwa={f.nazwa} href={jeden ? f.seanse[0].link : undefined} />
+                  <Szczegoly czesci={[kinoLink, godziny, f.wiek]} />
+                </Bilet>
+              );
+            });
           })}
         </ul>
       ) : info && zrodla.length ? (

@@ -31,22 +31,24 @@ button, input, select { font: inherit; color: inherit; }
 .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; background: #F3ECDA; border-radius: 0 0 28px 28px; padding: 16px 24px 0; margin: 0 -24px; }
 .brand { display: flex; align-items: flex-end; text-decoration: none; }
 .brand-logo { display: block; margin-bottom: 9px; }
-.brand-logo img { display: block; height: 66px; width: auto; }
-.brand-smok { height: 96px; width: auto; margin-left: 6px; display: block; }
+.brand-logo img { display: block; height: 100px; width: auto; }
+.brand-smok { height: 96px; width: auto; margin-left: 16px; display: block; }
 .top-krakow { height: 104px; width: auto; display: block; }
 .menu { display: flex; justify-content: flex-end; gap: 6px; margin: 16px 0 4px; }
 .menu-link { padding: 8px 15px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; flex: 0 0 auto; }
 .menu-link:hover { border-color: var(--kreda); }
 .menu-link[aria-current="page"] { border-color: var(--tusz); background: var(--slonce); }
 @media (max-width: 1107px) { .top { margin: 0 -20px; padding: 16px 20px 0; } }
+@media (max-width: 1000px) { .brand-logo img { height: 84px; } }
 @media (max-width: 860px) { .top-krakow { height: 76px; } }
+@media (max-width: 760px) { .top-krakow { display: none; } }
 @media (max-width: 640px) {
   .top { margin: 0 -20px; padding: 12px 20px 0; }
   .top-krakow { display: none; }
-  /* na telefonie bez hasła pod nazwą: obcinamy dolną część obrazka logo */
-  .brand-logo { height: 36px; overflow: hidden; margin-bottom: 6px; }
-  .brand-logo img { height: 45px; }
-  .brand-smok { height: 52px; margin-left: 4px; }
+  /* nowy napis nie ma hasła pod spodem, więc nic nie trzeba obcinać */
+  .brand-logo { margin-bottom: 6px; }
+  .brand-logo img { height: 56px; }
+  .brand-smok { height: 52px; margin-left: 8px; }
   /* menu: przewijany rząd pastylek na całą szerokość */
   .menu { justify-content: flex-start; gap: 2px; margin: 10px -20px 0; padding: 0 20px 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .menu::-webkit-scrollbar { display: none; }
@@ -104,37 +106,42 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .wyd-tytul-maly { font: 700 22px/1.1 var(--font-display); margin: 0; }
 .wyd-data { margin: 4px 0 14px; font-size: 14px; color: var(--tusz-2); }
 .wyd-glowna .wyd-data { color: var(--tusz); opacity: .75; }
-.wyd-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.wyd { display: grid; grid-template-columns: 96px 1fr; gap: 10px; align-items: baseline; }
-.wyd-godz { font: 700 16px/1.2 var(--font-display); }
-.wyd-duza { position: relative; background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px; padding: 10px 14px; grid-template-columns: 78px 1fr; align-items: center; }
-.wyd-duza .wyd-godz { font-size: 22px; align-self: stretch; display: flex; align-items: center; border-right: 2px dashed #d6cdb8; }
-/* wcięcia jak w bilecie, na linii oddzielającej godzinę */
-.wyd-duza::before, .wyd-duza::after { content: ""; position: absolute; left: 84px; width: 14px; height: 14px; background: var(--slonce); border: 2px solid var(--tusz); border-radius: 50%; }
-.wyd-duza::before { top: -9px; clip-path: inset(50% 0 0 0); }
-.wyd-duza::after { bottom: -9px; clip-path: inset(0 0 50% 0); }
-.wyd-nazwa { margin: 0; font-weight: 600; font-size: 15px; line-height: 1.3; }
-.wyd-duza .wyd-nazwa { font: 700 18px/1.2 var(--font-display); }
-.wyd-miejsce { margin: 2px 0 0; font-size: 13px; color: var(--tusz-2); }
-.wyd-info { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
-.wyd-info a { font-weight: 600; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.wyd-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 /* strony /koncerty i /spektakle */
 .wyd-miesiac { margin: 0 0 34px; }
-.wyd-lista-strona .wyd-duza { grid-template-columns: 132px 1fr; }
-.wyd-lista-strona .wyd-duza::before, .wyd-lista-strona .wyd-duza::after { display: none; }
-.wyd-lista-strona .wyd-godz { font-size: 18px; }
-.wyd-lista-strona .wyd-nazwa a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 3px; text-underline-offset: 3px; }
-.wyd-lista-strona .wyd-miejsce a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 2px; }
-@media (max-width: 480px) { .wyd-lista-strona .wyd-duza { grid-template-columns: 1fr; gap: 4px; } }
+/* bilet wydarzenia (components/Bilet.js): po lewej odcinek z godziną i datą, po prawej tytuł i szczegóły.
+   --nb = kolor tła sekcji (kolor wcięć przy perforacji), --tw = szerokość odcinka, --fk = kolor obrysu fokusa na ciemnym tle */
+.tk { --pl: 12px; --tw: 84px; position: relative; display: grid; grid-template-columns: var(--tw) minmax(0, 1fr); align-items: center; background: var(--papier); color: var(--tusz); border: 2px solid var(--tusz); border-radius: 14px; padding: 8px var(--pl); margin: 0; text-transform: none; }
+.tk::before, .tk::after { content: ""; position: absolute; left: calc(var(--pl) + var(--tw) - 10px); width: 14px; height: 14px; background: var(--nb, var(--papier)); border: 2px solid var(--tusz); border-radius: 50%; }
+.tk::before { top: -11px; clip-path: inset(50% 0 0 0); }
+.tk::after { bottom: -11px; clip-path: inset(0 0 50% 0); }
+.tk .tt { align-self: stretch; border-right: 2px dashed #cfc4a8; padding-right: 8px; display: flex; flex-direction: column; justify-content: center; min-height: 36px; min-width: 0; }
+.tk .td { font: 600 11.5px/1.1 var(--font-body); color: var(--tusz-2); margin-bottom: 1px; white-space: nowrap; }
+.tk .tt b { font: 700 17px/1.1 var(--font-display); white-space: nowrap; }
+.tk .tt b.dl { font-size: 13px; line-height: 1.05; white-space: normal; }
+.tk .tn { padding-left: 12px; min-width: 0; }
+.tk-nazwa { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font: 700 14.5px/1.2 var(--font-display); color: var(--tusz); }
+.tk .tn small { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font-size: 12px; line-height: 1.3; color: var(--tusz-2); margin-top: 1px; }
+.tk a { position: relative; z-index: 1; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 2px; }
+.tk small a { font-weight: 600; }
+/* link tytułu (albo „Szczegóły") obejmuje cały bilet: nie jest pozycjonowany, więc jego ::after rozciąga się na .tk */
+.tk a.tk-link { position: static; z-index: auto; }
+.tk-link::after { content: ""; position: absolute; inset: 0; border-radius: 14px; }
+.tk:has(.tk-link):hover { background: #FFF6DC; }
+.tk-link:focus-visible { outline: none; }
+.tk-link:focus-visible::after { outline: 3px solid var(--fk, var(--tusz)); outline-offset: 2px; }
+.tk-lista { gap: 12px; }
+/* kolor wcięć = tło sekcji; w ciasnych sekcjach odcinek jest węższy */
+.wyd-glowna .tk { --nb: var(--slonce); }
+.wyd-mala .tk { --nb: var(--biel); --tw: 70px; }
+.k-kino .tk { --nb: var(--tusz); --tw: 66px; --fk: var(--slonce); }
+.k-spektakle .tk { --nb: #B03A2E; --tw: 70px; --fk: var(--slonce); }
+.k-koncerty .tk { --nb: #2F5D3A; --tw: 70px; --fk: var(--slonce); }
+@media (max-width: 480px) { .wyd-glowna .tk { --tw: 70px; --pl: 10px; } }
 /* małe kafelki Jutro i Weekend: stała wysokość, 3 wydarzenia na slajd, strzałki ‹ › */
-.slajdy-okno { height: 184px; overflow: hidden; touch-action: pan-y; }
-.slajdy-lista { gap: 8px; }
-.slajd { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 8px; align-items: start; height: 56px; overflow: hidden; }
-.slajd-godz { font: 700 14px/1.3 var(--font-display); }
-.slajd-tresc { display: flex; flex-direction: column; min-width: 0; }
-.slajd-nazwa { font-weight: 600; font-size: 15px; line-height: 1.25; color: var(--tusz); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow-wrap: anywhere; }
-a.slajd-nazwa { text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.slajd-miejsce { font-size: 12px; color: var(--tusz-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slajdy-okno { height: 236px; overflow: hidden; touch-action: pan-y; }
+.slajdy-lista { gap: 10px; }
+.tk-s { height: 72px; box-sizing: border-box; }
 .slajdy-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
 .slajdy-strzalka { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); font-size: 20px; line-height: 1; cursor: pointer; }
 .slajdy-strzalka:disabled { opacity: .3; cursor: default; }
@@ -149,14 +156,7 @@ a.slajd-nazwa { text-decoration: underline; text-decoration-color: var(--mak); t
 .k-tytul { font: 700 21px/1.1 var(--font-display); margin: 0 0 3px; letter-spacing: -0.01em; }
 .k-pod { font-size: 12.5px; margin: 0 0 12px; opacity: .8; }
 .k-lista, .k-linki { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-/* wiersze: jasne karty z ciemnym tekstem (kolor ustawiony jawnie, nie dziedziczony z kafelka) */
-.k-wiersz { display: flex; flex-direction: column; background: #FFFDF7; color: #20242B; border-radius: 12px; padding: 8px 11px; min-width: 0; }
-.k-data { display: block; font: 700 12.5px/1.3 var(--font-display); color: #20242B; text-transform: none; }
-.k-nazwa { display: block; font: 600 14px/1.3 var(--font-body); color: #20242B; overflow-wrap: anywhere; text-transform: none; }
-a.k-nazwa { text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.k-miejsce { display: block; font-size: 12px; line-height: 1.4; color: #20242B; text-transform: none; }
-.k-miejsce a { color: #20242B; font-weight: 600; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 2px; }
-.k-miejsce small { font-size: 12px; }
+.k-lista { gap: 12px; }
 .k-pusto { margin: 0 0 12px; font-size: 14px; }
 .k-linki li { font-size: 15px; font-weight: 600; }
 .k-wiecej { margin: auto 0 0; padding-top: 12px; font-size: 13px; font-weight: 600; }
@@ -260,10 +260,6 @@ a.k-nazwa { text-decoration: underline; text-decoration-color: var(--mak); text-
 .kal-dzien-grupa { margin: 0 0 16px; }
 .kal-dzien-naglowek { margin: 0 0 8px; font: 700 15px/1.2 var(--font-display); color: var(--tusz-2); }
 .kal-wiersze { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.kal-wiersz { background: var(--biel); border: 2px solid var(--tusz); border-radius: 14px; padding: 9px 13px; min-width: 0; }
-.kal-wiersz .wyd-nazwa { font: 700 16px/1.25 var(--font-display); }
-.kal-wiersz .wyd-nazwa a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.kal-wiersz .wyd-miejsce a { color: var(--tusz); font-weight: 600; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 2px; }
 
 /* przełącznik dróg rowerowych na mapie */
 .mapa-rowery { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 14px; font-weight: 600; cursor: pointer; }
@@ -376,10 +372,6 @@ a.k-nazwa { text-decoration: underline; text-decoration-color: var(--mak); text-
 
 @media (max-width: 480px) {
   .wyd-glowna { padding: 18px 14px 14px; }
-  .wyd-duza { grid-template-columns: 58px 1fr; padding: 10px 12px; }
-  .wyd-duza::before, .wyd-duza::after { left: 62px; }
-  .wyd-duza .wyd-godz { font-size: 18px; }
-  .wyd { grid-template-columns: 84px 1fr; }
   .selecty { grid-template-columns: 1fr; }
   .strefy { flex-wrap: nowrap; overflow-x: auto; margin-right: -20px; padding-right: 20px; scrollbar-width: none; }
   .strefy::-webkit-scrollbar { display: none; }
