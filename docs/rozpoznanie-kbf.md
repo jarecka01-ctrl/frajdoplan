@@ -29,3 +29,21 @@ Sprawdzono 7 października 2026. Zapytania szły po kolei, nie częściej niż r
 - **Puste wyniki:** lista „Dla dzieci" bywa pusta („Brak aktywnych wydarzeń"). To nie jest błąd (`moznaPusto: true`). Brak i tabeli, i komunikatu o braku wydarzeń uznajemy za zmianę układu strony i zgłaszamy błąd.
 - **Błąd źródła:** poprzednie dane zostają (`ok: false`), a workflow kończy się „failed" (zasada dla całego skryptu).
 
+## Test z serwerów GitHuba (workflow_dispatch, 7 października 2026)
+
+Uruchomienie ręczne na gałęzi `zrodlo-kbf` ([przebieg #8](https://github.com/jarecka01-ctrl/frajdoplan/actions/runs/37592700115)), zakończone sukcesem, bez żadnego błędu źródeł. `robots.txt`, lista i obie strony wydarzeń odpowiedziały z serwerów GitHuba, czyli **bez blokady** (w przeciwieństwie do opera.krakow.pl, która daje HTTP 403). Moduł zostaje włączony. Gdyby serwer zaczął odpowiadać 403 lub podobnie, wystarczy `wlaczone: false` w `kbf.mjs`; zabezpieczeń nie obchodzimy. Krok „Zapisz zmiany" na gałęzi innej niż `main` jest pomijany, więc próba nie zmieniła `data/repertuar.json`.
+
+## Wynik: liczba wydarzeń dla dzieci na 180 dni
+
+| Źródło | Wydarzeń na stronie | Dla dzieci (po filtrze) | Dla grup (ukryte) | Do weryfikacji | Zastąpione linki |
+|---|---|---|---|---|---|
+| KBF Bilety | 2 terminy (1 wydarzenie: „SP4Kids: Uszy Duszy", Teatr KTO, 8.11.2026, 13:00 i 16:00, od 3 lat, 40/60 zł) | **2** | 0 | 0 | 0 |
+
+- To niewiele: filtr „Dla dzieci" ma w tej chwili tylko jedno wydarzenie z dwoma godzinami (festiwal Sacrum Profanum). Lista bywa pusta; ma się zapełniać przy większych festiwalach i sezonowych wydarzeniach. Moduł nie wymaga żadnej zmiany, gdy pojawi się więcej pozycji.
+- **Miejsca bez `place_id`:** Teatr KTO. W arkuszu „Miejsca" z repozytorium (`data/miejsca-poprawione.csv`) jest, ale arkusz używany przez workflow go nie ma (log: „Miejsca bez place_id w arkuszu: …, KBF Bilety, …"). Po dodaniu miejsca do arkusza `uzupelnij-miejsca.mjs` uzupełni pole.
+- **Deduplikacja:** w tym przebiegu nic nie dublowało się z innymi źródłami. Klucz (tytuł, dzień, miejsce) działa tak samo jak dla pozostałych źródeł, a nazwy miejsc KBF są sprowadzone do tych samych nazw co w modułach Filharmonii, Groteski, TAURON Areny, ICE itd.
+- **Do weryfikacji:** brak. Do tej listy trafiłyby wydarzenia z wiekiem powyżej 12 lat (decyduje właścicielka przez `wymus` / `ukryj`).
+
+## Do decyzji właścicielki
+1. Dodać **Teatr KTO** (Jana Zamoyskiego 50) do arkusza „Miejsca", żeby wydarzenia miały powiązane miejsce.
+2. Rozważyć kontakt z KBF (poczta@kbf.krakow.pl) w sprawie zgody na pobieranie listy. Regulaminy tego nie zakazują, ale też nie zezwalają wprost; kontakt (adres w nagłówku User-Agent) pozwoli KBF zareagować, gdyby się sprzeciwił.
