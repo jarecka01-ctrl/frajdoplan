@@ -44,6 +44,8 @@ jobs:
           CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL || secrets.CONTACT_EMAIL }}
           # adres CSV zakładki „Miejsca" (ten sam co w Vercel) — z niego bierzemy place_id kin, teatrów, domów kultury itd.; bez niego pole zostaje puste
           SHEET_CSV_URL: ${{ vars.SHEET_CSV_URL || secrets.SHEET_CSV_URL }}
+          # adres CSV zakładki „Wyjątki" (opcjonalny): tytuły, które zawsze pokazujemy albo ukrywamy; bez niego działa sam data/wyjatki.json
+          SHEET_WYJATKI_CSV_URL: ${{ vars.SHEET_WYJATKI_CSV_URL || secrets.SHEET_WYJATKI_CSV_URL }}
         run: |
           set +e
           node scripts/repertuar/uruchom.mjs
