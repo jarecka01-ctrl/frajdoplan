@@ -52,7 +52,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
       <div className="wrap">
         <header className="top">
           <Link href="/" className="brand" aria-label="Frajdoplan: co robić z dzieckiem w Krakowie, strona główna">
-            <span className="brand-logo"><img src="/brand/logo-frajdoplan.png" alt="Frajdoplan" width="1254" height="316" /></span>
+            <span className="brand-logo"><img src="/brand/nowe/slowo-nowe.png" alt="Frajdoplan" width="1325" height="361" /></span>
             <img className="brand-smok" src="/brand/smok.png" alt="" width="626" height="683" />
           </Link>
           <img className="top-krakow" src="/brand/krakow-baner.png" alt="" width="1406" height="349" />

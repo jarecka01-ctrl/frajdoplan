@@ -31,22 +31,24 @@ button, input, select { font: inherit; color: inherit; }
 .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; background: #F3ECDA; border-radius: 0 0 28px 28px; padding: 16px 24px 0; margin: 0 -24px; }
 .brand { display: flex; align-items: flex-end; text-decoration: none; }
 .brand-logo { display: block; margin-bottom: 9px; }
-.brand-logo img { display: block; height: 66px; width: auto; }
-.brand-smok { height: 96px; width: auto; margin-left: 6px; display: block; }
+.brand-logo img { display: block; height: 100px; width: auto; }
+.brand-smok { height: 96px; width: auto; margin-left: 16px; display: block; }
 .top-krakow { height: 104px; width: auto; display: block; }
 .menu { display: flex; justify-content: flex-end; gap: 6px; margin: 16px 0 4px; }
 .menu-link { padding: 8px 15px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; flex: 0 0 auto; }
 .menu-link:hover { border-color: var(--kreda); }
 .menu-link[aria-current="page"] { border-color: var(--tusz); background: var(--slonce); }
 @media (max-width: 1107px) { .top { margin: 0 -20px; padding: 16px 20px 0; } }
+@media (max-width: 1000px) { .brand-logo img { height: 84px; } }
 @media (max-width: 860px) { .top-krakow { height: 76px; } }
+@media (max-width: 760px) { .top-krakow { display: none; } }
 @media (max-width: 640px) {
   .top { margin: 0 -20px; padding: 12px 20px 0; }
   .top-krakow { display: none; }
-  /* na telefonie bez hasła pod nazwą: obcinamy dolną część obrazka logo */
-  .brand-logo { height: 36px; overflow: hidden; margin-bottom: 6px; }
-  .brand-logo img { height: 45px; }
-  .brand-smok { height: 52px; margin-left: 4px; }
+  /* nowy napis nie ma hasła pod spodem, więc nic nie trzeba obcinać */
+  .brand-logo { margin-bottom: 6px; }
+  .brand-logo img { height: 56px; }
+  .brand-smok { height: 52px; margin-left: 8px; }
   /* menu: przewijany rząd pastylek na całą szerokość */
   .menu { justify-content: flex-start; gap: 2px; margin: 10px -20px 0; padding: 0 20px 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .menu::-webkit-scrollbar { display: none; }
