@@ -33,13 +33,14 @@ import figurki from './zrodla/figurki.mjs';
 import slowacki from './zrodla/slowacki.mjs';
 import operaKrakowska from './zrodla/opera-krakowska.mjs';
 import kbf from './zrodla/kbf.mjs';
+import kfk from './zrodla/kfk.mjs';
 import { naprawLinki } from './linki.mjs';
 import { dopracujKategorie } from './kategorie.mjs';
 import { idKin, idKinZCsv, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 // Źródła wydarzeń (nie kina). Moduł z `wlaczone: false` jest gotowy, ale pomijany.
-const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl, tauronArena, iceKrakow, klubStudio, variete, groteska, figurki, slowacki, operaKrakowska, kbf]
+const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl, tauronArena, iceKrakow, klubStudio, variete, groteska, figurki, slowacki, operaKrakowska, kbf, kfk]
   .filter((z) => z.wlaczone !== false);
 const WYPRZEDZENIE_DNI = { spektakl: 60, koncert: 180, widowisko: 180, domyslnie: 60 }; // jak daleko do przodu zapisujemy wydarzenia (źródło może mieć własne `wyprzedzenieDni`)
 const KATALOG = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'data');
@@ -237,8 +238,11 @@ async function main() {
     }
     if (!blad && surowe.length === 0 && (stare.wszystkich || 0) > 0 && !zrodlo.moznaPusto) blad = 'źródło zwróciło 0 wydarzeń, a wcześniej zwracało dane';
     if (blad) {
-      bledy.push(`${zrodlo.id}: ${blad}`);
-      zrodla[zrodlo.id] = { ...stare, nazwa: zrodlo.nazwa, url: zrodlo.url, rodzaj: 'wydarzenia', ok: false, blad, sprawdzono: teraz };
+      // źródło z `lagodny: true`: awaria to ostrzeżenie (poprzednie dane zostają), workflow nie kończy się „failed"
+      if (zrodlo.lagodny) console.warn(`::warning::${zrodlo.id}: ${blad} (poprzednie dane zostają)`);
+      else bledy.push(`${zrodlo.id}: ${blad}`);
+      // łagodny błąd nie ustawia `ok: false` (strona pokazuje ostrzeżenie o nieaktualnych danych dla każdego źródła z ok: false)
+      zrodla[zrodlo.id] = { ...stare, nazwa: zrodlo.nazwa, url: zrodlo.url, rodzaj: 'wydarzenia', ...(zrodlo.lagodny ? { ostrzezenie: blad } : { ok: false, blad }), sprawdzono: teraz };
       wydarzenia.push(...stareWydarzenia);
       doWeryfikacji.push(...stareDoWeryfikacji);
       continue;
