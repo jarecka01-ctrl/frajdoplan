@@ -1,6 +1,6 @@
 # Repertuar kin studyjnych (Kijów, Mikro, Agrafka, Pod Baranami, Paradox, Sfinks) oraz wydarzenia dla dzieci
 # (teatry, koncerty, domy kultury, biblioteki, hale i kluby z wydarzeniami gościnnymi: TAURON Arena, ICE, Klub Studio,
-# Variété, Groteska, Teatr Figurki, Teatr Słowackiego, Opera Krakowska) → data/repertuar.json. Wynik uruchomienia (tabela źródeł i lista
+# Variété, Groteska, Teatr Figurki, Teatr Słowackiego, Opera Krakowska, KBF Bilety) → data/repertuar.json. Wynik uruchomienia (tabela źródeł i lista
 # „do weryfikacji") jest w zakładce Summary uruchomienia.
 # Wszystkie te kina mają tydzień repertuarowy piątek–czwartek i publikują go przed piątkiem
 # (docs/rozpoznanie-kin.md), więc jeden harmonogram wystarcza dla wszystkich.
@@ -52,7 +52,9 @@ jobs:
       # Zapis tylko przy zmianie pliku. Commit zrobiony tokenem GITHUB_TOKEN nie uruchamia ponownie
       # workflow (brak pętli), a Vercel wdroży nową wersję strony.
       # Obejmuje też wydarzenia (data/repertuar.json to jeden plik).
+      # Tylko na gałęzi main: ręczne uruchomienie na innej gałęzi (próba nowego źródła) niczego nie commituje.
       - name: Zapisz zmiany
+        if: github.ref == 'refs/heads/main'
         run: |
           if git diff --quiet -- data/repertuar.json; then
             echo "Repertuar bez zmian."
