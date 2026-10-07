@@ -14,6 +14,11 @@
       "wymus": [],
       "ukryj": []
     },
+    "okn": {
+      "_jak_dziala": "Galeria Huta Sztuki: wystawy i wernisaże są dla dorosłych i młodzieży, zajęcia dla dzieci są tylko grupowe (właścicielka, 7 października 2026). Wystarczy początek tytułu.",
+      "wymus": [],
+      "ukryj": ["Interwencja w magazynie zbiorów"]
+    },
     "ckpodgorza": {
       "_jak_dziala": "Bierzemy wydarzenia z grupą wiekową „dla dzieci” ze strony Centrum Kultury Podgórza. Niektóre z nich wyglądają na dorosłe albo mieszane — poniżej propozycja do ukrycia. Dodatkowo moduł sam ukrywa wydarzenia z sygnałem dla dorosłych (dla dorosłych, seniorzy, 18+, wernisaż, debata, spacer literacki).",
       "wymus": [],

@@ -617,22 +617,6 @@
       "status": "zatwierdzone"
     },
     {
-      "id": "okn-galeria-huta-sztuki-osrodek-kultury-norwida-interwencja-w-magazynie-zbiorow-wernisaz-2026-10-08T18:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "inne",
-      "nazwa": "Interwencja w magazynie zbiorów - wernisaż",
-      "data_regula": "2026-10-08",
-      "godzina": "18:00",
-      "miejsce": "Galeria Huta Sztuki | Ośrodek Kultury Norwida",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://okn.edu.pl/wydarzenie-3456-interwencja_w_magazynie_zbiorow_wernisaz-szczegoly-22474.html",
-      "zrodlo": "okn",
-      "status": "zatwierdzone"
-    },
-    {
       "id": "groteska-teatr-groteska-piekna-i-bestia-2026-10-09T09:00",
       "typ": "spektakl",
       "kino": false,
