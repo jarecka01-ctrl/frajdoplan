@@ -45,6 +45,7 @@ const WYPRZEDZENIE_DNI = { spektakl: 60, koncert: 180, widowisko: 180, domyslnie
 const KATALOG = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'data');
 const PLIK = process.env.REPERTUAR_PLIK || join(KATALOG, 'repertuar.json'); // REPERTUAR_PLIK: do prób, bez ruszania prawdziwego pliku
 const WYJATKI = join(KATALOG, 'wyjatki.json');
+const MIEJSCA_ZAPAS = join(KATALOG, 'miejsca-poprawione.csv'); // kopia arkusza „Miejsca" w repozytorium: zapas, gdy arkusz nie ma miejsca
 
 const czytajJson = async (plik, domyslnie) => {
   try { return JSON.parse(await readFile(plik, 'utf8')); } catch (e) { return domyslnie; }
@@ -154,6 +155,25 @@ async function main() {
   } else if (process.env.SHEET_CSV_URL) {
     try { wiersze = await wierszeMiejsc(process.env.SHEET_CSV_URL); } catch (e) { console.warn(`Uwaga: nie pobrano arkusza „Miejsca" (${e.message}); powiazane_miejsce_id wydarzeń zostaje takie jak w poprzednim pliku.`); }
   }
+  // Główne źródło to arkusz (SHEET_CSV_URL, ten sam co na stronie). Miejsca, których w nim nie ma, a są w pliku
+  // data/miejsca-poprawione.csv (bez archiwum), dopasowujemy z pliku. Służy to tylko do powiazane_miejsce_id; wypisujemy,
+  // które miejsca wzięto z zapasu, bo to znak, że arkusz w SHEET_CSV_URL jest nieaktualny albo niepełny.
+  let zapas = [];
+  try { zapas = wierszeZCsv(await readFile(MIEJSCA_ZAPAS, 'utf8')).filter((r) => r.sekcja !== 'archiwum'); } catch (e) { /* brak pliku = brak zapasu */ }
+  const idArkusza = new Set(wiersze.map((r) => r.place_id));
+  const zZapasu = new Map(zapas.filter((r) => !idArkusza.has(r.place_id)).map((r) => [r.place_id, r]));
+  const wierszeArkusza = wiersze.length;
+  wiersze = [...wiersze, ...zZapasu.values()];
+  console.log(`Arkusz „Miejsca": ${wierszeArkusza} wierszy${wierszeArkusza === 0 ? ' (PUSTY albo nie pobrano — sprawdź SHEET_CSV_URL)' : ''}; plik zapasowy dokłada ${zZapasu.size} miejsc, których nie ma w arkuszu.`);
+  const uzyteZZapasu = new Map(); // place_id → nazwa miejsca, które dopasowano dopiero z zapasu
+  const brakMiejsc = new Map(); // „źródło: miejsce" → liczba wydarzeń bez place_id
+  const miejsceId = (zrodlo, s) => {
+    const z = idMiejsca(zrodlo, s, wiersze);
+    if (z && zZapasu.has(z)) uzyteZZapasu.set(z, zZapasu.get(z).name);
+    const id = z || idZPoprzedniego[`${zrodlo.id}|${s.miejsce}`] || '';
+    if (!id) { const k = `${zrodlo.nazwa}: ${s.miejsce}`; brakMiejsc.set(k, (brakMiejsc.get(k) || 0) + 1); }
+    return id;
+  };
   const idZPoprzedniego = Object.fromEntries((poprzedni.wydarzenia || []).filter((w) => w.powiazane_miejsce_id).map((w) => [`${w.zrodlo}|${w.miejsce}`, w.powiazane_miejsce_id]));
 
   const zrodla = {};
@@ -162,7 +182,6 @@ async function main() {
   const tabela = [];
   const tabelaInne = [];
   const doWeryfikacji = [];
-  const bezMiejsca = new Set(); // hale i kluby (źródła gościnne), których nie ma w arkuszu „Miejsca"
 
   for (const zrodlo of ZRODLA_KIN) {
     const stare = poprzedni.zrodla?.[zrodlo.id] || {};
@@ -240,8 +259,7 @@ async function main() {
     const { zastapione, niesprawdzone, uwagi } = await naprawLinki(zrodlo, dlaLudzi);
     uwagi.forEach((u) => console.log(`  link: ${u}`));
     if (niesprawdzone) console.warn(`  ${zrodlo.id}: ${niesprawdzone} linków nie udało się sprawdzić (zostają bez zmian)`);
-    const gotowe = wybrane.map((s) => naWydarzenieInne(zrodlo, s, idMiejsca(zrodlo, s, wiersze) || idZPoprzedniego[`${zrodlo.id}|${s.miejsce}`] || ''));
-    if (gotowe.some((w) => !w.powiazane_miejsce_id)) bezMiejsca.add(zrodlo.nazwa);
+    const gotowe = wybrane.map((s) => naWydarzenieInne(zrodlo, s, miejsceId(zrodlo, s)));
     const dlaGrup = gotowe.filter((w) => w.dla_grup).length;
     const wWeryfikacji = doWeryfikacji.filter((w) => w.zrodlo === zrodlo.id).length;
     tabelaInne.push({ źródło: zrodlo.nazwa, 'dla dzieci': gotowe.length - dlaGrup, 'dla grup (ukryte)': dlaGrup, 'do weryfikacji': wWeryfikacji, 'zastąpione linki': zastapione });
@@ -294,11 +312,12 @@ async function main() {
   console.table(tabela.map((t) => ({ kino: t.kino, 'liczba seansów': t.seansow, 'zastąpione linki': t.zastapione, 'niesprawdzone linki': t.niesprawdzone })));
   if (tabelaInne.length) console.table(tabelaInne);
   console.log(`Zapisano ${unikalne.length} wydarzeń (seansów i innych) do data/repertuar.json; do weryfikacji: ${weryfikacja.length}`);
-  const brakujaceMiejsca = [...bezMiejsca].sort((a, b) => a.localeCompare(b, 'pl'));
-  if (brakujaceMiejsca.length) console.log(`Miejsca bez place_id w arkuszu „Miejsca": ${brakujaceMiejsca.join(', ')}`);
+  const brakujaceMiejsca = [...brakMiejsc].map(([k, n]) => `${k} (${n})`).sort((a, b) => a.localeCompare(b, 'pl'));
+  if (brakujaceMiejsca.length) console.log(`Miejsca bez place_id (źródło: miejsce, liczba wydarzeń):\n- ${brakujaceMiejsca.join('\n- ')}`);
+  if (uzyteZZapasu.size) console.log(`Dopasowano z pliku zapasowego (brak w arkuszu „Miejsca" z SHEET_CSV_URL): ${[...uzyteZZapasu.values()].join(', ')}`);
   const kandydaci = [...new Set(unikalne.filter((w) => w.kandydat_banera).map((w) => `${w.nazwa} (${w.data_regula})`))];
   if (kandydaci.length) console.log(`Kandydaci na baner (decyduje właścicielka, kolumna wyrozniony): ${kandydaci.join('; ')}`);
-  await podsumowanieGithub(tabela, tabelaInne, weryfikacja, brakujaceMiejsca, kandydaci);
+  await podsumowanieGithub(tabela, tabelaInne, weryfikacja, brakujaceMiejsca, kandydaci, [...uzyteZZapasu.values()]);
 
   if (bledy.length) {
     console.error(`Błędy źródeł:\n- ${bledy.join('\n- ')}`);
@@ -307,7 +326,7 @@ async function main() {
 }
 
 // Podsumowanie w GitHub Actions (zakładka „Summary" uruchomienia): tabela źródeł i lista „do weryfikacji".
-async function podsumowanieGithub(kina, inne, weryfikacja, brakujaceMiejsca = [], kandydaci = []) {
+async function podsumowanieGithub(kina, inne, weryfikacja, brakujaceMiejsca = [], kandydaci = [], zZapasu = []) {
   if (!process.env.GITHUB_STEP_SUMMARY) return;
   const wiersz = (...k) => `| ${k.join(' | ')} |`;
   const linie = ['## Repertuar: wynik', ''];
@@ -318,7 +337,8 @@ async function podsumowanieGithub(kina, inne, weryfikacja, brakujaceMiejsca = []
       wiersz('źródło', 'tytuł', 'pierwszy termin', 'wiek'), wiersz('---', '---', '---', '---'),
       ...[...new Map(weryfikacja.map((w) => [`${w.zrodlo}|${w.tytul}`, w])).values()].map((w) => wiersz(w.zrodlo, w.tytul, w.data, w.wiek || '—')), '');
   }
-  if (brakujaceMiejsca.length) linie.push('### Miejsca bez wpisu w arkuszu „Miejsca"', 'Wydarzenia z tych miejsc nie mają `powiazane_miejsce_id`. Dodaj miejsce do arkusza (potem `uzupelnij-miejsca.mjs`):', '', ...brakujaceMiejsca.map((m) => `- ${m}`), '');
+  if (brakujaceMiejsca.length) linie.push('### Miejsca bez place_id', 'Wydarzenia z tych miejsc nie mają `powiazane_miejsce_id` (źródło: miejsce, w nawiasie liczba wydarzeń). Dodaj miejsce do arkusza „Miejsca" (potem `uzupelnij-miejsca.mjs`):', '', ...brakujaceMiejsca.map((m) => `- ${m}`), '');
+  if (zZapasu.length) linie.push('### Miejsca dopasowane z pliku zapasowego', 'Tych miejsc nie ma w arkuszu „Miejsca" z `SHEET_CSV_URL` (sekret repozytorium), a są w `data/miejsca-poprawione.csv`. Sprawdź, czy sekret wskazuje aktualny arkusz:', '', ...zZapasu.map((m) => `- ${m}`), '');
   if (kandydaci.length) linie.push('### Kandydaci na baner (duże widowiska rodzinne)', 'O banerze decyduje właścicielka: w arkuszu „Wydarzenia" wpisz `tak` w kolumnie `wyrozniony`.', '', ...kandydaci.map((k) => `- ${k}`), '');
   const { appendFile } = await import('node:fs/promises');
   await appendFile(process.env.GITHUB_STEP_SUMMARY, `${linie.join('\n')}\n`);
