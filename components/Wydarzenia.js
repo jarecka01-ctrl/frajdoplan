@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { adresKarty } from '../lib/miejsca';
+import Bilet, { Nazwa, Szczegoly } from './Bilet';
 
 /*
   Wydarzenia z zakładki „Wydarzenia" w Arkuszu Google.
@@ -52,31 +53,21 @@ export const zakresDat = (a, b) => {
 
 export const poGodzinie = (a, b) => (a.godzina || '99').localeCompare(b.godzina || '99');
 
-function Karta({ w, duza }) {
+function Karta({ w }) {
   return (
-    <li className={duza ? 'wyd wyd-duza' : 'wyd'}>
-      <span className="wyd-godz">{w.godzina || 'cały dzień'}</span>
-      <div className="wyd-tresc">
-        <p className="wyd-nazwa">{w.nazwa}</p>
-        {w.miejsce && <p className="wyd-miejsce">{w.miejsce}</p>}
-        {duza && (w.wiek || w.cena || w.link) && (
-          <p className="wyd-info">
-            {w.wiek && <span>{w.wiek}</span>}
-            {w.cena && <span>{w.cena}</span>}
-            {w.link && <a href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>}
-          </p>
-        )}
-      </div>
-    </li>
+    <Bilet godzina={w.godzina}>
+      <Nazwa nazwa={w.nazwa} />
+      <Szczegoly czesci={[w.miejsce, w.wiek, w.cena, w.link && <a className="tk-link" href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>]} />
+    </Bilet>
   );
 }
 
 // Tytuł wydarzenia jako link: do biletów (link_biletow), a gdy go brak — do karty miejsca (/miejsce/…)
 // (powiazane_miejsce_id); gdy i tego brak, zwykły tekst.
 function Tytul({ w, miejsca }) {
-  if (w.link) return <a className="slajd-nazwa" href={w.link} target="_blank" rel="noreferrer" title={w.nazwa}>{w.nazwa}</a>;
-  if (w.miejsceId && miejsca.has(w.miejsceId)) return <a className="slajd-nazwa" href={miejsca.get(w.miejsceId)} title={w.nazwa}>{w.nazwa}</a>;
-  return <span className="slajd-nazwa" title={w.nazwa}>{w.nazwa}</span>;
+  if (w.link) return <Nazwa nazwa={w.nazwa} href={w.link} />;
+  if (w.miejsceId && miejsca.has(w.miejsceId)) return <Nazwa nazwa={w.nazwa} href={miejsca.get(w.miejsceId)} zewnetrzny={false} />;
+  return <Nazwa nazwa={w.nazwa} />;
 }
 
 // Małe kafelki „Jutro" i „Weekend": stała wysokość, po 3 wydarzenia na slajd, strzałki ‹ › i przesunięcie palcem.
@@ -103,13 +94,10 @@ function Slajdy({ pozycje, miejsca, pusto, etykieta }) {
       >
         <ul className="wyd-lista slajdy-lista" aria-live="polite">
           {widoczne.map((w) => (
-            <li key={`${w.id}-${w.dzien || ''}`} className="slajd">
-              <span className="slajd-godz">{w.godzina}</span>
-              <span className="slajd-tresc">
-                <Tytul w={w} miejsca={miejsca} />
-                {w.miejsce && <small className="slajd-miejsce">{w.miejsce}</small>}
-              </span>
-            </li>
+            <Bilet key={`${w.id}-${w.dzien || ''}`} className="tk-s" nad={w.dzien} godzina={w.godzina}>
+              <Tytul w={w} miejsca={miejsca} />
+              <Szczegoly czesci={[w.miejsce]} />
+            </Bilet>
           ))}
         </ul>
       </div>
@@ -157,7 +145,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <h2 className="wyd-tytul">Dziś dla dzieci w Krakowie</h2>
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
             {dzis.length ? (
-              <ul className="wyd-lista">{dzis.slice(0, 6).map((w) => <Karta key={w.id} w={w} duza />)}</ul>
+              <ul className="wyd-lista">{dzis.slice(0, 6).map((w) => <Karta key={w.id} w={w} />)}</ul>
             ) : (
               <>
                 <p className="wyd-pusto">Na dziś to już wszystko. Zobacz, co jest jutro</p>
@@ -170,7 +158,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <h2 className="wyd-tytul">Jutro dla dzieci w Krakowie</h2>
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
             {jutroLista.length ? (
-              <ul className="wyd-lista">{jutroLista.slice(0, 6).map((w) => <Karta key={w.id} w={w} duza />)}</ul>
+              <ul className="wyd-lista">{jutroLista.slice(0, 6).map((w) => <Karta key={w.id} w={w} />)}</ul>
             ) : (
               <p className="wyd-pusto">Na jutro też nie mamy jeszcze wydarzeń w kalendarzu.</p>
             )}
@@ -186,7 +174,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
           <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
           <Slajdy
             key={`jutro-${jutroLista.length}`}
-            pozycje={jutroLista.map((w) => ({ ...w, godzina: w.godzina || 'cały dzień' }))}
+            pozycje={jutroLista}
             miejsca={miejsca}
             pusto="Brak wydarzeń w kalendarzu."
             etykieta="Wydarzenia jutro"
@@ -198,7 +186,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
           <p className="wyd-data">{zakresDat(sob, nd)}</p>
           <Slajdy
             key={`weekend-${weekend.length}`}
-            pozycje={weekend.map((w) => ({ ...w, godzina: `${w.dzien} ${w.godzina || ''}`.trim() }))}
+            pozycje={weekend}
             miejsca={miejsca}
             pusto="Brak wydarzeń w kalendarzu."
             etykieta="Wydarzenia w najbliższy weekend"

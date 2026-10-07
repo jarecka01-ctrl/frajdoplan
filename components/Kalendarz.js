@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { dzisWarszawa, trwaW, poGodzinie, dzienTygodnia, MIESIACE } from './Wydarzenia';
 import { grupujTerminy } from '../lib/grupowanie';
+import Bilet, { Nazwa, Szczegoly, godzinyPodTytulem } from './Bilet';
 
 /*
   Kalendarz na cały miesiąc (jak na krakow.pl): kropka przy dniach z wydarzeniami,
@@ -167,29 +168,12 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
                 {poDniach.map((g) => (
                   <section key={g.dzien} className="kal-dzien-grupa" aria-label={naglowekDnia(g.dzien)}>
                     <h3 className="kal-dzien-naglowek">{naglowekDnia(g.dzien)}</h3>
-                    <ul className="kal-wiersze">
+                    <ul className="kal-wiersze tk-lista">
                       {g.wiersze.map((w) => (
-                        <li key={`${w.id}-${w.dzien}`} className="kal-wiersz">
-                          <p className="wyd-nazwa">
-                            {ikonaKat(w) && <span aria-hidden="true" title={w.kategoria}>{ikonaKat(w)} </span>}
-                            {w.link ? <a href={w.link} target="_blank" rel="noreferrer">{w.nazwa}</a> : w.nazwa}
-                          </p>
-                          <p className="wyd-miejsce">
-                            {w.godziny.length ? w.godziny.map((g2, i) => (
-                              <span key={g2.godzina}>
-                                {i > 0 && ', '}
-                                {g2.link && (w.godziny.length > 1 || g2.link !== w.link) ? <a href={g2.link} target="_blank" rel="noreferrer">{g2.godzina}</a> : g2.godzina}
-                              </span>
-                            )) : 'cały dzień'}
-                            {w.miejsce && ` · ${w.miejsce}`}
-                          </p>
-                          {(w.wiek || w.cena) && (
-                            <p className="wyd-info">
-                              {w.wiek && <span>{w.wiek}</span>}
-                              {w.cena && <span>{w.cena}</span>}
-                            </p>
-                          )}
-                        </li>
+                        <Bilet key={`${w.id}-${w.dzien}`} godzina={w.godziny[0] && w.godziny[0].godzina}>
+                          <Nazwa nazwa={w.nazwa} href={w.link} przed={ikonaKat(w) && <span aria-hidden="true" title={w.kategoria}>{ikonaKat(w)} </span>} />
+                          <Szczegoly czesci={[godzinyPodTytulem(w.godziny, w.link), w.miejsce, w.wiek, w.cena]} />
+                        </Bilet>
                       ))}
                     </ul>
                   </section>
@@ -206,22 +190,12 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
               <p className="wyd-pusto">W tym miesiącu nie mamy jeszcze wydarzeń w kalendarzu.</p>
             )
           ) : naWybrany.length ? (
-            <ul className="wyd-lista">
+            <ul className="wyd-lista tk-lista">
               {naWybrany.map((w) => (
-                <li key={w.id} className="wyd wyd-duza">
-                  <span className="wyd-godz">{w.godzina || 'cały dzień'}</span>
-                  <div className="wyd-tresc">
-                    <p className="wyd-nazwa">{ikonaKat(w) && <span aria-hidden="true" title={w.kategoria}>{ikonaKat(w)} </span>}{w.nazwa}</p>
-                    {w.miejsce && <p className="wyd-miejsce">{w.miejsce}</p>}
-                    {(w.wiek || w.cena || w.link) && (
-                      <p className="wyd-info">
-                        {w.wiek && <span>{w.wiek}</span>}
-                        {w.cena && <span>{w.cena}</span>}
-                        {w.link && <a href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>}
-                      </p>
-                    )}
-                  </div>
-                </li>
+                <Bilet key={w.id} godzina={w.godzina}>
+                  <Nazwa nazwa={w.nazwa} przed={ikonaKat(w) && <span aria-hidden="true" title={w.kategoria}>{ikonaKat(w)} </span>} />
+                  <Szczegoly czesci={[w.miejsce, w.wiek, w.cena, w.link && <a className="tk-link" href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>]} />
+                </Bilet>
               ))}
             </ul>
           ) : (
