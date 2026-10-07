@@ -27,13 +27,16 @@ export function wiekZOpisu(tekst, { plus = true } = {}) {
 }
 const wiekDoDwunastu = (wiek) => { const n = parseInt((String(wiek).match(/\d+/) || [])[0], 10); return Number.isFinite(n) && n <= 12; };
 
+// Wyraźny sygnał dla dorosłych w nagłówku (tytuł i kategoria) albo w treści (18+, od 15–18 lat).
+export const dlaDoroslych = (naglowek, tresc) => DLA_DOROSLYCH.test(naglowek) || /18\+|od 1[5-8] lat/i.test(tresc);
+
 // tytul: nazwa wydarzenia; opis: tekst ze strony (może być pusty); kategoria: kategoria ze źródła (np. „Sportowe")
 export function ocenaGoscinna({ tytul = '', opis = '', kategoria = '' }) {
   const naglowek = spacje(`${tytul} ${kategoria}`);
   const tresc = spacje(`${tytul} ${opis}`);
   // 5+ uznajemy tylko w tytule; w opisach zdarza się przy dystansach i liczbach (3+ km)
   const wiek = wiekZOpisu(tytul) || wiekZOpisu(opis, { plus: false });
-  if (DLA_DOROSLYCH.test(naglowek) || /18\+|od 1[5-8] lat/i.test(tresc)) return { dlaDzieci: false, wiek: '' };
+  if (dlaDoroslych(naglowek, tresc)) return { dlaDzieci: false, wiek: '' };
   const sygnal = SYGNAL.test(tresc) || (wiek && wiekDoDwunastu(wiek));
   if (sygnal) {
     // sygnał rodzinny przy imprezie sportowej (np. pokaz koszykarzy) to za mało, żeby publikować samemu
