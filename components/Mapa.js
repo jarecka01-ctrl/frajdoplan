@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { IKONY } from '../lib/ikony';
+import { promienOkolicy, PROMIEN_OKOLICY_KM } from '../lib/geo';
 
 /*
   Mapa miejsc: Leaflet + kafelki OpenStreetMap (bez kluczy API).
   Punkty rysowane na canvasie, więc ponad 1000 miejsc działa płynnie.
-  Żółty punkt = pod dachem, czerwony = na polu.
+  Żółty punkt = pod dachem, czerwony = na polu. Po kliknięciu „Blisko mnie" (prop `ja`) mapa przybliża się na okolicę
+  użytkownika (zoom 14, ok. 2–3 km; gdy w promieniu 2,5 km jest mniej niż 5 miejsc, oddala tak, by objąć 5 najbliższych) i pokazuje punkt „jesteś tutaj"; „Pokaż cały Kraków" wraca do widoku miasta.
 */
 
 const KRAKOW = [50.0617, 19.9373];
+const ZOOM_OKOLICY = 14; // zoom 14 pokazuje ok. 2–3 km wokół użytkownika
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 function dymek(p) {
@@ -26,7 +29,7 @@ function dymek(p) {
     </div>`;
 }
 
-export default function Mapa({ miejsca }) {
+export default function Mapa({ miejsca, ja = null }) {
   const el = useRef(null);
   const mapa = useRef(null);
   const warstwa = useRef(null);
@@ -35,6 +38,43 @@ export default function Mapa({ miejsca }) {
   const [pokazRowery, setPokazRowery] = useState(false);
   const aktualne = useRef(miejsca);
   aktualne.current = miejsca;
+  const warstwaJa = useRef(null);
+  const jaRef = useRef(ja);
+  jaRef.current = ja;
+  const [calyWidok, setCalyWidok] = useState(false); // true = użytkownik wrócił do widoku całego miasta
+  const calyRef = useRef(false);
+
+  // Widok mapy: przy „Blisko mnie" okolica użytkownika, inaczej wszystkie miejsca z listy.
+  const ustawWidok = () => {
+    const L = Lref.current;
+    if (!L || !mapa.current) return;
+    const punkty = aktualne.current.filter((p) => p.lat != null && p.lon != null);
+    const gdzie = jaRef.current;
+    if (gdzie && !calyRef.current) {
+      const promien = promienOkolicy(gdzie, punkty);
+      if (promien <= PROMIEN_OKOLICY_KM) {
+        mapa.current.setView([gdzie.lat, gdzie.lon], ZOOM_OKOLICY); // dzielnica i najbliższe okolice
+      } else {
+        // w okolicy jest mniej niż 5 miejsc: oddalamy, żeby objąć najbliższe
+        mapa.current.fitBounds(L.latLng(gdzie.lat, gdzie.lon).toBounds(promien * 2000), { padding: [24, 24], maxZoom: ZOOM_OKOLICY });
+      }
+    } else if (punkty.length) {
+      mapa.current.fitBounds(L.latLngBounds(punkty.map((p) => [p.lat, p.lon])), { padding: [30, 30], maxZoom: 15 });
+    }
+  };
+
+  // Punkt „jesteś tutaj": inny kształt niż pinezki miejsc (kółka na canvasie), ponad nimi.
+  const rysujJa = () => {
+    const L = Lref.current;
+    if (!L || !warstwaJa.current) return;
+    warstwaJa.current.clearLayers();
+    const gdzie = jaRef.current;
+    if (!gdzie) return;
+    L.marker([gdzie.lat, gdzie.lon], {
+      icon: L.divIcon({ className: 'ja-pin', html: '<span></span>', iconSize: [26, 26], iconAnchor: [13, 13] }),
+      title: 'Jesteś tutaj', alt: 'Jesteś tutaj', keyboard: false, zIndexOffset: 1000,
+    }).addTo(warstwaJa.current);
+  };
 
   const rysuj = () => {
     const L = Lref.current;
@@ -50,9 +90,8 @@ export default function Mapa({ miejsca }) {
         .bindPopup(dymek(p), { maxWidth: 260 })
         .addTo(warstwa.current);
     });
-    if (punkty.length) {
-      mapa.current.fitBounds(L.latLngBounds(punkty.map((p) => [p.lat, p.lon])), { padding: [30, 30], maxZoom: 15 });
-    }
+    rysujJa();
+    ustawWidok();
   };
 
   useEffect(() => {
@@ -67,6 +106,7 @@ export default function Mapa({ miejsca }) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(mapa.current);
       warstwa.current = L.layerGroup().addTo(mapa.current);
+      warstwaJa.current = L.layerGroup().addTo(mapa.current);
       // Drogi rowerowe: przezroczysta nakładka CyclOSM (dane OpenStreetMap), włączana przełącznikiem.
       rowery.current = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm-lite/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -82,6 +122,20 @@ export default function Mapa({ miejsca }) {
 
   useEffect(() => { rysuj(); }, [miejsca]);
 
+  // Nowe położenie (albo jego wyłączenie): punkt „jesteś tutaj" i przybliżenie na okolicę.
+  useEffect(() => {
+    calyRef.current = false;
+    setCalyWidok(false);
+    rysujJa();
+    ustawWidok();
+  }, [ja]);
+
+  const przelaczWidok = () => {
+    calyRef.current = !calyRef.current;
+    setCalyWidok(calyRef.current);
+    ustawWidok();
+  };
+
   useEffect(() => {
     if (!mapa.current || !rowery.current) return;
     if (pokazRowery) rowery.current.addTo(mapa.current);
@@ -93,6 +147,11 @@ export default function Mapa({ miejsca }) {
   return (
     <div className="mapa-wrap">
       <div ref={el} className="mapa" role="region" aria-label="Mapa miejsc" />
+      {ja && (
+        <button type="button" className="mapa-caly" onClick={przelaczWidok}>
+          {calyWidok ? 'Pokaż moją okolicę' : 'Pokaż cały Kraków'}
+        </button>
+      )}
       <label className="mapa-rowery">
         <input type="checkbox" checked={pokazRowery} onChange={(e) => setPokazRowery(e.target.checked)} />
         🚲 Pokaż drogi rowerowe
@@ -100,6 +159,7 @@ export default function Mapa({ miejsca }) {
       <p className="mapa-legenda">
         <span className="kropka kropka-dach" /> pod dachem
         <span className="kropka kropka-pole" /> na polu
+        {ja && <><span className="kropka kropka-ja" /> jesteś tutaj</>}
         {bezWspolrzednych > 0 && <span className="mapa-uwaga">{bezWspolrzednych} bez lokalizacji na mapie</span>}
       </p>
     </div>

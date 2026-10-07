@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { adresKarty } from '../lib/miejsca';
+import { km, pozaRegionem, PROMIEN_REGIONU_KM } from '../lib/geo';
 import { IKONY, SKROTY } from '../lib/ikony';
 import { DZIALY, kategoriaRodzaju, odmianaMiejsc } from '../lib/kategorie';
 
@@ -16,13 +17,6 @@ const NA_STRONE = 24;
 const strefaZ = (p) => p.strefa ?? 'Kraków i okolice';
 const kategoriaZ = (p) => p.kategoria ?? 'Pod dachem';
 
-// Odległość w km między dwoma punktami (wzór haversine).
-function km(a, b) {
-  const R = 6371, r = (x) => (x * Math.PI) / 180;
-  const dLat = r(b.lat - a.lat), dLon = r(b.lon - a.lon);
-  const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dLon / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(h));
-}
 const ladnieKm = (d) => (d < 1 ? `${Math.max(50, Math.round(d * 1000 / 50) * 50)} m` : `${d.toFixed(1).replace('.', ',')} km`);
 const STREFY = [
   { id: 'Kraków i okolice', label: 'Kraków' },
@@ -53,15 +47,34 @@ export default function Katalog({
   const [widok, setWidok] = useState('lista');
   const [ja, setJa] = useState(null); // położenie użytkownika, gdy kliknął „Blisko mnie" i się zgodził
   const [szukam, setSzukam] = useState(false);
+  const [komunikat, setKomunikat] = useState(''); // powód, dla którego „Blisko mnie" nie zadziałało
 
-  // Prosi o zgodę na lokalizację. Przy odmowie albo błędzie nic się nie zmienia. Drugie kliknięcie wyłącza sortowanie.
+  // Jeden stan `ja` dla listy (sortowanie i odległości) i mapy (przybliżenie i punkt „jesteś tutaj"), niezależnie od widoku.
+  // Prosi o zgodę na lokalizację; położenia nie zapisujemy ani nie wysyłamy. Drugie kliknięcie wyłącza „Blisko mnie".
+  // Odmowa, błąd albo pozycja daleko od Krakowa: komunikat i bez zmiany widoku.
   const bliskoMnie = () => {
+    setKomunikat('');
     if (ja) { setJa(null); return; }
-    if (!('geolocation' in navigator)) return;
+    if (!('geolocation' in navigator)) { setKomunikat('Ta przeglądarka nie potrafi ustalić położenia. Szukaj po nazwie lub ulicy.'); return; }
     setSzukam(true);
     navigator.geolocation.getCurrentPosition(
-      (poz) => { setJa({ lat: poz.coords.latitude, lon: poz.coords.longitude }); setSzukam(false); },
-      () => setSzukam(false),
+      (poz) => {
+        const gdzie = { lat: poz.coords.latitude, lon: poz.coords.longitude };
+        setSzukam(false);
+        if (pozaRegionem(gdzie)) {
+          setKomunikat(`Wygląda na to, że jesteś ponad ${PROMIEN_REGIONU_KM} km od Krakowa, więc zostawiamy widok całego miasta.`);
+          return;
+        }
+        setJa(gdzie);
+      },
+      (blad) => {
+        setSzukam(false);
+        setKomunikat(
+          blad && blad.code === 1 ? 'Nie mamy zgody na sprawdzenie Twojego położenia. Zezwól na lokalizację w ustawieniach przeglądarki albo wpisz ulicę w wyszukiwarce.'
+            : blad && blad.code === 3 ? 'Ustalanie położenia trwa zbyt długo. Spróbuj jeszcze raz.'
+              : 'Nie udało się ustalić Twojego położenia. Spróbuj ponownie za chwilę.'
+        );
+      },
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 }
     );
   };
@@ -213,8 +226,10 @@ export default function Katalog({
         </div>
       </div>
 
+      {komunikat && <p className="notice" role="status">{komunikat}</p>}
+
       {widok === 'mapa' && filtered.length > 0 ? (
-        <Mapa miejsca={filtered} />
+        <Mapa miejsca={filtered} ja={ja} />
       ) : filtered.length === 0 ? (
         <div className="pusto">
           <p>Nic tu nie pasuje do tych filtrów.</p>
