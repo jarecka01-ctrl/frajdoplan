@@ -73,7 +73,13 @@ export default function PolitykaPrywatnosci({ seo }) {
         Serwis nie ustawia ciasteczek (plików cookies). Nie używam ciasteczek śledzących, reklamowych ani analitycznych, dlatego na
         stronie nie ma baneru zgody na ciasteczka.
       </p>
-      {/* TODO: gdy plan będzie dało się udostępniać linkiem (etap 2 funkcji „Mój plan"), dopisać, że link zawiera wybrane pozycje, a serwer ich nie zapisuje */}
+      <p>
+        Plan możesz udostępnić linkiem. Wybrane pozycje (identyfikatory wydarzeń i miejsc, dni, godziny i nazwa planu) są wtedy zapisane
+        w samym adresie linku. Serwis ich nie przechowuje: link trafia tylko tam, gdzie go wyślesz. Gdy ktoś otworzy taki link, jego adres
+        (razem z zakodowanym planem) trafia, jak każdy adres strony, do logów hostingu opisanych w punkcie 2b, ale nie do statystyk
+        odwiedzin (z nich obcinamy część adresu po znaku zapytania). Strona z planem nie jest indeksowana przez wyszukiwarki i nie
+        przekazuje swojego adresu dalej.
+      </p>
       <p>
         Jedyne dane, które serwis zapisuje w pamięci przeglądarki (localStorage), to Twój plan z funkcji „Mój plan”: wybrane wydarzenia
         i miejsca, ewentualnie wybrane przez Ciebie dni i godziny oraz nazwa planu. Zapis powstaje dopiero wtedy, gdy dodasz coś do planu,
@@ -134,6 +140,7 @@ export default function PolitykaPrywatnosci({ seo }) {
       <ul className="prawne-historia">
         <li><strong>8 października 2026</strong>: pierwsza wersja polityki prywatności.</li>
         <li><strong>8 października 2026</strong>: dopisany zapis planu („Mój plan”) w pamięci przeglądarki.</li>
+        <li><strong>8 października 2026</strong>: dopisane udostępnianie planu linkiem.</li>
       </ul>
     </StronaPrawna>
   );

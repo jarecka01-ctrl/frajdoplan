@@ -512,6 +512,12 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
 .plan-stopka { margin-top: 12px; }
 .plan-potwierdz { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
 .plan-przycisk { min-height: 44px; border: 2px solid var(--tusz); background: var(--biel); color: var(--tusz); border-radius: 14px; padding: 8px 16px; font: 700 15px/1.1 var(--font-display); cursor: pointer; }
+.plan-akcje { margin-top: 18px; display: grid; gap: 8px; }
+.plan-akcje .plan-przycisk { width: 100%; justify-content: center; text-decoration: none; display: inline-flex; align-items: center; }
+.plan-przycisk.glowny { background: var(--slonce); box-shadow: 3px 3px 0 var(--tusz); }
+.plan-przycisk:disabled, .plan-przycisk.wylaczony { opacity: .5; cursor: default; box-shadow: none; pointer-events: none; }
+.plan-link-etykieta { display: grid; gap: 4px; font-size: 12px; color: var(--tusz-2); }
+.plan-link-pole { width: 100%; border: 2px solid var(--tusz); border-radius: 10px; padding: 8px 10px; font: 500 13px var(--font-body); background: var(--biel); color: var(--tusz); }
 .plan-przycisk.niebezpieczny { background: #fff3f0; border-color: var(--mak); color: #8d2418; }
 .plan-uwaga { font-size: 11.5px; color: var(--tusz-2); line-height: 1.4; margin: 12px 0 0; }
 @media (min-width: 900px) {
@@ -521,3 +527,32 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
 }
 @keyframes plan-wsun-bok { from { transform: translateX(100%); } to { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .plan-pasek, .plan-okno { animation: none; } }
+
+/* strona /plan (plan z linku) i wydruk */
+.plan-strona { max-width: 720px; margin-bottom: 40px; }
+.plan-strona h1 { font: 700 clamp(32px, 7vw, 52px)/1 var(--font-display); letter-spacing: -0.02em; margin: 0 0 8px; overflow-wrap: anywhere; }
+.plan-strona-akcje { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 8px; }
+.plan-import { background: var(--biel); border: 2px solid var(--tusz); border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+.plan-import p { margin: 0 0 10px; font-weight: 600; }
+.plan-import small { display: block; margin-top: 8px; font-size: 12px; color: var(--tusz-2); }
+.plan-import-przyciski { display: flex; flex-wrap: wrap; gap: 8px; }
+.plan-strona .plan-poz { grid-template-columns: 70px minmax(0, 1fr); }
+.plan-druk-logo { display: none; }
+.plan-druk-stopka { margin: 22px 0 0; font-size: 12px; color: var(--tusz-2); }
+@media print {
+  @page { margin: 14mm; }
+  html, body { background: #fff !important; background-image: none !important; }
+  body { padding: 0 !important; color: #000; font-size: 12pt; }
+  .top, .menu, .stopka, .okruszki, .plan-pasek, .plan-toast, .plan-strona-akcje, .plan-import, .plan-info, .notice { display: none !important; }
+  .wrap { max-width: none; padding: 0; margin: 0; }
+  .plan-strona { max-width: none; margin: 0; }
+  .plan-druk-logo { display: block; height: 14mm; width: auto; margin: 0 0 6mm; }
+  .plan-strona h1 { font-size: 26pt; }
+  .prawne-data { color: #333; }
+  .plan-dzien-naglowek { color: #000; break-after: avoid; margin-top: 8mm; }
+  .plan-poz { break-inside: avoid; border-bottom: 1px solid #999; }
+  .plan-poz.odbylo { background: none; margin: 0; padding: 9px 0; }
+  .plan-t a { color: #000; text-decoration: none; }
+  .plan-tr small, .plan-h-miejsce, .plan-druk-stopka { color: #222; }
+  .plan-druk-stopka { margin-top: 10mm; font-size: 10pt; border-top: 1px solid #999; padding-top: 3mm; }
+}

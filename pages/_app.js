@@ -9,7 +9,8 @@ export default function App({ Component, pageProps }) {
     <>
       <Component {...pageProps} />
       <PlanRoot />
-      <Analytics />
+      {/* adres planu udostępnionego linkiem (/plan?p=…) nie trafia do statystyk w całości: obcinamy część po znaku zapytania */}
+      <Analytics beforeSend={(zdarzenie) => (zdarzenie.url.includes('/plan') ? { ...zdarzenie, url: zdarzenie.url.split('?')[0] } : zdarzenie)} />
     </>
   );
 }

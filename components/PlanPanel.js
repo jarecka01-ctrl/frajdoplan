@@ -1,16 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import Link from 'next/link';
 import { akcje, usePlan } from '../lib/planStore';
 import { useDanePlanu } from '../lib/danePlanu';
+import { zbudujLinkPlanu, MAKS_DLUGOSC_LINKU } from '../lib/linkPlanu';
 import {
-  MAKS_NAZWA, MAKS_POZYCJI, DOMYSLNA_NAZWA, kluczPozycji, rozwiazPozycje, grupujPoDniach, znajdzKolizje,
+  MAKS_NAZWA, MAKS_POZYCJI, DOMYSLNA_NAZWA, rozwiazPozycje, grupujPoDniach, znajdzKolizje, odciskPozycji,
 } from '../lib/plan';
-import { NAZWY_DNI, ladnaData, dzienTygodnia, dzisWarszawa, godzinaWarszawa } from './Wydarzenia';
+import { dzisWarszawa, godzinaWarszawa } from './Wydarzenia';
+import PlanDni, { naglowekDnia } from './PlanWidok';
 
 const NA_FOKUS = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
-const godzinyLinie = (g) => String(g || '').split(/\s*[,;]\s*/).filter(Boolean);
-const naglowekDnia = (iso) => `${NAZWY_DNI[dzienTygodnia(iso)]}, ${ladnaData(iso)}`;
 
 // Okno dialogowe: pułapka fokusu, Esc, blokada przewijania tła, powrót fokusu do przycisku, który je otworzył.
 function useOknoDialogowe(ref, onZamknij) {
@@ -47,51 +46,25 @@ function useOknoDialogowe(ref, onZamknij) {
   }, []);
 }
 
-function Pozycja({ r, kolizja, zamknij }) {
-  const miejsce = r.poz.typ === 'miejsce';
-  const stan = r.status === 'niedostepne' ? ' niedostepne' : r.status === 'odbylo' ? ' odbylo' : '';
-  const tytul = r.href ? (
-    r.href.startsWith('/')
-      ? <Link href={r.href} onClick={zamknij}>{r.tytul}</Link>
-      : <a href={r.href} target="_blank" rel="noreferrer">{r.tytul}</a>
-  ) : r.tytul;
-  return (
-    <li className={`plan-poz${stan}${kolizja ? ' kol' : ''}`}>
-      <div className="plan-h">
-        {miejsce ? <span className="plan-h-miejsce">miejsce</span>
-          : r.status === 'niedostepne' ? <span className="plan-h-miejsce">—</span>
-            : godzinyLinie(r.godzina).length ? godzinyLinie(r.godzina).map((g) => <b key={g}>{g}</b>)
-              : <span className="plan-h-miejsce">cały dzień</span>}
-      </div>
-      <div className="plan-tr">
-        <p className="plan-t">{tytul}</p>
-        <small>{[miejsce ? r.rodzaj : r.miejsce, miejsce ? r.adres : null, r.wiek, r.cena].filter(Boolean).join(' · ')}</small>
-        {r.status === 'odbylo' && <small className="plan-stan">już się odbyło</small>}
-        {r.status === 'niedostepne' && <small className="plan-stan">już niedostępne</small>}
-        {miejsce && r.status === 'ok' && (
-          <label className="plan-dzien">
-            <span>Dzień:</span>
-            <input
-              type="date"
-              value={r.poz.dzien || ''}
-              min={dzisWarszawa()}
-              onChange={(e) => akcje.ustawDzien(r.klucz, e.target.value)}
-              aria-label={`Dzień wizyty: ${r.tytul}`}
-            />
-          </label>
-        )}
-      </div>
-      <button type="button" className="plan-usun" aria-label={`Usuń z planu: ${r.tytul}`} onClick={() => akcje.usun(r.klucz, r.tytul)}>
-        <span aria-hidden="true">×</span>
-      </button>
-    </li>
-  );
+// Kopiowanie do schowka z zapasowym sposobem (starsze przeglądarki, brak zgody na schowek).
+async function skopiuj(tekst, poleZapasowe) {
+  try {
+    await navigator.clipboard.writeText(tekst);
+    return true;
+  } catch (e) {
+    try {
+      poleZapasowe?.select();
+      return document.execCommand('copy');
+    } catch (e2) { return false; }
+  }
 }
 
 export default function PlanPanel({ onZamknij }) {
   const plan = usePlan();
   const oknoRef = useRef(null);
+  const poleLinku = useRef(null);
   const [czyszczenie, setCzyszczenie] = useState(false);
+  const [link, setLink] = useState(null); // { url, dlugosc, zaDlugi }
   const { status, dane, ponow } = useDanePlanu();
   const teraz = useMemo(() => ({ dzien: dzisWarszawa(), godzina: godzinaWarszawa() }), []);
   useOknoDialogowe(oknoRef, onZamknij);
@@ -109,11 +82,21 @@ export default function PlanPanel({ onZamknij }) {
   const wKolizji = new Set(kolizje.flatMap((k) => [k.a.klucz, k.b.klucz]));
   const pusty = plan.pozycje.length === 0;
 
-  const rysujPozycje = (lista) => (
-    <ul className="plan-lista">
-      {lista.map((r) => <Pozycja key={r.klucz} r={r} kolizja={wKolizji.has(r.klucz)} zamknij={onZamknij} />)}
-    </ul>
-  );
+  // Link do udostępniania: w adresie jest cały plan (identyfikatory, dni, nazwa) i odciski treści, serwer niczego nie zapisuje.
+  useEffect(() => {
+    if (status !== 'ok' || pusty) { setLink(null); return undefined; }
+    let aktualny = true;
+    const odciski = Object.fromEntries(rozwiazane.filter((r) => r.status === 'ok' || r.status === 'odbylo').map((r) => [r.klucz, odciskPozycji(r)]));
+    zbudujLinkPlanu(window.location.origin, { nazwa: plan.nazwa, pozycje: plan.pozycje }, odciski, teraz.dzien)
+      .then((l) => { if (aktualny) setLink(l); })
+      .catch(() => { if (aktualny) setLink(null); });
+    return () => { aktualny = false; };
+  }, [status, pusty, rozwiazane, plan.nazwa, plan.pozycje, teraz.dzien]);
+
+  const kopiujLink = async () => {
+    if (!link || link.zaDlugi) return;
+    akcje.komunikat((await skopiuj(link.url, poleLinku.current)) ? 'Link do planu skopiowany' : 'Nie udało się skopiować. Zaznacz link i skopiuj go ręcznie.');
+  };
 
   return createPortal(
     <>
@@ -152,22 +135,34 @@ export default function PlanPanel({ onZamknij }) {
           </p>
         )}
 
-        {status === 'ok' && !pusty && (
-          <>
-            {grupy.dni.map(({ dzien, pozycje }) => (
-              <section key={dzien} aria-label={naglowekDnia(dzien)}>
-                <h3 className="plan-dzien-naglowek">{naglowekDnia(dzien)}</h3>
-                {rysujPozycje(pozycje)}
-              </section>
-            ))}
-            {grupy.bezDnia.length > 0 && (
-              <section aria-label="Kiedy chcesz">
-                <h3 className="plan-dzien-naglowek">Kiedy chcesz</h3>
-                <p className="plan-podpis">Miejsca bez dnia. Wybierz datę, jeśli chcesz je zaplanować na konkretny dzień.</p>
-                {rysujPozycje(grupy.bezDnia)}
-              </section>
+        {status === 'ok' && !pusty && <PlanDni grupy={grupy} wKolizji={wKolizji} tryb="edycja" zamknij={onZamknij} />}
+
+        {!pusty && status === 'ok' && (
+          <div className="plan-akcje">
+            <button type="button" className="plan-przycisk glowny" disabled={!link || link.zaDlugi} onClick={kopiujLink}>🔗 Skopiuj link i wyślij</button>
+            <a
+              className={`plan-przycisk${!link || link.zaDlugi ? ' wylaczony' : ''}`}
+              href={link && !link.zaDlugi ? `${link.url}&druk=1` : undefined}
+              target="_blank"
+              rel="noopener"
+              aria-disabled={!link || link.zaDlugi}
+              role={!link || link.zaDlugi ? 'link' : undefined}
+              tabIndex={!link || link.zaDlugi ? -1 : undefined}
+            >
+              🖨 Drukuj / PDF
+            </a>
+            {link && link.zaDlugi && (
+              <p className="plan-ostrzezenie" role="alert">
+                Plan jest za długi na link ({link.dlugosc} znaków, bezpieczny limit to {MAKS_DLUGOSC_LINKU}). Usuń kilka pozycji i spróbuj ponownie.
+              </p>
             )}
-          </>
+            {link && !link.zaDlugi && (
+              <label className="plan-link-etykieta">
+                <span>Link do planu</span>
+                <input ref={poleLinku} className="plan-link-pole" readOnly value={link.url} onFocus={(e) => e.target.select()} />
+              </label>
+            )}
+          </div>
         )}
 
         <div className="plan-stopka">
@@ -182,7 +177,8 @@ export default function PlanPanel({ onZamknij }) {
           ))}
         </div>
         <p className="plan-uwaga">
-          Plan zapisuje się tylko w tej przeglądarce, na tym urządzeniu (maks. {MAKS_POZYCJI} pozycji). Godziny mogły się zmienić, przed wyjściem sprawdź u organizatora.
+          Plan zapisuje się tylko w tej przeglądarce, na tym urządzeniu (maks. {MAKS_POZYCJI} pozycji). Link zawiera wybrane pozycje, a serwis ich nie zapisuje.
+          Godziny mogły się zmienić, przed wyjściem sprawdź u organizatora.
         </p>
       </div>
     </>,
