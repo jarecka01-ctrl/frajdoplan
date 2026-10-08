@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import PlanPlus, { PlanGodziny } from './PlanPlus';
+import PlanPlus from './PlanPlus';
 
 /*
   Kafelek wydarzenia w kształcie biletu (styl .tk w styles/globals.css): po lewej odcinek z godziną (duża) i datą (mała, nad godziną),
@@ -7,28 +7,18 @@ import PlanPlus, { PlanGodziny } from './PlanPlus';
     nad     — mała linia nad godziną: data albo „od"; bez niej odcinek pokazuje samą godzinę;
     godzina — duża linia; puste = „cały dzień"; kilka godzin w jednym tekście = jedna pod drugą;
     children — prawa strona: <Nazwa …/> i <Szczegoly …/>;
-    plan    — { id, dzien, tytul, godziny? }: przycisk „+" (Mój plan) po prawej, pionowo na środku; bez niego bilet nie ma przycisku.
-              Gdy bilet ma kilka godzin (`godziny`: [{ godzina, id }] albo kilka godzin w tekście `godzina`), zamiast jednego „+" jest
-              osobna pastylka „+ 10:00" przy każdej godzinie.
+    plan    — { id, dzien, tytul }: jeden przycisk „+" (Mój plan) po prawej, pionowo na środku; bez niego bilet nie ma przycisku.
+              Bilet z kilkoma godzinami też ma jeden „+": wszystkie godziny wydarzenia pokazuje dopiero panel „Mój plan".
 */
 // Godzina z arkusza bywa wpisana jako kilka godzin („10:00, 12:00", „9:00; 11:30") albo zakres („10:00–12:00"):
 // każda godzina dostaje własną linię na odcinku, a zakres może się złamać po myślniku (znak niewidocznego odstępu).
 const godzinyOdcinka = (godzina) => String(godzina || '').split(/\s*[,;]\s*|\s+i\s+/).map((g) => g.trim()).filter(Boolean);
 const zLamaniemPoMyslniku = (g) => g.replace(/([–—-])(?=\d)/g, '$1\u200b');
 
-// Godziny, przy których dajemy osobne „+": z danych (`plan.godziny`, każda ma własne ID) albo z tekstu godziny wydarzenia (wspólne ID + `godz`).
-function godzinyDoPlanu(plan, godziny) {
-  if (!plan) return null;
-  if (plan.godziny && plan.godziny.length > 1) return plan.godziny;
-  const czasy = godziny.filter((g) => /\d{1,2}:\d{2}/.test(g));
-  return czasy.length > 1 ? czasy.map((g) => ({ godzina: g, id: plan.id, godz: g })) : null;
-}
-
 export default function Bilet({ nad, godzina, className = '', plan, children }) {
   const godziny = godzinyOdcinka(godzina);
-  const wielegodzin = godzinyDoPlanu(plan, godziny);
   return (
-    <li className={`tk${plan ? ' tk-plan' : ''}${wielegodzin ? ' tk-godziny' : ''} ${className}`.trim()}>
+    <li className={`tk${plan ? ' tk-plan' : ''} ${className}`.trim()}>
       <span className="tt">
         {nad && <span className="td">{nad}</span>}
         {godziny.length
@@ -37,9 +27,8 @@ export default function Bilet({ nad, godzina, className = '', plan, children }) 
       </span>
       <span className="tn">
         {children}
-        {wielegodzin && <PlanGodziny godziny={wielegodzin} dzien={plan.dzien} tytul={plan.tytul} />}
       </span>
-      {plan && !wielegodzin && <PlanPlus typ="wydarzenie" id={plan.id} dzien={plan.dzien} tytul={plan.tytul} />}
+      {plan && <PlanPlus typ="wydarzenie" id={plan.id} dzien={plan.dzien} tytul={plan.tytul} />}
     </li>
   );
 }

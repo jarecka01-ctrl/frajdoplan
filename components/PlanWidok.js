@@ -46,7 +46,7 @@ function Pozycja({ r, kolizja, tryb, zamknij }) {
         )}
       </div>
       {tryb === 'edycja' && (
-        <button type="button" className="plan-usun" aria-label={`Usuń z planu: ${r.tytul}`} onClick={() => akcje.usun(r.klucz, r.tytul)}>
+        <button type="button" className="plan-usun" aria-label={`Usuń z planu: ${r.tytul}`} onClick={() => { akcje.usun(r.klucz, r.tytul); (r.takze || []).forEach((k) => akcje.usun(k, r.tytul)); }}>
           <span aria-hidden="true">×</span>
         </button>
       )}

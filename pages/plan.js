@@ -6,7 +6,7 @@ import { seoStrony } from '../lib/seo';
 import { odkodujPlan } from '../lib/linkPlanu';
 import { useDanePlanu } from '../lib/danePlanu';
 import { usePlan, akcje } from '../lib/planStore';
-import { rozwiazPozycje, grupujPoDniach, znajdzKolizje, kluczPozycji, MAKS_POZYCJI } from '../lib/plan';
+import { rozwiazPlan, grupujPoDniach, znajdzKolizje, MAKS_POZYCJI } from '../lib/plan';
 import { zdarzenie } from '../lib/statystyki';
 import { dzisWarszawa, godzinaWarszawa, ladnaData } from '../components/Wydarzenia';
 
@@ -49,7 +49,7 @@ export default function PlanZLinku({ seo }) {
 
   const plan = wynik.etap === 'ok' ? wynik.plan : null;
   const rozwiazane = useMemo(
-    () => (plan && dane ? plan.pozycje.map((p) => rozwiazPozycje(p, dane, teraz, plan.odciski[kluczPozycji(p)])) : []),
+    () => (plan && dane ? rozwiazPlan(plan.pozycje, dane, teraz, plan.odciski) : []),
     [plan, dane, teraz],
   );
   const grupy = useMemo(() => grupujPoDniach(rozwiazane), [rozwiazane]);
