@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { jsonLdTekst } from '../lib/jsonld';
 import { KONTAKT_EMAIL } from '../lib/prawne';
 
+const WERSJA_IKON = 2;
+
 const MENU = [
   { href: '/', label: 'Atrakcje', dzial: '/atrakcje' },
   { href: '/sport', label: 'Sport' },
@@ -25,12 +27,14 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {seo.weryfikacjaGoogle && <meta name="google-site-verification" content={seo.weryfikacjaGoogle} />}
         <meta name="description" content={seo.opis} />
         <link rel="canonical" href={seo.canonical} />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        {/* ?v= to numer wersji ikon: przeglądarki bardzo długo pamiętają favicony, więc przy każdej wymianie ikon podnosimy numer (tu i w public/site.webmanifest) */}
+        <link rel="icon" href={`/favicon.ico?v=${WERSJA_IKON}`} sizes="any" />
+        <link rel="icon" type="image/png" sizes="16x16" href={`/favicon-16.png?v=${WERSJA_IKON}`} />
+        <link rel="icon" type="image/png" sizes="32x32" href={`/favicon-32.png?v=${WERSJA_IKON}`} />
+        <link rel="apple-touch-icon" href={`/apple-touch-icon.png?v=${WERSJA_IKON}`} />
+        <link rel="icon" type="image/png" sizes="192x192" href={`/icon-192.png?v=${WERSJA_IKON}`} />
+        <link rel="icon" type="image/png" sizes="512x512" href={`/icon-512.png?v=${WERSJA_IKON}`} />
+        <link rel="manifest" href={`/site.webmanifest?v=${WERSJA_IKON}`} />
         <meta name="theme-color" content="#F7B32B" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="pl_PL" />
