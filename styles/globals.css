@@ -132,6 +132,13 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .tk-link:focus-visible { outline: none; }
 .tk-link:focus-visible::after { outline: 3px solid var(--fk, var(--tusz)); outline-offset: 2px; }
 .tk-lista { gap: 12px; }
+/* wydarzenie, które już się zaczęło (kafelek „Dziś"): szary bilet i tekst z oznaczeniem, nie sam kolor; kontrast tekstu nadal min. AA */
+.tk-minelo { background: #F0ECE0; }
+.tk-minelo .tt b, .tk-minelo .tk-nazwa { color: var(--tusz-2); }
+.tk-minelo a { color: var(--tusz-2); text-decoration-color: #B9B2A0; }
+.tk-minelo:has(.tk-link):hover { background: #E9E4D5; }
+.tk-znacznik { font-weight: 700; color: var(--tusz); }
+.wyd-lista + .wyd-pusto { margin-top: 14px; }
 /* kolor wcięć = tło sekcji; w ciasnych sekcjach odcinek jest węższy */
 .wyd-glowna .tk { --nb: var(--slonce); }
 .wyd-mala .tk { --nb: var(--biel); --tw: 70px; }
