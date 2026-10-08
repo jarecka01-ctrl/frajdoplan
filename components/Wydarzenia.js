@@ -58,9 +58,9 @@ export const poGodzinie = (a, b) => (a.godzina || '99').localeCompare(b.godzina 
 const godzinyZTekstu = (t) => (String(t || '').match(/\d{1,2}:\d{2}/g) || []).map((g) => g.padStart(5, '0'));
 export const juzPo = (w, godz) => { const g = godzinyZTekstu(w.godzina); return g.length > 0 && g.every((x) => x <= godz); };
 
-function Karta({ w, minelo = false }) {
+function Karta({ w, dzien, minelo = false }) {
   return (
-    <Bilet className={minelo ? 'tk-minelo' : ''} godzina={w.godzina}>
+    <Bilet className={minelo ? 'tk-minelo' : ''} godzina={w.godzina} plan={{ id: w.id, dzien, tytul: w.nazwa }}>
       <Nazwa nazwa={w.nazwa} />
       <Szczegoly czesci={[minelo && <strong className="tk-znacznik">Już się zaczęło</strong>, w.miejsce, w.wiek, w.cena, w.link && <a className="tk-link" href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>]} />
     </Bilet>
@@ -99,7 +99,7 @@ function Slajdy({ pozycje, miejsca, pusto, etykieta }) {
       >
         <ul className="wyd-lista slajdy-lista" aria-live="polite">
           {widoczne.map((w) => (
-            <Bilet key={`${w.id}-${w.dzien || ''}`} className="tk-s" nad={w.dzien} godzina={w.godzina}>
+            <Bilet key={`${w.id}-${w.dzien || ''}`} className="tk-s" nad={w.dzien} godzina={w.godzina} plan={{ id: w.id, dzien: w.iso, tytul: w.nazwa }}>
               <Tytul w={w} miejsca={miejsca} />
               <Szczegoly czesci={[w.miejsce]} />
             </Bilet>
@@ -147,7 +147,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
     ...(przyszle.length < NA_LISTE ? minione.slice(-(NA_LISTE - przyszle.length)).map((w) => ({ w, minelo: true })) : []), // najświeższe minione, jeśli jest miejsce
   ];
   const jutroLista = naDzien(jutro);
-  const weekend = [...naDzien(sob).map((w) => ({ ...w, dzien: 'sob.' })), ...naDzien(nd).map((w) => ({ ...w, dzien: 'niedz.' }))];
+  const weekend = [...naDzien(sob).map((w) => ({ ...w, dzien: 'sob.', iso: sob })), ...naDzien(nd).map((w) => ({ ...w, dzien: 'niedz.', iso: nd }))];
 
   return (
     <section className="wydarzenia" aria-label="Wydarzenia">
@@ -159,7 +159,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
             {dzis.length ? (
               <>
-                <ul className="wyd-lista">{dzis.map(({ w, minelo }) => <Karta key={w.id} w={w} minelo={minelo} />)}</ul>
+                <ul className="wyd-lista">{dzis.map(({ w, minelo }) => <Karta key={w.id} w={w} dzien={teraz} minelo={minelo} />)}</ul>
                 {!przyszle.length && (
                   <>
                     <p className="wyd-pusto">Na dziś to już wszystko. Zobacz, co jest jutro</p>
@@ -179,7 +179,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <h2 className="wyd-tytul">Jutro dla dzieci w Krakowie</h2>
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
             {jutroLista.length ? (
-              <ul className="wyd-lista">{jutroLista.slice(0, 6).map((w) => <Karta key={w.id} w={w} />)}</ul>
+              <ul className="wyd-lista">{jutroLista.slice(0, 6).map((w) => <Karta key={w.id} w={w} dzien={jutro} />)}</ul>
             ) : (
               <p className="wyd-pusto">Na jutro też nie mamy jeszcze wydarzeń w kalendarzu.</p>
             )}
@@ -195,7 +195,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
           <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
           <Slajdy
             key={`jutro-${jutroLista.length}`}
-            pozycje={jutroLista}
+            pozycje={jutroLista.map((w) => ({ ...w, iso: jutro }))}
             miejsca={miejsca}
             pusto="Brak wydarzeń w kalendarzu."
             etykieta="Wydarzenia jutro"

@@ -1,0 +1,106 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mój plan – podgląd</title>
+<style>
+:root{--d:'Baloo 2','Nunito','Trebuchet MS',system-ui,sans-serif;--b:'Inter','Segoe UI',system-ui,sans-serif;--papier:#FFFDF7;--tusz:#20242B;--slonce:#F7B32B;--mak:#E4483A;--kreda:#EFE7D6;--miod:#FDE9B8;--soft:#5B6270;--zielen:#2F5D3A}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tusz);font:400 15px/1.5 var(--b);background:var(--papier);background-image:radial-gradient(rgba(32,36,43,.10) 1.1px,transparent 1.3px);background-size:22px 22px;padding-bottom:96px}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 0}
+.top{background:#F3ECDA;border-radius:0 0 24px 24px;margin:0 -16px 14px;padding:14px 18px 12px;font:700 26px/1 var(--d);letter-spacing:-.02em}
+.top small{display:block;font:500 12px/1.3 var(--b);color:var(--soft);letter-spacing:0;margin-top:3px}
+h2{font:700 26px/1 var(--d);letter-spacing:-.02em;margin:6px 0 2px}.dt{font-size:13px;color:var(--soft);margin:0 0 12px}
+.tk{--pl:12px;--tw:68px;position:relative;display:grid;grid-template-columns:var(--tw) 1fr;align-items:center;background:#FFFDF7;border:2px solid var(--tusz);border-radius:14px;padding:9px var(--pl);margin-bottom:12px}
+.tk:before,.tk:after{content:"";position:absolute;left:calc(var(--pl) + var(--tw) - 8px);width:14px;height:14px;background:var(--papier);border:2px solid var(--tusz);border-radius:50%}
+.tk:before{top:-9px;clip-path:inset(50% 0 0 0)}.tk:after{bottom:-9px;clip-path:inset(0 0 50% 0)}
+.tk .tt{border-right:2px dashed #cfc4a8;padding-right:8px;min-height:38px;display:flex;flex-direction:column;justify-content:center}
+.tk .tt b{font:700 18px/1.1 var(--d)}.tk .tt i{font:600 11px/1.1 var(--b);color:var(--soft);font-style:normal}
+.tk .tn{padding-left:12px;padding-right:38px;min-width:0}
+.tk .tn u{font:700 15px/1.2 var(--d);text-decoration:none;display:block}
+.tk .tn small{display:block;font-size:12px;color:var(--soft);margin-top:2px}
+.plus{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:2px solid var(--tusz);background:#fff;font:700 22px/1 var(--d);color:var(--tusz);cursor:pointer;display:grid;place-items:center;padding:0;transition:.15s}
+.plus:active{transform:translateY(-50%) scale(.92)}
+.plus.on{background:var(--slonce);box-shadow:2px 2px 0 var(--tusz)}
+.plus svg{width:16px;height:16px}
+.bar{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:10px 16px 14px;pointer-events:none;transform:translateY(120%);transition:.25s}
+.bar.show{transform:none}
+.bar button{pointer-events:auto;width:100%;max-width:528px;display:flex;align-items:center;gap:10px;background:var(--tusz);color:#fff;border:0;border-radius:18px;padding:13px 16px;font:700 16px/1 var(--d);box-shadow:0 6px 0 rgba(0,0,0,.18);cursor:pointer}
+.bar .n{background:var(--slonce);color:var(--tusz);border-radius:999px;min-width:26px;height:26px;display:grid;place-items:center;font-size:15px}
+.bar .go{margin-left:auto;font:600 13px var(--b);opacity:.85}
+.sheet-bg{position:fixed;inset:0;background:rgba(32,36,43,.45);opacity:0;pointer-events:none;transition:.2s}
+.sheet-bg.show{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:88vh;overflow:auto;background:var(--papier);border:2px solid var(--tusz);border-bottom:0;border-radius:24px 24px 0 0;padding:16px 16px 20px;transform:translateY(105%);transition:.28s;max-width:560px;margin:0 auto}
+.sheet.show{transform:none}
+.grab{width:44px;height:5px;border-radius:9px;background:#d6cdb8;margin:0 auto 10px}
+.sheet h3{font:700 26px/1 var(--d);margin:0;letter-spacing:-.02em;display:flex;justify-content:space-between;align-items:center}
+.x{border:2px solid var(--tusz);background:#fff;border-radius:50%;width:32px;height:32px;font:700 16px var(--b);cursor:pointer}
+.nm{margin:10px 0 4px;width:100%;border:2px solid var(--tusz);border-radius:12px;padding:9px 12px;font:600 15px var(--b);background:#fff}
+.warn{background:#fff3f0;border:2px dashed var(--mak);border-radius:12px;padding:8px 11px;font-size:13px;color:#8d2418;margin:8px 0}
+.warn b{font-family:var(--d);font-size:14px}
+.day{font:700 13px var(--d);letter-spacing:.07em;text-transform:uppercase;color:var(--soft);margin:12px 0 6px}
+.it{display:grid;grid-template-columns:52px 1fr 28px;gap:10px;align-items:start;padding:8px 0;border-bottom:2px dotted #d6cdb8}
+.it .h{font:700 17px/1.1 var(--d)}.it .h i{display:block;font:500 11px var(--b);color:var(--soft);font-style:normal;margin-top:2px}
+.it .t{font:700 15px/1.2 var(--d)}.it small{display:block;font-size:12px;color:var(--soft)}
+.it.c .h{color:var(--mak)}
+.rm{border:0;background:none;font-size:20px;color:var(--soft);cursor:pointer;line-height:1}
+.note{width:100%;margin-top:10px;border:2px solid var(--tusz);border-radius:12px;padding:9px 12px;font:400 14px var(--b);background:#fff;min-height:54px;resize:none}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.acts button{border:2px solid var(--tusz);background:#fff;border-radius:14px;padding:11px 8px;font:700 15px/1.1 var(--d);cursor:pointer;display:flex;gap:7px;align-items:center;justify-content:center}
+.acts button.pri{background:var(--slonce);box-shadow:3px 3px 0 var(--tusz);grid-column:1/3}
+.foot{font-size:11.5px;color:var(--soft);margin-top:10px;line-height:1.4}
+.toast{position:fixed;left:50%;top:14px;transform:translate(-50%,-80px);background:var(--tusz);color:#fff;border-radius:12px;padding:9px 14px;font:600 13px var(--b);transition:.25s;z-index:9}
+.toast.show{transform:translate(-50%,0)}
+.lab{position:fixed;right:10px;top:10px;font:600 11px var(--b);background:#fff7e0;border:1.5px dashed #B87500;color:#8a5a00;border-radius:8px;padding:4px 8px;z-index:5}
+@media(min-width:900px){.wrap{max-width:560px}}
+</style></head><body>
+<div class="top">Frajdoplan<small>przykładowy podgląd funkcji „Mój plan"</small></div>
+<div class="wrap">
+<h2>Sobota z dzieckiem</h2><p class="dt">sobota, 10 października · przykładowe wydarzenia</p>
+<div id="list"></div>
+</div>
+<div class="bar" id="bar"><button id="open"><span class="n" id="cnt">0</span>Mój plan<span class="go">Zobacz i wyślij ›</span></button></div>
+<div class="sheet-bg" id="bg"></div>
+<div class="sheet" id="sheet">
+ <div class="grab"></div>
+ <h3>Mój plan <button class="x" id="close" aria-label="Zamknij">✕</button></h3>
+ <input class="nm" id="nm" value="Sobota z dzieckiem" aria-label="Nazwa planu">
+ <div id="warn"></div>
+ <div id="items"></div>
+ <textarea class="note" id="note" placeholder="Notatka, np. zabrać zmianę ubrań i skarpetki antypoślizgowe"></textarea>
+ <div class="acts">
+  <button class="pri" data-t="Link skopiowany: frajdoplan.pl/plan?p=k3x9…">🔗 Skopiuj link i wyślij</button>
+  <button data-t="Otwieram okno drukowania / zapis PDF">🖨 Drukuj / PDF</button>
+  <button data-t="Pobrano plik .ics do kalendarza">📅 Do kalendarza</button>
+ </div>
+ <p class="foot">Plan zapisuje się tylko w tej przeglądarce. Link zawiera wybrane wydarzenia, bez konta. Godziny mogły się zmienić, przed wyjściem sprawdź u organizatora.</p>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const E=[
+ {id:1,t:'10:00',e:'11:30',n:'Zapomniana wyspa (dubbing)',p:'Kino Pod Baranami · od 5 lat',pr:'24 zł'},
+ {id:2,t:'12:00',e:'13:00',n:'Bankructwo Małego Dżeka',p:'Teatr Bagatela · od 7 lat',pr:'35 zł'},
+ {id:3,t:'14:00',e:'16:00',n:'Plac zabaw i spacer: Park Jordana',p:'al. 3 Maja · każdy wiek',pr:'0 zł'},
+ {id:4,t:'17:00',e:'18:00',n:'Magiczny ogród',p:'Teatr Groteska · od 4 lat',pr:'30 zł'},
+ {id:5,t:'17:30',e:'18:15',n:'Czytanie bajek: Kot w butach',p:'Biblioteka, filia nr 21 · od 3 lat',pr:'0 zł'}];
+const sel=new Set();const $=s=>document.querySelector(s);
+const CHK='<svg viewBox="0 0 16 16" fill="none" stroke="#20242B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
+function m(x){const[a,b]=x.split(':');return +a*60+ +b}
+function render(){
+ $('#list').innerHTML=E.map(v=>`<div class="tk"><div class="tt"><b>${v.t}</b><i>do ${v.e}</i></div><div class="tn"><u>${v.n}</u><small>${v.p}</small></div><button class="plus ${sel.has(v.id)?'on':''}" data-id="${v.id}" aria-pressed="${sel.has(v.id)}" aria-label="${sel.has(v.id)?'Usuń z planu':'Dodaj do planu'}: ${v.n}">${sel.has(v.id)?CHK:'+'}</button></div>`).join('');
+ const items=E.filter(v=>sel.has(v.id));
+ $('#cnt').textContent=items.length; $('#bar').classList.toggle('show',items.length>0);
+ let w=[];for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){if(m(items[i].t)<m(items[j].e)&&m(items[j].t)<m(items[i].e))w.push([items[i],items[j]])}
+ const cs=new Set(w.flat().map(v=>v.id));
+ $('#warn').innerHTML=w.map(([a,b])=>`<div class="warn"><b>Nakładają się godziny:</b> „${a.n}" (${a.t}–${a.e}) i „${b.n}" (${b.t}–${b.e}). Wybierz jedno albo dojedź na część.</div>`).join('');
+ $('#items').innerHTML='<div class="day">sobota, 10 października</div>'+(items.length?items.map(v=>`<div class="it ${cs.has(v.id)?'c':''}"><div class="h">${v.t}<i>do ${v.e}</i></div><div><div class="t">${v.n}</div><small>${v.p} · ${v.pr}</small></div><button class="rm" data-id="${v.id}" aria-label="Usuń">×</button></div>`).join(''):'<p class="foot">Plan jest pusty. Dodaj wydarzenia przyciskiem „+".</p>');
+}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('show'),1800)}
+function sheet(o){$('#sheet').classList.toggle('show',o);$('#bg').classList.toggle('show',o)}
+document.addEventListener('click',e=>{
+ const p=e.target.closest('.plus');if(p){const id=+p.dataset.id;sel.has(id)?sel.delete(id):(sel.add(id),toast('Dodano do planu'));render();return}
+ const r=e.target.closest('.rm');if(r){sel.delete(+r.dataset.id);render();return}
+ if(e.target.closest('#open'))sheet(true);
+ if(e.target.closest('#close')||e.target.id==='bg')sheet(false);
+ const a=e.target.closest('.acts button');if(a)toast(a.dataset.t);
+});
+const q=location.hash.slice(1);
+if(q==='1'||q==='2')[1,4,5].forEach(i=>sel.add(i));
+render();if(q==='2')sheet(true);
+</script></body></html>

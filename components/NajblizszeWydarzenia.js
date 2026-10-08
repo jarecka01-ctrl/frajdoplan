@@ -57,7 +57,7 @@ export default function NajblizszeWydarzenia({
       {wiersze.length ? (
         <ul className="k-lista">
           {wiersze.map((w) => (
-            <Bilet key={`${w.id}-${w.dzien}`} nad={krotkaDataBilet(w.dzien)} godzina={w.godziny[0] && w.godziny[0].godzina}>
+            <Bilet key={`${w.id}-${w.dzien}`} nad={krotkaDataBilet(w.dzien)} godzina={w.godziny[0] && w.godziny[0].godzina} plan={{ id: (w.godziny[0] && w.godziny[0].id) || w.id, dzien: w.dzien, tytul: w.nazwa }}>
               <Nazwa nazwa={w.nazwa} href={w.link} />
               <Szczegoly czesci={[
                 w.godziny.length > 1 && w.godziny.map((g) => g.godzina).join(', '),

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { adresKarty } from '../lib/miejsca';
+import PlanPlus from './PlanPlus';
 import { km, pozaRegionem, PROMIEN_REGIONU_KM } from '../lib/geo';
 import { IKONY, SKROTY } from '../lib/ikony';
 import { DZIALY, kategoriaRodzaju, odmianaMiejsc } from '../lib/kategorie';
@@ -263,7 +264,7 @@ export default function Katalog({
           {filtered.slice(0, limit).map((p) => {
             const pole = p.kategoria === 'Plener';
             return (
-              <li key={p.id} id={`miejsce-${p.id}`} tabIndex={-1} className={`karta ${pole ? 'karta-pole' : 'karta-dach'}`}>
+              <li key={p.id} id={`miejsce-${p.id}`} tabIndex={-1} className={`karta karta-plan ${pole ? 'karta-pole' : 'karta-dach'}`}>
                 <div className="karta-gora">
                   <span className="typ">
                     <span aria-hidden="true">{IKONY[rodzajZ(p)] || (pole ? '🌳' : '🏠')}</span>
@@ -284,6 +285,7 @@ export default function Katalog({
                   {strefaZ(p) === 'Pod Krakowem' && p.km != null && <span className="info">{Math.round(p.km)} km od Krakowa</span>}
                   {p.website && <a className="link" href={p.website} target="_blank" rel="noreferrer">Strona miejsca</a>}
                 </div>
+                <PlanPlus typ="miejsce" id={p.id} tytul={p.name} />
               </li>
             );
           })}

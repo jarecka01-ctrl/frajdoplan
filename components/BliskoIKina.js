@@ -60,7 +60,7 @@ function DzisWKinach({ places, wydarzenia, dzis, godz, info }) {
               ));
               // jeden seans: godzina jest na odcinku, a jego link obejmuje cały bilet (przez tytuł); kilka seansów: „od" i linki przy godzinach
               return (
-                <Bilet key={`${kino}-${f.nazwa}`} nad={jeden ? undefined : 'od'} godzina={f.seanse[0].godzina}>
+                <Bilet key={`${kino}-${f.nazwa}`} nad={jeden ? undefined : 'od'} godzina={f.seanse[0].godzina} plan={{ id: f.seanse[0].id, dzien: dataDnia, tytul: f.nazwa }}>
                   <Nazwa nazwa={f.nazwa} href={jeden ? f.seanse[0].link : undefined} />
                   <Szczegoly czesci={[kinoLink, godziny, f.wiek]} />
                 </Bilet>
