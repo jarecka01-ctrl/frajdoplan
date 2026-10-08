@@ -58,6 +58,8 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
           <img className="top-krakow" src="/brand/krakow-baner.png" alt="" width="1406" height="349" />
         </header>
         <nav className="menu" aria-label="Główne menu">
+          {/* skrót do listy miejsc na stronie głównej (jest na jej końcu, pod kalendarzem) */}
+          <Link href="/#miejsca" className="menu-link menu-skrot"><span aria-hidden="true">↓ </span>Miejsca</Link>
           {MENU.map((m) => (
             <Link key={m.href} href={m.href} className="menu-link" aria-current={aktywna(m, pathname) ? 'page' : undefined}>
               {m.label}

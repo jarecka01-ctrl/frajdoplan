@@ -84,6 +84,13 @@ export default function Katalog({
   useEffect(() => { setLimit(naStrone); setDodano(''); }, [strefa, kategoria, wybrane, query, naStrone]);
 
   // Link z kafelka wydarzeń (`/#miejsce-<id>`): pokaż tylko tę kartę i przewiń do niej.
+  // Wejście na `/#miejsca`: kafelki nad listą (kalendarz, kina…) wyrastają dopiero po załadowaniu strony, więc po chwili przewijamy jeszcze raz.
+  useEffect(() => {
+    if (!id || window.location.hash !== `#${id}`) return undefined;
+    const t = setTimeout(() => document.getElementById(id)?.scrollIntoView(), 200);
+    return () => clearTimeout(t);
+  }, [id]);
+
   useEffect(() => {
     const id = (window.location.hash.match(/^#miejsce-(.+)$/) || [])[1];
     const miejsce = id && places.find((p) => p.id === decodeURIComponent(id));

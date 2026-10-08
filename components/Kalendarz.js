@@ -66,7 +66,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
   const [widok, setWidok] = useState(null); // null = automat: z filtrem kategorii otwiera się Cały miesiąc, bez filtra Dzień
   const [limit, setLimit] = useState({ klucz: '', n: NA_START });
   useEffect(() => { const d = dzisWarszawa(); setDzis(d); setWybrany(d); }, []);
-  if (!dzis) return <section className="kalendarz" aria-hidden="true" />;
+  if (!dzis) return <section id="kalendarz" className="kalendarz" aria-hidden="true" />;
 
   const [r0, m0] = dzis.split('-').map(Number);
   const m = ((m0 - 1 + przesun) % 12) + 1;
@@ -108,7 +108,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
     : `Brak wydarzeń w ${MIESIAC_MIEJSCOWNIK[m - 1]}`;
 
   return (
-    <section className="kalendarz" aria-label="Kalendarz wydarzeń">
+    <section id="kalendarz" className="kalendarz" aria-label="Kalendarz wydarzeń">
       <h2 className="sekcja">Kalendarz wydarzeń dla dzieci</h2>
       {dostepne.length > 0 && (
         <div className="rodzaje kal-filtry" role="group" aria-label="Rodzaj wydarzenia">
