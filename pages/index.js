@@ -35,8 +35,8 @@ export default function Home({ places, wydarzenia = [], kina = null, muzyka = []
       </section>
       <Wydarzenia wydarzenia={wydarzenia} places={places} />
       <BliskoIKina places={places} wydarzenia={wydarzenia} kina={kina} muzyka={muzyka} />
-      <Katalog places={places} dzial="atrakcje" tytul="Miejsca na każdy dzień" placeholder="Szukaj: sala zabaw, Nowa Huta, trampoliny…" />
       <Kalendarz wydarzenia={wydarzenia} />
+      <Katalog id="miejsca" className="katalog-miejsca" naStrone={6} places={places} dzial="atrakcje" tytul="Miejsca na każdy dzień" placeholder="Szukaj: sala zabaw, Nowa Huta, trampoliny…" />
     </Uklad>
   );
 }

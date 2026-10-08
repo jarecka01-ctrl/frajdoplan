@@ -37,6 +37,7 @@ button, input, select { font: inherit; color: inherit; }
 .menu { display: flex; justify-content: flex-end; gap: 6px; margin: 16px 0 4px; }
 .menu-link { padding: 8px 15px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; flex: 0 0 auto; }
 .menu-link:hover { border-color: var(--kreda); }
+.menu-skrot { border-color: var(--kreda); border-style: dashed; margin-right: 6px; }
 .menu-link[aria-current="page"] { border-color: var(--tusz); background: var(--slonce); }
 @media (max-width: 1107px) { .top { margin: 0 -20px; padding: 16px 20px 0; } }
 @media (max-width: 1000px) { .brand-logo img { height: 84px; } }
@@ -232,6 +233,9 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 
 /* kalendarz miesiąca */
 .kalendarz { margin-top: 56px; }
+.katalog-miejsca { margin-top: 56px; }
+section[id] { scroll-margin-top: 16px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .kal-wrap { display: grid; gap: 18px; grid-template-columns: 1fr; }
 @media (min-width: 860px) { .kal-wrap { grid-template-columns: 1fr 1fr; align-items: start; } }
 .kal-miesiac { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 5px 5px 0 var(--slonce); padding: 16px; }

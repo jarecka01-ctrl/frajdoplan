@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { adresKarty } from '../lib/miejsca';
@@ -33,7 +33,7 @@ const KATEGORIE = [
 // Na stronie kategorii (`kategoria` + `kategorie` z serwera) kafelki po prostu przenoszą do innej kategorii.
 export default function Katalog({
   places, tytul, pokazDachPole = true, pokazStrefy = true, grupuj = 'podkategoria', placeholder = 'Szukaj po nazwie lub ulicy…',
-  dzial, kategorie, kategoria: aktywna, naStrone = NA_STRONE,
+  dzial, kategorie, kategoria: aktywna, naStrone = NA_STRONE, id, className,
 }) {
   // Na stronie kategorii pokazujemy od razu całą listę (bez zawężania do Krakowa), żeby była w HTML.
   const [strefa, setStrefa] = useState(pokazStrefy && !aktywna ? 'Kraków i okolice' : '');
@@ -44,6 +44,8 @@ export default function Katalog({
   const [wybrane, setWybrane] = useState([]); // kilka rodzajów naraz; pusto = wszystkie
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(naStrone);
+  const [dodano, setDodano] = useState(''); // komunikat dla czytnika ekranu po „Pokaż więcej"
+  const fokusNa = useRef(null); // id miejsca, na które trafia fokus, gdy przycisk znika (lista się skończyła)
   const [widok, setWidok] = useState('lista');
   const [ja, setJa] = useState(null); // położenie użytkownika, gdy kliknął „Blisko mnie" i się zgodził
   const [szukam, setSzukam] = useState(false);
@@ -79,9 +81,16 @@ export default function Katalog({
     );
   };
 
-  useEffect(() => setLimit(naStrone), [strefa, kategoria, wybrane, query, naStrone]);
+  useEffect(() => { setLimit(naStrone); setDodano(''); }, [strefa, kategoria, wybrane, query, naStrone]);
 
   // Link z kafelka wydarzeń (`/#miejsce-<id>`): pokaż tylko tę kartę i przewiń do niej.
+  // Wejście na `/#miejsca`: kafelki nad listą (kalendarz, kina…) wyrastają dopiero po załadowaniu strony, więc po chwili przewijamy jeszcze raz.
+  useEffect(() => {
+    if (!id || window.location.hash !== `#${id}`) return undefined;
+    const t = setTimeout(() => document.getElementById(id)?.scrollIntoView(), 200);
+    return () => clearTimeout(t);
+  }, [id]);
+
   useEffect(() => {
     const id = (window.location.hash.match(/^#miejsce-(.+)$/) || [])[1];
     const miejsce = id && places.find((p) => p.id === decodeURIComponent(id));
@@ -136,8 +145,22 @@ export default function Katalog({
 
   const wyczysc = () => { setKategoria(''); setWybrane([]); setQuery(''); };
 
+  // Dokłada kolejne miejsca po stronie klienta. Fokus zostaje na przycisku; gdy to ostatnia porcja i przycisk znika,
+  // przechodzi na pierwszy nowo dodany kafelek. Czytnik ekranu dostaje komunikat (ukryty akapit z aria-live).
+  const pokazWiecej = () => {
+    const ile = Math.min(naStrone, filtered.length - limit);
+    if (limit + naStrone >= filtered.length) fokusNa.current = filtered[limit].id;
+    setLimit(limit + naStrone);
+    setDodano((d) => `Dodano ${ile} ${odmianaMiejsc(ile)}${d.endsWith('\u00a0') ? '' : '\u00a0'}`); // zmiana tekstu przy każdym kliknięciu, żeby komunikat się powtórzył
+  };
+  useEffect(() => {
+    if (!fokusNa.current) return;
+    document.getElementById(`miejsce-${fokusNa.current}`)?.focus();
+    fokusNa.current = null;
+  }, [limit]);
+
   return (
-    <section aria-label={tytul}>
+    <section id={id} className={className} aria-label={tytul}>
       <h2 className="sekcja">{tytul}</h2>
       {pokazStrefy && (
         <nav className="strefy" aria-label="Gdzie szukasz">
@@ -240,7 +263,7 @@ export default function Katalog({
           {filtered.slice(0, limit).map((p) => {
             const pole = p.kategoria === 'Plener';
             return (
-              <li key={p.id} id={`miejsce-${p.id}`} className={`karta ${pole ? 'karta-pole' : 'karta-dach'}`}>
+              <li key={p.id} id={`miejsce-${p.id}`} tabIndex={-1} className={`karta ${pole ? 'karta-pole' : 'karta-dach'}`}>
                 <div className="karta-gora">
                   <span className="typ">
                     <span aria-hidden="true">{IKONY[rodzajZ(p)] || (pole ? '🌳' : '🏠')}</span>
@@ -269,11 +292,12 @@ export default function Katalog({
 
       {widok === 'lista' && filtered.length > limit && (
         <div className="wiecej">
-          <button className="przycisk" onClick={() => setLimit((l) => l + naStrone)}>
-            Pokaż kolejne {Math.min(naStrone, filtered.length - limit)}
+          <button type="button" className="przycisk" onClick={pokazWiecej}>
+            Pokaż więcej miejsc ({filtered.length - limit})
           </button>
         </div>
       )}
+      <p className="sr-only" role="status" aria-live="polite">{dodano}</p>
     </section>
   );
 }
