@@ -421,3 +421,18 @@ section[id] { scroll-margin-top: 16px; }
 .mapa-caly:active { transform: translate(3px, 3px); box-shadow: none; }
 .ja-pin span { display: block; width: 26px; height: 26px; box-sizing: border-box; border-radius: 6px; transform: rotate(45deg); background: var(--tusz); border: 3px solid var(--papier); box-shadow: 0 0 0 2px var(--tusz), 0 0 0 9px rgba(32, 36, 43, .18); }
 .kropka-ja { border-radius: 3px; background: var(--tusz); transform: rotate(45deg) scale(.85); margin-right: -6px; }
+
+/* strony prawne: polityka prywatności, regulamin, kontakt */
+.prawne { max-width: 720px; margin-bottom: 40px; }
+.prawne h1 { font: 700 clamp(34px, 7vw, 56px)/1 var(--font-display); letter-spacing: -0.02em; margin: 0 0 10px; }
+.prawne-data { margin: 0 0 24px; font-size: 14px; color: var(--tusz-2); }
+.prawne h2 { font: 700 24px/1.2 var(--font-display); margin: 34px 0 10px; }
+.prawne h3 { font: 700 18px/1.25 var(--font-display); margin: 22px 0 6px; }
+.prawne p, .prawne li { font-size: 16px; line-height: 1.65; }
+.prawne p { margin: 0 0 12px; }
+.prawne ul { margin: 0 0 12px; padding-left: 22px; }
+.prawne li { margin-bottom: 6px; }
+.prawne a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.prawne-historia { list-style: none; padding-left: 0; }
+/* brakujące dane do uzupełnienia: celowo bardzo widoczne */
+.uzupelnij { background: #FFE2DE; color: #9B1C12; border: 2px dashed var(--mak); border-radius: 6px; padding: 1px 6px; font-weight: 600; }
