@@ -9,6 +9,7 @@
     "repertuar": "node scripts/repertuar/uruchom.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "leaflet": "1.9.4",
     "next": "14.2.5",
     "papaparse": "5.4.1",

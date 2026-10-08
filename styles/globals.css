@@ -369,10 +369,12 @@ section[id] { scroll-margin-top: 16px; }
 .pusto p { margin: 0 0 16px; font-size: 17px; }
 
 /* stopka: przerywana linia i smok wychylający się zza dolnej krawędzi */
-.stopka { position: relative; margin-top: 30px; height: 170px; overflow: hidden; border-top: 2px dashed #d6cdb8; font-size: 13px; color: var(--tusz-2); }
+.stopka { position: relative; margin-top: 30px; min-height: 170px; padding-bottom: 24px; overflow: hidden; border-top: 2px dashed #d6cdb8; font-size: 13px; color: var(--tusz-2); }
 .stopka p { margin: 18px 0; max-width: 46ch; }
+.stopka .stopka-linki { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; max-width: calc(100% - 200px); }
+.stopka-linki a { color: var(--tusz); font-weight: 500; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; padding: 5px 0; }
 .stopka-smok { position: absolute; right: 30px; bottom: -14px; width: 150px; height: auto; }
-@media (max-width: 480px) { .stopka-smok { right: 6px; width: 110px; } .stopka p { max-width: 24ch; } }
+@media (max-width: 480px) { .stopka-smok { right: 6px; width: 110px; } .stopka p { max-width: 24ch; } .stopka .stopka-linki { max-width: calc(100% - 125px); } }
 
 @media (max-width: 480px) {
   .wyd-glowna { padding: 18px 14px 14px; }

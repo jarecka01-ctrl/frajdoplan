@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { jsonLdTekst } from '../lib/jsonld';
+import { KONTAKT_EMAIL } from '../lib/prawne';
 
 const MENU = [
   { href: '/', label: 'Atrakcje', dzial: '/atrakcje' },
@@ -71,6 +72,12 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {children}
         <footer className="stopka">
           <p>Frajdoplan, Kraków. Dane o miejscach pochodzą z publicznych źródeł, m.in. Map Google.</p>
+          <nav className="stopka-linki" aria-label="Informacje prawne i kontakt">
+            <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
+            <Link href="/regulamin">Regulamin</Link>
+            <Link href="/kontakt">Kontakt</Link>
+            <a href={`mailto:${KONTAKT_EMAIL}?subject=${encodeURIComponent('Błąd na stronie')}`}>Zgłoś błąd</a>
+          </nav>
           <img className="stopka-smok" src="/brand/smok.png" alt="" width="626" height="683" loading="lazy" />
         </footer>
       </div>
