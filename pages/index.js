@@ -13,9 +13,9 @@ export async function getStaticProps() {
     adres: '/',
     teksty: {
       tytul: 'Atrakcje dla dzieci w Krakowie: gdzie iść dziś | Frajdoplan',
-      opis: 'Sale zabaw, place zabaw, muzea, kina i wycieczki pod Krakowem. Sprawdź, gdzie iść z dzieckiem dziś i w weekend.',
+      opis: 'Co robić z dzieckiem w Krakowie? Aktualne wydarzenia na dziś i weekend, atrakcje i miejsca dla dzieci w Krakowie i okolicy – wszystko w jednym miejscu.',
       h1: 'Gdzie dziś idziemy?',
-      wstep: 'Miejsca dla dzieci w Krakowie i okolicy: od sal zabaw po wycieczki za miasto.',
+      wstep: 'Aktualne wydarzenia, atrakcje i miejsca dla dzieci w Krakowie i okolicy – wszystko w jednym miejscu.',
     },
   });
 }
