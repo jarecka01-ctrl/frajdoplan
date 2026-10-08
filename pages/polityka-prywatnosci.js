@@ -76,7 +76,7 @@ export default function PolitykaPrywatnosci({ seo }) {
       {/* TODO: gdy plan będzie dało się udostępniać linkiem (etap 2 funkcji „Mój plan"), dopisać, że link zawiera wybrane pozycje, a serwer ich nie zapisuje */}
       <p>
         Jedyne dane, które serwis zapisuje w pamięci przeglądarki (localStorage), to Twój plan z funkcji „Mój plan”: wybrane wydarzenia
-        i miejsca, ewentualnie wybrane przez Ciebie dni, nazwa planu i notatka. Zapis powstaje dopiero wtedy, gdy dodasz coś do planu,
+        i miejsca, ewentualnie wybrane przez Ciebie dni i godziny oraz nazwa planu. Zapis powstaje dopiero wtedy, gdy dodasz coś do planu,
         zostaje wyłącznie na Twoim urządzeniu i nie jest wysyłany na serwer. Możesz go usunąć w każdej chwili przyciskiem „Wyczyść plan”
         albo w ustawieniach przeglądarki.
       </p>

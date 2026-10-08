@@ -170,7 +170,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
                     <h3 className="kal-dzien-naglowek">{naglowekDnia(g.dzien)}</h3>
                     <ul className="kal-wiersze tk-lista">
                       {g.wiersze.map((w) => (
-                        <Bilet key={`${w.id}-${w.dzien}`} godzina={w.godziny[0] && w.godziny[0].godzina} plan={{ id: (w.godziny[0] && w.godziny[0].id) || w.id, dzien: w.dzien, tytul: w.nazwa }}>
+                        <Bilet key={`${w.id}-${w.dzien}`} godzina={w.godziny[0] && w.godziny[0].godzina} plan={{ id: (w.godziny[0] && w.godziny[0].id) || w.id, dzien: w.dzien, tytul: w.nazwa, godziny: w.godziny }}>
                           <Nazwa nazwa={w.nazwa} href={w.link} przed={ikonaKat(w) && <span aria-hidden="true" title={w.kategoria}>{ikonaKat(w)} </span>} />
                           <Szczegoly czesci={[godzinyPodTytulem(w.godziny, w.link), w.miejsce, w.wiek, w.cena]} />
                         </Bilet>

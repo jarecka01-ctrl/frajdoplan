@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { akcje, usePlan } from '../lib/planStore';
 import { useDanePlanu } from '../lib/danePlanu';
 import {
-  MAKS_NOTATKA, MAKS_NAZWA, MAKS_POZYCJI, DOMYSLNA_NAZWA, kluczPozycji, rozwiazPozycje, grupujPoDniach, znajdzKolizje,
+  MAKS_NAZWA, MAKS_POZYCJI, DOMYSLNA_NAZWA, kluczPozycji, rozwiazPozycje, grupujPoDniach, znajdzKolizje,
 } from '../lib/plan';
 import { NAZWY_DNI, ladnaData, dzienTygodnia, dzisWarszawa, godzinaWarszawa } from './Wydarzenia';
 
@@ -169,17 +169,6 @@ export default function PlanPanel({ onZamknij }) {
             )}
           </>
         )}
-
-        <label className="plan-notatka-etykieta" htmlFor="plan-notatka">Notatka do planu</label>
-        <textarea
-          id="plan-notatka"
-          className="plan-notatka"
-          value={plan.notatka}
-          maxLength={MAKS_NOTATKA}
-          placeholder="Np. zabrać zmianę ubrań i skarpetki antypoślizgowe"
-          onChange={(e) => akcje.ustawNotatke(e.target.value)}
-        />
-        <p className="plan-licznik" aria-hidden="true">{plan.notatka.length}/{MAKS_NOTATKA}</p>
 
         <div className="plan-stopka">
           {!pusty && (czyszczenie ? (
