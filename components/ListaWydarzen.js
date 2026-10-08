@@ -23,7 +23,7 @@ export default function ListaWydarzen({ miesiace, liczba, seo, nazwaOkruszka, pu
             <h2 className="sekcja">{m.nazwa.charAt(0).toUpperCase() + m.nazwa.slice(1)}</h2>
             <ul className="wyd-lista wyd-lista-strona tk-lista">
               {m.wiersze.map((w) => (
-                <Bilet key={`${w.id}-${w.dzien}`} nad={krotkaData(w.dzien)} godzina={w.godziny[0] && w.godziny[0].godzina}>
+                <Bilet key={`${w.id}-${w.dzien}`} nad={krotkaData(w.dzien)} godzina={w.godziny[0] && w.godziny[0].godzina} plan={{ id: (w.godziny[0] && w.godziny[0].id) || w.id, dzien: w.dzien, tytul: w.nazwa, godziny: w.godziny }}>
                   <Nazwa nazwa={w.nazwa} href={w.link} />
                   <Szczegoly czesci={[godzinyPodTytulem(w.godziny, w.link), w.miejsce, w.wiek, w.cena]} />
                 </Bilet>

@@ -26,7 +26,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {seo.noindex && <meta name="robots" content="noindex, nofollow" />}
         {seo.weryfikacjaGoogle && <meta name="google-site-verification" content={seo.weryfikacjaGoogle} />}
         <meta name="description" content={seo.opis} />
-        <link rel="canonical" href={seo.canonical} />
+        {seo.canonical && <link rel="canonical" href={seo.canonical} />}
         {/* ?v= to numer wersji ikon: przeglądarki bardzo długo pamiętają favicony, więc przy każdej wymianie ikon podnosimy numer (tu i w public/site.webmanifest) */}
         <link rel="icon" href={`/favicon.ico?v=${WERSJA_IKON}`} sizes="any" />
         <link rel="icon" type="image/png" sizes="16x16" href={`/favicon-16.png?v=${WERSJA_IKON}`} />
@@ -41,7 +41,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         <meta property="og:site_name" content="Frajdoplan" />
         <meta property="og:title" content={seo.tytul} />
         <meta property="og:description" content={seo.opis} />
-        <meta property="og:url" content={seo.canonical} />
+        {seo.canonical && <meta property="og:url" content={seo.canonical} />}
         <meta property="og:image" content={seo.obrazek} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

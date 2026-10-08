@@ -1,5 +1,6 @@
 import StronaPrawna, { Administrator, Email } from '../components/StronaPrawna';
 import { seoStrony } from '../lib/seo';
+import { ZDARZENIA_WLACZONE } from '../lib/statystyki';
 
 export async function getStaticProps() {
   const seo = await seoStrony('/polityka-prywatnosci', {
@@ -30,6 +31,14 @@ export default function PolitykaPrywatnosci({ seo }) {
         w przeglądarce, a dane są zanonimizowane: według opisu dostawcy odwiedziny nie są łączone z konkretną osobą ani między
         kolejnymi dniami. Podstawa prawna: uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO), czyli ulepszanie serwisu.
       </p>
+
+      {ZDARZENIA_WLACZONE && (
+        <p>
+          Statystyki zliczają też anonimowo samo użycie funkcji „Mój plan” (np. „dodano pozycję do planu”, „skopiowano link”, „pobrano plik
+          kalendarza”, „wydruk”) wraz z typem pozycji (wydarzenie albo miejsce) i liczbą pozycji w planie. Nigdy nie zapisują nazwy planu ani
+          jego treści.
+        </p>
+      )}
 
       <h3>b) Logi serwera (hosting)</h3>
       <p>
@@ -68,10 +77,23 @@ export default function PolitykaPrywatnosci({ seo }) {
         wyświetlisz mapę, obowiązuje opis z punktu 2d: serwery mapy zobaczą, jaki obszar wokół Ciebie oglądasz.
       </p>
 
-      <h2>4. Ciasteczka</h2>
+      <h2>4. Ciasteczka i pamięć przeglądarki</h2>
       <p>
-        Serwis nie ustawia ciasteczek (plików cookies) ani nie zapisuje danych w pamięci przeglądarki (np. w localStorage). Nie używam
-        ciasteczek śledzących, reklamowych ani analitycznych, dlatego na stronie nie ma baneru zgody na ciasteczka.
+        Serwis nie ustawia ciasteczek (plików cookies). Nie używam ciasteczek śledzących, reklamowych ani analitycznych, dlatego na
+        stronie nie ma baneru zgody na ciasteczka.
+      </p>
+      <p>
+        Plan możesz udostępnić linkiem. Wybrane pozycje (identyfikatory wydarzeń i miejsc, dni, godziny i nazwa planu) są wtedy zapisane
+        w samym adresie linku. Serwis ich nie przechowuje: link trafia tylko tam, gdzie go wyślesz. Gdy ktoś otworzy taki link, jego adres
+        (razem z zakodowanym planem) trafia, jak każdy adres strony, do logów hostingu opisanych w punkcie 2b, ale nie do statystyk
+        odwiedzin (z nich obcinamy część adresu po znaku zapytania). Strona z planem nie jest indeksowana przez wyszukiwarki i nie
+        przekazuje swojego adresu dalej.
+      </p>
+      <p>
+        Jedyne dane, które serwis zapisuje w pamięci przeglądarki (localStorage), to Twój plan z funkcji „Mój plan”: wybrane wydarzenia
+        i miejsca, ewentualnie wybrane przez Ciebie dni i godziny oraz nazwa planu. Zapis powstaje dopiero wtedy, gdy dodasz coś do planu,
+        zostaje wyłącznie na Twoim urządzeniu i nie jest wysyłany na serwer. Możesz go usunąć w każdej chwili przyciskiem „Wyczyść plan”
+        albo w ustawieniach przeglądarki.
       </p>
 
       <h2>5. Odbiorcy danych i dostawcy</h2>
@@ -126,6 +148,8 @@ export default function PolitykaPrywatnosci({ seo }) {
       <p>Aktualną wersję zawsze znajdziesz na tej stronie, a zmiany odnotowuję poniżej.</p>
       <ul className="prawne-historia">
         <li><strong>8 października 2026</strong>: pierwsza wersja polityki prywatności.</li>
+        <li><strong>8 października 2026</strong>: dopisany zapis planu („Mój plan”) w pamięci przeglądarki.</li>
+        <li><strong>8 października 2026</strong>: dopisane udostępnianie planu linkiem.</li>
       </ul>
     </StronaPrawna>
   );
