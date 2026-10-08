@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { jsonLdTekst } from '../lib/jsonld';
 import { KONTAKT_EMAIL } from '../lib/prawne';
 
+const WERSJA_IKON = 2;
+
 const MENU = [
   { href: '/', label: 'Atrakcje', dzial: '/atrakcje' },
   { href: '/sport', label: 'Sport' },
@@ -25,12 +27,14 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {seo.weryfikacjaGoogle && <meta name="google-site-verification" content={seo.weryfikacjaGoogle} />}
         <meta name="description" content={seo.opis} />
         <link rel="canonical" href={seo.canonical} />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        {/* ?v= to numer wersji ikon: przeglądarki bardzo długo pamiętają favicony, więc przy każdej wymianie ikon podnosimy numer (tu i w public/site.webmanifest) */}
+        <link rel="icon" href={`/favicon.ico?v=${WERSJA_IKON}`} sizes="any" />
+        <link rel="icon" type="image/png" sizes="16x16" href={`/favicon-16.png?v=${WERSJA_IKON}`} />
+        <link rel="icon" type="image/png" sizes="32x32" href={`/favicon-32.png?v=${WERSJA_IKON}`} />
+        <link rel="apple-touch-icon" href={`/apple-touch-icon.png?v=${WERSJA_IKON}`} />
+        <link rel="icon" type="image/png" sizes="192x192" href={`/icon-192.png?v=${WERSJA_IKON}`} />
+        <link rel="icon" type="image/png" sizes="512x512" href={`/icon-512.png?v=${WERSJA_IKON}`} />
+        <link rel="manifest" href={`/site.webmanifest?v=${WERSJA_IKON}`} />
         <meta name="theme-color" content="#F7B32B" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="pl_PL" />
@@ -53,8 +57,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
       <div className="wrap">
         <header className="top">
           <Link href="/" className="brand" aria-label="Frajdoplan: co robić z dzieckiem w Krakowie, strona główna">
-            <span className="brand-logo"><img src="/brand/nowe/slowo-nowe.png" alt="Frajdoplan" width="1325" height="361" /></span>
-            <img className="brand-smok" src="/brand/smok.png" alt="" width="626" height="683" />
+            <span className="brand-logo"><img src="/brand/nowe/logo-header.png" alt="Frajdoplan – co robić z dzieckiem w Krakowie" width="1528" height="449" /></span>
           </Link>
           <img className="top-krakow" src="/brand/krakow-baner.png" alt="" width="1406" height="349" />
         </header>
@@ -71,6 +74,8 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
         {fetchError && <div className="notice">Nie udało się pobrać danych z arkusza. Sprawdź, czy link CSV nadal działa.</div>}
         {children}
         <footer className="stopka">
+          {/* tło stopki jest jasne (papier), więc wersja z ciemnym napisem; na ciemne tło służy logo-slowo-jasne.png */}
+          <img className="stopka-logo" src="/brand/nowe/logo-slowo.png" alt="Frajdoplan" width="1528" height="361" loading="lazy" />
           <p>Frajdoplan, Kraków. Dane o miejscach pochodzą z publicznych źródeł, m.in. Map Google.</p>
           <nav className="stopka-linki" aria-label="Informacje prawne i kontakt">
             <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
@@ -78,7 +83,6 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
             <Link href="/kontakt">Kontakt</Link>
             <a href={`mailto:${KONTAKT_EMAIL}?subject=${encodeURIComponent('Błąd na stronie')}`}>Zgłoś błąd</a>
           </nav>
-          <img className="stopka-smok" src="/brand/smok.png" alt="" width="626" height="683" loading="lazy" />
         </footer>
       </div>
     </>
