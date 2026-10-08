@@ -53,11 +53,16 @@ export const zakresDat = (a, b) => {
 
 export const poGodzinie = (a, b) => (a.godzina || '99').localeCompare(b.godzina || '99');
 
-function Karta({ w }) {
+// Wydarzenie z godziną (jedną, kilkoma albo zakresem „10:00–12:00") jest „po", gdy wszystkie jego godziny już minęły; bez godziny = cały dzień, nie mija.
+// Znamy tylko godzinę rozpoczęcia, więc oznaczenie mówi „zaczęło się", nie „skończyło się".
+const godzinyZTekstu = (t) => (String(t || '').match(/\d{1,2}:\d{2}/g) || []).map((g) => g.padStart(5, '0'));
+export const juzPo = (w, godz) => { const g = godzinyZTekstu(w.godzina); return g.length > 0 && g.every((x) => x <= godz); };
+
+function Karta({ w, minelo = false }) {
   return (
-    <Bilet godzina={w.godzina}>
+    <Bilet className={minelo ? 'tk-minelo' : ''} godzina={w.godzina}>
       <Nazwa nazwa={w.nazwa} />
-      <Szczegoly czesci={[w.miejsce, w.wiek, w.cena, w.link && <a className="tk-link" href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>]} />
+      <Szczegoly czesci={[minelo && <strong className="tk-znacznik">Już się zaczęło</strong>, w.miejsce, w.wiek, w.cena, w.link && <a className="tk-link" href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>]} />
     </Bilet>
   );
 }
@@ -132,7 +137,15 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
   const naDzien = (iso) => wydarzenia.filter((w) => !w.kino && trwaW(w.data_regula, iso)).sort(poGodzinie);
   // „Dziś" to tylko to, co jeszcze się nie zaczęło (albo trwa cały dzień), tak samo jak w kafelku „Dziś w kinach"
   const godz = godzinaWarszawa();
-  const dzis = naDzien(teraz).filter((w) => !w.godzina || w.godzina > godz);
+  // Wydarzenia, które już się zaczęły, zostają na liście (wyszarzone, z oznaczeniem), pod tymi, które jeszcze przed nami.
+  const dzisWszystkie = naDzien(teraz);
+  const przyszle = dzisWszystkie.filter((w) => !juzPo(w, godz));
+  const minione = dzisWszystkie.filter((w) => juzPo(w, godz));
+  const NA_LISTE = 6;
+  const dzis = [
+    ...przyszle.slice(0, NA_LISTE).map((w) => ({ w, minelo: false })),
+    ...(przyszle.length < NA_LISTE ? minione.slice(-(NA_LISTE - przyszle.length)).map((w) => ({ w, minelo: true })) : []), // najświeższe minione, jeśli jest miejsce
+  ];
   const jutroLista = naDzien(jutro);
   const weekend = [...naDzien(sob).map((w) => ({ ...w, dzien: 'sob.' })), ...naDzien(nd).map((w) => ({ ...w, dzien: 'niedz.' }))];
 
@@ -145,7 +158,15 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <h2 className="wyd-tytul">Dziś dla dzieci w Krakowie</h2>
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
             {dzis.length ? (
-              <ul className="wyd-lista">{dzis.slice(0, 6).map((w) => <Karta key={w.id} w={w} />)}</ul>
+              <>
+                <ul className="wyd-lista">{dzis.map(({ w, minelo }) => <Karta key={w.id} w={w} minelo={minelo} />)}</ul>
+                {!przyszle.length && (
+                  <>
+                    <p className="wyd-pusto">Na dziś to już wszystko. Zobacz, co jest jutro</p>
+                    <p><button type="button" className="przycisk" onClick={() => setGlowny('jutro')}>Jutro dla dzieci w Krakowie</button></p>
+                  </>
+                )}
+              </>
             ) : (
               <>
                 <p className="wyd-pusto">Na dziś to już wszystko. Zobacz, co jest jutro</p>
