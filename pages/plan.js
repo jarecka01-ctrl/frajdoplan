@@ -7,6 +7,7 @@ import { odkodujPlan } from '../lib/linkPlanu';
 import { useDanePlanu } from '../lib/danePlanu';
 import { usePlan, akcje } from '../lib/planStore';
 import { rozwiazPozycje, grupujPoDniach, znajdzKolizje, kluczPozycji, MAKS_POZYCJI } from '../lib/plan';
+import { zdarzenie } from '../lib/statystyki';
 import { dzisWarszawa, godzinaWarszawa, ladnaData } from '../components/Wydarzenia';
 
 // Plan udostępniony linkiem (/plan?p=…). Strona nie jest indeksowana, nie ma adresu kanonicznego i nie trafia do sitemapy;
@@ -66,6 +67,14 @@ export default function PlanZLinku({ seo }) {
     const t = setTimeout(() => window.print(), 500);
     return () => clearTimeout(t);
   }, [druk, gotowy]);
+
+  // Statystyka wydruku: jedno zdarzenie na każde okno drukowania (przycisk, automatyczny druk i Ctrl+P).
+  useEffect(() => {
+    if (!plan) return undefined;
+    const przyDruku = () => zdarzenie('plan_wydruk', { liczba_pozycji: plan.pozycje.length });
+    window.addEventListener('beforeprint', przyDruku);
+    return () => window.removeEventListener('beforeprint', przyDruku);
+  }, [plan]);
 
   const wczytaj = (tryb) => {
     setZrobione(akcje.zaimportuj(plan, tryb));

@@ -1,5 +1,6 @@
 import StronaPrawna, { Administrator, Email } from '../components/StronaPrawna';
 import { seoStrony } from '../lib/seo';
+import { ZDARZENIA_WLACZONE } from '../lib/statystyki';
 
 export async function getStaticProps() {
   const seo = await seoStrony('/polityka-prywatnosci', {
@@ -30,6 +31,14 @@ export default function PolitykaPrywatnosci({ seo }) {
         w przeglądarce, a dane są zanonimizowane: według opisu dostawcy odwiedziny nie są łączone z konkretną osobą ani między
         kolejnymi dniami. Podstawa prawna: uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO), czyli ulepszanie serwisu.
       </p>
+
+      {ZDARZENIA_WLACZONE && (
+        <p>
+          Statystyki zliczają też anonimowo samo użycie funkcji „Mój plan” (np. „dodano pozycję do planu”, „skopiowano link”, „pobrano plik
+          kalendarza”, „wydruk”) wraz z typem pozycji (wydarzenie albo miejsce) i liczbą pozycji w planie. Nigdy nie zapisują nazwy planu ani
+          jego treści.
+        </p>
+      )}
 
       <h3>b) Logi serwera (hosting)</h3>
       <p>

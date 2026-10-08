@@ -3,6 +3,9 @@ import { createPortal } from 'react-dom';
 import { akcje, usePlan } from '../lib/planStore';
 import { useDanePlanu } from '../lib/danePlanu';
 import { zbudujLinkPlanu, MAKS_DLUGOSC_LINKU } from '../lib/linkPlanu';
+import { planDoIcs, opisPominietych } from '../lib/ics';
+import { zdarzenie } from '../lib/statystyki';
+import { slugZ } from '../lib/kategorie';
 import {
   MAKS_NAZWA, MAKS_POZYCJI, DOMYSLNA_NAZWA, rozwiazPozycje, grupujPoDniach, znajdzKolizje, odciskPozycji,
 } from '../lib/plan';
@@ -65,9 +68,12 @@ export default function PlanPanel({ onZamknij }) {
   const poleLinku = useRef(null);
   const [czyszczenie, setCzyszczenie] = useState(false);
   const [link, setLink] = useState(null); // { url, dlugosc, zaDlugi }
+  const [mozeUdostepnic, setMozeUdostepnic] = useState(false); // systemowe udostępnianie (telefony, część komputerów)
+  const [kalendarz, setKalendarz] = useState(''); // podsumowanie po pobraniu pliku .ics
   const { status, dane, ponow } = useDanePlanu();
   const teraz = useMemo(() => ({ dzien: dzisWarszawa(), godzina: godzinaWarszawa() }), []);
   useOknoDialogowe(oknoRef, onZamknij);
+  useEffect(() => { setMozeUdostepnic(typeof navigator.share === 'function'); }, []);
 
   const rozwiazane = useMemo(
     () => (dane ? plan.pozycje.map((p) => rozwiazPozycje(p, dane, teraz)) : []),
@@ -95,7 +101,41 @@ export default function PlanPanel({ onZamknij }) {
 
   const kopiujLink = async () => {
     if (!link || link.zaDlugi) return;
-    akcje.komunikat((await skopiuj(link.url, poleLinku.current)) ? 'Link do planu skopiowany' : 'Nie udało się skopiować. Zaznacz link i skopiuj go ręcznie.');
+    const udalo = await skopiuj(link.url, poleLinku.current);
+    if (udalo) zdarzenie('plan_link_skopiowany', { liczba_pozycji: plan.pozycje.length });
+    akcje.komunikat(udalo ? 'Link do planu skopiowany' : 'Nie udało się skopiować. Zaznacz link i skopiuj go ręcznie.');
+  };
+
+  // Systemowe okno udostępniania (WhatsApp, SMS, Messenger…); anulowanie przez użytkownika nic nie zmienia, inny błąd = kopiujemy link.
+  const udostepnij = async () => {
+    if (!link || link.zaDlugi) return;
+    try {
+      await navigator.share({ title: plan.nazwa, text: `${plan.nazwa}: plan z Frajdoplanu`, url: link.url });
+      zdarzenie('plan_udostepniono', { liczba_pozycji: plan.pozycje.length });
+    } catch (e) {
+      if (e && e.name === 'AbortError') return;
+      await kopiujLink();
+    }
+  };
+
+  // Plik .ics budowany w przeglądarce; miejsca bez dnia i wydarzenia, które się odbyły albo są niedostępne, pomijamy i mówimy o tym.
+  const doKalendarza = () => {
+    const wynik = planDoIcs(plan.nazwa, rozwiazane, window.location.origin);
+    const pominiete = opisPominietych(wynik.pominieto);
+    if (!wynik.dodano) {
+      setKalendarz(`Nie ma czego dodać do kalendarza.${pominiete ? ` Pominięto: ${pominiete}.` : ''} Miejsca trzeba najpierw przypisać do dnia.`);
+      return;
+    }
+    const adres = URL.createObjectURL(new Blob([wynik.ics], { type: 'text/calendar;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = adres;
+    a.download = `${slugZ(plan.nazwa) || 'moj-plan'}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(adres), 10000);
+    zdarzenie('plan_kalendarz', { liczba_pozycji: wynik.dodano });
+    setKalendarz(`Pobrano plik kalendarza: ${wynik.dodano} pozycji.${pominiete ? ` Pominięto: ${pominiete}.` : ''}`);
   };
 
   return createPortal(
@@ -139,7 +179,15 @@ export default function PlanPanel({ onZamknij }) {
 
         {!pusty && status === 'ok' && (
           <div className="plan-akcje">
-            <button type="button" className="plan-przycisk glowny" disabled={!link || link.zaDlugi} onClick={kopiujLink}>🔗 Skopiuj link i wyślij</button>
+            {mozeUdostepnic ? (
+              <>
+                <button type="button" className="plan-przycisk glowny" disabled={!link || link.zaDlugi} onClick={udostepnij}>📤 Wyślij</button>
+                <button type="button" className="plan-przycisk" disabled={!link || link.zaDlugi} onClick={kopiujLink}>🔗 Skopiuj link</button>
+              </>
+            ) : (
+              <button type="button" className="plan-przycisk glowny" disabled={!link || link.zaDlugi} onClick={kopiujLink}>🔗 Skopiuj link i wyślij</button>
+            )}
+            <button type="button" className="plan-przycisk" onClick={doKalendarza}>📅 Do kalendarza</button>
             <a
               className={`plan-przycisk${!link || link.zaDlugi ? ' wylaczony' : ''}`}
               href={link && !link.zaDlugi ? `${link.url}&druk=1` : undefined}
@@ -151,6 +199,7 @@ export default function PlanPanel({ onZamknij }) {
             >
               🖨 Drukuj / PDF
             </a>
+            {kalendarz && <p className="plan-info" role="status">{kalendarz}</p>}
             {link && link.zaDlugi && (
               <p className="plan-ostrzezenie" role="alert">
                 Plan jest za długi na link ({link.dlugosc} znaków, bezpieczny limit to {MAKS_DLUGOSC_LINKU}). Usuń kilka pozycji i spróbuj ponownie.
