@@ -14,12 +14,6 @@ export async function getStaticProps() {
 export default function PolitykaPrywatnosci({ seo }) {
   return (
     <StronaPrawna seo={seo} nazwa="Polityka prywatności" aktualizacja="8 października 2026">
-      <p>
-        Ta strona wyjaśnia prostym językiem, jakie dane osobowe przetwarza serwis Frajdoplan (frajdoplan.pl) i jakie prawa przysługują
-        osobom, których dane dotyczą. Opisuje stan na dzień aktualizacji: w serwisie nie ma kont, formularzy ani newslettera.
-        Gdy to się zmieni, zaktualizuję tę politykę.
-      </p>
-
       <h2>1. Kto jest administratorem danych</h2>
       <p>
         Administratorem danych osobowych jest <Administrator />, osoba fizyczna prowadząca serwis Frajdoplan poza działalnością
