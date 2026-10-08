@@ -7,7 +7,7 @@ import { planDoIcs, opisPominietych } from '../lib/ics';
 import { zdarzenie } from '../lib/statystyki';
 import { slugZ } from '../lib/kategorie';
 import {
-  MAKS_NAZWA, MAKS_POZYCJI, DOMYSLNA_NAZWA, rozwiazPozycje, grupujPoDniach, znajdzKolizje, odciskPozycji,
+  MAKS_NAZWA, MAKS_POZYCJI, DOMYSLNA_NAZWA, rozwiazPlan, grupujPoDniach, znajdzKolizje, odciskPozycji,
 } from '../lib/plan';
 import { dzisWarszawa, godzinaWarszawa } from './Wydarzenia';
 import PlanDni, { naglowekDnia } from './PlanWidok';
@@ -76,7 +76,7 @@ export default function PlanPanel({ onZamknij }) {
   useEffect(() => { setMozeUdostepnic(typeof navigator.share === 'function'); }, []);
 
   const rozwiazane = useMemo(
-    () => (dane ? plan.pozycje.map((p) => rozwiazPozycje(p, dane, teraz)) : []),
+    () => (dane ? rozwiazPlan(plan.pozycje, dane, teraz) : []),
     [plan.pozycje, dane, teraz],
   );
   const grupy = useMemo(() => grupujPoDniach(rozwiazane), [rozwiazane]);

@@ -453,11 +453,6 @@ section[id] { scroll-margin-top: 16px; }
 .plan-plus:active { transform: translateY(-50%) scale(.92); }
 .plan-plus.on { background: var(--slonce); box-shadow: 2px 2px 0 var(--tusz); }
 .tk-plan .tn { padding-right: 44px; }
-.tk-godziny .tn { padding-right: 0; }
-.plan-godziny { display: flex; flex-wrap: wrap; gap: 8px 6px; margin-top: 8px; }
-.plan-godzina { position: relative; min-height: 32px; padding: 0 12px; border-radius: 999px; border: 2px solid var(--tusz); background: var(--biel); color: var(--tusz); font: 700 14px/1 var(--font-display); cursor: pointer; display: inline-flex; align-items: center; z-index: 2; }
-.plan-godzina::before { content: ""; position: absolute; inset: -6px -3px; } /* pole dotyku min. 44 px wysokości */
-.plan-godzina.on { background: var(--slonce); box-shadow: 2px 2px 0 var(--tusz); }
 .karta-plan { position: relative; padding-right: 64px; }
 .karta-plan .plan-plus { right: 14px; }
 
