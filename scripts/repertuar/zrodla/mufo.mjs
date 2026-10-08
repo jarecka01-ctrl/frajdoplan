@@ -69,7 +69,7 @@ export default {
   nazwa: 'MuFo Muzeum Fotografii',
   url: `${BAZA}/odwiedzaj/wydarzenia`,
   rodzaj: 'wydarzenia',
-  miejsca: [['MuFo Rakowicka', /mufo\s+rakowicka/i], ['MuFo Józefitów', /mufo\s+józefitów/i], ['Muzeum Fotografii w Krakowie', /muzeum\s+fotografii/i]],
+  miejsca: [[/rakowicka/i, /mufo\s+rakowicka/i]], // MuFo Józefitów nie ma karty w arkuszu „Miejsca"
   async pobierz() {
     const dzis = dzisWarszawa();
     let lista = parsuj(await pobierz(`${LISTA}&active_page=1`, { robots: true }));

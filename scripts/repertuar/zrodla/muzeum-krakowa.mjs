@@ -102,7 +102,8 @@ export default {
   nazwa: 'Muzeum Krakowa',
   url: `${BAZA}/kalendarium`,
   rodzaj: 'wydarzenia',
-  miejsca: [['Muzeum Krakowa', /muzeum\s+krakowa|krzysztofory|schindler|emalia|stara\s+synagoga|apteka\s+pod\s+orłem|rydlówka|muzeum\s+podgórza|nowej\s+huty|kamienica\s+hipolit|przystań/i]],
+  // oddziały z kartą w arkuszu „Miejsca"; pozostałe zostają bez powiazane_miejsce_id
+  miejsca: [[/krzysztofory/i, /krzysztofory/i], [/muzeum\s+podgórza/i, /^muzeum\s+podgórza$/i]],
   async pobierz() {
     const jakoMapa = new Map();
     const zbieraj = (arr) => arr.forEach((w) => jakoMapa.set(`${w.strona}|${w.data}|${w.godzina}`, w));

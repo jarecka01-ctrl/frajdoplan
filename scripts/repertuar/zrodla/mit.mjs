@@ -74,7 +74,7 @@ export default {
   url: `${BAZA}/wydarzenia/`,
   rodzaj: 'wydarzenia',
   miejsca: [
-    ['Muzeum Inżynierii i Techniki', /muzeum\s+inżynierii/i],
+    [/muzeum\s+inżynierii/i, /muzeum\s+inżynierii/i],
     ['Hangar Czyżyny', /hangar\s+czyżyny/i],
     ['Ogród Doświadczeń im. Stanisława Lema', /ogród\s+doświadczeń/i],
   ],

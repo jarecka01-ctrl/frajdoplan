@@ -133,7 +133,8 @@ export default {
   nazwa: 'Muzeum Narodowe w Krakowie',
   url: `${BAZA}/wydarzenia/`,
   rodzaj: 'wydarzenia',
-  miejsca: [['Muzeum Narodowe w Krakowie', /muzeum\s+narodowe\s+w\s+krakowie|\bMNK\b/i]],
+  // tylko oddziały, które mają kartę w arkuszu „Miejsca" (Gmach Główny = al. 3 Maja 1, Pałac Czapskich); reszta zostaje bez powiazane_miejsce_id
+  miejsca: [[/gmach\s+główny|^muzeum\s+narodowe/i, /^muzeum\s+narodowe\s+w\s+krakowie$/i], [/czapscy/i, /ogród\s+czapskich/i]],
   async pobierz() {
     const wszystkie = await listaAjax('');
     const znacznik = new Set((await listaAjax('rodzice-i-dzieci')).map((w) => w.strona));
