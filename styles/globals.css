@@ -369,10 +369,12 @@ section[id] { scroll-margin-top: 16px; }
 .pusto p { margin: 0 0 16px; font-size: 17px; }
 
 /* stopka: przerywana linia i smok wychylający się zza dolnej krawędzi */
-.stopka { position: relative; margin-top: 30px; height: 170px; overflow: hidden; border-top: 2px dashed #d6cdb8; font-size: 13px; color: var(--tusz-2); }
+.stopka { position: relative; margin-top: 30px; min-height: 170px; padding-bottom: 24px; overflow: hidden; border-top: 2px dashed #d6cdb8; font-size: 13px; color: var(--tusz-2); }
 .stopka p { margin: 18px 0; max-width: 46ch; }
+.stopka .stopka-linki { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; max-width: calc(100% - 200px); }
+.stopka-linki a { color: var(--tusz); font-weight: 500; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; padding: 5px 0; }
 .stopka-smok { position: absolute; right: 30px; bottom: -14px; width: 150px; height: auto; }
-@media (max-width: 480px) { .stopka-smok { right: 6px; width: 110px; } .stopka p { max-width: 24ch; } }
+@media (max-width: 480px) { .stopka-smok { right: 6px; width: 110px; } .stopka p { max-width: 24ch; } .stopka .stopka-linki { max-width: calc(100% - 125px); } }
 
 @media (max-width: 480px) {
   .wyd-glowna { padding: 18px 14px 14px; }
@@ -421,3 +423,18 @@ section[id] { scroll-margin-top: 16px; }
 .mapa-caly:active { transform: translate(3px, 3px); box-shadow: none; }
 .ja-pin span { display: block; width: 26px; height: 26px; box-sizing: border-box; border-radius: 6px; transform: rotate(45deg); background: var(--tusz); border: 3px solid var(--papier); box-shadow: 0 0 0 2px var(--tusz), 0 0 0 9px rgba(32, 36, 43, .18); }
 .kropka-ja { border-radius: 3px; background: var(--tusz); transform: rotate(45deg) scale(.85); margin-right: -6px; }
+
+/* strony prawne: polityka prywatności, regulamin, kontakt */
+.prawne { max-width: 720px; margin-bottom: 40px; }
+.prawne h1 { font: 700 clamp(34px, 7vw, 56px)/1 var(--font-display); letter-spacing: -0.02em; margin: 0 0 10px; }
+.prawne-data { margin: 0 0 24px; font-size: 14px; color: var(--tusz-2); }
+.prawne h2 { font: 700 24px/1.2 var(--font-display); margin: 34px 0 10px; }
+.prawne h3 { font: 700 18px/1.25 var(--font-display); margin: 22px 0 6px; }
+.prawne p, .prawne li { font-size: 16px; line-height: 1.65; }
+.prawne p { margin: 0 0 12px; }
+.prawne ul { margin: 0 0 12px; padding-left: 22px; }
+.prawne li { margin-bottom: 6px; }
+.prawne a { color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.prawne-historia { list-style: none; padding-left: 0; }
+/* brakujące dane do uzupełnienia: celowo bardzo widoczne */
+.uzupelnij { background: #FFE2DE; color: #9B1C12; border: 2px dashed var(--mak); border-radius: 6px; padding: 1px 6px; font-weight: 600; }
