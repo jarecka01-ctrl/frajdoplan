@@ -559,7 +559,7 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
 .herogrid .hero-glowna { margin: 10px 0 0; }
 .pg { margin-top: 14px; max-width: 100%; }
 .pg .strip { display: none; }
-.pg .wcard { background: var(--biel); border: 2px solid var(--tusz); border-radius: 18px 18px 18px 6px; box-shadow: 4px 4px 0 var(--tusz); padding: 10px 12px; }
+.pg .wcard { background: none; border: 0; box-shadow: none; padding: 0; } /* dyskretny moduł: bez białej ramki, tylko kafelki pór dnia */
 .pg .segs { display: grid; grid-template-columns: repeat(3, 1fr); border: 2px solid var(--tusz); border-radius: 12px; overflow: hidden; }
 .pg .seg { padding: 7px 3px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1px; background: var(--papier); min-width: 0; }
 .pg .seg + .seg { border-left: 2px dashed #cfc4a8; }
@@ -575,7 +575,7 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
 .pg .l1, .pg .a2 { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 11px; color: var(--tusz-2); }
 .pg .l1 { margin: 6px 2px 0; }
 .pg .wcard a { font-weight: 700; font-size: 11.5px; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; white-space: nowrap; }
-.pg .air { margin-top: 8px; padding-top: 8px; border-top: 2px dashed #cfc4a8; }
+.pg .air { margin-top: 4px; }
 .pg .gauge { display: flex; align-items: center; gap: 7px; font: 700 15px var(--font-display); }
 .pg .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--tusz); flex: 0 0 auto; }
 .pg .a2 { margin-top: 2px; }

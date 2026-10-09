@@ -8,7 +8,7 @@ const Ikona = ({ typ }) => {
 const Kropla = () => (<svg viewBox="0 0 16 16" className="ic" aria-hidden="true"><path d="M8 1.5C5.5 5 3.5 7.2 3.5 9.8a4.5 4.5 0 0 0 9 0C12.5 7.2 10.5 5 8 1.5z" fill="#E4483A" /></svg>);
 const Ptak = () => (<svg viewBox="0 0 16 16" className="ic" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="#2F5D3A" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /></svg>);
 
-const URL_IMGW = 'https://pogodynka.pl/polska/krakow'; // szczegóły pogody
+const URL_MET = 'https://www.yr.no/en/forecast/daily-table/2-3094802/Poland/Lesser%20Poland/Krak%C3%B3w/Krak%C3%B3w'; // szczegóły prognozy (yr.no = MET Norway)
 const URL_AIRLY = 'https://airly.org/map/pl/#50.0647,19.9450'; // mapa wszystkich czujników
 
 // Dla zwiniętego paska na telefonie: najbliższa pora, w której będzie padać
@@ -41,11 +41,11 @@ export default function PogodaPowietrze({ pogoda, powietrze }) {
               </div>
             ))}
           </div>
-          <div className="l1"><span>Prognoza: MET Norway</span><a href={URL_IMGW} target="_blank" rel="noopener noreferrer">Szczegóły (IMGW) ›</a></div>
+          <div className="l1"><span>Prognoza: MET Norway</span><a href={URL_MET} target="_blank" rel="noopener noreferrer">Szczegóły ›</a></div>
           {powietrze && (
             <div className="air">
               <div className="a1"><span className="gauge"><i className="dot" style={{ background: powietrze.kolor }} /><b>Powietrze: {powietrze.etykieta}</b></span></div>
-              <div className="a2"><span>średnia ze stacji GIOŚ w Krakowie ({powietrze.stacje})</span><a href={URL_AIRLY} target="_blank" rel="noopener noreferrer">Sprawdź wszystko (Airly) ›</a></div>
+              <div className="a2"><span>średnia ze stacji GIOŚ w Krakowie</span><a href={URL_AIRLY} target="_blank" rel="noopener noreferrer">Sprawdź wszystko (Airly) ›</a></div>
             </div>
           )}
         </div>
