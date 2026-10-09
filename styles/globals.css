@@ -552,44 +552,45 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
   .plan-druk-stopka { margin-top: 10mm; font-size: 10pt; border-top: 1px solid #999; padding-top: 3mm; }
 }
 
-/* widżet „Pogoda i powietrze" (strona główna): prawa kolumna obok menu i nagłówka; na telefonie zwinięty pasek */
+/* „Zobacz wszystko" w kafelkach Jutro i Weekend + okno z pełną listą */
+.slajdy-wszystko { margin: 6px 0 0; text-align: center; }
+.slajdy-wszystko-link { border: 0; background: none; padding: 4px 6px; cursor: pointer; font: 700 13px var(--font-body); color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.wokno-tlo { position: fixed; inset: 0; z-index: 60; background: rgba(32, 36, 43, .55); }
+.wokno { position: fixed; z-index: 61; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(560px, calc(100vw - 32px)); max-height: 86vh; display: flex; flex-direction: column;
+  background: var(--papier); color: var(--tusz); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 6px 6px 0 var(--mak); padding: 20px 20px 12px; }
+.wokno-weekend { box-shadow: 6px 6px 0 #B87500; }
+.wokno:focus { outline: none; }
+.wokno .stempel { left: 18px; right: auto; top: -14px; font-size: 13px; }
+.wokno-tytul { font: 700 24px/1.15 var(--font-display); margin: 4px 44px 2px 0; }
+.wokno .wyd-data { margin: 0 0 10px; }
+.wokno-zamknij { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); font: 700 22px/1 var(--font-body); cursor: pointer; display: grid; place-items: center; padding: 0; }
+.wokno-lista { overflow-y: auto; overscroll-behavior: contain; flex: 1; min-height: 0; margin: 0; padding: 2px 4px 6px 2px; }
+.wokno .tk { --nb: var(--papier); --tw: 70px; }
+.wokno-stopka { margin: 0; padding-top: 6px; text-align: center; border-top: 2px dashed #d6cdb8; }
+@media (max-width: 640px) {
+  .wokno { left: 0; right: 0; top: auto; bottom: 0; transform: none; width: auto; max-height: 90vh; border-bottom: 0; border-radius: 22px 22px 0 0; box-shadow: none; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .wokno .stempel { left: 16px; }
+}
+
+/* widżet „Pogoda i powietrze" (strona główna): dyskretny jednowierszowy pasek po prawej, na wysokość menu i na szerokość kafelka „Jutro";
+   na telefonie zwinięty pasek, po dotknięciu ten sam pasek w dwóch rzędach */
 .herogrid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 18px; align-items: start; margin: 0 0 22px; }
 .herogrid > * { min-width: 0; }
 .menu-lewo { justify-content: flex-start; }
-.herogrid .hero-glowna { margin: 10px 0 0; }
-.pg { margin-top: 14px; max-width: 100%; }
+.herogrid .hero-glowna { margin: 26px 0 0; }
+.pg { margin-top: 16px; max-width: 100%; } /* 16px = górny margines menu, żeby oba rzędy stały równo */
 .pg .strip { display: none; }
-.pg .wcard { background: var(--biel); border: 2px solid var(--tusz); border-radius: 18px 18px 18px 6px; box-shadow: 4px 4px 0 var(--tusz); padding: 10px 12px; }
-.pg .segs { display: grid; grid-template-columns: repeat(3, 1fr); border: 2px solid var(--tusz); border-radius: 12px; overflow: hidden; }
-.pg .seg { padding: 7px 3px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1px; background: var(--papier); min-width: 0; }
-.pg .seg + .seg { border-left: 2px dashed #cfc4a8; }
-.pg .sn { font: 700 12px/1.15 var(--font-display); }
-.pg .sn small { display: block; font: 600 10px var(--font-body); color: var(--tusz-2); }
-.pg .wi { width: 30px; height: 30px; }
-.pg .sh { display: contents; }
-.pg .st { font: 700 19px/1 var(--font-display); }
-.pg .pchip { display: inline-flex; align-items: center; gap: 2px; font: 700 10.5px/1.1 var(--font-body); border-radius: 999px; padding: 3px 6px; border: 1.5px solid; white-space: nowrap; margin-top: 2px; }
-.pg .pchip .ic { width: 10px; height: 10px; }
-.pg .pchip.dry { background: #E6F2E1; border-color: #2F5D3A; color: #1f4129; }
-.pg .pchip.wet { background: #FDE3DF; border-color: var(--mak); color: #8d2418; }
-.pg .l1, .pg .a2 { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 11px; color: var(--tusz-2); }
-.pg .l1 { margin: 6px 2px 0; }
-.pg .wcard a { font-weight: 700; font-size: 11.5px; color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; white-space: nowrap; }
-.pg .air { margin-top: 8px; padding-top: 8px; border-top: 2px dashed #cfc4a8; }
-.pg .gauge { display: flex; align-items: center; gap: 7px; font: 700 15px var(--font-display); }
+.pg .wrow { display: flex; align-items: center; justify-content: space-between; gap: 4px; height: 42px; padding: 0 8px; background: var(--papier); border: 2px solid var(--tusz); border-radius: 999px; }
+.pg .wc { display: inline-flex; align-items: center; gap: 3px; min-width: 0; white-space: nowrap; }
+.pg .wc + .wc { padding-left: 5px; border-left: 2px dashed #cfc4a8; }
+.pg .wc .sn { font: 700 11.5px/1 var(--font-display); color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.pg .wi { width: 18px; height: 18px; flex: 0 0 auto; }
+.pg .st { font: 700 13px/1 var(--font-display); }
 .pg .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--tusz); flex: 0 0 auto; }
-.pg .a2 { margin-top: 2px; }
-@media (min-width: 641px) {
-  .pg .seg { padding: 5px 4px 6px; flex-direction: row; flex-wrap: wrap; justify-content: center; align-content: center; row-gap: 2px; column-gap: 6px; }
-  .pg .sh { display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; }
-  .pg .sh .wi { width: 22px; height: 22px; }
-  .pg .sn { text-align: left; }
-  .pg .seg .st { font-size: 17px; }
-  .pg .seg .pchip { margin-top: 0; }
-}
-@media (max-width: 640px) {
+/* poniżej 1100 px kolumna jest za wąska na jeden rząd: układ jednokolumnowy i zwinięty pasek */
+@media (max-width: 1100px) {
   .herogrid { grid-template-columns: 1fr; gap: 12px; margin: 0 0 18px; }
-  .herogrid .hero-glowna { margin: 6px 0 0; }
+  .herogrid .hero-glowna { margin: 14px 0 0; }
   .pg { margin-top: 0; }
   .pg .strip { display: flex; align-items: center; gap: 10px; width: 100%; background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px 16px 16px 5px; box-shadow: 3px 3px 0 var(--tusz); padding: 9px 12px; font: 600 13px var(--font-body); color: var(--tusz); cursor: pointer; text-align: left; }
   .pg .strip .wi { width: 26px; height: 26px; }
@@ -598,8 +599,12 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
   .pg .strip .s3 { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
   .pg .strip .dot { width: 11px; height: 11px; }
   .pg .strip .chev { font-size: 18px; line-height: 1; }
-  .pg .pgfull { display: none; margin-top: 12px; }
+  .pg .pgfull { display: none; margin-top: 10px; }
   .pg.open .pgfull { display: block; }
   .pg.open .chev { transform: rotate(180deg); }
+  .pg .wrow { height: auto; flex-wrap: wrap; border-radius: 18px; padding: 8px 12px; row-gap: 8px; }
+  .pg .wc { flex: 1 1 45%; }
+  .pg .wc + .wc { border-left: 0; padding-left: 0; }
+  .pg .wc .sn { font-size: 13px; }
 }
 @media print { .pg { display: none !important; } }
