@@ -16,8 +16,20 @@ const MENU = [
 const aktywna = (m, pathname) => pathname === m.href || pathname.startsWith(`${m.dzial || m.href}/`) || pathname === m.dzial;
 
 // `seo` przychodzi z getStaticProps (lib/seo.js): tytul, opis, canonical, obrazek. `jsonLd` = lista obiektów schema.org.
-export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetchError }) {
+export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetchError, hero = null, widget = null }) {
   const { pathname } = useRouter();
+  // Menu jest jedno; gdy strona ma widżet (strona główna), stoi po lewej nad nagłówkiem, a widżet po prawej.
+  const menu = (
+    <nav className={`menu${widget ? ' menu-lewo' : ''}`} aria-label="Główne menu">
+      {/* skrót do listy miejsc na stronie głównej (jest na jej końcu, pod kalendarzem) */}
+      <Link href="/#miejsca" className="menu-link menu-skrot"><span aria-hidden="true">↓ </span>Miejsca</Link>
+      {MENU.map((m) => (
+        <Link key={m.href} href={m.href} className="menu-link" aria-current={aktywna(m, pathname) ? 'page' : undefined}>
+          {m.label}
+        </Link>
+      ))}
+    </nav>
+  );
   return (
     <>
       <Head>
@@ -61,15 +73,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
           </Link>
           <img className="top-krakow" src="/brand/krakow-baner.png" alt="" width="1406" height="349" />
         </header>
-        <nav className="menu" aria-label="Główne menu">
-          {/* skrót do listy miejsc na stronie głównej (jest na jej końcu, pod kalendarzem) */}
-          <Link href="/#miejsca" className="menu-link menu-skrot"><span aria-hidden="true">↓ </span>Miejsca</Link>
-          {MENU.map((m) => (
-            <Link key={m.href} href={m.href} className="menu-link" aria-current={aktywna(m, pathname) ? 'page' : undefined}>
-              {m.label}
-            </Link>
-          ))}
-        </nav>
+        {widget ? <div className="herogrid"><div className="lewo">{menu}{hero}</div>{widget}</div> : <>{menu}{hero}</>}
         {missingConfig && <div className="notice">Brak zmiennej <code>SHEET_CSV_URL</code>. Ustaw ją w Vercel (Settings → Environment Variables).</div>}
         {fetchError && <div className="notice">Nie udało się pobrać danych z arkusza. Sprawdź, czy link CSV nadal działa.</div>}
         {children}
