@@ -13,9 +13,9 @@ export async function getStaticProps() {
     adres: '/',
     teksty: {
       tytul: 'Atrakcje dla dzieci w Krakowie: gdzie iść dziś | Frajdoplan',
-      opis: 'Co robić z dzieckiem w Krakowie? Aktualne wydarzenia na dziś i weekend, atrakcje i miejsca dla dzieci w Krakowie i okolicy – wszystko w jednym miejscu.',
+      opis: 'Co robić z dzieckiem w Krakowie? Aktualne wydarzenia na dziś i weekend, atrakcje i miejsca dla dzieci w Krakowie i okolicy – wszystko pod ręką.',
       h1: 'Gdzie dziś idziemy?',
-      wstep: 'Aktualne wydarzenia, atrakcje i miejsca dla dzieci w Krakowie i okolicy – wszystko w jednym miejscu.',
+      wstep: 'Aktualne wydarzenia, atrakcje i miejsca dla dzieci w Krakowie i okolicy – wszystko pod ręką.',
     },
   });
 }
