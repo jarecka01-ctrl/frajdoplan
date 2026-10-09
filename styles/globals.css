@@ -552,6 +552,26 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
   .plan-druk-stopka { margin-top: 10mm; font-size: 10pt; border-top: 1px solid #999; padding-top: 3mm; }
 }
 
+/* „Zobacz wszystko" w kafelkach Jutro i Weekend + okno z pełną listą */
+.slajdy-wszystko { margin: 6px 0 0; text-align: center; }
+.slajdy-wszystko-link { border: 0; background: none; padding: 4px 6px; cursor: pointer; font: 700 13px var(--font-body); color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.wokno-tlo { position: fixed; inset: 0; z-index: 60; background: rgba(32, 36, 43, .55); }
+.wokno { position: fixed; z-index: 61; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(560px, calc(100vw - 32px)); max-height: 86vh; display: flex; flex-direction: column;
+  background: var(--papier); color: var(--tusz); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 6px 6px 0 var(--mak); padding: 20px 20px 12px; }
+.wokno-weekend { box-shadow: 6px 6px 0 #B87500; }
+.wokno:focus { outline: none; }
+.wokno .stempel { left: 18px; right: auto; top: -14px; font-size: 13px; }
+.wokno-tytul { font: 700 24px/1.15 var(--font-display); margin: 4px 44px 2px 0; }
+.wokno .wyd-data { margin: 0 0 10px; }
+.wokno-zamknij { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); font: 700 22px/1 var(--font-body); cursor: pointer; display: grid; place-items: center; padding: 0; }
+.wokno-lista { overflow-y: auto; overscroll-behavior: contain; flex: 1; min-height: 0; margin: 0; padding: 2px 4px 6px 2px; }
+.wokno .tk { --nb: var(--papier); --tw: 70px; }
+.wokno-stopka { margin: 0; padding-top: 6px; text-align: center; border-top: 2px dashed #d6cdb8; }
+@media (max-width: 640px) {
+  .wokno { left: 0; right: 0; top: auto; bottom: 0; transform: none; width: auto; max-height: 90vh; border-bottom: 0; border-radius: 22px 22px 0 0; box-shadow: none; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .wokno .stempel { left: 16px; }
+}
+
 /* widżet „Pogoda i powietrze" (strona główna): dyskretny jednowierszowy pasek po prawej, na wysokość menu i na szerokość kafelka „Jutro";
    na telefonie zwinięty pasek, po dotknięciu ten sam pasek w dwóch rzędach */
 .herogrid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 18px; align-items: start; margin: 0 0 22px; }

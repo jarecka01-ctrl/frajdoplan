@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useOknoDialogowe } from '../lib/oknoDialogowe';
+import { useEffect, useRef, useState } from 'react';
 import { adresKarty } from '../lib/miejsca';
 import Bilet, { Nazwa, Szczegoly } from './Bilet';
 
@@ -77,7 +79,7 @@ function Tytul({ w, miejsca }) {
 
 // Małe kafelki „Jutro" i „Weekend": stała wysokość, po 3 wydarzenia na slajd, strzałki ‹ › i przesunięcie palcem.
 const NA_SLAJD = 3;
-function Slajdy({ pozycje, miejsca, pusto, etykieta }) {
+function Slajdy({ pozycje, miejsca, pusto, etykieta, onWszystko }) {
   const [nr, setNr] = useState(0);
   const [start, setStart] = useState(null);
   const ile = Math.max(1, Math.ceil(pozycje.length / NA_SLAJD));
@@ -107,19 +109,55 @@ function Slajdy({ pozycje, miejsca, pusto, etykieta }) {
         </ul>
       </div>
       {ile > 1 && (
+        <>
         <div className="slajdy-nav">
           <button type="button" className="slajdy-strzalka" onClick={() => idz(-1)} disabled={biezacy === 0} aria-label="Poprzednie wydarzenia">‹</button>
           <span className="slajdy-licznik" aria-label={`Strona ${biezacy + 1} z ${ile}`}>{biezacy + 1} / {ile}</span>
           <button type="button" className="slajdy-strzalka" onClick={() => idz(1)} disabled={biezacy === ile - 1} aria-label="Następne wydarzenia">›</button>
         </div>
+        {onWszystko && (
+          <p className="slajdy-wszystko">
+            <button type="button" className="slajdy-wszystko-link" onClick={onWszystko}>Zobacz wszystko ({pozycje.length}) <span aria-hidden="true">›</span></button>
+          </p>
+        )}
+        </>
       )}
     </div>
+  );
+}
+
+// Okno „Zobacz wszystko": pełna lista wydarzeń dnia albo weekendu (te same bilety co w kafelku, z „+" do planu).
+// Renderowane do body (poza #__next, który na czas okna jest nieaktywny), jak panel „Mój plan".
+function OknoWszystkich({ tytul, data, mod, stempel, pozycje, miejsca, onZamknij }) {
+  const ref = useRef(null);
+  useOknoDialogowe(ref, onZamknij);
+  return createPortal(
+    <>
+      <div className="wokno-tlo" onClick={onZamknij} aria-hidden="true" />
+      <div ref={ref} className={`wokno${mod ? ` ${mod}` : ''}`} role="dialog" aria-modal="true" aria-labelledby="wokno-tytul" tabIndex={-1}>
+        <span className={`stempel${mod ? ' stempel-weekend' : ''}`}>{stempel}</span>
+        <button type="button" className="wokno-zamknij" onClick={onZamknij} aria-label="Zamknij">×</button>
+        <h2 id="wokno-tytul" className="wokno-tytul">{tytul}</h2>
+        <p className="wyd-data">{data} · {pozycje.length} {pozycje.length === 1 ? 'wydarzenie' : 'wydarzeń'}</p>
+        <ul className="wyd-lista wokno-lista">
+          {pozycje.map((w) => (
+            <Bilet key={`${w.id}-${w.dzien || ''}-${w.godzina || ''}`} className="tk-s" nad={w.dzien} godzina={w.godzina} plan={{ id: w.id, dzien: w.iso, tytul: w.nazwa }}>
+              <Tytul w={w} miejsca={miejsca} />
+              <Szczegoly czesci={[w.miejsce, w.wiek, w.cena]} />
+            </Bilet>
+          ))}
+        </ul>
+        <p className="wokno-stopka"><button type="button" className="slajdy-wszystko-link" onClick={onZamknij}>Zamknij</button></p>
+      </div>
+    </>,
+    document.body,
   );
 }
 
 export default function Wydarzenia({ wydarzenia, places = [] }) {
   const [teraz, setTeraz] = useState(null); // liczone w przeglądarce, żeby „dziś" zawsze było dzisiaj
   const [glowny, setGlowny] = useState('dzis'); // co pokazuje duża sekcja: dziś albo (po kliknięciu) jutro
+  const [okno, setOkno] = useState(null); // 'jutro' | 'weekend' | null: otwarte okno „Zobacz wszystko"
 
   useEffect(() => setTeraz(dzisWarszawa()), []);
 
@@ -199,6 +237,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             miejsca={miejsca}
             pusto="Brak wydarzeń w kalendarzu."
             etykieta="Wydarzenia jutro"
+            onWszystko={() => setOkno('jutro')}
           />
         </div>
         <div className="wyd-mala">
@@ -211,9 +250,18 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             miejsca={miejsca}
             pusto="Brak wydarzeń w kalendarzu."
             etykieta="Wydarzenia w najbliższy weekend"
+            onWszystko={() => setOkno('weekend')}
           />
         </div>
       </div>
+      {okno === 'jutro' && jutroLista.length > 0 && (
+        <OknoWszystkich stempel="Jutro" tytul="Jutro dla dzieci w Krakowie" data={`${NAZWY_DNI[dzienTygodnia(jutro)]}, ${ladnaData(jutro)}`}
+          pozycje={jutroLista.map((w) => ({ ...w, iso: jutro }))} miejsca={miejsca} onZamknij={() => setOkno(null)} />
+      )}
+      {okno === 'weekend' && weekend.length > 0 && (
+        <OknoWszystkich stempel="Weekend" mod="wokno-weekend" tytul={wWeekend ? 'Kolejny weekend dla dzieci w Krakowie' : 'Najbliższy weekend dla dzieci w Krakowie'} data={zakresDat(sob, nd)}
+          pozycje={weekend} miejsca={miejsca} onZamknij={() => setOkno(null)} />
+      )}
     </section>
   );
 }
