@@ -98,10 +98,10 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .wydarzenia-ladowanie { min-height: 220px; }
 .wyd-glowna {
   background: var(--slonce); border: 2px solid var(--tusz); border-radius: 28px 28px 28px 8px;
-  box-shadow: 6px 6px 0 var(--tusz); padding: 22px 22px 18px; position: relative;
+  box-shadow: 6px 6px 0 var(--tusz); padding: 28px 22px 18px; position: relative; /* góra niżej, żeby naklejka nie nachodziła na tytuł */
 }
 .wyd-boczne { display: grid; gap: 18px; grid-template-rows: 1fr 1fr; }
-.wyd-mala { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 16px 18px; position: relative; min-width: 0; }
+.wyd-mala { background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 5px 5px 0 var(--mak); padding: 26px 18px 16px; position: relative; min-width: 0; }
 .wyd-tytul { font: 700 clamp(30px, 5vw, 40px)/1 var(--font-display); margin: 0; letter-spacing: -0.015em; }
 .wyd-tytul-maly { font: 700 22px/1.1 var(--font-display); margin: 0; }
 .wyd-data { margin: 4px 0 14px; font-size: 14px; color: var(--tusz-2); }
@@ -448,7 +448,7 @@ section[id] { scroll-margin-top: 16px; }
 .stopka-linki a { color: var(--tusz); font-weight: 500; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; padding: 5px 0; }
 
 @media (max-width: 480px) {
-  .wyd-glowna { padding: 18px 14px 14px; }
+  .wyd-glowna { padding: 28px 14px 14px; }
   .selecty { grid-template-columns: 1fr; }
   .strefy { flex-wrap: nowrap; overflow-x: auto; margin-right: -20px; padding-right: 20px; scrollbar-width: none; }
   .strefy::-webkit-scrollbar { display: none; }
