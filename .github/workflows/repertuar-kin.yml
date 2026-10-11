@@ -46,6 +46,9 @@ jobs:
           SHEET_CSV_URL: ${{ vars.SHEET_CSV_URL || secrets.SHEET_CSV_URL }}
           # adres CSV zakładki „Wyjątki" (opcjonalny): tytuły, które zawsze pokazujemy albo ukrywamy; bez niego działa sam data/wyjatki.json
           SHEET_WYJATKI_CSV_URL: ${{ vars.SHEET_WYJATKI_CSV_URL || secrets.SHEET_WYJATKI_CSV_URL }}
+          # adres API kupbilecik.pl z tokenem partnera (TYLKO jako sekret repozytorium, nigdy w kodzie); bez niego to źródło jest pomijane.
+          # Limit API: 3 zapytania na minutę i 10 na godzinę, więc moduł robi jedno zapytanie na przebieg.
+          KUPBILECIK_API_URL: ${{ secrets.KUPBILECIK_API_URL }}
         run: |
           set +e
           node scripts/repertuar/uruchom.mjs
