@@ -7,7 +7,7 @@
 var ZAKLADKI = {
   wydarzenie: {
     nazwa: 'Zgłoszenia_wydarzeń',
-    kolumny: ['rola', 'nazwa', 'kategoria', 'data_regula', 'godzina', 'miejsce', 'adres', 'wiek', 'cena', 'link', 'opis', 'email'],
+    kolumny: ['rola', 'nazwa', 'kategoria', 'czestosc', 'data_regula', 'cykl_od', 'cykl_do', 'cykl_opis', 'godzina', 'miejsce', 'adres', 'wiek', 'cena', 'link', 'opis', 'email'],
     tytul: 'Nowe wydarzenie'
   },
   miejsce: {

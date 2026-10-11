@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { POLA, sprawdzZgloszenie } from '../lib/zgloszenia';
+import { POLA, czyWidoczne, sprawdzZgloszenie } from '../lib/zgloszenia';
 import { KONTAKT_EMAIL } from '../lib/prawne';
 
 /*
@@ -19,6 +19,8 @@ export default function FormularzZgloszenia({ typ }) {
   const [stan, setStan] = useState('gotowy'); // gotowy | wysylanie | ok
   const [bledy, setBledy] = useState({});
   const [blad, setBlad] = useState('');
+  const [wartosci, setWartosci] = useState({}); // wartości list wyboru, od których zależy widoczność innych pól
+  const przyZmianie = (e) => { const { name, value, tagName } = e.target; if (tagName === 'SELECT') setWartosci((w) => ({ ...w, [name]: value })); };
   const start = useRef(0);
   const formularz = useRef(null);
   useEffect(() => { start.current = Date.now(); }, [stan]);
@@ -26,7 +28,7 @@ export default function FormularzZgloszenia({ typ }) {
   async function wyslij(e) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    const dane = Object.fromEntries(pola.map((p) => [p.id, String(f.get(p.id) || '')]));
+    const dane = Object.fromEntries(pola.filter((p) => czyWidoczne(p, wartosci)).map((p) => [p.id, String(f.get(p.id) || '')]));
     const zgoda = f.get('zgoda') === 'on';
     const wynik = sprawdzZgloszenie(typ, dane);
     const lokalne = { ...(wynik.bledy || {}) };
@@ -61,14 +63,14 @@ export default function FormularzZgloszenia({ typ }) {
     return (
       <div className="zgl-sukces" role="status">
         <p><strong>{t.sukces}</strong></p>
-        <p><button type="button" className="przycisk" onClick={() => setStan('gotowy')}>{t.kolejne}</button></p>
+        <p><button type="button" className="przycisk" onClick={() => { setWartosci({}); setStan('gotowy'); }}>{t.kolejne}</button></p>
       </div>
     );
   }
 
   return (
-    <form ref={formularz} className="zgl" onSubmit={wyslij} noValidate>
-      {pola.map((p) => {
+    <form ref={formularz} className="zgl" onSubmit={wyslij} onChange={przyZmianie} noValidate>
+      {pola.filter((p) => czyWidoczne(p, wartosci)).map((p) => {
         const id = `zgl-${typ}-${p.id}`;
         const opis = [p.pomoc && `${id}-pomoc`, bledy[p.id] && `${id}-blad`].filter(Boolean).join(' ') || undefined;
         const wspolne = { id, name: p.id, required: !!p.wymagane, 'aria-invalid': bledy[p.id] ? true : undefined, 'aria-describedby': opis, maxLength: p.max, placeholder: p.placeholder, className: 'zgl-pole' };

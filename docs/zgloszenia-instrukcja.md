@@ -40,7 +40,7 @@ Wejdź na `/dodaj/wydarzenie`, wypełnij formularz (np. testowo, z datą jutrzej
 
 ## Jak przeglądać zgłoszenia
 
-- Zakładka `Zgłoszenia_wydarzeń`: kolumna `data_regula` ma ten sam format co w zakładce „Wydarzenia" (`2026-10-03` albo `2026-10-01 do 2026-10-05`).
+- Zakładka `Zgłoszenia_wydarzeń`: kolumna `czestosc` mówi, czy wydarzenie jest `jednorazowe`, trwa `kilka` dni, czy jest `cykliczne`. Kolumna `data_regula` ma ten sam format co w zakładce „Wydarzenia" (`2026-10-03`, `2026-10-01 do 2026-10-05`, `co sobotę`, `codziennie`). Gdy zgłaszający wybrał „Inaczej" (np. pierwsza sobota miesiąca), `data_regula` jest pusta, a opis jest w `cykl_opis`, więc regułę trzeba wpisać ręcznie. `cykl_od` i `cykl_do` to granice cyklu (arkusz ich nie ma, więc zakończenie cyklu pilnujesz sama, np. zmieniając `status`).
   Skopiuj do „Wydarzenia" nazwę, datę, godzinę, miejsce, wiek, cenę, link i opis; kategoria ma te same wartości co w „Wydarzenia".
 - Zakładka `Zgłoszenia_miejsc`: `rodzaj` to `Pod dachem` albo `Plener` (kolumna `kategoria_glowna`), `podkategoria` wpisał zgłaszający
   (zwykle trzeba ją dopasować do istniejących podkategorii), reszta pasuje do kolumn „Miejsc". Dane miejsca (lat, lon, zdjęcie) uzupełniasz jak zwykle.
