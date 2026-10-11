@@ -108,6 +108,66 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .wyd-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 /* strony /koncerty i /spektakle */
 .wyd-miesiac { margin: 0 0 34px; }
+
+/* strony /koncerty i /spektakle: duże karty z podziałem na miesiące (components/ListaWydarzen.js); --kk = kolor znaczka z datą i cienia */
+.kk-strona { --kk: #2F5D3A; }
+.kk-strona.kk-spektakl { --kk: #B03A2E; }
+.kk-pasek { position: sticky; top: 0; z-index: 5; background: var(--papier); padding: 10px 0; border-bottom: 2px solid var(--kreda); display: flex; gap: 10px 14px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+.kk-mies, .kk-filtry { display: flex; gap: 8px; flex-wrap: wrap; }
+.kk-mies { margin-right: auto; }
+.kk-mies a { text-decoration: none; color: var(--tusz); font-weight: 700; border: 2px solid var(--tusz); border-radius: 999px; padding: 5px 14px; font-size: 14px; background: #fff; }
+.kk-mies a i { font-style: normal; background: var(--slonce); border-radius: 999px; padding: 0 7px; margin-left: 4px; font-size: 12px; }
+.kk-filtry button { font: 600 13px var(--font-text, Inter, sans-serif); border: 2px solid var(--kreda); background: #fff; border-radius: 999px; padding: 5px 12px; cursor: pointer; color: var(--tusz); }
+.kk-filtry button[aria-pressed="true"] { background: var(--tusz); color: #fff; border-color: var(--tusz); }
+.kk-miesiac { scroll-margin-top: 70px; }
+.kk-mh { display: flex; align-items: baseline; gap: 14px; margin: 34px 0 16px; border-bottom: 3px solid var(--tusz); padding-bottom: 6px; }
+.kk-mh h2 { font: 800 34px/1 var(--font-display); margin: 0; letter-spacing: -0.01em; }
+.kk-mh span { margin-left: auto; font-weight: 600; color: var(--tusz-2); font-size: 14px; }
+.kk-siatka { list-style: none; margin: 0; padding: 0 6px 6px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px 22px; }
+.kk { display: flex; background: #fff; border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 5px 5px 0 var(--kk); overflow: hidden; min-width: 0; }
+.kk-data { flex: 0 0 84px; background: var(--kk); color: var(--papier); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 6px; text-align: center; position: relative; }
+.kk-data::after { content: ""; position: absolute; right: -1px; top: 8px; bottom: 8px; border-right: 3px dotted var(--papier); opacity: .7; }
+.kk-dt { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; opacity: .9; }
+.kk-data b { font: 800 40px/1 var(--font-display); }
+.kk-mi { font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: .06em; }
+.kk-za { margin-top: 8px; background: var(--slonce); color: var(--tusz); border-radius: 999px; font-size: 11px; font-weight: 700; padding: 1px 8px; white-space: nowrap; }
+.kk-tresc { padding: 14px 16px 14px 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; flex: 1; }
+.kk-tresc h3 { font: 700 20px/1.15 var(--font-display); margin: 0; }
+.kk-tresc h3 a { color: inherit; text-decoration: none; }
+.kk-tresc h3 a:hover { text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; }
+.kk-gdzie { margin: 0; display: flex; gap: 6px; align-items: center; font-size: 14px; color: var(--tusz-2); font-weight: 500; }
+.kk-gdzie svg { flex: none; color: var(--mak); }
+.kk-tagi { display: flex; gap: 6px; flex-wrap: wrap; }
+.kk-tag { font-size: 12px; font-weight: 700; border: 1.5px solid var(--tusz); border-radius: 999px; padding: 1px 9px; background: var(--kreda); }
+.kk-tag.kk-wiek { background: var(--slonce); }
+.kk-tag.kk-wk { background: #fff; border-style: dashed; }
+.kk-stopka { margin-top: auto; display: flex; flex-direction: column; gap: 10px; padding-top: 6px; }
+.kk-godz { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.kk-etl { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; color: var(--tusz-2); margin-right: 2px; }
+.kk-h { font: 700 14px var(--font-text, Inter, sans-serif); border: 2px solid var(--tusz); border-radius: 8px; padding: 2px 9px; background: #fff; color: var(--tusz); text-decoration: none; }
+a.kk-h:hover { background: var(--slonce); }
+.kk-akcje { display: flex; gap: 10px; align-items: center; }
+.kk-btn { background: var(--tusz); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 6px 18px; }
+.kk-btn:hover { background: var(--mak); }
+.kk-akcje .plan-plus { position: relative; right: auto; top: auto; transform: none; flex: none; }
+.kk-akcje .plan-plus:active { transform: scale(.92); }
+.kk-naj { grid-column: 1 / -1; box-shadow: 6px 6px 0 var(--slonce); }
+.kk-naj .kk-data { flex-basis: 116px; background: var(--mak); }
+.kk-naj .kk-data b { font-size: 56px; }
+.kk-naj h3 { font-size: 28px; }
+.kk-naj .kk-tresc { padding: 18px 22px; }
+.kk-etyk { align-self: flex-start; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--mak); }
+@media (max-width: 560px) {
+  .kk-siatka { grid-template-columns: 1fr; }
+  .kk-data { flex-basis: 72px; }
+  .kk-naj .kk-data { flex-basis: 84px; }
+  .kk-naj .kk-data b { font-size: 44px; }
+  .kk-naj h3 { font-size: 22px; }
+  .kk-pasek { flex-direction: column; align-items: stretch; flex-wrap: nowrap; gap: 8px; }
+  .kk-mies, .kk-filtry { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; margin-right: 0; scrollbar-width: none; }
+  .kk-mies a, .kk-filtry button { white-space: nowrap; flex: none; }
+  .kk-mh h2 { font-size: 28px; }
+}
 /* bilet wydarzenia (components/Bilet.js): po lewej odcinek z godziną i datą, po prawej tytuł i szczegóły.
    --nb = kolor tła sekcji (kolor wcięć przy perforacji), --tw = szerokość odcinka, --fk = kolor obrysu fokusa na ciemnym tle */
 .tk { --pl: 12px; --tw: 84px; position: relative; display: grid; grid-template-columns: var(--tw) minmax(0, 1fr); align-items: center; background: var(--papier); color: var(--tusz); border: 2px solid var(--tusz); border-radius: 14px; padding: 8px var(--pl); margin: 0; text-transform: none; }
