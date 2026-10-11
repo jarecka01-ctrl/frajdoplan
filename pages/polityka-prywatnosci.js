@@ -14,7 +14,7 @@ export async function getStaticProps() {
 
 export default function PolitykaPrywatnosci({ seo }) {
   return (
-    <StronaPrawna seo={seo} nazwa="Polityka prywatności" aktualizacja="8 października 2026">
+    <StronaPrawna seo={seo} nazwa="Polityka prywatności" aktualizacja="11 października 2026">
       <h2>1. Kto jest administratorem danych</h2>
       <p>
         Administratorem danych osobowych jest <Administrator />, osoba fizyczna prowadząca serwis Frajdoplan poza działalnością
@@ -56,9 +56,21 @@ export default function PolitykaPrywatnosci({ seo }) {
         wiadomość (art. 6 ust. 1 lit. f RODO). Korespondencję przechowuję do 12 miesięcy po jej zakończeniu, potem ją usuwam.
       </p>
 
-      {/* TODO: dopisać po dodaniu formularzy i newslettera */}
+      {/* TODO: dopisać po dodaniu newslettera */}
 
-      <h3>d) Czcionki i mapa ładowane z zewnętrznych serwerów</h3>
+      <h3>d) Formularze „Dodaj wydarzenie" i „Dodaj miejsce"</h3>
+      <p>
+        Jeśli wyślesz zgłoszenie przez formularz, przetwarzam dane, które w nim podasz: opis wydarzenia lub miejsca, informację, kim jesteś
+        (organizator, rodzic, inna osoba), oraz Twój adres e-mail. E-mail służy tylko do zadania pytań o zgłoszenie i nie jest publikowany
+        na stronie. Zgłoszenie trafia do arkusza Google, a ja dostaję powiadomienie e-mailem. Nic nie pojawia się na stronie bez mojego
+        sprawdzenia. Podstawa prawna: Twoja zgoda (art. 6 ust. 1 lit. a RODO), którą wyrażasz, zaznaczając pole przed wysłaniem;
+        możesz ją cofnąć w dowolnym momencie, pisząc na <Email />. Zgłoszenia przechowuję do 12 miesięcy, a adres e-mail usuwam z arkusza
+        wcześniej, gdy sprawa zostanie załatwiona. Informacje o wydarzeniu lub miejscu, które zostaną dodane do serwisu (nazwa, data,
+        adres, opis, strona internetowa), są publiczne i pozostają w serwisie, dopóki są aktualne. Adresów IP z formularza nie zapisuję;
+        serwer chwilowo, w pamięci, liczy zgłoszenia z jednego adresu, żeby wyłapać nadużycia.
+      </p>
+
+      <h3>e) Czcionki i mapa ładowane z zewnętrznych serwerów</h3>
       <p>
         Przy otwarciu strony Twoja przeglądarka pobiera czcionki z serwerów Google (Google Fonts), więc Google otrzymuje wtedy Twój
         adres IP i podstawowe dane przeglądarki. Gdy otworzysz mapę, przeglądarka pobiera jej kafelki z serwerów OpenStreetMap
@@ -101,10 +113,10 @@ export default function PolitykaPrywatnosci({ seo }) {
         <li><strong>Vercel Inc.</strong>: hosting strony i statystyki odwiedzin (Vercel Analytics), jako podmiot przetwarzający na moje zlecenie.</li>
         <li>
           <strong>Google</strong>: poczta w usłudze Google Workspace obsługująca adres <Email /> (Twoje wiadomości) oraz arkusz Google
-          z danymi o miejscach i wydarzeniach (bez danych użytkowników serwisu), jako podmiot przetwarzający na moje zlecenie.
-          Google jest też dostawcą czcionek (punkt 2d).
+          z danymi o miejscach i wydarzeniach i zgłoszeniami z formularzy (punkt 2d), jako podmiot przetwarzający na moje zlecenie.
+          Google jest też dostawcą czcionek (punkt 2e).
         </li>
-        <li><strong>OpenStreetMap i CyclOSM</strong>: kafelki mapy (punkt 2d). To odrębni operatorzy, nie przetwarzają danych na moje zlecenie.</li>
+        <li><strong>OpenStreetMap i CyclOSM</strong>: kafelki mapy (punkt 2e). To odrębni operatorzy, nie przetwarzają danych na moje zlecenie.</li>
       </ul>
       <p>Nie sprzedaję danych i nie przekazuję ich nikomu poza wymienionymi dostawcami.</p>
 

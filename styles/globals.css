@@ -37,6 +37,7 @@ button, input, select { font: inherit; color: inherit; }
 .menu-link { padding: 8px 15px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; flex: 0 0 auto; }
 .menu-link:hover { border-color: var(--kreda); }
 .menu-skrot { border-color: var(--kreda); border-style: dashed; margin-right: 6px; }
+.menu-dodaj { border-color: var(--tusz); border-style: dashed; margin-left: 4px; }
 .menu-link[aria-current="page"] { border-color: var(--tusz); background: var(--slonce); }
 @media (max-width: 1107px) { .top { margin: 0 -20px; padding: 16px 20px 0; } }
 @media (max-width: 1000px) { .brand-logo img { height: 84px; } }
@@ -683,3 +684,34 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
   .pg .wc .sn { font-size: 13px; }
 }
 @media print { .pg { display: none !important; } }
+
+/* formularze „Dodaj wydarzenie" / „Dodaj miejsce" (components/FormularzZgloszenia.js) i strona wyboru /dodaj */
+.dodaj-wybor { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 820px; margin-bottom: 40px; }
+.dodaj-karta { display: flex; flex-direction: column; gap: 8px; padding: 22px 22px 18px; background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; color: var(--tusz); text-decoration: none; }
+.dodaj-wydarzenie { box-shadow: 6px 6px 0 var(--mak); }
+.dodaj-miejsce { box-shadow: 6px 6px 0 var(--slonce); }
+.dodaj-karta:hover { transform: translate(-1px, -1px); }
+.dodaj-karta strong { font: 700 26px/1.1 var(--font-display); }
+.dodaj-ikona { font-size: 30px; line-height: 1; }
+.dodaj-strzalka { margin-top: auto; padding-top: 8px; font-weight: 700; text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.zgl { max-width: 640px; display: grid; gap: 18px; margin: 0 0 48px; padding: 22px 22px 20px; background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 6px 6px 0 var(--slonce); }
+.zgl-wiersz label { display: block; font-weight: 700; margin-bottom: 5px; }
+.zgl-gw { color: var(--mak); }
+.zgl-opc { font-weight: 500; color: var(--tusz-2); font-size: 13px; }
+.zgl-pole { width: 100%; border: 2px solid var(--tusz); border-radius: 12px; padding: 10px 12px; font: 500 16px var(--font-body); background: var(--papier); color: var(--tusz); min-height: 46px; }
+textarea.zgl-pole { resize: vertical; min-height: 110px; }
+.zgl-pole:focus { outline: 3px solid var(--slonce); outline-offset: 1px; }
+.zgl-zle .zgl-pole { border-color: var(--mak); background: #fff3f0; }
+.zgl-pomoc { margin: 5px 0 0; font-size: 13px; color: var(--tusz-2); }
+.zgl-blad { margin: 5px 0 0; font-size: 14px; font-weight: 700; color: #B3261E; }
+.zgl-blad-ogolny { padding: 10px 12px; border: 2px solid var(--mak); border-radius: 12px; background: #fff3f0; }
+.zgl-pulapka { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.zgl-checkbox { display: flex !important; gap: 10px; align-items: flex-start; font-weight: 500 !important; font-size: 14px; }
+.zgl-checkbox input { width: 22px; height: 22px; flex: 0 0 auto; margin-top: 1px; accent-color: var(--tusz); }
+.zgl-nota { margin: 0; font-size: 13px; color: var(--tusz-2); }
+.zgl-wyslij { justify-self: start; }
+.zgl-sukces { max-width: 640px; margin-bottom: 48px; padding: 22px; background: #EAF5EC; border: 2px solid #2F5D3A; border-radius: 22px 22px 22px 6px; box-shadow: 6px 6px 0 #2F5D3A; }
+@media (max-width: 480px) { .zgl { padding: 18px 16px; } }
+
+.dodaj-przypis { margin: 18px 0 0; font-size: 14px; color: var(--tusz); }
+.dodaj-przypis a { font-weight: 700; color: var(--tusz); text-decoration: underline; text-underline-offset: 3px; }

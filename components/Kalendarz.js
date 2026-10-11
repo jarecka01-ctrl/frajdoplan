@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { dzisWarszawa, trwaW, poGodzinie, dzienTygodnia, MIESIACE } from './Wydarzenia';
 import { grupujTerminy } from '../lib/grupowanie';
+import Link from 'next/link';
 import Bilet, { Nazwa, Szczegoly, godzinyPodTytulem } from './Bilet';
 
 /*
@@ -201,6 +202,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
           ) : (
             <p className="wyd-pusto">Na ten dzień nie mamy jeszcze wydarzeń w kalendarzu.</p>
           )}
+          <p className="dodaj-przypis">Brakuje wydarzenia? <Link href="/dodaj/wydarzenie">Dodaj je</Link></p>
         </div>
       </div>
     </section>
