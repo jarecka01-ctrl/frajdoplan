@@ -15,5 +15,5 @@ export async function getStaticProps() {
 }
 
 export default function Spektakle(props) {
-  return <ListaWydarzen {...props} nazwaOkruszka="Spektakle" pusto="Nie mamy teraz spektakli dla dzieci w kalendarzu. Zajrzyj tu za kilka dni." />;
+  return <ListaWydarzen {...props} nazwaOkruszka="Spektakle" kolor="spektakl" pusto="Nie mamy teraz spektakli dla dzieci w kalendarzu. Zajrzyj tu za kilka dni." />;
 }
