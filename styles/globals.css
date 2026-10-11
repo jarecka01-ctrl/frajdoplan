@@ -402,15 +402,16 @@ section[id] { scroll-margin-top: 16px; }
 .okruszki a { color: var(--tusz-2); text-decoration: underline; text-underline-offset: 2px; }
 .okruszki a:hover { color: var(--tusz); }
 
-/* naklejki DZIŚ / JUTRO / WEEKEND: stempel z przerywaną ramką w prawym górnym rogu kafelka */
+/* metki DZIŚ / JUTRO / WEEKEND: naklejka z konturem i twardym cieniem w prawym górnym rogu kafelka, ze ściętym rogiem i lekkim przekrzywieniem (jak przyciski i kafelki w reszcie serwisu) */
 .stempel {
-  position: absolute; right: -6px; top: -13px; z-index: 1;
-  font: 700 13px/1 var(--font-display); letter-spacing: .06em; text-transform: uppercase;
-  color: var(--mak); background: #fff3f0; border: 2.5px dashed var(--mak); border-radius: 6px; padding: 5px 9px;
-  transform: rotate(-5deg);
+  position: absolute; right: 14px; top: -15px; z-index: 1;
+  font: 800 14px/1 var(--font-display); letter-spacing: .06em; text-transform: uppercase;
+  color: var(--tusz); background: var(--slonce); border: 2px solid var(--tusz); border-radius: 999px 999px 999px 4px;
+  box-shadow: 3px 3px 0 var(--tusz); padding: 7px 14px 6px;
+  transform: rotate(-3deg);
 }
-.wyd-glowna .stempel { right: -8px; top: -14px; font-size: 15px; }
-.stempel-weekend { color: #B87500; border-color: #B87500; background: #fff7e0; transform: rotate(4deg); }
+.wyd-glowna .stempel { background: var(--papier); } /* główny kafelek jest żółty, więc metka jasna */
+.stempel-weekend { background: #2F5D3A; color: var(--papier); transform: rotate(-3deg); }
 
 /* karta miejsca (/miejsce/[slug]) */
 .karta-miejsce { max-width: 720px; margin-bottom: 30px; }
@@ -572,7 +573,7 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
   background: var(--papier); color: var(--tusz); border: 2px solid var(--tusz); border-radius: 22px 22px 6px 22px; box-shadow: 6px 6px 0 var(--mak); padding: 20px 20px 12px; }
 .wokno-weekend { box-shadow: 6px 6px 0 #B87500; }
 .wokno:focus { outline: none; }
-.wokno .stempel { left: 18px; right: auto; top: -14px; font-size: 13px; }
+.wokno .stempel { left: 18px; right: auto; top: -15px; font-size: 13px; }
 .wokno-tytul { font: 700 24px/1.15 var(--font-display); margin: 4px 44px 2px 0; }
 .wokno .wyd-data { margin: 0 0 10px; }
 .wokno-zamknij { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); font: 700 22px/1 var(--font-body); cursor: pointer; display: grid; place-items: center; padding: 0; }
