@@ -71,8 +71,18 @@ async function upewnijSieZeDozwolone(url) {
     await odstep();
     try {
       const pobierzRobots = () => fetch(`${serwis}/robots.txt`, { headers: { 'User-Agent': USER_AGENT }, redirect: 'follow', signal: AbortSignal.timeout(20000) });
-      let res = await pobierzRobots();
-      if (res.status >= 500) { await czekaj(5000); res = await pobierzRobots(); } // chwilowy błąd serwera: jedna ponowna próba
+      // chwilowy błąd sieci (przekroczony czas, błąd DNS „EAI_AGAIN", zerwane połączenie): do trzech prób, po 5 i po 20 sekundach.
+      // Jeśli robots.txt nadal nie da się przeczytać, niczego z serwisu nie pobieramy (jak dotąd).
+      const probuj = async () => {
+        for (let proba = 0; ; proba += 1) {
+          try { return await pobierzRobots(); } catch (e) {
+            if (proba >= 2) throw e;
+            await czekaj(proba === 0 ? 5000 : 20000);
+          }
+        }
+      };
+      let res = await probuj();
+      if (res.status >= 500) { await czekaj(5000); res = await probuj(); } // chwilowy błąd serwera: jedna ponowna próba
       if (res.status >= 500) robotsPamiec.set(serwis, { blad: `robots.txt: HTTP ${res.status}` });
       else if (!res.ok) robotsPamiec.set(serwis, []); // brak pliku = brak zakazów
       else {
