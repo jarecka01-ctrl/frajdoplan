@@ -594,7 +594,9 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
 .pg .strip { display: none; }
 .pg .wrow { display: flex; align-items: center; justify-content: space-between; gap: 4px; height: 42px; padding: 0 8px; background: var(--papier); border: 2px solid var(--tusz); border-radius: 999px; }
 .pg .wc { display: inline-flex; align-items: center; gap: 3px; min-width: 0; white-space: nowrap; }
+.pg .wc { flex: 0 0 auto; }
 .pg .wc + .wc { padding-left: 5px; border-left: 2px dashed #cfc4a8; }
+.pg .wc.wc-jutro { border-left: 2px solid var(--tusz); } /* granica między resztą dzisiaj a jutrem */
 .pg .wc .sn { font: 700 11.5px/1 var(--font-display); color: var(--tusz); text-decoration: underline; text-decoration-color: var(--mak); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .pg .wi { width: 18px; height: 18px; flex: 0 0 auto; }
 .pg .st { font: 700 13px/1 var(--font-display); }
