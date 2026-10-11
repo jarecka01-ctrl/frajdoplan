@@ -19,6 +19,7 @@ Właścicielka nie jest programistką. Odpowiadaj po polsku, prosto, bez żargon
 
 ## Struktura
 - `lib/dane.js` — pobieranie miejsc i wydarzeń, przypisanie sekcji (`z-marszu`, `treningi`, `zajecia`, `polkolonie`) i dyscyplin.
+- `lib/scalanie.js` — to samo wydarzenie wpisane ręcznie w arkuszu „Wydarzenia" i pobrane przez skrypt (`data/repertuar.json`) jest jednym wierszem: zostaje wiersz z arkusza (godziny, baner, obrazek, opis), duplikat ze skryptu znika, a wiersz z arkusza przejmuje z niego brakujący link, cenę i wiek. Duplikat = ten sam jeden dzień, podobne miejsce (np. „ICE Kraków Congress Centre" i „ICE Kraków"), podobna nazwa i godzina ze skryptu na liście godzin z arkusza; samo to samo miejsce i ta sama godzina przy innej nazwie, inna data albo inna godzina nie scala (zostają oba wiersze i widać rozbieżność do poprawienia w arkuszu). Zakresy dat, reguły i kina nie są scalane. Wywołuje to `pobierzWydarzenia` w `lib/dane.js`.
 - `lib/ikony.js` — ikony podkategorii/dyscyplin i skróty nazw na kafelkach.
 - `lib/kategorie.js` — adresy kategorii (slugi, nazwy do tytułów) dla działów atrakcje / sport / zajecia.
 - `lib/seo.js` — teksty stron z „Strony_SEO" + canonical; `lib/jsonld.js` — dane strukturalne (BreadcrumbList, ItemList).
