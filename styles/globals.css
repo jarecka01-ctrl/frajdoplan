@@ -453,8 +453,6 @@ section[id] { scroll-margin-top: 16px; }
 .plan-plus:active { transform: translateY(-50%) scale(.92); }
 .plan-plus.on { background: var(--slonce); box-shadow: 2px 2px 0 var(--tusz); }
 .tk-plan .tn { padding-right: 44px; }
-.karta-plan { position: relative; padding-right: 64px; }
-.karta-plan .plan-plus { right: 14px; }
 
 body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treści ani stopki */
 .plan-pasek { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; justify-content: center; padding: 10px 16px calc(14px + env(safe-area-inset-bottom)); pointer-events: none; animation: plan-wsun .25s ease-out; }
