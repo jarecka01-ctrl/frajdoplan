@@ -552,13 +552,12 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
   .plan-druk-stopka { margin-top: 10mm; font-size: 10pt; border-top: 1px solid #999; padding-top: 3mm; }
 }
 
-/* Długa lista „Dziś" (powyżej 6 wydarzeń): własne przewijanie, cień u dołu i podpowiedź */
+/* Długa lista „Dziś" (powyżej 6 wydarzeń): własne przewijanie, cień u dołu jako podpowiedź */
 .wyd-przewijanie { position: relative; }
-.wyd-lista-przewijana { max-height: 680px; overflow-y: auto; overscroll-behavior: contain; padding: 2px 6px 34px 2px; scrollbar-width: thin; scrollbar-color: var(--tusz) transparent; }
+.wyd-lista-przewijana { max-height: 680px; overflow-y: auto; overscroll-behavior: contain; padding: 2px 6px 14px 2px; scrollbar-width: thin; scrollbar-color: var(--tusz) transparent; }
 .wyd-lista-przewijana:focus-visible { outline-offset: -3px; }
 .wyd-przewijanie::after { content: ''; position: absolute; left: 0; right: 8px; bottom: 0; height: 56px; pointer-events: none; background: linear-gradient(to bottom, rgba(247, 179, 43, 0), var(--slonce) 85%); transition: opacity .2s; }
 .wyd-na-dole::after { opacity: 0; }
-.wyd-podpowiedz { position: absolute; left: 0; right: 8px; bottom: 6px; z-index: 1; margin: 0; text-align: center; font: 700 13px var(--font-body); color: var(--tusz); pointer-events: none; }
 @media (max-width: 640px) { .wyd-lista-przewijana { max-height: 520px; } }
 
 /* „Zobacz wszystko" w kafelkach Jutro i Weekend + okno z pełną listą */
