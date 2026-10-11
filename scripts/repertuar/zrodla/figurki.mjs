@@ -87,6 +87,9 @@ export default {
   nazwa: 'Teatr Figurki',
   url: `${BAZA}/repertuar/`,
   rodzaj: 'wydarzenia',
+  // Od 11.10.2026 serwery GitHuba nie mogą rozwiązać adresu teatrfigurki.pl (błąd DNS EAI_AGAIN, nawet po trzech próbach, w trzech przebiegach
+  // z rzędu). Awaria tego małego źródła to ostrzeżenie: poprzednie dane zostają, a workflow nie kończy się błędem. Zdjąć, gdy strona wróci.
+  lagodny: true,
   miejsca: [['Teatr Figur', /teatr figur$/i], ['Nowohuckie Centrum Kultury', /nowohuckie centrum kultury/i]],
   async pobierz() {
     return parsuj(await pobierz(this.url, { robots: true }));
