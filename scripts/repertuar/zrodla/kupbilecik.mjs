@@ -124,7 +124,8 @@ export default {
   wyprzedzenieDni: 180,
   lagodny: true, // HTTP 429 (limit API) albo chwilowy błąd to ostrzeżenie, poprzednie dane zostają
   wlaczone: Boolean(adres() || process.env.KUPBILECIK_PLIK), // bez sekretu źródło jest pomijane
-  miejsca: [], // miejsca są różne (teatry, hale, kina); powiązanie z kartą dopasowuje się po nazwie miejsca z innych źródeł
+  // powiązanie z kartą miejsca (adres w „Moim planie"): tylko miejsca, które mają kartę w arkuszu „Miejsca"; reszta (np. Forum Horyzonty) zostaje bez place_id
+  miejsca: [['Kino Kijów', /^kino\s+kij[óo]w/i], ['ICE Kraków', /ice\s*krak/i], [/klub\s+p[łl]asz[óo]w/i, /klub\s+p[łl]asz[óo]w/i]],
   async pobierz() {
     let dane;
     if (process.env.KUPBILECIK_PLIK) {
