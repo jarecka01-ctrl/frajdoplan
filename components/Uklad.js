@@ -11,6 +11,7 @@ const MENU = [
   { href: '/sport', label: 'Sport' },
   { href: '/zajecia', label: 'Zajęcia' },
   { href: '/polkolonie', label: 'Półkolonie' },
+  { href: '/dodaj', label: '+ Dodaj', klasa: 'menu-dodaj' },
 ];
 // Zakładka jest aktywna też na podstronach działu (np. /sport/taniec).
 const aktywna = (m, pathname) => pathname === m.href || pathname.startsWith(`${m.dzial || m.href}/`) || pathname === m.dzial;
@@ -24,7 +25,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
       {/* skrót do listy miejsc na stronie głównej (jest na jej końcu, pod kalendarzem) */}
       <Link href="/#miejsca" className="menu-link menu-skrot"><span aria-hidden="true">↓ </span>Miejsca</Link>
       {MENU.map((m) => (
-        <Link key={m.href} href={m.href} className="menu-link" aria-current={aktywna(m, pathname) ? 'page' : undefined}>
+        <Link key={m.href} href={m.href} className={`menu-link${m.klasa ? ` ${m.klasa}` : ''}`} aria-current={aktywna(m, pathname) ? 'page' : undefined}>
           {m.label}
         </Link>
       ))}
@@ -84,6 +85,8 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
           <nav className="stopka-linki" aria-label="Informacje prawne i kontakt">
             <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
             <Link href="/regulamin">Regulamin</Link>
+            <Link href="/dodaj/wydarzenie">Dodaj wydarzenie</Link>
+            <Link href="/dodaj/miejsce">Dodaj miejsce</Link>
             <Link href="/kontakt">Kontakt</Link>
             <a href={`mailto:${KONTAKT_EMAIL}?subject=${encodeURIComponent('Błąd na stronie')}`}>Zgłoś błąd</a>
           </nav>

@@ -13,6 +13,7 @@ Właścicielka nie jest programistką. Odpowiadaj po polsku, prosto, bez żargon
 - `SHEET_EVENTS_CSV_URL` — zakładka „Wydarzenia" (CSV).
 - `SHEET_WYJATKI_CSV_URL` — zakładka „Wyjątki" (CSV), czytana tylko przez skrypt repertuaru w GitHub Actions (nie przez Vercel).
 - `SHEET_SEO_CSV_URL` — zakładka „Strony_SEO" (CSV, kolumny: adres, tytul_seo, opis_meta, h1, wstep; `{liczba}` = liczba miejsc). Bez niej działają teksty domyślne.
+- `ZGLOSZENIA_URL`, `ZGLOSZENIA_SEKRET` — adres (kończy się na `/exec`) i hasło skryptu Apps Script przyjmującego zgłoszenia z formularzy „Dodaj wydarzenie" / „Dodaj miejsce" (nigdy w kodzie ani na czacie; bez nich formularz odpowiada „chwilowo niedostępny", instrukcja: `docs/zgloszenia-instrukcja.md`).
 - `NEXT_PUBLIC_ADMIN_NAME` — imię i nazwisko administratora w polityce prywatności i regulaminie (bez niej widać czerwony placeholder).
 - `NEXT_PUBLIC_STATYSTYKI_ZDARZEN` — `1` włącza niestandardowe zdarzenia statystyk „Mój plan" (wymaga planu Vercel Pro; bez niej `zdarzenie()` nic nie robi).
 - `SITE_URL` — adres serwisu do canonical i Open Graph (domyślnie https://frajdoplan.pl).
@@ -20,6 +21,7 @@ Właścicielka nie jest programistką. Odpowiadaj po polsku, prosto, bez żargon
 ## Struktura
 - `lib/dane.js` — pobieranie miejsc i wydarzeń, przypisanie sekcji (`z-marszu`, `treningi`, `zajecia`, `polkolonie`) i dyscyplin.
 - `lib/scalanie.js` — to samo wydarzenie wpisane ręcznie w arkuszu „Wydarzenia" i pobrane przez skrypt (`data/repertuar.json`) jest jednym wierszem: zostaje wiersz z arkusza (godziny, baner, obrazek, opis), duplikat ze skryptu znika, a wiersz z arkusza przejmuje z niego brakujący link, cenę i wiek. Duplikat = ten sam jeden dzień, podobne miejsce (np. „ICE Kraków Congress Centre" i „ICE Kraków"), podobna nazwa i godzina ze skryptu na liście godzin z arkusza; samo to samo miejsce i ta sama godzina przy innej nazwie, inna data albo inna godzina nie scala (zostają oba wiersze i widać rozbieżność do poprawienia w arkuszu). Zakresy dat, reguły i kina nie są scalane. Wywołuje to `pobierzWydarzenia` w `lib/dane.js`.
+- `lib/zgloszenia.js` — pola i sprawdzanie danych formularzy „Dodaj wydarzenie" / „Dodaj miejsce" (wspólne dla przeglądarki i serwera); `pages/api/zglos.js` przyjmuje zgłoszenie (pułapka na boty, min. 3 s, limit 5/godz./adres w pamięci, zgoda RODO, sprawdzenie Origin) i wysyła do skryptu Apps Script (`docs/zgloszenia-apps-script.gs`), który dopisuje wiersz w zakładkach „Zgłoszenia_wydarzeń" / „Zgłoszenia_miejsc" arkusza i wysyła e-mail; zgłoszenia nigdy nie publikują się same; `components/FormularzZgloszenia.js`, strony `pages/dodaj/index.js`, `dodaj/wydarzenie.js`, `dodaj/miejsce.js`, pozycja „+ Dodaj" w menu `Uklad` i linki w stopce.
 - `lib/ikony.js` — ikony podkategorii/dyscyplin i skróty nazw na kafelkach.
 - `lib/kategorie.js` — adresy kategorii (slugi, nazwy do tytułów) dla działów atrakcje / sport / zajecia.
 - `lib/seo.js` — teksty stron z „Strony_SEO" + canonical; `lib/jsonld.js` — dane strukturalne (BreadcrumbList, ItemList).
