@@ -56,6 +56,7 @@ export default {
   nazwa: 'Ośrodek Kultury Norwida',
   url: `${BAZA}/wydarzenia.html`,
   rodzaj: 'wydarzenia',
+  moznaPusto: true, // często jedynym wydarzeniem dla dzieci jest seans filmowy (pomijamy go, bo kina mają własne moduły), więc 0 wydarzeń to nie awaria
   miejsca: [
     ['Kuźnia', /kuźnia|kuznia/i],
     ['ARTzona', /artzona/i],
