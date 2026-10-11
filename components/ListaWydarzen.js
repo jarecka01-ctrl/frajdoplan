@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import Uklad from './Uklad';
 import Okruszki from './Okruszki';
 import PlanPlus from './PlanPlus';
@@ -124,6 +125,7 @@ export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszk
             </section>
           ))}
           {widoczne.length === 0 && <p className="wyd-pusto">Nie ma już nadchodzących wydarzeń{miejsce ? ' w tym miejscu' : ''}.</p>}
+          <p className="dodaj-przypis">Brakuje wydarzenia? <Link href="/dodaj/wydarzenie">Dodaj je</Link></p>
         </div>
       )}
     </Uklad>
