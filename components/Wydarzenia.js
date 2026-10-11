@@ -126,6 +126,25 @@ function Slajdy({ pozycje, miejsca, pusto, etykieta, onWszystko }) {
   );
 }
 
+// Lista wydarzeń dnia w dużej sekcji. Do 6 pozycji rośnie sama; dłuższa dostaje własne przewijanie (max. wysokość w CSS),
+// z cieniem u dołu i podpowiedzią „Przewiń w dół", dopóki nie dojedziemy do końca.
+const PROG_PRZEWIJANIA = 6;
+function ListaDnia({ ile, etykieta, children }) {
+  const [naDole, setNaDole] = useState(false);
+  const dluga = ile > PROG_PRZEWIJANIA;
+  const przyPrzewijaniu = (e) => {
+    const el = e.currentTarget;
+    setNaDole(el.scrollTop + el.clientHeight >= el.scrollHeight - 8);
+  };
+  if (!dluga) return <ul className="wyd-lista">{children}</ul>;
+  return (
+    <div className={`wyd-przewijanie${naDole ? ' wyd-na-dole' : ''}`}>
+      <ul className="wyd-lista wyd-lista-przewijana" tabIndex={0} aria-label={`${etykieta}: ${ile}, lista się przewija`} onScroll={przyPrzewijaniu}>{children}</ul>
+      {!naDole && <p className="wyd-podpowiedz" aria-hidden="true">↓ Przewiń w dół, jest tu {ile} wydarzeń</p>}
+    </div>
+  );
+}
+
 // Okno „Zobacz wszystko": pełna lista wydarzeń dnia albo weekendu (te same bilety co w kafelku, z „+" do planu).
 // Renderowane do body (poza #__next, który na czas okna jest nieaktywny), jak panel „Mój plan".
 function OknoWszystkich({ tytul, data, mod, stempel, pozycje, miejsca, onZamknij }) {
@@ -179,10 +198,10 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
   const dzisWszystkie = naDzien(teraz);
   const przyszle = dzisWszystkie.filter((w) => !juzPo(w, godz));
   const minione = dzisWszystkie.filter((w) => juzPo(w, godz));
-  const NA_LISTE = 6;
+  // Pokazujemy wszystkie wydarzenia dnia: najpierw te, które jeszcze przed nami, pod nimi wyszarzone (długa lista się przewija, patrz ListaDnia).
   const dzis = [
-    ...przyszle.slice(0, NA_LISTE).map((w) => ({ w, minelo: false })),
-    ...(przyszle.length < NA_LISTE ? minione.slice(-(NA_LISTE - przyszle.length)).map((w) => ({ w, minelo: true })) : []), // najświeższe minione, jeśli jest miejsce
+    ...przyszle.map((w) => ({ w, minelo: false })),
+    ...minione.map((w) => ({ w, minelo: true })),
   ];
   const jutroLista = naDzien(jutro);
   const weekend = [...naDzien(sob).map((w) => ({ ...w, dzien: 'sob.', iso: sob })), ...naDzien(nd).map((w) => ({ ...w, dzien: 'niedz.', iso: nd }))];
@@ -197,7 +216,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
             {dzis.length ? (
               <>
-                <ul className="wyd-lista">{dzis.map(({ w, minelo }) => <Karta key={w.id} w={w} dzien={teraz} minelo={minelo} />)}</ul>
+                <ListaDnia ile={dzis.length} etykieta="Wydarzenia dziś">{dzis.map(({ w, minelo }) => <Karta key={w.id} w={w} dzien={teraz} minelo={minelo} />)}</ListaDnia>
                 {!przyszle.length && (
                   <>
                     <p className="wyd-pusto">Na dziś to już wszystko. Zobacz, co jest jutro</p>
@@ -217,7 +236,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <h2 className="wyd-tytul">Jutro dla dzieci w Krakowie</h2>
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(jutro)]}, {ladnaData(jutro)}</p>
             {jutroLista.length ? (
-              <ul className="wyd-lista">{jutroLista.slice(0, 6).map((w) => <Karta key={w.id} w={w} dzien={jutro} />)}</ul>
+              <ListaDnia ile={jutroLista.length} etykieta="Wydarzenia jutro">{jutroLista.map((w) => <Karta key={w.id} w={w} dzien={jutro} />)}</ListaDnia>
             ) : (
               <p className="wyd-pusto">Na jutro też nie mamy jeszcze wydarzeń w kalendarzu.</p>
             )}
