@@ -127,7 +127,7 @@ function Slajdy({ pozycje, miejsca, pusto, etykieta, onWszystko }) {
 }
 
 // Lista wydarzeń dnia w dużej sekcji. Do 6 pozycji rośnie sama; dłuższa dostaje własne przewijanie (max. wysokość w CSS),
-// z cieniem u dołu i podpowiedzią „Przewiń w dół", dopóki nie dojedziemy do końca.
+// z cieniem u dołu (znika po dojechaniu do końca) jako jedyną podpowiedzią.
 const PROG_PRZEWIJANIA = 6;
 function ListaDnia({ ile, etykieta, children }) {
   const [naDole, setNaDole] = useState(false);
@@ -140,7 +140,6 @@ function ListaDnia({ ile, etykieta, children }) {
   return (
     <div className={`wyd-przewijanie${naDole ? ' wyd-na-dole' : ''}`}>
       <ul className="wyd-lista wyd-lista-przewijana" tabIndex={0} aria-label={`${etykieta}: ${ile}, lista się przewija`} onScroll={przyPrzewijaniu}>{children}</ul>
-      {!naDole && <p className="wyd-podpowiedz" aria-hidden="true">↓ Przewiń w dół, jest tu {ile} wydarzeń</p>}
     </div>
   );
 }
