@@ -715,3 +715,60 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 
 .dodaj-przypis { margin: 18px 0 0; font-size: 14px; color: var(--tusz); }
 .dodaj-przypis a { font-weight: 700; color: var(--tusz); text-decoration: underline; text-underline-offset: 3px; }
+
+/* strona /weekend: sobota i niedziela według pory dnia, małe kafelki wydarzeń (kolor cienia zależy od rodzaju) */
+.wk-strona { margin-bottom: 40px; }
+.wk-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 18px; font-size: 14px; font-weight: 600; }
+.wk-meta span { background: var(--kreda); border-radius: 999px; padding: 4px 12px; }
+.wk-typy { position: relative; background: var(--slonce); border: 2px solid var(--tusz); border-radius: 28px 28px 28px 8px; box-shadow: 6px 6px 0 var(--tusz); padding: 34px 20px 18px; margin: 0 0 26px; }
+.wk-typy .stempel { background: var(--papier); }
+.wk-typy h2 { font: 800 26px/1 var(--font-display); margin: 0 0 12px; }
+.wk-typy ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.wk-typy li { background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px 16px 16px 5px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; }
+.wk-typy small { font-weight: 700; font-size: 12px; color: var(--mak); text-transform: uppercase; letter-spacing: .05em; }
+.wk-typy b { font: 700 19px/1.15 var(--font-display); }
+.wk-typy b a { color: inherit; text-decoration: none; }
+.wk-typy li span { font-size: 13.5px; color: var(--tusz-2); }
+.wk-pasek { position: sticky; top: 0; z-index: 5; background: var(--papier); padding: 10px 0 12px; border-bottom: 2px solid var(--kreda); margin-bottom: 6px; }
+.wk-dni { display: flex; gap: 10px; margin-bottom: 10px; }
+.wk-dni a { flex: 1; display: flex; justify-content: space-between; align-items: center; gap: 8px; text-decoration: none; color: var(--tusz); background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px 16px 16px 5px; padding: 8px 14px; font: 800 19px var(--font-display); }
+.wk-dni a small { font: 600 13px var(--font-body); color: var(--tusz-2); }
+.wk-dni a:hover { box-shadow: 3px 3px 0 var(--mak); }
+.wk-filtry { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 1px 4px; }
+.wk-filtry::-webkit-scrollbar { display: none; }
+.wk-filtry button { flex: 0 0 auto; font: 600 14px var(--font-body); border: 2px solid var(--tusz); background: var(--biel); border-radius: 999px; padding: 5px 13px; color: var(--tusz); cursor: pointer; }
+.wk-filtry button[aria-pressed="true"] { background: var(--slonce); box-shadow: 2px 2px 0 var(--tusz); }
+.wk-filtry i { font-style: normal; color: var(--tusz-2); font-weight: 500; margin-left: 3px; }
+.wk-dzien { margin: 30px 0 8px; scroll-margin-top: 130px; }
+.wk-dh { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.wk-dh h2 { font: 800 34px/1 var(--font-display); margin: 0; }
+.wk-dh span { color: var(--tusz-2); font-weight: 600; }
+.wk-pora { margin: 18px 0 10px; display: flex; align-items: center; gap: 10px; font: 800 15px var(--font-display); text-transform: uppercase; letter-spacing: .08em; }
+.wk-pora::after { content: ''; flex: 1; border-top: 2px dashed #d6cdb8; }
+.wk-pora em { font: 600 12px var(--font-body); font-style: normal; color: var(--tusz-2); letter-spacing: 0; text-transform: none; }
+.wk-siatka { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.wk-k { --c: var(--mak); display: grid; grid-template-columns: 78px minmax(0, 1fr); background: var(--biel); border: 2px solid var(--tusz); border-radius: 16px 16px 16px 5px; box-shadow: 4px 4px 0 var(--c); overflow: hidden; }
+.wk-spektakl { --c: #B03A2E; } .wk-koncert { --c: #2F5D3A; } .wk-warsztaty, .wk-pokaz, .wk-czytanie, .wk-planszowki { --c: #C27A00; } .wk-sport, .wk-spacer, .wk-jarmark, .wk-festyn { --c: var(--mak); } .wk-wystawa { --c: #3B4A8A; }
+.wk-g { border-right: 2px dashed var(--tusz); background: var(--kreda); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 4px; font: 800 20px/1.1 var(--font-display); text-align: center; }
+.wk-g .wk-cd { font-size: 15px; }
+.wk-g small { font: 600 11px var(--font-body); color: var(--tusz-2); }
+.wk-t { padding: 10px 12px; min-width: 0; }
+.wk-kat { font: 700 11.5px var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--c); }
+.wk-t h3 { margin: 1px 0 3px; font: 700 18px/1.15 var(--font-display); overflow-wrap: anywhere; }
+.wk-t h3 a { color: inherit; text-decoration: none; }
+.wk-t h3 a:hover { text-decoration: underline; text-decoration-color: var(--c); text-decoration-thickness: 2px; }
+.wk-m { margin: 0; font-size: 13.5px; color: var(--tusz-2); }
+.wk-w { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 7px; align-items: center; }
+.wk-tag { font: 600 12px var(--font-body); background: var(--kreda); border-radius: 999px; padding: 2px 9px; }
+.wk-free { background: #DDEFD9; color: #2F5D3A; }
+.wk-w .plan-plus { position: relative; right: auto; top: auto; transform: none; flex: none; margin-left: auto; }
+.wk-w .plan-plus:active { transform: scale(.92); }
+.wk-podpowiedz { margin: 34px 0 0; padding: 14px 18px; border: 2px dashed #d6cdb8; border-radius: 18px; font-size: 14.5px; }
+@media (max-width: 760px) {
+  .wk-siatka { grid-template-columns: 1fr; }
+  .wk-typy { padding: 30px 14px 14px; }
+  .wk-dh h2 { font-size: 28px; }
+  .wk-dni a { flex-direction: column; align-items: flex-start; gap: 0; padding: 6px 10px; font-size: 16px; }
+  .wk-k { grid-template-columns: 62px minmax(0, 1fr); }
+  .wk-g { font-size: 17px; }
+}
