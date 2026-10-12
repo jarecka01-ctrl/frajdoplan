@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import Uklad from './Uklad';
 import Okruszki from './Okruszki';
 import PlanPlus from './PlanPlus';
@@ -158,6 +159,7 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
           )}
         </div>
       )}
+      <p className="dodaj-przypis">Brakuje wydarzenia? <Link href="/dodaj/wydarzenie">Dodaj je</Link></p>
     </Uklad>
   );
 }
