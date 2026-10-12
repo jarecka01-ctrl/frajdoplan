@@ -61,6 +61,7 @@ export default async function handler(req, res) {
       const powod = dane ? `błąd skryptu: ${String(dane.blad || 'brak opisu').slice(0, 200)}` : `odpowiedź nie jest JSON-em: ${tekst.replace(/\s+/g, ' ').slice(0, 80)}`;
       throw new Error(`Apps Script: HTTP ${odp.status}, ${powod}`);
     }
+    if (dane.mail === false) console.warn('[zglos] zgłoszenie zapisane w arkuszu, ale e-mail z powiadomieniem nie poszedł (sprawdź zgody skryptu na pocztę)');
     return res.status(200).json({ ok: true });
   } catch (e) {
     console.error('[zglos] nie udało się zapisać zgłoszenia:', e.message); // bez treści zgłoszenia i bez adresu skryptu
