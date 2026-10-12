@@ -162,7 +162,7 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
       )}
       <section className="nl-blok" aria-labelledby="nl-weekend-h">
         <h2 id="nl-weekend-h">Plan weekendu w skrzynce</h2>
-        <p>Co piątek jeden krótki e-mail: nasze typy i wydarzenia na sobotę i niedzielę. Bez reklam.</p>
+        <p>Co tydzień, przed weekendem, jeden krótki e-mail: nasze typy i wydarzenia na sobotę i niedzielę. Bez reklam.</p>
         <NewsletterForm id="nl-weekend" zwarty />
       </section>
       <p className="dodaj-przypis">Brakuje wydarzenia? <Link href="/dodaj/wydarzenie">Dodaj je</Link></p>

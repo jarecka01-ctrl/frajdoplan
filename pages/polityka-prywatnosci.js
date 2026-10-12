@@ -60,7 +60,7 @@ export default function PolitykaPrywatnosci({ seo }) {
       <p>
         Jeśli zapiszesz się na newsletter, przetwarzam Twój adres e-mail oraz informację o zapisie: datę, godzinę i potwierdzenie adresu.
         Zapis wymaga potwierdzenia: najpierw wysyłam wiadomość z linkiem, a dopiero jego kliknięcie dodaje Cię do listy. Adres służy
-        wyłącznie do wysyłania newslettera Frajdoplanu (raz w tygodniu, w piątek, z planem weekendu dla dzieci w Krakowie). Dostawca
+        wyłącznie do wysyłania newslettera Frajdoplanu (raz w tygodniu, przed weekendem, z planem weekendu dla dzieci w Krakowie). Dostawca
         narzędzia do wysyłki może zapisywać, czy wiadomość została otwarta i czy kliknięto w link; wykorzystuję to tylko do oceny, które
         treści są przydatne. Podstawa prawna: Twoja zgoda (art. 6 ust. 1 lit. a RODO), którą wyrażasz, zaznaczając pole przy zapisie.
         Zgodę możesz cofnąć w dowolnym momencie: kliknij link „Wypisz się” na dole każdej wiadomości albo napisz na <Email />. Cofnięcie

@@ -6,9 +6,9 @@ import { seoStrony } from '../../lib/seo';
 export async function getStaticProps() {
   const seo = await seoStrony('/newsletter/dziekujemy', {
     tytul: 'Dziękujemy za zapis na newsletter | Frajdoplan',
-    opis: 'Adres e-mail potwierdzony. Od najbliższego piątku dostaniesz plan weekendu dla dzieci w Krakowie.',
+    opis: 'Adres e-mail potwierdzony. Przed najbliższym weekendem dostaniesz plan dla dzieci w Krakowie.',
     h1: 'Gotowe, jesteś zapisana!',
-    wstep: 'Adres e-mail potwierdzony. Pierwszy newsletter dostaniesz w najbliższy piątek.',
+    wstep: 'Adres e-mail potwierdzony. Pierwszy newsletter dostaniesz przed najbliższym weekendem.',
   }, 0, { noindex: true });
   return { props: { seo: { ...seo, canonical: '' } }, revalidate: 3600 };
 }

@@ -52,7 +52,7 @@ export default function NewsletterForm({ id = 'nl', zwarty = false }) {
   if (stan === 'ok') {
     return (
       <div className={`nl nl-ok${zwarty ? ' nl-zwarty' : ''}`} role="status">
-        <p><strong>Prawie gotowe!</strong> Wysłaliśmy do Ciebie e-mail z prośbą o potwierdzenie. Kliknij w nim przycisk, a od najbliższego piątku dostaniesz plan weekendu.</p>
+        <p><strong>Prawie gotowe!</strong> Wysłaliśmy do Ciebie e-mail z prośbą o potwierdzenie. Kliknij w nim przycisk, a przed najbliższym weekendem dostaniesz plan na sobotę i niedzielę.</p>
         <p className="nl-nota">Nic nie przyszło? Zajrzyj do folderu „Oferty” lub „Spam”.</p>
       </div>
     );
@@ -82,7 +82,7 @@ export default function NewsletterForm({ id = 'nl', zwarty = false }) {
         <label className="zgl-checkbox">
           <input type="checkbox" name="zgoda" aria-invalid={bledy.zgoda ? true : undefined} aria-describedby={bledy.zgoda ? `${id}-zgoda-blad` : undefined} />
           <span>
-            Zgadzam się na otrzymywanie newslettera Frajdoplanu (raz w tygodniu, w piątek) na podany adres e-mail.
+            Zgadzam się na otrzymywanie newslettera Frajdoplanu (raz w tygodniu, przed weekendem) na podany adres e-mail.
             Zapis możesz w każdej chwili cofnąć. Szczegóły w <Link href="/polityka-prywatnosci">polityce prywatności</Link>.
           </span>
         </label>
