@@ -11,7 +11,6 @@ const MENU = [
   { href: '/sport', label: 'Sport' },
   { href: '/zajecia', label: 'Zajęcia' },
   { href: '/polkolonie', label: 'Półkolonie' },
-  { href: '/dodaj', label: '+ Dodaj', klasa: 'menu-dodaj' },
 ];
 // Zakładka jest aktywna też na podstronach działu (np. /sport/taniec).
 const aktywna = (m, pathname) => pathname === m.href || pathname.startsWith(`${m.dzial || m.href}/`) || pathname === m.dzial;
