@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { useOknoDialogowe } from '../lib/oknoDialogowe';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { adresKarty } from '../lib/miejsca';
 import Bilet, { Nazwa, Szczegoly } from './Bilet';
 
@@ -46,6 +47,13 @@ export function trwaW(regula, iso) {
   return DNI.some(([wzor, nr]) => wzor.test(r) && nr === dz);
 }
 
+// Najbliższy weekend: sobota po dzisiejszym dniu (w piątek to jutro; w sobotę i niedzielę — kolejny tydzień). Wspólne dla kafelka „Weekend" i strony /weekend.
+export function najblizszyWeekend(teraz) {
+  let sob = plusDni(teraz, 1);
+  while (dzienTygodnia(sob) !== 6) sob = plusDni(sob, 1);
+  return { sob, nd: plusDni(sob, 1), wWeekend: [0, 6].includes(dzienTygodnia(teraz)) };
+}
+
 export const zakresDat = (a, b) => {
   const da = new Date(`${a}T12:00:00Z`), db = new Date(`${b}T12:00:00Z`);
   return da.getUTCMonth() === db.getUTCMonth()
@@ -79,7 +87,7 @@ function Tytul({ w, miejsca }) {
 
 // Małe kafelki „Jutro" i „Weekend": stała wysokość, po 3 wydarzenia na slajd, strzałki ‹ › i przesunięcie palcem.
 const NA_SLAJD = 3;
-function Slajdy({ pozycje, miejsca, pusto, etykieta, onWszystko }) {
+function Slajdy({ pozycje, miejsca, pusto, etykieta, onWszystko, href }) {
   const [nr, setNr] = useState(0);
   const [start, setStart] = useState(null);
   const ile = Math.max(1, Math.ceil(pozycje.length / NA_SLAJD));
@@ -115,9 +123,11 @@ function Slajdy({ pozycje, miejsca, pusto, etykieta, onWszystko }) {
           <span className="slajdy-licznik" aria-label={`Strona ${biezacy + 1} z ${ile}`}>{biezacy + 1} / {ile}</span>
           <button type="button" className="slajdy-strzalka" onClick={() => idz(1)} disabled={biezacy === ile - 1} aria-label="Następne wydarzenia">›</button>
         </div>
-        {onWszystko && (
+        {(onWszystko || href) && (
           <p className="slajdy-wszystko">
-            <button type="button" className="slajdy-wszystko-link" onClick={onWszystko}>Zobacz wszystko ({pozycje.length}) <span aria-hidden="true">›</span></button>
+            {href
+              ? <Link href={href} className="slajdy-wszystko-link">Zobacz wszystko ({pozycje.length}) <span aria-hidden="true">›</span></Link>
+              : <button type="button" className="slajdy-wszystko-link" onClick={onWszystko}>Zobacz wszystko ({pozycje.length}) <span aria-hidden="true">›</span></button>}
           </p>
         )}
         </>
@@ -175,7 +185,7 @@ function OknoWszystkich({ tytul, data, mod, stempel, pozycje, miejsca, onZamknij
 export default function Wydarzenia({ wydarzenia, places = [] }) {
   const [teraz, setTeraz] = useState(null); // liczone w przeglądarce, żeby „dziś" zawsze było dzisiaj
   const [glowny, setGlowny] = useState('dzis'); // co pokazuje duża sekcja: dziś albo (po kliknięciu) jutro
-  const [okno, setOkno] = useState(null); // 'jutro' | 'weekend' | null: otwarte okno „Zobacz wszystko"
+  const [okno, setOkno] = useState(null); // 'jutro' | null: otwarte okno „Zobacz wszystko"
 
   useEffect(() => setTeraz(dzisWarszawa()), []);
 
@@ -184,10 +194,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
 
   const jutro = plusDni(teraz, 1);
   // najbliższa sobota po dzisiejszym dniu (w piątek to jutro; w weekend — kolejny tydzień)
-  let sob = plusDni(teraz, 1);
-  while (dzienTygodnia(sob) !== 6) sob = plusDni(sob, 1);
-  const wWeekend = [0, 6].includes(dzienTygodnia(teraz));
-  const nd = plusDni(sob, 1);
+  const { sob, nd, wWeekend } = najblizszyWeekend(teraz);
 
   // seanse kinowe mają własną sekcję „Dziś w kinach"
   const naDzien = (iso) => wydarzenia.filter((w) => !w.kino && trwaW(w.data_regula, iso)).sort(poGodzinie);
@@ -268,17 +275,13 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             miejsca={miejsca}
             pusto="Brak wydarzeń w kalendarzu."
             etykieta="Wydarzenia w najbliższy weekend"
-            onWszystko={() => setOkno('weekend')}
+            href="/weekend"
           />
         </div>
       </div>
       {okno === 'jutro' && jutroLista.length > 0 && (
         <OknoWszystkich stempel="Jutro" tytul="Jutro dla dzieci w Krakowie" data={`${NAZWY_DNI[dzienTygodnia(jutro)]}, ${ladnaData(jutro)}`}
           pozycje={jutroLista.map((w) => ({ ...w, iso: jutro }))} miejsca={miejsca} onZamknij={() => setOkno(null)} />
-      )}
-      {okno === 'weekend' && weekend.length > 0 && (
-        <OknoWszystkich stempel="Weekend" mod="wokno-weekend" tytul={wWeekend ? 'Kolejny weekend dla dzieci w Krakowie' : 'Najbliższy weekend dla dzieci w Krakowie'} data={zakresDat(sob, nd)}
-          pozycje={weekend} miejsca={miejsca} onZamknij={() => setOkno(null)} />
       )}
     </section>
   );

@@ -11,7 +11,7 @@ import Bilet, { Nazwa, Szczegoly, godzinyPodTytulem } from './Bilet';
 
 const MIANOWNIK = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
 const DNI_KROTKO = ['pon', 'wt', 'śr', 'czw', 'pt', 'sob', 'niedz'];
-const KATEGORIE = [
+export const KATEGORIE = [
   { id: 'koncert', nazwa: 'Koncerty', ikona: '🎵' },
   { id: 'spektakl', nazwa: 'Spektakle', ikona: '🎭' },
   { id: 'warsztaty', nazwa: 'Warsztaty', ikona: '🎨' },
