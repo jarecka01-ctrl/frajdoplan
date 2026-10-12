@@ -53,8 +53,14 @@ export default async function handler(req, res) {
       redirect: 'follow',
       signal: AbortSignal.timeout(15000),
     });
-    const dane = await odp.json().catch(() => null);
-    if (!odp.ok || !dane || dane.ok !== true) throw new Error(`Apps Script: HTTP ${odp.status}`);
+    const tekst = await odp.text().catch(() => '');
+    let dane = null;
+    try { dane = JSON.parse(tekst); } catch (e) { /* odpowiedź nie jest JSON-em, np. strona logowania Google */ }
+    if (!odp.ok || !dane || dane.ok !== true) {
+      // do logu tylko to, co pomaga znaleźć przyczynę: komunikat skryptu („brak dostępu" = złe hasło) albo początek odpowiedzi, która nie jest JSON-em (bez treści zgłoszenia)
+      const powod = dane ? `błąd skryptu: ${String(dane.blad || 'brak opisu').slice(0, 200)}` : `odpowiedź nie jest JSON-em: ${tekst.replace(/\s+/g, ' ').slice(0, 80)}`;
+      throw new Error(`Apps Script: HTTP ${odp.status}, ${powod}`);
+    }
     return res.status(200).json({ ok: true });
   } catch (e) {
     console.error('[zglos] nie udało się zapisać zgłoszenia:', e.message); // bez treści zgłoszenia i bez adresu skryptu
