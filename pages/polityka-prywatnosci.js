@@ -56,9 +56,20 @@ export default function PolitykaPrywatnosci({ seo }) {
         wiadomość (art. 6 ust. 1 lit. f RODO). Korespondencję przechowuję do 12 miesięcy po jej zakończeniu, potem ją usuwam.
       </p>
 
-      {/* TODO: dopisać po dodaniu newslettera */}
+      <h3>d) Newsletter</h3>
+      <p>
+        Jeśli zapiszesz się na newsletter, przetwarzam Twój adres e-mail oraz informację o zapisie: datę, godzinę i potwierdzenie adresu.
+        Zapis wymaga potwierdzenia: najpierw wysyłam wiadomość z linkiem, a dopiero jego kliknięcie dodaje Cię do listy. Adres służy
+        wyłącznie do wysyłania newslettera Frajdoplanu (raz w tygodniu, przed weekendem, z planem weekendu dla dzieci w Krakowie). Dostawca
+        narzędzia do wysyłki może zapisywać, czy wiadomość została otwarta i czy kliknięto w link; wykorzystuję to tylko do oceny, które
+        treści są przydatne. Podstawa prawna: Twoja zgoda (art. 6 ust. 1 lit. a RODO), którą wyrażasz, zaznaczając pole przy zapisie.
+        Zgodę możesz cofnąć w dowolnym momencie: kliknij link „Wypisz się” na dole każdej wiadomości albo napisz na <Email />. Cofnięcie
+        zgody nie wpływa na zgodność z prawem wysyłki sprzed cofnięcia. Po wypisaniu się nie wysyłam już wiadomości, a adres usuwam z
+        listy wysyłkowej. Adresów IP z formularza zapisu nie zapisuję; serwer chwilowo, w pamięci, liczy próby zapisu z jednego adresu,
+        żeby wyłapać nadużycia.
+      </p>
 
-      <h3>d) Formularze „Dodaj wydarzenie" i „Dodaj miejsce"</h3>
+      <h3>e) Formularze „Dodaj wydarzenie" i „Dodaj miejsce"</h3>
       <p>
         Jeśli wyślesz zgłoszenie przez formularz, przetwarzam dane, które w nim podasz: opis wydarzenia lub miejsca, informację, kim jesteś
         (organizator, rodzic, inna osoba), oraz Twój adres e-mail. E-mail służy tylko do zadania pytań o zgłoszenie i nie jest publikowany
@@ -70,7 +81,7 @@ export default function PolitykaPrywatnosci({ seo }) {
         serwer chwilowo, w pamięci, liczy zgłoszenia z jednego adresu, żeby wyłapać nadużycia.
       </p>
 
-      <h3>e) Czcionki i mapa ładowane z zewnętrznych serwerów</h3>
+      <h3>f) Czcionki i mapa ładowane z zewnętrznych serwerów</h3>
       <p>
         Przy otwarciu strony Twoja przeglądarka pobiera czcionki z serwerów Google (Google Fonts), więc Google otrzymuje wtedy Twój
         adres IP i podstawowe dane przeglądarki. Gdy otworzysz mapę, przeglądarka pobiera jej kafelki z serwerów OpenStreetMap
@@ -113,16 +124,17 @@ export default function PolitykaPrywatnosci({ seo }) {
         <li><strong>Vercel Inc.</strong>: hosting strony i statystyki odwiedzin (Vercel Analytics), jako podmiot przetwarzający na moje zlecenie.</li>
         <li>
           <strong>Google</strong>: poczta w usłudze Google Workspace obsługująca adres <Email /> (Twoje wiadomości) oraz arkusz Google
-          z danymi o miejscach i wydarzeniach i zgłoszeniami z formularzy (punkt 2d), jako podmiot przetwarzający na moje zlecenie.
-          Google jest też dostawcą czcionek (punkt 2e).
+          z danymi o miejscach i wydarzeniach i zgłoszeniami z formularzy (punkt 2e), jako podmiot przetwarzający na moje zlecenie.
+          Google jest też dostawcą czcionek (punkt 2f).
         </li>
-        <li><strong>OpenStreetMap i CyclOSM</strong>: kafelki mapy (punkt 2e). To odrębni operatorzy, nie przetwarzają danych na moje zlecenie.</li>
+        <li><strong>Brevo</strong> (Sendinblue SAS, Francja): narzędzie do obsługi listy adresów i wysyłki newslettera (punkt 2d), jako podmiot przetwarzający na moje zlecenie.</li>
+        <li><strong>OpenStreetMap i CyclOSM</strong>: kafelki mapy (punkt 2f). To odrębni operatorzy, nie przetwarzają danych na moje zlecenie.</li>
       </ul>
       <p>Nie sprzedaję danych i nie przekazuję ich nikomu poza wymienionymi dostawcami.</p>
 
       <h2>6. Przekazywanie danych poza Europejski Obszar Gospodarczy</h2>
       <p>
-        Vercel i Google mogą przetwarzać dane poza Europejskim Obszarem Gospodarczym, w tym w Stanach Zjednoczonych. Dostawcy stosują
+        Vercel, Google i Brevo (przez swoich dostawców) mogą przetwarzać dane poza Europejskim Obszarem Gospodarczym, w tym w Stanach Zjednoczonych. Dostawcy stosują
         zabezpieczenia wymagane przez RODO, w szczególności standardowe klauzule umowne zatwierdzone przez Komisję Europejską i (lub)
         uczestnictwo w programie EU-US Data Privacy Framework. Więcej informacji możesz uzyskać, pisząc na <Email />.
       </p>
