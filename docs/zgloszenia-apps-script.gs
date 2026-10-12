@@ -3,7 +3,16 @@
   Skrypt wkleja się do arkusza Google (Rozszerzenia → Apps Script), patrz docs/zgloszenia-instrukcja.md.
   Strona wysyła tu zgłoszenie (przez serwer Vercel), skrypt dopisuje wiersz w zakładce i wysyła Ci e-mail z powiadomieniem.
   Hasło (SEKRET) ustawiasz we Właściwościach skryptu, nie w kodzie.
+
+  Trzy rzeczy, o których łatwo zapomnieć (szczegóły w instrukcji):
+  1. Raz uruchom funkcję `autoryzuj` z edytora i zezwól na dostęp do arkusza i poczty. Bez tego zgłoszenia kończą się błędem
+     „You do not have permission to call SpreadsheetApp.getActiveSpreadsheet".
+  2. Po KAŻDEJ zmianie kodu: Wdróż → Zarządzaj wdrożeniami → ołówek → Wersja: „Nowa wersja" → Wdróż. Adres wdrożenia się nie zmienia.
+     Samo zapisanie kodu nie zmienia tego, co działa pod adresem /exec.
+  3. Sprawdź wdrożenie, otwierając adres /exec w przeglądarce: zobaczysz krótką odpowiedź z informacją, czy hasło i arkusz są dostępne.
 */
+var WERSJA = '2026-10-12';
+
 var ZAKLADKI = {
   wydarzenie: {
     nazwa: 'Zgłoszenia_wydarzeń',
@@ -17,6 +26,27 @@ var ZAKLADKI = {
   }
 };
 
+// Uruchom raz z edytora (lista funkcji u góry → autoryzuj → Uruchom), żeby Google zapytał o zgodę na dostęp do arkusza i poczty.
+function autoryzuj() {
+  var arkusz = SpreadsheetApp.getActiveSpreadsheet();
+  if (!arkusz) throw new Error('Skrypt nie jest przypisany do arkusza. Otwórz Apps Script z menu Rozszerzenia w arkuszu.');
+  var limit = MailApp.getRemainingDailyQuota();
+  Logger.log('Uprawnienia w porządku. Arkusz: ' + arkusz.getName() + '. Pozostały dzienny limit e-maili: ' + limit + '.');
+}
+
+// Sprawdzenie wdrożenia: otwórz adres /exec w przeglądarce. Nie pokazuje żadnych sekretów, tylko tak/nie.
+function doGet() {
+  var wynik = { ok: true, usluga: 'frajdoplan-zgloszenia', wersja: WERSJA };
+  wynik.sekret_ustawiony = !!PropertiesService.getScriptProperties().getProperty('SEKRET');
+  try {
+    wynik.arkusz_dostepny = !!SpreadsheetApp.getActiveSpreadsheet();
+  } catch (err) {
+    wynik.arkusz_dostepny = false;
+    wynik.blad_arkusza = String(err).slice(0, 200);
+  }
+  return odp(wynik);
+}
+
 function doPost(e) {
   try {
     var dane = JSON.parse(e.postData.contents);
@@ -26,6 +56,7 @@ function doPost(e) {
     if (!ust) return odp({ ok: false, blad: 'nieznany typ' });
 
     var arkusz = SpreadsheetApp.getActiveSpreadsheet();
+    if (!arkusz) return odp({ ok: false, blad: 'skrypt nie jest przypisany do arkusza (otwórz Apps Script z menu Rozszerzenia w arkuszu)' });
     var karta = arkusz.getSheetByName(ust.nazwa) || arkusz.insertSheet(ust.nazwa);
     var naglowek = ['zgłoszono', 'status'].concat(ust.kolumny);
     if (karta.getLastRow() === 0) {
@@ -39,10 +70,17 @@ function doPost(e) {
     var numer = karta.getLastRow() + 1;
     karta.getRange(numer, 1, 1, wiersz.length).setNumberFormat('@').setValues([wiersz]);
 
-    var tytul = ust.tytul + ': ' + (dane.wiersz.nazwa || '');
-    MailApp.sendEmail(Session.getEffectiveUser().getEmail(), 'Frajdoplan: ' + tytul,
-      'Nowe zgłoszenie czeka w zakładce „' + ust.nazwa + '" (wiersz ' + numer + ').\n\n' + tytul + '\n' + arkusz.getUrl());
-    return odp({ ok: true });
+    // e-mail to tylko powiadomienie: gdy się nie uda (brak zgody na pocztę, limit dzienny), zgłoszenie jest już zapisane,
+    // więc nie zgłaszamy błędu (inaczej zgłaszający wysyłałby to samo drugi raz)
+    var mail = true;
+    try {
+      var tytul = ust.tytul + ': ' + (dane.wiersz.nazwa || '');
+      MailApp.sendEmail(Session.getEffectiveUser().getEmail(), 'Frajdoplan: ' + tytul,
+        'Nowe zgłoszenie czeka w zakładce „' + ust.nazwa + '" (wiersz ' + numer + ').\n\n' + tytul + '\n' + arkusz.getUrl());
+    } catch (errMail) {
+      mail = false;
+    }
+    return odp({ ok: true, mail: mail });
   } catch (err) {
     return odp({ ok: false, blad: String(err) });
   }
