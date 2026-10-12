@@ -5,6 +5,7 @@ export async function getStaticProps() {
   return pobierzDane({
     sekcja: 'z-marszu',
     zWydarzeniami: true,
+    zAdresami: true,
     adres: '/weekend',
     teksty: {
       tytul: 'Weekend dla dzieci w Krakowie: co robić w sobotę i niedzielę | Frajdoplan',

@@ -33,7 +33,8 @@ function wierszeDnia(wydarzenia, iso) {
   });
 }
 
-function Karta({ w, miejsca }) {
+function Karta({ w, miejsca, adresy }) {
+  const ulica = w.adres || adresy[w.miejsceId] || '';
   const href = w.link || (w.miejsceId && miejsca.has(w.miejsceId) ? miejsca.get(w.miejsceId) : '');
   const zewn = !!w.link;
   const kat = NAZWA_KAT[w.kategoria];
@@ -48,6 +49,12 @@ function Karta({ w, miejsca }) {
         {kat && <span className="wk-kat">{kat}</span>}
         <h3>{href ? <a href={href} {...(zewn ? { target: '_blank', rel: 'noreferrer' } : {})}>{w.nazwa}</a> : w.nazwa}</h3>
         {w.miejsce && <p className="wk-m">{w.miejsce}</p>}
+        {ulica && (
+          <p className="wk-adres">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
+            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${ulica}, Kraków`)}`} target="_blank" rel="noreferrer" title="Pokaż na mapie">{ulica}</a>
+          </p>
+        )}
         <div className="wk-w">
           {w.wiek && <span className="wk-tag">{w.wiek}</span>}
           {w.cena && <span className={`wk-tag${bezplatne(w) ? ' wk-free' : ''}`}>{w.cena}</span>}
@@ -58,7 +65,7 @@ function Karta({ w, miejsca }) {
   );
 }
 
-export default function WeekendStrona({ wydarzenia = [], places = [], seo, missingConfig, fetchError }) {
+export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {}, seo, missingConfig, fetchError }) {
   const [teraz, setTeraz] = useState(null);
   const [kat, setKat] = useState('');
   const [tylkoBezplatne, setTylkoBezplatne] = useState(false);
@@ -139,7 +146,7 @@ export default function WeekendStrona({ wydarzenia = [], places = [], seo, missi
                       return (
                         <div key={p.id}>
                           <h3 className="wk-pora">{p.nazwa} {p.opis && <em>{p.opis}</em>}</h3>
-                          <ul className="wk-siatka">{w.map((x) => <Karta key={`${x.id}-${x.dzien}-${x.nazwa}`} w={x} miejsca={miejsca} />)}</ul>
+                          <ul className="wk-siatka">{w.map((x) => <Karta key={`${x.id}-${x.dzien}-${x.nazwa}`} w={x} miejsca={miejsca} adresy={adresy} />)}</ul>
                         </div>
                       );
                     })}
