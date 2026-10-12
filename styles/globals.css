@@ -37,7 +37,6 @@ button, input, select { font: inherit; color: inherit; }
 .menu-link { padding: 8px 15px; border-radius: 999px; border: 2px solid transparent; color: var(--tusz); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; flex: 0 0 auto; }
 .menu-link:hover { border-color: var(--kreda); }
 .menu-skrot { border-color: var(--kreda); border-style: dashed; margin-right: 6px; }
-.menu-dodaj { border-color: var(--tusz); border-style: dashed; margin-left: 4px; }
 .menu-link[aria-current="page"] { border-color: var(--tusz); background: var(--slonce); }
 @media (max-width: 1107px) { .top { margin: 0 -20px; padding: 16px 20px 0; } }
 @media (max-width: 1000px) { .brand-logo img { height: 84px; } }
