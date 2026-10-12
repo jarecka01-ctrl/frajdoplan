@@ -84,6 +84,7 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
           <nav className="stopka-linki" aria-label="Informacje prawne i kontakt">
             <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
             <Link href="/regulamin">Regulamin</Link>
+            <Link href="/newsletter">Newsletter</Link>
             <Link href="/dodaj/wydarzenie">Dodaj wydarzenie</Link>
             <Link href="/dodaj/miejsce">Dodaj miejsce</Link>
             <Link href="/kontakt">Kontakt</Link>

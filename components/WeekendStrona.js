@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Uklad from './Uklad';
 import Okruszki from './Okruszki';
 import PlanPlus from './PlanPlus';
+import NewsletterForm from './NewsletterForm';
 import { KATEGORIE } from './Kalendarz';
 import { dzisWarszawa, najblizszyWeekend, trwaW, zakresDat, ladnaData } from './Wydarzenia';
 import { adresKarty } from '../lib/miejsca';
@@ -18,15 +19,15 @@ const PORY = [
   { id: 'popo', nazwa: 'Popołudnie', opis: '12:00–17:00' },
   { id: 'wieczor', nazwa: 'Wieczór', opis: 'od 17:00' },
 ];
-const godzinyZTekstu = (t) => (String(t || '').match(/\d{1,2}:\d{2}/g) || []).map((g) => g.padStart(5, '0'));
+export const godzinyZTekstu = (t) => (String(t || '').match(/\d{1,2}:\d{2}/g) || []).map((g) => g.padStart(5, '0'));
 const poraId = (g) => (!g ? 'caly' : g < '12:00' ? 'rano' : g < '17:00' ? 'popo' : 'wieczor');
-const bezplatne = (w) => /bezp|wstęp wolny|wstęp bezpłatny|^0\s?zł/i.test(w.cena || '');
+export const bezplatne = (w) => /bezp|wstęp wolny|wstęp bezpłatny|^0\s?zł/i.test(w.cena || '');
 // nazwa rodzaju na kafelku w liczbie pojedynczej (chipy filtra używają nazw z KATEGORIE)
 const NAZWA_KAT = { koncert: 'Koncert', spektakl: 'Spektakl', warsztaty: 'Warsztaty', pokaz: 'Pokaz', czytanie: 'Czytanie', wystawa: 'Wystawa', jarmark: 'Jarmark', festyn: 'Festyn', sport: 'Sport', spacer: 'Spacer', planszowki: 'Planszówki' };
 const liczba = (n) => `${n} ${n === 1 ? 'wydarzenie' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'wydarzenia' : 'wydarzeń'}`;
 
 // jeden wiersz = jedno wydarzenie w jednym dniu; godziny z osobnych wpisów o tym samym tytule i miejscu są połączone (grupujTerminy)
-function wierszeDnia(wydarzenia, iso) {
+export function wierszeDnia(wydarzenia, iso) {
   const lista = wydarzenia.filter((w) => !w.kino && trwaW(w.data_regula, iso)).map((w) => ({ ...w, dzien: iso }));
   return grupujTerminy(lista).map((w) => {
     const godziny = [...new Set(w.godziny.flatMap((g) => godzinyZTekstu(g.godzina)))].sort();
@@ -159,6 +160,11 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
           )}
         </div>
       )}
+      <section className="nl-blok" aria-labelledby="nl-weekend-h">
+        <h2 id="nl-weekend-h">Plan weekendu w skrzynce</h2>
+        <p>Co piątek jeden krótki e-mail: nasze typy i wydarzenia na sobotę i niedzielę. Bez reklam.</p>
+        <NewsletterForm id="nl-weekend" zwarty />
+      </section>
       <p className="dodaj-przypis">Brakuje wydarzenia? <Link href="/dodaj/wydarzenie">Dodaj je</Link></p>
     </Uklad>
   );

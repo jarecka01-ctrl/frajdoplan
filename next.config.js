@@ -3,7 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   // Strona planu z linku: bez indeksowania i bez przekazywania adresu (z zakodowanym planem) jako referera dalej
   async headers() {
-    return [{ source: '/plan', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }, { key: 'Referrer-Policy', value: 'no-referrer' }] }];
+    return [
+      { source: '/plan', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }, { key: 'Referrer-Policy', value: 'no-referrer' }] },
+      // widok roboczy newslettera i strona po potwierdzeniu zapisu: poza wyszukiwarką
+      { source: '/newsletter/generator', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      { source: '/newsletter/dziekujemy', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+    ];
   },
   async redirects() {
     return [
