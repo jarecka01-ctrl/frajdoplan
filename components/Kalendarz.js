@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { dzisWarszawa, trwaW, poGodzinie, dzienTygodnia, MIESIACE } from './Wydarzenia';
-import { grupujTerminy } from '../lib/grupowanie';
+import { grupujTerminy, scalMiejsca, opisMiejsc } from '../lib/grupowanie';
 import Link from 'next/link';
 import Bilet, { Nazwa, Szczegoly, godzinyPodTytulem } from './Bilet';
 
@@ -95,7 +95,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
   const terminy = dni.filter((x) => x.iso >= dzis).flatMap((x) => wydarzenia.filter((w) => trwaW(w.data_regula, x.iso)).map((w) => ({
     id: w.id, nazwa: w.nazwa, miejsce: w.miejsce, dzien: x.iso, godzina: w.godzina, link: w.link, wiek: w.wiek, cena: w.cena, kategoria: w.kategoria,
   })));
-  const wiersze = grupujTerminy(terminy);
+  const wiersze = scalMiejsca(grupujTerminy(terminy));
   const klucz = `${r}-${m}-${aktywne.join(',')}`;
   const ile = limit.klucz === klucz ? limit.n : NA_START;
   const poDniach = [];
@@ -171,9 +171,9 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
                     <h3 className="kal-dzien-naglowek">{naglowekDnia(g.dzien)}</h3>
                     <ul className="kal-wiersze tk-lista">
                       {g.wiersze.map((w) => (
-                        <Bilet key={`${w.id}-${w.dzien}`} godzina={w.godziny[0] && w.godziny[0].godzina} plan={{ id: (w.godziny[0] && w.godziny[0].id) || w.id, dzien: w.dzien, tytul: w.nazwa, godziny: w.godziny }}>
+                        <Bilet key={`${w.id}-${w.dzien}`} godzina={w.godziny[0] && w.godziny[0].godzina} plan={w.lokalizacje ? undefined : { id: (w.godziny[0] && w.godziny[0].id) || w.id, dzien: w.dzien, tytul: w.nazwa, godziny: w.godziny }}>
                           <Nazwa nazwa={w.nazwa} href={w.link} przed={ikonaKat(w) && <span aria-hidden="true" title={w.kategoria}>{ikonaKat(w)} </span>} />
-                          <Szczegoly czesci={[godzinyPodTytulem(w.godziny, w.link), w.miejsce, w.wiek, w.cena]} />
+                          <Szczegoly czesci={[godzinyPodTytulem(w.godziny, w.link), opisMiejsc(w), w.wiek, w.cena]} />
                         </Bilet>
                       ))}
                     </ul>

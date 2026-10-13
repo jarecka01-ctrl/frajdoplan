@@ -5,6 +5,7 @@ import Okruszki from './Okruszki';
 import PlanPlus from './PlanPlus';
 import { wydarzeniaJsonLd } from '../lib/jsonld';
 import { dzisWarszawa, godzinaWarszawa } from './Wydarzenia';
+import { opisMiejsc } from '../lib/grupowanie';
 
 // Strony /koncerty i /spektakle: lista wszystkich przyszłych wydarzeń jednej kategorii, miesiąc po miesiącu, w dużych kartach.
 // Karta: znaczek z datą (dzień tygodnia, numer, miesiąc, „za X dni"), tytuł (link do biletów), miejsce, wiek i cena,
@@ -42,7 +43,7 @@ function Karta({ w, dzis, pierwsza, nazwaKategorii }) {
         <h3>{tytul}</h3>
         <p className="kk-gdzie">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
-          {w.miejsce || 'Kraków'}
+          {opisMiejsc(w) || 'Kraków'}
         </p>
         <span className="sr-only">{`${DNI[d.getUTCDay()]} ${d.getUTCDate()} ${MIES[d.getUTCMonth()]}`}</span>
         {(w.wiek || w.cena || weekend) && (
@@ -63,7 +64,7 @@ function Karta({ w, dzis, pierwsza, nazwaKategorii }) {
           </div>
           <div className="kk-akcje">
             {link && <a className="kk-btn" href={link} target="_blank" rel="noreferrer">Bilety</a>}
-            <PlanPlus typ="wydarzenie" id={(w.godziny[0] && w.godziny[0].id) || w.id} dzien={w.dzien} tytul={w.nazwa} />
+            {!w.lokalizacje && <PlanPlus typ="wydarzenie" id={(w.godziny[0] && w.godziny[0].id) || w.id} dzien={w.dzien} tytul={w.nazwa} />}
           </div>
         </div>
       </div>
@@ -78,18 +79,18 @@ export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszk
 
   const wszystkie = miesiace.flatMap((m) => m.wiersze);
   const widoczne = useMemo(() => miesiace
-    .map((m) => ({ ...m, wiersze: m.wiersze.filter((w) => (!czas || !juzMinelo(w, czas.dzis, czas.godz)) && (!miejsce || w.miejsce === miejsce)) }))
+    .map((m) => ({ ...m, wiersze: m.wiersze.filter((w) => (!czas || !juzMinelo(w, czas.dzis, czas.godz)) && (!miejsce || (w.lokalizacje ? w.lokalizacje.some((l) => l.miejsce === miejsce) : w.miejsce === miejsce))) }))
     .filter((m) => m.wiersze.length), [miesiace, czas, miejsce]);
   const miejsca = useMemo(() => {
     const licz = {};
-    wszystkie.forEach((w) => { if (w.miejsce) licz[w.miejsce] = (licz[w.miejsce] || 0) + 1; });
+    wszystkie.forEach((w) => (w.lokalizacje ? w.lokalizacje.map((l) => l.miejsce) : [w.miejsce]).forEach((m) => { if (m) licz[m] = (licz[m] || 0) + 1; }));
     return Object.entries(licz).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([m]) => m);
   }, [wszystkie]);
   const nazwaKategorii = kolor === 'spektakl' ? 'spektakl' : 'koncert';
   let pierwsza = !miejsce; // wyróżniona karta tylko na pełnej liście
 
   return (
-    <Uklad seo={seo} jsonLd={wydarzeniaJsonLd(wszystkie, seo.canonical)} missingConfig={missingConfig} fetchError={fetchError}>
+    <Uklad seo={seo} jsonLd={wydarzeniaJsonLd(wszystkie.flatMap((w) => (w.lokalizacje ? w.lokalizacje.map((l) => ({ ...w, miejsce: l.miejsce, link: l.link || w.link, godziny: l.godziny, lokalizacje: undefined })) : [w])), seo.canonical)} missingConfig={missingConfig} fetchError={fetchError}>
       <Okruszki sciezka={[{ nazwa: nazwaOkruszka, href: seo.adres }]} siteUrl={seo.siteUrl} />
       <section className="hero">
         <h1>{seo.h1}</h1>
