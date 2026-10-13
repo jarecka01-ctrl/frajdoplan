@@ -32,7 +32,10 @@ export default async function handler(req, res) {
 
   const { email, zgoda, www_firmowa: pulapka, czas } = req.body || {};
   // pułapka na boty (ukryte pole) i zbyt szybkie wysłanie (poniżej 2 s od otwarcia): udajemy sukces, nic nie wysyłamy
-  if (pulapka || (typeof czas === 'number' && czas < 2000)) return res.status(200).json({ ok: true });
+  if (pulapka || (typeof czas === 'number' && czas < 2000)) {
+    console.warn('[newsletter] zapis pominięty (bez wysyłki do Brevo):', pulapka ? 'wypełnione ukryte pole' : `za szybko, ${czas} ms`);
+    return res.status(200).json({ ok: true });
+  }
 
   const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '').split(',')[0].trim();
   if (przekroczonyLimit(ip)) return res.status(429).json({ ok: false, blad: 'Było już kilka prób zapisu. Spróbuj ponownie za godzinę albo napisz na kontakt@frajdoplan.pl.' });
@@ -54,13 +57,19 @@ export default async function handler(req, res) {
       body: JSON.stringify({ email: czystyEmail(email), includeListIds: [lista], templateId: szablon, redirectionUrl: `${adres}/newsletter/dziekujemy` }),
       signal: AbortSignal.timeout(10000),
     });
-    if (odp.ok) return res.status(200).json({ ok: true });
+    if (odp.ok) {
+      console.log(`[newsletter] Brevo przyjęło zapis: HTTP ${odp.status}`);
+      return res.status(200).json({ ok: true });
+    }
 
     const tekst = await odp.text().catch(() => '');
     let dane = null;
     try { dane = JSON.parse(tekst); } catch (e) { /* nie JSON */ }
     // Ten adres już jest na liście albo czeka na potwierdzenie: osobie piszemy to samo co przy sukcesie (nie zdradzamy, kto jest zapisany)
-    if (odp.status === 400 && /already|exist|duplicate/i.test(`${dane && dane.code} ${dane && dane.message}`)) return res.status(200).json({ ok: true });
+    if (odp.status === 400 && /already|exist|duplicate/i.test(`${dane && dane.code} ${dane && dane.message}`)) {
+      console.warn(`[newsletter] Brevo: adres już istnieje lub czeka na potwierdzenie (HTTP 400, ${String((dane && (dane.code || dane.message)) || '')}), e-mail nie został wysłany ponownie`);
+      return res.status(200).json({ ok: true });
+    }
     // do logu tylko kod i komunikat Brevo (bez adresu e-mail i bez klucza)
     throw new Error(`Brevo: HTTP ${odp.status}, ${String((dane && (dane.code || dane.message)) || tekst.replace(/\s+/g, ' ').slice(0, 80))}`);
   } catch (e) {
