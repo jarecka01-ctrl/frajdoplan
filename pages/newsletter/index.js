@@ -26,7 +26,7 @@ export default function Newsletter({ seo }) {
           <li><strong>Nasze typy</strong> na weekend, czyli wydarzenia, które naprawdę warto zobaczyć.</li>
           <li><strong>Sobota i niedziela</strong> według pory dnia, z godziną, miejscem i ceną.</li>
           <li><strong>Bezpłatne atrakcje</strong> oznaczone osobno, żeby łatwo je znaleźć.</li>
-          <li>Wysyłamy w środę wieczorem albo w czwartek rano, żebyś zdążyła wszystko zaplanować.</li>
+          <li>Wysyłamy w czwartek rano, żebyście zdążyli wszystko zaplanować.</li>
         </ul>
         <NewsletterForm id="nl-strona" />
         <p className="nl-nota">Po zapisie dostaniesz e-mail z prośbą o potwierdzenie adresu. Z newslettera możesz zrezygnować jednym kliknięciem w dowolnej wiadomości.</p>
