@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Uklad from './Uklad';
 import Okruszki from './Okruszki';
@@ -45,47 +45,43 @@ function Karta({ w, miejsca, adresy }) {
   const zewn = !!w.link;
   const kat = NAZWA_KAT[w.kategoria];
   const nadmiar = w.godz.length > 3;
+  const darmo = bezplatne(w);
   return (
-    <li className={`wk-k wk-${w.kategoria || 'inne'}`}>
+    <li className={`wk-r wk-${w.kategoria || 'inne'}`}>
       <div className="wk-g">
         {w.godz.length ? w.godz.slice(0, 3).map((g) => <b key={g}>{g}</b>) : <b className="wk-cd">cały dzień</b>}
         {nadmiar && <small>+{w.godz.length - 3}</small>}
       </div>
       <div className="wk-t">
-        {kat && <span className="wk-kat">{kat}</span>}
-        <h3>{href ? <a href={href} {...(zewn ? { target: '_blank', rel: 'noreferrer' } : {})}>{w.nazwa}</a> : w.nazwa}</h3>
-        {w.miejsce && <p className="wk-m">{w.miejsce}</p>}
+        <h3>
+          {href ? <a href={href} {...(zewn ? { target: '_blank', rel: 'noreferrer' } : {})}>{w.nazwa}</a> : w.nazwa}
+          {darmo && <span className="wk-tag wk-free">bezpłatne</span>}
+        </h3>
+        <p className="wk-m">
+          {kat && <span className="wk-kat">{kat}</span>}
+          {w.lokalizacje ? <span>{liczbaLok(w.lokalizacje.length)}{w.wspolneMiejsce ? `: ${w.wspolneMiejsce}` : ''}</span> : w.miejsce && <span>{w.miejsce}</span>}
+          {!w.lokalizacje && ulica && <a className="wk-ulica" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${ulica}, Kraków`)}`} target="_blank" rel="noreferrer" title="Pokaż na mapie">{ulica}</a>}
+          {w.wiek && <span>{w.wiek}</span>}
+          {w.cena && !darmo && <span>{w.cena}</span>}
+        </p>
         {w.lokalizacje && (
-          <>
-            <p className="wk-m">{liczbaLok(w.lokalizacje.length)}{w.wspolneMiejsce ? ` · ${w.wspolneMiejsce}` : ''}</p>
-            <ul className="wk-lok">
-              {w.lokalizacje.map((l) => {
-                const u = l.adres || adresy[l.miejsceId] || '';
-                const h = l.link || (l.miejsceId && miejsca.has(l.miejsceId) ? miejsca.get(l.miejsceId) : '');
-                const rozneGodz = w.lokalizacje.some((x) => x.godz.join() !== l.godz.join());
-                return (
-                  <li key={l.miejsce}>
-                    {h ? <a href={h} target={l.link ? '_blank' : undefined} rel={l.link ? 'noreferrer' : undefined}>{l.nazwaMiejsca}</a> : l.nazwaMiejsca}
-                    {rozneGodz && l.godz.length > 0 && <span className="wk-lok-g"> · {l.godz.join(', ')}</span>}
-                    {u && <> · <a className="wk-lok-u" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${u}, Kraków`)}`} target="_blank" rel="noreferrer" title="Pokaż na mapie">{u}</a></>}
-                  </li>
-                );
-              })}
-            </ul>
-          </>
+          <ul className="wk-lok">
+            {w.lokalizacje.map((l) => {
+              const u = l.adres || adresy[l.miejsceId] || '';
+              const h = l.link || (l.miejsceId && miejsca.has(l.miejsceId) ? miejsca.get(l.miejsceId) : '');
+              const rozneGodz = w.lokalizacje.some((x) => x.godz.join() !== l.godz.join());
+              return (
+                <li key={l.miejsce}>
+                  {h ? <a href={h} target={l.link ? '_blank' : undefined} rel={l.link ? 'noreferrer' : undefined}>{l.nazwaMiejsca}</a> : l.nazwaMiejsca}
+                  {rozneGodz && l.godz.length > 0 && <span className="wk-lok-g"> · {l.godz.join(', ')}</span>}
+                  {u && <> · <a className="wk-lok-u" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${u}, Kraków`)}`} target="_blank" rel="noreferrer" title="Pokaż na mapie">{u}</a></>}
+                </li>
+              );
+            })}
+          </ul>
         )}
-        {ulica && (
-          <p className="wk-adres">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
-            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${ulica}, Kraków`)}`} target="_blank" rel="noreferrer" title="Pokaż na mapie">{ulica}</a>
-          </p>
-        )}
-        <div className="wk-w">
-          {w.wiek && <span className="wk-tag">{w.wiek}</span>}
-          {w.cena && <span className={`wk-tag${bezplatne(w) ? ' wk-free' : ''}`}>{w.cena}</span>}
-          {!w.lokalizacje && <PlanPlus typ="wydarzenie" id={w.planId} dzien={w.dzien} tytul={w.nazwa} />}
-        </div>
       </div>
+      {!w.lokalizacje && <PlanPlus typ="wydarzenie" id={w.planId} dzien={w.dzien} tytul={w.nazwa} />}
     </li>
   );
 }
@@ -95,6 +91,7 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
   const [kat, setKat] = useState('');
   const [tylkoBezplatne, setTylkoBezplatne] = useState(false);
   useEffect(() => setTeraz(dzisWarszawa()), []);
+  const drukuj = useCallback(() => { try { window.print(); } catch (e) { /* brak drukowania w tej przeglądarce */ } }, []);
 
   const miejsca = useMemo(() => new Map(places.map((p) => [p.id, adresKarty(p)])), [places]);
   const dane = useMemo(() => {
@@ -102,6 +99,15 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
     const { sob, nd, wWeekend } = najblizszyWeekend(teraz);
     return { sob, nd, wWeekend, dni: [{ id: 'sobota', nazwa: 'Sobota', iso: sob, wiersze: wierszeDnia(wydarzenia, sob) }, { id: 'niedziela', nazwa: 'Niedziela', iso: nd, wiersze: wierszeDnia(wydarzenia, nd) }] };
   }, [teraz, wydarzenia]);
+
+  // adres z ?pdf=1 (np. z newslettera) od razu otwiera okno zapisu do PDF
+  const gotowe = !!dane;
+  useEffect(() => {
+    if (!gotowe) return undefined;
+    if (new URLSearchParams(window.location.search).get('pdf') !== '1') return undefined;
+    const t = setTimeout(drukuj, 700);
+    return () => clearTimeout(t);
+  }, [gotowe, drukuj]);
 
   const wszystkie = dane ? dane.dni.flatMap((d) => d.wiersze) : [];
   const rodzaje = KATEGORIE.map((k) => ({ ...k, ile: wszystkie.filter((w) => w.kategoria === k.id).length })).filter((k) => k.ile > 0);
@@ -122,9 +128,16 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
       </section>
       {!dane ? <div className="wydarzenia-ladowanie" aria-hidden="true" /> : (
         <div className="wk-strona">
+          <img className="plan-druk-logo" src="/brand/nowe/logo-header.png" alt="Frajdoplan – co robić z dzieckiem w Krakowie" width="1528" height="449" />
           <div className="wk-meta">
             <span>{zakresDat(dane.sob, dane.nd)}</span>
             <span>{liczba(wszystkie.length)}</span>
+            {wszystkie.length > 0 && (
+              <button type="button" className="wk-pdf" onClick={drukuj}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="M6 9V3h12v6" /><rect x="3" y="9" width="18" height="8" rx="2" /><path d="M6 14h12v7H6z" /></svg>
+                Zapisz jako PDF
+              </button>
+            )}
           </div>
           {wszystkie.length === 0 ? (
             <p className="wyd-pusto">Na ten weekend nie mamy jeszcze wydarzeń w kalendarzu. Zajrzyj tu za kilka dni.</p>
@@ -159,10 +172,10 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
                   </div>
                 )}
               </div>
-              {dane.dni.map((d) => {
+              {dane.dni.map((d, nr) => {
                 const wiersze = filtruj(d.wiersze);
                 return (
-                  <section key={d.id} id={d.id} className="wk-dzien" aria-label={d.nazwa}>
+                  <section key={d.id} id={d.id} className={`wk-dzien wk-dz-${nr}`} aria-label={d.nazwa}>
                     <div className="wk-dh"><h2>{d.nazwa}</h2><span>{ladnaData(d.iso)} · {liczba(wiersze.length)}</span></div>
                     {wiersze.length === 0 && <p className="wyd-pusto">{d.wiersze.length ? 'Brak wydarzeń pasujących do filtra.' : 'Na ten dzień nie mamy jeszcze wydarzeń.'}</p>}
                     {PORY.map((p) => {
@@ -171,13 +184,14 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
                       return (
                         <div key={p.id}>
                           <h3 className="wk-pora">{p.nazwa} {p.opis && <em>{p.opis}</em>}</h3>
-                          <ul className="wk-siatka">{w.map((x) => <Karta key={`${x.id}-${x.dzien}-${x.nazwa}`} w={x} miejsca={miejsca} adresy={adresy} />)}</ul>
+                          <ul className="wk-lista">{w.map((x) => <Karta key={`${x.id}-${x.dzien}-${x.nazwa}`} w={x} miejsca={miejsca} adresy={adresy} />)}</ul>
                         </div>
                       );
                     })}
                   </section>
                 );
               })}
+              <p className="wk-druk-stopka">Lista z serwisu frajdoplan.pl, stan na dzień wydruku. Godziny i ceny sprawdź na stronie organizatora.</p>
               <p className="wk-podpowiedz">Chcesz ułożyć plan? Przyciskiem „+” dodasz wydarzenie do „Mojego planu”, a stamtąd pobierzesz je do kalendarza, wydrukujesz lub wyślesz znajomym.</p>
             </>
           )}

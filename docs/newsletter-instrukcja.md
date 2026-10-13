@@ -38,8 +38,8 @@ Po dodaniu zmiennych potrzebne jest **nowe wdrożenie** (wystarczy wdrożyć naj
 ## 4. Newsletter na weekend (co tydzień, czwartek rano)
 
 1. Otwórz `https://frajdoplan.pl/newsletter/generator` (adres jest ukryty, nie ma do niego linków na stronie).
-2. Odznacz wydarzenia, których nie chcesz (np. dla dorosłych). „Nasze typy" to wydarzenia z `wyrozniony = tak` w arkuszu (do trzech). Na start zaznaczone jest do 10 wydarzeń na dzień.
-3. Kliknij **Kopiuj temat**, **Kopiuj podgląd** i **Kopiuj kod HTML**.
+2. Odznacz wydarzenia, których nie chcesz (np. dla dorosłych). „Nasze typy" to wydarzenia z `wyrozniony = tak` w arkuszu (do trzech). Na start zaznaczone są wszystkie wydarzenia weekendu, więc newsletter jest kompletny (ok. 1,4 KB na wydarzenie; Gmail ucina maile powyżej ok. 102 KB, czyli przy ok. 70 wydarzeniach trzeba część odznaczyć).
+3. Kliknij **Kopiuj temat**, **Kopiuj podgląd** i **Kopiuj kod HTML**. Przycisk **Zapisz jako PDF** otwiera mail w nowym oknie i okno drukowania: wybierz „Zapisz jako PDF".
 4. W Brevo: Campaigns → Create an email campaign → wybierz listę „Newsletter weekend" → w edytorze wybierz wklejenie własnego kodu HTML (Code your own / „Paste your code") i wklej. Wyślij sobie test, potem zaplanuj wysyłkę na czwartek rano (zakładka planowania w kampanii).
 5. Dane do generatora odświeżają się co godzinę z arkusza, a skrypt repertuaru działa we wtorek i czwartek wieczorem. Przed wysyłką (w środę wieczorem albo w czwartek rano) sprawdź w arkuszu „Wydarzenia”, czy wpisałaś ręcznie to, co ważne; jeśli chcesz najświeższych danych ze skryptu, uruchom go ręcznie (GitHub → Actions → repertuar → Run workflow).
 6. Znacznik `{{ unsubscribe }}` w stopce Brevo zamieni na link do rezygnacji.
