@@ -109,8 +109,16 @@ export default function PlanPanel({ onZamknij }) {
         <div className="plan-uchwyt" aria-hidden="true" />
         <div className="plan-gora">
           <h2 id="plan-tytul">Mój plan</h2>
+          {!pusty && !czyszczenie && <button type="button" className="plan-wyczysc" onClick={() => setCzyszczenie(true)}>Wyczyść plan</button>}
           <button type="button" className="plan-zamknij" aria-label="Zamknij plan" onClick={onZamknij}><span aria-hidden="true">✕</span></button>
         </div>
+        {!pusty && czyszczenie && (
+          <div className="plan-potwierdz" role="alertdialog" aria-label="Potwierdź wyczyszczenie planu">
+            <span>Usunąć cały plan?</span>
+            <button type="button" className="plan-przycisk niebezpieczny" onClick={() => { akcje.wyczysc(); setCzyszczenie(false); }}>Tak, wyczyść</button>
+            <button type="button" className="plan-przycisk" onClick={() => setCzyszczenie(false)}>Anuluj</button>
+          </div>
+        )}
         <input
           className="plan-nazwa"
           value={plan.nazwa}
@@ -178,17 +186,6 @@ export default function PlanPanel({ onZamknij }) {
           </div>
         )}
 
-        <div className="plan-stopka">
-          {!pusty && (czyszczenie ? (
-            <div className="plan-potwierdz" role="alertdialog" aria-label="Potwierdź wyczyszczenie planu">
-              <span>Usunąć cały plan?</span>
-              <button type="button" className="plan-przycisk niebezpieczny" onClick={() => { akcje.wyczysc(); setCzyszczenie(false); }}>Tak, wyczyść</button>
-              <button type="button" className="plan-przycisk" onClick={() => setCzyszczenie(false)}>Anuluj</button>
-            </div>
-          ) : (
-            <button type="button" className="plan-przycisk" onClick={() => setCzyszczenie(true)}>Wyczyść plan</button>
-          ))}
-        </div>
         <p className="plan-uwaga">
           Plan zapisuje się tylko w tej przeglądarce, na tym urządzeniu (maks. {MAKS_POZYCJI} pozycji). Link zawiera wybrane pozycje, a serwis ich nie zapisuje.
           Godziny mogły się zmienić, przed wyjściem sprawdź u organizatora.
