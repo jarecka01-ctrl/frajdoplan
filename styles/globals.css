@@ -529,7 +529,11 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
 }
 .plan-okno:focus { outline: none; }
 .plan-uchwyt { width: 44px; height: 5px; border-radius: 9px; background: #d6cdb8; margin: 0 auto 10px; }
-.plan-gora { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.plan-gora { display: flex; align-items: center; gap: 10px; }
+.plan-gora h2 { margin-right: auto; }
+.plan-wyczysc { min-height: 44px; border: 2px solid var(--tusz); background: var(--biel); color: #8d2418; border-radius: 999px; padding: 6px 14px; font: 700 14px var(--font-body); cursor: pointer; white-space: nowrap; }
+.plan-wyczysc:hover { background: #fff3f0; border-color: var(--mak); }
+.plan-potwierdz { margin: 10px 0 4px; padding: 10px 12px; background: #fff3f0; border: 2px solid var(--mak); border-radius: 14px; }
 .plan-gora h2 { font: 700 26px/1 var(--font-display); letter-spacing: -0.02em; margin: 0; }
 .plan-zamknij, .plan-usun { border: 2px solid var(--tusz); background: var(--biel); color: var(--tusz); cursor: pointer; display: grid; place-items: center; padding: 0; }
 .plan-zamknij { width: 44px; height: 44px; border-radius: 50%; font: 700 16px var(--font-body); }
@@ -557,7 +561,6 @@ body.ma-pasek-planu { padding-bottom: 88px; } /* pasek planu nie zasłania treś
 .plan-usun { width: 44px; height: 44px; margin: -6px 0 0; border-color: transparent; background: none; font: 400 24px/1 var(--font-body); color: var(--tusz-2); border-radius: 50%; }
 .plan-dzien { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px; color: var(--tusz-2); }
 .plan-dzien input { border: 2px solid var(--tusz); border-radius: 8px; padding: 6px 8px; font: 500 14px var(--font-body); background: var(--biel); color: var(--tusz); min-height: 36px; }
-.plan-stopka { margin-top: 12px; }
 .plan-potwierdz { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
 .plan-przycisk { min-height: 44px; border: 2px solid var(--tusz); background: var(--biel); color: var(--tusz); border-radius: 14px; padding: 8px 16px; font: 700 15px/1.1 var(--font-display); cursor: pointer; }
 .plan-akcje { margin-top: 18px; display: grid; gap: 8px; }
