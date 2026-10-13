@@ -5,7 +5,7 @@ import { wierszeDnia, bezplatne } from './WeekendStrona';
 import { zbudujNewsletter } from '../lib/newsletterTresc';
 
 // Ukryty widok dla właścicielki (/newsletter/generator, bez indeksowania, bez linków w serwisie): z wydarzeń najbliższego weekendu
-// układa gotowy newsletter przed weekendem (środa wieczorem albo czwartek rano). Można odznaczyć wydarzenia, a potem skopiować HTML do Brevo albo sam tekst.
+// układa gotowy newsletter przed weekendem (czwartek rano). Można odznaczyć wydarzenia, a potem skopiować HTML do Brevo albo sam tekst.
 const NA_DZIEN = 10; // tyle wydarzeń na dzień zaznaczamy na start (poza „Naszymi typami"), żeby mail nie był za długi
 const klucz = (w) => `${w.dzien}|${w.nazwa}`;
 
