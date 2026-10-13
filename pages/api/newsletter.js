@@ -71,7 +71,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
     // do logu tylko kod i komunikat Brevo (bez adresu e-mail i bez klucza)
-    throw new Error(`Brevo: HTTP ${odp.status}, ${String((dane && (dane.code || dane.message)) || tekst.replace(/\s+/g, ' ').slice(0, 80))}`);
+    throw new Error(`Brevo: HTTP ${odp.status}, ${String((dane && `${dane.code} / ${dane.message}`) || tekst.replace(/\s+/g, ' ').slice(0, 80)).replace(/\S+@\S+/g, '[adres]').slice(0, 160)}`);
   } catch (e) {
     console.error('[newsletter] nie udało się zapisać adresu:', e.message);
     return res.status(502).json({ ok: false, blad: 'Nie udało się zapisać na newsletter. Spróbuj za chwilę albo napisz na kontakt@frajdoplan.pl.' });
