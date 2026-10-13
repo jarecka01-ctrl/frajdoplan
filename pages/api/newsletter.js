@@ -66,7 +66,7 @@ export default async function handler(req, res) {
     let dane = null;
     try { dane = JSON.parse(tekst); } catch (e) { /* nie JSON */ }
     // Ten adres już jest na liście albo czeka na potwierdzenie: osobie piszemy to samo co przy sukcesie (nie zdradzamy, kto jest zapisany)
-    if (odp.status === 400 && /already|exist|duplicate/i.test(`${dane && dane.code} ${dane && dane.message}`)) {
+    if (odp.status === 400 && /already|duplicate|contact.{0,20}exist/i.test(`${dane && dane.code} ${dane && dane.message}`) && !/template/i.test(String(dane && dane.message))) {
       console.warn(`[newsletter] Brevo: adres już istnieje lub czeka na potwierdzenie (HTTP 400, ${String((dane && `${dane.code} / ${dane.message}`) || '').replace(/\S+@\S+/g, '[adres]').slice(0, 120)}), e-mail nie został wysłany ponownie`);
       return res.status(200).json({ ok: true });
     }
