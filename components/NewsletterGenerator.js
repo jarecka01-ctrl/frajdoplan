@@ -33,7 +33,7 @@ export default function NewsletterGenerator({ wydarzenia = [], adresy = {}, seo,
     const { sob, nd } = najblizszyWeekend(teraz);
     const dni = [{ nazwa: 'Sobota', iso: sob }, { nazwa: 'Niedziela', iso: nd }].map((d) => ({
       ...d,
-      wiersze: wierszeDnia(wydarzenia, d.iso).map((w) => ({ ...w, ulica: w.adres || adresy[w.miejsceId] || '', bezplatne: bezplatne(w) })).sort((a, b) => (a.godz[0] || '').localeCompare(b.godz[0] || '')),
+      wiersze: wierszeDnia(wydarzenia, d.iso).map((w) => ({ ...w, ulica: w.adres || adresy[w.miejsceId] || '', bezplatne: bezplatne(w), ...(w.lokalizacje ? { lokalizacje: w.lokalizacje.map((l) => ({ ...l, ulica: l.adres || adresy[l.miejsceId] || '' })) } : {}) })).sort((a, b) => (a.godz[0] || '').localeCompare(b.godz[0] || '')),
     }));
     return { sob, nd, dni };
   }, [teraz, wydarzenia, adresy]);

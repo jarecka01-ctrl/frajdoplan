@@ -7,7 +7,7 @@ import NewsletterForm from './NewsletterForm';
 import { KATEGORIE } from './Kalendarz';
 import { dzisWarszawa, najblizszyWeekend, trwaW, zakresDat, ladnaData } from './Wydarzenia';
 import { adresKarty } from '../lib/miejsca';
-import { grupujTerminy } from '../lib/grupowanie';
+import { grupujTerminy, scalLokalizacje } from '../lib/grupowanie';
 
 // Strona /weekend: wszystkie wydarzenia najbliższego weekendu (bez seansów kinowych, te mają „Dziś w kinach"), osobno sobota i niedziela,
 // w każdym dniu pogrupowane na Cały dzień / Rano (do 12:00) / Popołudnie (12:00–17:00) / Wieczór (od 17:00).
@@ -29,11 +29,15 @@ const liczba = (n) => `${n} ${n === 1 ? 'wydarzenie' : (n % 10 >= 2 && n % 10 <=
 // jeden wiersz = jedno wydarzenie w jednym dniu; godziny z osobnych wpisów o tym samym tytule i miejscu są połączone (grupujTerminy)
 export function wierszeDnia(wydarzenia, iso) {
   const lista = wydarzenia.filter((w) => !w.kino && trwaW(w.data_regula, iso)).map((w) => ({ ...w, dzien: iso }));
-  return grupujTerminy(lista).map((w) => {
+  const wiersze = grupujTerminy(lista).map((w) => {
     const godziny = [...new Set(w.godziny.flatMap((g) => godzinyZTekstu(g.godzina)))].sort();
     return { ...w, godz: godziny, pora: poraId(godziny[0]), planId: (w.godziny[0] && w.godziny[0].id) || w.id };
   });
+  // to samo wydarzenie w kilku miejscach (np. filie biblioteki) = jeden wiersz z listą lokalizacji
+  return scalLokalizacje(wiersze).map((w) => (w.lokalizacje ? { ...w, pora: poraId(w.godz[0]) } : w));
 }
+
+const liczbaLok = (n) => `${n} ${n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'lokalizacje' : 'lokalizacji'}`;
 
 function Karta({ w, miejsca, adresy }) {
   const ulica = w.adres || adresy[w.miejsceId] || '';
@@ -51,6 +55,25 @@ function Karta({ w, miejsca, adresy }) {
         {kat && <span className="wk-kat">{kat}</span>}
         <h3>{href ? <a href={href} {...(zewn ? { target: '_blank', rel: 'noreferrer' } : {})}>{w.nazwa}</a> : w.nazwa}</h3>
         {w.miejsce && <p className="wk-m">{w.miejsce}</p>}
+        {w.lokalizacje && (
+          <>
+            <p className="wk-m">{liczbaLok(w.lokalizacje.length)}{w.wspolneMiejsce ? ` · ${w.wspolneMiejsce}` : ''}</p>
+            <ul className="wk-lok">
+              {w.lokalizacje.map((l) => {
+                const u = l.adres || adresy[l.miejsceId] || '';
+                const h = l.link || (l.miejsceId && miejsca.has(l.miejsceId) ? miejsca.get(l.miejsceId) : '');
+                const rozneGodz = w.lokalizacje.some((x) => x.godz.join() !== l.godz.join());
+                return (
+                  <li key={l.miejsce}>
+                    {h ? <a href={h} target={l.link ? '_blank' : undefined} rel={l.link ? 'noreferrer' : undefined}>{l.nazwaMiejsca}</a> : l.nazwaMiejsca}
+                    {rozneGodz && l.godz.length > 0 && <span className="wk-lok-g"> · {l.godz.join(', ')}</span>}
+                    {u && <> · <a className="wk-lok-u" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${u}, Kraków`)}`} target="_blank" rel="noreferrer" title="Pokaż na mapie">{u}</a></>}
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
         {ulica && (
           <p className="wk-adres">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
@@ -60,7 +83,7 @@ function Karta({ w, miejsca, adresy }) {
         <div className="wk-w">
           {w.wiek && <span className="wk-tag">{w.wiek}</span>}
           {w.cena && <span className={`wk-tag${bezplatne(w) ? ' wk-free' : ''}`}>{w.cena}</span>}
-          <PlanPlus typ="wydarzenie" id={w.planId} dzien={w.dzien} tytul={w.nazwa} />
+          {!w.lokalizacje && <PlanPlus typ="wydarzenie" id={w.planId} dzien={w.dzien} tytul={w.nazwa} />}
         </div>
       </div>
     </li>
@@ -116,7 +139,7 @@ export default function WeekendStrona({ wydarzenia = [], places = [], adresy = {
                       <li key={w.id}>
                         <small>{dzien(w.dzien)}{w.godz[0] ? ` · ${w.godz[0]}` : ''}</small>
                         <b>{w.link ? <a href={w.link} target="_blank" rel="noreferrer">{w.nazwa}</a> : w.nazwa}</b>
-                        <span>{[w.miejsce, w.wiek].filter(Boolean).join(' · ')}</span>
+                        <span>{[w.lokalizacje ? `${liczbaLok(w.lokalizacje.length)}${w.wspolneMiejsce ? `: ${w.wspolneMiejsce}` : ''}` : w.miejsce, w.wiek].filter(Boolean).join(' · ')}</span>
                       </li>
                     ))}
                   </ul>
