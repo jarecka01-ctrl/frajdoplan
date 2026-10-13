@@ -6,7 +6,6 @@ import { zbudujNewsletter } from '../lib/newsletterTresc';
 
 // Ukryty widok dla właścicielki (/newsletter/generator, bez indeksowania, bez linków w serwisie): z wydarzeń najbliższego weekendu
 // układa gotowy newsletter przed weekendem (czwartek rano). Można odznaczyć wydarzenia, a potem skopiować HTML do Brevo albo sam tekst.
-const NA_DZIEN = 10; // tyle wydarzeń na dzień zaznaczamy na start (poza „Naszymi typami"), żeby mail nie był za długi
 const klucz = (w) => `${w.dzien}|${w.nazwa}`;
 
 async function kopiuj(tekst) {
@@ -38,25 +37,20 @@ export default function NewsletterGenerator({ wydarzenia = [], adresy = {}, seo,
     return { sob, nd, dni };
   }, [teraz, wydarzenia, adresy]);
 
-  // domyślny wybór: wyróżnione + do NA_DZIEN pozostałych w każdym dniu (najpierw bezpłatne, potem według godziny)
+  // domyślny wybór: wszystkie wydarzenia weekendu (mail ma być kompletny); odznaczasz to, czego nie chcesz
   useEffect(() => {
     if (!weekend || wybrane) return;
-    const zazn = new Set();
-    weekend.dni.forEach((d) => {
-      d.wiersze.filter((w) => w.wyrozniony).forEach((w) => zazn.add(klucz(w)));
-      [...d.wiersze].filter((w) => !w.wyrozniony).sort((a, b) => Number(b.bezplatne) - Number(a.bezplatne)).slice(0, NA_DZIEN).forEach((w) => zazn.add(klucz(w)));
-    });
-    setWybrane(zazn);
+    setWybrane(new Set(weekend.dni.flatMap((d) => d.wiersze).map(klucz)));
   }, [weekend, wybrane]);
 
   const tresc = useMemo(() => {
     if (!weekend || !wybrane) return null;
     const widziane = new Set();
     const typy = weekend.dni.flatMap((d) => d.wiersze).filter((w) => w.wyrozniony && wybrane.has(klucz(w)) && !widziane.has(w.nazwa) && widziane.add(w.nazwa)).slice(0, 3).map((w) => ({ ...w, dzienNazwa: w.dzien === weekend.sob ? 'Sobota' : 'Niedziela' }));
-    const nazwyTypow = new Set(typy.map((w) => w.nazwa));
-    const dni = weekend.dni.map((d) => ({ nazwa: d.nazwa, iso: d.iso, wiersze: d.wiersze.filter((w) => wybrane.has(klucz(w)) && !nazwyTypow.has(w.nazwa)) }));
+    const dni = weekend.dni.map((d) => ({ nazwa: d.nazwa, iso: d.iso, wiersze: d.wiersze.filter((w) => wybrane.has(klucz(w))) }));
     const wszystkie = weekend.dni.flatMap((d) => d.wiersze);
-    return zbudujNewsletter({ sob: weekend.sob, nd: weekend.nd, adres: seo.siteUrl, dni, typy, ileWszystkich: wszystkie.length, ileBezplatnych: wszystkie.filter((w) => w.bezplatne).length });
+    const wMailu = dni.flatMap((d) => d.wiersze);
+    return zbudujNewsletter({ sob: weekend.sob, nd: weekend.nd, adres: seo.siteUrl, dni, typy, ileWszystkich: wMailu.length, ileBezplatnych: wMailu.filter((w) => w.bezplatne).length });
   }, [weekend, wybrane, seo.siteUrl]);
 
   const powiedz = (t) => { setKomunikat(t); clearTimeout(czasKomunikatu.current); czasKomunikatu.current = setTimeout(() => setKomunikat(''), 3500); };
@@ -67,6 +61,14 @@ export default function NewsletterGenerator({ wydarzenia = [], adresy = {}, seo,
     a.download = `newsletter-weekend-${weekend.sob}.html`;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+  // zapis maila jako PDF: otwiera wiadomość w nowym oknie i uruchamia okno drukowania (tam wybierasz „Zapisz jako PDF")
+  const zapiszPdf = () => {
+    const okno = window.open('', '_blank');
+    if (!okno) { powiedz('Przeglądarka zablokowała nowe okno. Zezwól na wyskakujące okna dla tej strony.'); return; }
+    okno.document.open();
+    okno.document.write(tresc.html.replace('</body>', '<script>window.addEventListener("load",function(){setTimeout(function(){window.print()},600)})</script></body>'));
+    okno.document.close();
   };
   const przelacz = (k) => setWybrane((s) => { const n = new Set(s); if (n.has(k)) n.delete(k); else n.add(k); return n; });
 
@@ -80,7 +82,7 @@ export default function NewsletterGenerator({ wydarzenia = [], adresy = {}, seo,
         <div className="ng">
           <div className="ng-kolumna">
             <h2>1. Wybierz wydarzenia</h2>
-            <p className="ng-nota">Zaznaczone trafią do maila. „Nasze typy” to wydarzenia z kolumną <code>wyrozniony = tak</code> w arkuszu (do trzech).</p>
+            <p className="ng-nota">Zaznaczone trafią do maila (na start wszystkie, żeby wiadomość była kompletna). „Nasze typy” to wydarzenia z kolumną <code>wyrozniony = tak</code> w arkuszu (do trzech).</p>
             {weekend.dni.map((d) => (
               <fieldset className="ng-dzien" key={d.iso}>
                 <legend>{d.nazwa} ({d.wiersze.length})</legend>
@@ -110,6 +112,7 @@ export default function NewsletterGenerator({ wydarzenia = [], adresy = {}, seo,
               <button type="button" className="przycisk" onClick={() => kopiujCo(tresc.html, 'kod HTML')}>Kopiuj kod HTML</button>
               <button type="button" className="przycisk" onClick={() => kopiujCo(tresc.tekst, 'wersja tekstowa')}>Kopiuj sam tekst</button>
               <button type="button" className="przycisk" onClick={pobierz}>Pobierz plik .html</button>
+              <button type="button" className="przycisk" onClick={zapiszPdf}>Zapisz jako PDF</button>
             </div>
             <p className="ng-komunikat" role="status" aria-live="polite">{komunikat}</p>
             <h2>Podgląd</h2>
