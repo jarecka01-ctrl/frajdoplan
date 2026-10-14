@@ -839,3 +839,9 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 .ng-przyciski { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 4px; }
 .ng-komunikat { min-height: 1.4em; margin: 6px 0 12px; font-weight: 700; color: #2F5D3A; }
 .ng-podglad { width: 100%; height: 720px; border: 2px solid var(--tusz); border-radius: 14px; background: #fff; }
+/* blok „Jak wybrać spektakl dla dziecka" pod listą /spektakle */
+.kk-poradnik { margin: 40px 0 8px; padding: 18px 20px; border: 2px dashed #d6cdb8; border-radius: 18px; }
+.kk-poradnik h2 { font: 800 24px/1.1 var(--font-display); margin: 0 0 10px; }
+.kk-poradnik ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 15px; line-height: 1.5; }
+.kk-poradnik a { color: inherit; text-decoration-color: var(--mak); text-underline-offset: 2px; }
+@media print { .kk-poradnik { display: none; } }

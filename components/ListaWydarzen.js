@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Uklad from './Uklad';
 import Okruszki from './Okruszki';
 import PlanPlus from './PlanPlus';
-import { wydarzeniaJsonLd } from '../lib/jsonld';
+import { wydarzeniaJsonLd, listaWydarzenJsonLd } from '../lib/jsonld';
 import { dzisWarszawa, godzinaWarszawa } from './Wydarzenia';
 import { opisMiejsc } from '../lib/grupowanie';
 
@@ -68,7 +68,7 @@ function Dzien({ dzien, wiersze, dzis }) {
   );
 }
 
-export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszka, pusto, missingConfig, fetchError, kolor = 'koncert' }) {
+export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszka, pusto, missingConfig, fetchError, kolor = 'koncert', children }) {
   const [czas, setCzas] = useState(null);
   const [miejsce, setMiejsce] = useState('');
   const [tylkoDarmo, setTylkoDarmo] = useState(false);
@@ -95,7 +95,7 @@ export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszk
   const sa = wszystkie.some(darmowe);
 
   return (
-    <Uklad seo={seo} jsonLd={wydarzeniaJsonLd(wszystkie.flatMap((w) => (w.lokalizacje ? w.lokalizacje.map((l) => ({ ...w, miejsce: l.miejsce, link: l.link || w.link, godziny: l.godziny, lokalizacje: undefined })) : [w])), seo.canonical)} missingConfig={missingConfig} fetchError={fetchError}>
+    <Uklad seo={seo} jsonLd={[...(wydarzeniaJsonLd(wszystkie.flatMap((w) => (w.lokalizacje ? w.lokalizacje.map((l) => ({ ...w, miejsce: l.miejsce, link: l.link || w.link, godziny: l.godziny, lokalizacje: undefined })) : [w])), seo.canonical)), listaWydarzenJsonLd(wszystkie, seo.canonical, seo.h1)]} missingConfig={missingConfig} fetchError={fetchError}>
       <Okruszki sciezka={[{ nazwa: nazwaOkruszka, href: seo.adres }]} siteUrl={seo.siteUrl} />
       <section className="hero">
         <h1>{seo.h1}</h1>
@@ -127,6 +127,7 @@ export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszk
             </section>
           ))}
           {widoczne.length === 0 && <p className="wyd-pusto">Nie ma już nadchodzących wydarzeń{miejsce || tylkoDarmo ? ' dla wybranych filtrów' : ''}.</p>}
+          {children}
           <p className="dodaj-przypis">Brakuje wydarzenia? <Link href="/dodaj/wydarzenie">Dodaj je</Link></p>
         </div>
       )}
