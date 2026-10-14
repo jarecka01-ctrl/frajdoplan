@@ -25,6 +25,8 @@ export const KATEGORIE = [
   { id: 'planszowki', nazwa: 'Planszówki', ikona: '🎲' },
   { id: 'inne', nazwa: 'Inne', ikona: '➕' },
 ];
+// bez wielkości liter i polskich znaków: „łódź" znajdzie „Łódź", „teatr groteska" znajdzie „Groteska"
+const norm = (t) => String(t || '').toLowerCase().replace(/ł/g, 'l').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 const pad = (n) => String(n).padStart(2, '0');
 const NA_START = 30; // tyle wierszy w widoku miesiąca, reszta po przycisku Pokaż więcej
 const MIESIAC_MIEJSCOWNIK = ['styczniu', 'lutym', 'marcu', 'kwietniu', 'maju', 'czerwcu', 'lipcu', 'sierpniu', 'wrześniu', 'październiku', 'listopadzie', 'grudniu'];
@@ -57,6 +59,7 @@ const naglowekDnia = (iso) => {
 
 export default function Kalendarz({ wydarzenia: wszystkie }) {
   const [rodzaje, setRodzaje] = useState([]); // kilka kategorii naraz; pusto = wszystkie
+  const [q, setQ] = useState(''); // wyszukiwarka: nazwa, miejsce lub rodzaj wydarzenia
   // seanse kinowe są tylko w kafelku „Dziś w kinach"
   const bezKin = useMemo(() => wszystkie.filter((w) => !w.kino), [wszystkie]);
   const ikonaKat = (w) => (KATEGORIE.find((k) => k.id === w.kategoria) || {}).ikona;
@@ -80,7 +83,15 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
   const wMiesiacu = bezKin.filter((w) => Array.from({ length: ileDni }, (_, i) => `${r}-${pad(m)}-${pad(i + 1)}`).some((iso) => trwaW(w.data_regula, iso)));
   const dostepne = KATEGORIE.filter((k) => wMiesiacu.some((w) => w.kategoria === k.id));
   const aktywne = rodzaje.filter((id) => dostepne.some((k) => k.id === id));
-  const wydarzenia = aktywne.length ? bezKin.filter((w) => aktywne.includes(w.kategoria)) : bezKin;
+  const bazowe = aktywne.length ? bezKin.filter((w) => aktywne.includes(w.kategoria)) : bezKin;
+  const fraza = norm(q).trim();
+  const slowa = fraza ? fraza.split(/\s+/) : [];
+  const wydarzenia = slowa.length
+    ? bazowe.filter((w) => {
+      const tekst = norm(`${w.nazwa} ${w.miejsce || ''} ${(KATEGORIE.find((k) => k.id === w.kategoria) || {}).nazwa || ''}`);
+      return slowa.every((x) => tekst.includes(x));
+    })
+    : bazowe;
 
   const dni = Array.from({ length: ileDni }, (_, i) => {
     const iso = `${r}-${pad(m)}-${pad(i + 1)}`;
@@ -91,12 +102,20 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
 
   // widok Cały miesiąc: wszystkie wydarzenia (bez seansów) z oglądanego miesiąca od dziś, pogrupowane po dniach;
   // ten sam tytuł, dzień i miejsce = jeden wiersz z kilkoma godzinami
-  const widokAktywny = widok || (aktywne.length ? 'miesiac' : 'dzien');
-  const terminy = dni.filter((x) => x.iso >= dzis).flatMap((x) => wydarzenia.filter((w) => trwaW(w.data_regula, x.iso)).map((w) => ({
-    id: w.id, nazwa: w.nazwa, miejsce: w.miejsce, dzien: x.iso, godzina: w.godzina, link: w.link, wiek: w.wiek, cena: w.cena, kategoria: w.kategoria,
+  // z wyszukiwaniem: widok „Wyniki" obejmuje wszystkie dostępne miesiące (dziś i dwa kolejne), nie tylko oglądany
+  const widokAktywny = fraza ? (widok === 'dzien' ? 'dzien' : 'wyniki') : (widok === 'wyniki' ? 'miesiac' : widok || (aktywne.length ? 'miesiac' : 'dzien'));
+  const dniListy = widokAktywny === 'wyniki'
+    ? Array.from({ length: 3 }, (_, i) => {
+      const mm = ((m0 - 1 + i) % 12) + 1;
+      const rr = r0 + Math.floor((m0 - 1 + i) / 12);
+      return Array.from({ length: new Date(Date.UTC(rr, mm, 0)).getUTCDate() }, (__, j) => `${rr}-${pad(mm)}-${pad(j + 1)}`);
+    }).flat()
+    : dni.map((x) => x.iso);
+  const terminy = dniListy.filter((iso) => iso >= dzis).flatMap((iso) => wydarzenia.filter((w) => trwaW(w.data_regula, iso)).map((w) => ({
+    id: w.id, nazwa: w.nazwa, miejsce: w.miejsce, dzien: iso, godzina: w.godzina, link: w.link, wiek: w.wiek, cena: w.cena, kategoria: w.kategoria,
   })));
   const wiersze = scalMiejsca(grupujTerminy(terminy));
-  const klucz = `${r}-${m}-${aktywne.join(',')}`;
+  const klucz = `${r}-${m}-${aktywne.join(',')}-${fraza}-${widokAktywny}`;
   const ile = limit.klucz === klucz ? limit.n : NA_START;
   const poDniach = [];
   wiersze.slice(0, ile).forEach((w) => {
@@ -104,13 +123,19 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
     poDniach[poDniach.length - 1].wiersze.push(w);
   });
   const rzeczownik = aktywne.length === 1 && RZECZOWNIKI[aktywne[0]] ? RZECZOWNIKI[aktywne[0]] : WYDARZENIA;
-  const naglowekMiesiaca = wiersze.length
-    ? `${wiersze.length} ${forma(wiersze.length, rzeczownik)} w ${MIESIAC_MIEJSCOWNIK[m - 1]}`
-    : `Brak wydarzeń w ${MIESIAC_MIEJSCOWNIK[m - 1]}`;
+  const naglowekMiesiaca = widokAktywny === 'wyniki'
+    ? (wiersze.length ? `${wiersze.length} ${forma(wiersze.length, rzeczownik)} dla „${q.trim()}”` : `Brak wyników dla „${q.trim()}”`)
+    : wiersze.length
+      ? `${wiersze.length} ${forma(wiersze.length, rzeczownik)} w ${MIESIAC_MIEJSCOWNIK[m - 1]}`
+      : `Brak wydarzeń w ${MIESIAC_MIEJSCOWNIK[m - 1]}`;
 
   return (
     <section id="kalendarz" className="kalendarz" aria-label="Kalendarz wydarzeń">
       <h2 className="sekcja">Kalendarz wydarzeń dla dzieci</h2>
+      <label className="szukaj kal-szukaj">
+        <span className="sr-only">Szukaj wydarzenia</span>
+        <input type="search" placeholder="Szukaj wydarzenia: nazwa, miejsce, np. Groteska, warsztaty…" value={q} onChange={(e) => setQ(e.target.value)} autoComplete="off" />
+      </label>
       {dostepne.length > 0 && (
         <div className="rodzaje kal-filtry" role="group" aria-label="Rodzaj wydarzenia">
           <button className="rodzaj" aria-pressed={aktywne.length === 0} onClick={() => setRodzaje([])}>
@@ -156,14 +181,14 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
         <div className="kal-lista">
           <div className="kal-pasek">
             <p className="kal-lista-tytul">
-              {widokAktywny === 'miesiac' ? naglowekMiesiaca : d && `${d.getUTCDate()} ${MIESIACE[d.getUTCMonth()]}`}
+              {widokAktywny !== 'dzien' ? naglowekMiesiaca : d && `${d.getUTCDate()} ${MIESIACE[d.getUTCMonth()]}`}
             </p>
             <div className="widok" role="group" aria-label="Widok kalendarza">
               <button type="button" className="widok-btn" aria-pressed={widokAktywny === 'dzien'} onClick={() => setWidok('dzien')}>Dzień</button>
-              <button type="button" className="widok-btn" aria-pressed={widokAktywny === 'miesiac'} onClick={() => setWidok('miesiac')}>Cały miesiąc</button>
+              <button type="button" className="widok-btn" aria-pressed={widokAktywny !== 'dzien'} onClick={() => setWidok(fraza ? 'wyniki' : 'miesiac')}>{fraza ? 'Wyniki' : 'Cały miesiąc'}</button>
             </div>
           </div>
-          {widokAktywny === 'miesiac' ? (
+          {widokAktywny !== 'dzien' ? (
             wiersze.length ? (
               <>
                 {poDniach.map((g) => (
@@ -188,7 +213,7 @@ export default function Kalendarz({ wydarzenia: wszystkie }) {
                 )}
               </>
             ) : (
-              <p className="wyd-pusto">W tym miesiącu nie mamy jeszcze wydarzeń w kalendarzu.</p>
+              <p className="wyd-pusto">{fraza ? 'Nic nie pasuje do tego wyszukiwania. Spróbuj innego słowa albo wyczyść pole.' : 'W tym miesiącu nie mamy jeszcze wydarzeń w kalendarzu.'}</p>
             )
           ) : naWybrany.length ? (
             <ul className="wyd-lista tk-lista">

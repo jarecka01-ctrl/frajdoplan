@@ -346,6 +346,8 @@ section[id] { scroll-margin-top: 16px; }
   border: 2px solid var(--tusz); background: var(--biel); font-size: 16px;
 }
 .szukaj input::placeholder { color: #8A909B; }
+.kal-szukaj { display: block; margin-bottom: 12px; }
+.kal-szukaj input { height: 46px; }
 .chipy { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
   height: 40px; padding: 0 16px; border-radius: 999px; cursor: pointer;
