@@ -29,10 +29,14 @@ function Wiersz({ w }) {
   const adresTytulu = w.strona || link;
   const tytul = adresTytulu ? <a href={adresTytulu} target="_blank" rel="noreferrer">{w.nazwa}</a> : w.nazwa;
   const miejsce = opisMiejsc(w);
+  // każda godzina ma własny link do biletów (np. Filharmonia: dwa koncerty w jeden dzień) → godziny są linkami, a jeden przycisk „Bilety” by mylił
+  const linkiGodz = new Set(w.godziny.map((g) => g.link).filter(Boolean)).size > 1;
   return (
     <li className="wk-r">
       <div className="wk-g">
-        {w.godziny.length ? w.godziny.slice(0, 3).map((g) => <b key={g.godzina}>{g.godzina}</b>) : <b className="wk-cd">cały dzień</b>}
+        {w.godziny.length ? w.godziny.slice(0, 3).map((g) => (linkiGodz && g.link
+          ? <a key={g.godzina} className="wk-gl" href={g.link} target="_blank" rel="noreferrer" title={`Bilety na ${g.godzina}`} aria-label={`Bilety: ${w.nazwa}, ${g.godzina}`}><b>{g.godzina}</b></a>
+          : <b key={g.godzina}>{g.godzina}</b>)) : <b className="wk-cd">cały dzień</b>}
         {w.godziny.length > 3 && <small>+{w.godziny.length - 3}</small>}
       </div>
       <div className="wk-t">
@@ -41,11 +45,12 @@ function Wiersz({ w }) {
           {miejsce && <span>{miejsce}</span>}
           {w.wiek && <span className="kk-wiek">{w.wiek}</span>}
           {w.cena && <span>{w.cena}</span>}
+          {linkiGodz && <span>bilety: kliknij godzinę</span>}
         </p>
-        {link && <a className="kk-bilety kk-bilety-tel" href={link} target="_blank" rel="noreferrer" aria-label={`Bilety: ${w.nazwa}`}>Bilety</a>}
+        {link && !linkiGodz && <a className="kk-bilety kk-bilety-tel" href={link} target="_blank" rel="noreferrer" aria-label={`Bilety: ${w.nazwa}`}>Bilety</a>}
       </div>
       <div className="kk-akcje">
-        {link && <a className="kk-bilety kk-bilety-pc" href={link} target="_blank" rel="noreferrer" aria-label={`Bilety: ${w.nazwa}`}>Bilety</a>}
+        {link && !linkiGodz && <a className="kk-bilety kk-bilety-pc" href={link} target="_blank" rel="noreferrer" aria-label={`Bilety: ${w.nazwa}`}>Bilety</a>}
         {!w.lokalizacje && <PlanPlus typ="wydarzenie" id={(w.godziny[0] && w.godziny[0].id) || w.id} dzien={w.dzien} tytul={w.nazwa} />}
       </div>
     </li>
