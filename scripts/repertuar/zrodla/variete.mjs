@@ -61,6 +61,7 @@ export function parsuj(html) {
         kategoria: koncert ? 'koncert' : 'spektakl',
         link: (t.link && t.link.url) || '',
         strona: `${BAZA}/repertuar/spektakle`,
+        opisUrl: `${BAZA}/repertuar/spektakle/${s.slug}`, // strona spektaklu na stronie teatru (opis, obsada); link biletów prowadzi tylko do zakupu
         wiek: ocena.wiek,
         dlaDzieci: ocena.dlaDzieci,
         dlaGrup: dzien >= 1 && dzien <= 5 && g < '13:00',

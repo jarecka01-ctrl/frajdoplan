@@ -25,7 +25,9 @@ const juzMinelo = (w, dzis, godz) => w.dzien === dzis && w.godziny.length > 0 &&
 
 function Wiersz({ w }) {
   const link = w.link || (w.godziny.find((g) => g.link) || {}).link || '';
-  const tytul = link ? <a href={link} target="_blank" rel="noreferrer">{w.nazwa}</a> : w.nazwa;
+  // tytuł prowadzi do opisu u organizatora (`strona`), gdy go mamy; „Bilety” zawsze do zakupu
+  const adresTytulu = w.strona || link;
+  const tytul = adresTytulu ? <a href={adresTytulu} target="_blank" rel="noreferrer">{w.nazwa}</a> : w.nazwa;
   const miejsce = opisMiejsc(w);
   return (
     <li className="wk-r">

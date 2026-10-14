@@ -118,6 +118,7 @@ const naWydarzenieInne = (zrodlo, s, idMiejsc = '') => ({
   link_biletow: s.link || '',
   zrodlo: zrodlo.id,
   status: 'zatwierdzone',
+  ...(s.opisUrl ? { link_strony: s.opisUrl } : {}), // strona spektaklu u organizatora, gdy link biletów prowadzi tylko do zakupu
   ...(s.dlaGrup ? { dla_grup: true } : {}), // poranki dla szkół: zostają w pliku, strona ich nie pokazuje
   ...(s.kandydatBanera ? { kandydat_banera: true } : {}), // duże widowisko rodzinne: o banerze (`wyrozniony`) decyduje właścicielka
 });

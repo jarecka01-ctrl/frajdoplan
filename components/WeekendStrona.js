@@ -41,8 +41,8 @@ const liczbaLok = (n) => `${n} ${n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || 
 
 function Karta({ w, miejsca, adresy }) {
   const ulica = w.adres || adresy[w.miejsceId] || '';
-  const href = w.link || (w.miejsceId && miejsca.has(w.miejsceId) ? miejsca.get(w.miejsceId) : '');
-  const zewn = !!w.link;
+  const href = w.linkStrony || w.link || (w.miejsceId && miejsca.has(w.miejsceId) ? miejsca.get(w.miejsceId) : '');
+  const zewn = !!(w.linkStrony || w.link);
   const kat = NAZWA_KAT[w.kategoria];
   const nadmiar = w.godz.length > 3;
   const darmo = bezplatne(w);
