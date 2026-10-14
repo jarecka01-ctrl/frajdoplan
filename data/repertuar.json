@@ -1,20 +1,20 @@
 {
-  "zaktualizowano": "2026-10-13T21:28:06+02:00",
+  "zaktualizowano": "2026-10-14T11:33:26+02:00",
   "zrodla": {
     "kijow": {
       "nazwa": "Kino Kijów",
       "url": "https://kijow.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 148,
-      "dla_dzieci": 32,
-      "linki_zastapione": 32
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 145,
+      "dla_dzieci": 29,
+      "linki_zastapione": 29
     },
     "mikro": {
       "nazwa": "Kino Mikro",
       "url": "https://kinomikro.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 131,
       "dla_dzieci": 7,
       "linki_zastapione": 0
@@ -23,8 +23,8 @@
       "nazwa": "Kino Agrafka",
       "url": "http://kinoagrafka.pl/rep.php",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 24,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 30,
       "dla_dzieci": 1,
       "linki_zastapione": 0
     },
@@ -32,8 +32,8 @@
       "nazwa": "Kino Pod Baranami",
       "url": "https://www.kinopodbaranami.pl/repertuar.php",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 197,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 196,
       "dla_dzieci": 2,
       "linki_zastapione": 1
     },
@@ -41,8 +41,8 @@
       "nazwa": "Kino Paradox",
       "url": "https://kinoparadox.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 31,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 29,
       "dla_dzieci": 6,
       "linki_zastapione": 0
     },
@@ -50,8 +50,8 @@
       "nazwa": "Kino Sfinks",
       "url": "https://kinosfinks.okn.edu.pl/wydarzenia-kategoria-158.html",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 59,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 55,
       "dla_dzieci": 1,
       "linki_zastapione": 0
     },
@@ -60,7 +60,7 @@
       "url": "https://okn.edu.pl/wydarzenia.html",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 0,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -73,12 +73,12 @@
       "url": "https://ludowy.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 98,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 100,
       "dla_dzieci": 16,
       "dla_grup": 16,
-      "do_weryfikacji": 2,
-      "pominiete": 64,
+      "do_weryfikacji": 3,
+      "pominiete": 65,
       "linki_zastapione": 1
     },
     "kultureska": {
@@ -86,7 +86,7 @@
       "url": "https://kultureska.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 31,
       "dla_dzieci": 0,
       "dla_grup": 31,
@@ -99,12 +99,12 @@
       "url": "https://teatrkrakow.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 131,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 132,
       "dla_dzieci": 5,
       "dla_grup": 49,
       "do_weryfikacji": 0,
-      "pominiete": 77,
+      "pominiete": 78,
       "linki_zastapione": 0
     },
     "szczescie": {
@@ -112,7 +112,7 @@
       "url": "https://teatrszczescie.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 20,
       "dla_dzieci": 6,
       "dla_grup": 0,
@@ -125,10 +125,10 @@
       "url": "https://filharmoniakrakow.pl/public/program",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 62,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 65,
       "dla_dzieci": 47,
-      "dla_grup": 15,
+      "dla_grup": 18,
       "do_weryfikacji": 0,
       "pominiete": 0,
       "linki_zastapione": 3
@@ -138,7 +138,7 @@
       "url": "https://sinfonietta.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 5,
       "dla_dzieci": 0,
       "dla_grup": 2,
@@ -151,46 +151,46 @@
       "url": "https://biblioteka.krakow.pl/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 51,
-      "dla_dzieci": 51,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 49,
+      "dla_dzieci": 49,
       "dla_grup": 0,
       "do_weryfikacji": 0,
       "pominiete": 0,
-      "linki_zastapione": 51
+      "linki_zastapione": 49
     },
     "ckpodgorza": {
       "nazwa": "Centrum Kultury Podgórza",
       "url": "https://www.ckpodgorza.pl/oferta/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 40,
-      "dla_dzieci": 26,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 39,
+      "dla_dzieci": 28,
       "dla_grup": 8,
       "do_weryfikacji": 0,
-      "pominiete": 6,
-      "linki_zastapione": 26
+      "pominiete": 3,
+      "linki_zastapione": 28
     },
     "zis": {
       "nazwa": "Dzieciaki na start (ZIS Kraków)",
       "url": "https://zis.krakow.pl/dzieciaki-na-start",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 5,
-      "dla_dzieci": 5,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 6,
+      "dla_dzieci": 6,
       "dla_grup": 0,
       "do_weryfikacji": 0,
       "pominiete": 0,
-      "linki_zastapione": 4
+      "linki_zastapione": 5
     },
     "tauron-arena": {
       "nazwa": "TAURON Arena Kraków",
       "url": "https://www.tauronarenakrakow.pl/events/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 33,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -203,7 +203,7 @@
       "url": "https://icekrakow.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 17,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -216,7 +216,7 @@
       "url": "https://www.klubstudio.pl/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 60,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -229,10 +229,10 @@
       "url": "https://www.teatrvariete.pl/repertuar/sprawdz-repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 55,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 53,
       "dla_dzieci": 10,
-      "dla_grup": 25,
+      "dla_grup": 23,
       "do_weryfikacji": 1,
       "pominiete": 19,
       "linki_zastapione": 0
@@ -242,9 +242,9 @@
       "url": "https://www.groteska.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 87,
-      "dla_dzieci": 28,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 86,
+      "dla_dzieci": 27,
       "dla_grup": 47,
       "do_weryfikacji": 1,
       "pominiete": 11,
@@ -255,7 +255,7 @@
       "url": "https://teatrfigurki.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 7,
       "dla_dzieci": 7,
       "dla_grup": 0,
@@ -268,12 +268,12 @@
       "url": "https://teatrwkrakowie.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 97,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 98,
       "dla_dzieci": 0,
       "dla_grup": 0,
       "do_weryfikacji": 0,
-      "pominiete": 97,
+      "pominiete": 98,
       "linki_zastapione": 0
     },
     "kbf": {
@@ -281,7 +281,7 @@
       "url": "https://kbfbilety.krakow.pl/wydarzenia/filtruj?type%5B%22children%22%5D=on&location=0",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 2,
       "dla_dzieci": 2,
       "dla_grup": 0,
@@ -294,9 +294,9 @@
       "url": "https://krakowskieforum.pl/wydarzenia.html",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 23,
-      "dla_dzieci": 23,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 31,
+      "dla_dzieci": 31,
       "dla_grup": 0,
       "do_weryfikacji": 0,
       "pominiete": 0,
@@ -307,12 +307,12 @@
       "url": "https://dworek.eu/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 12,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 11,
       "dla_dzieci": 2,
       "dla_grup": 0,
       "do_weryfikacji": 0,
-      "pominiete": 10,
+      "pominiete": 9,
       "linki_zastapione": 2
     },
     "dworek-kluby": {
@@ -320,7 +320,7 @@
       "url": "https://mydlniki.dworek.eu/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 25,
       "dla_dzieci": 6,
       "dla_grup": 0,
@@ -333,12 +333,12 @@
       "url": "https://mck.krakow.pl/wystawy-i-wydarzenia/kalendarz/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 4,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 3,
       "dla_dzieci": 1,
       "dla_grup": 0,
       "do_weryfikacji": 0,
-      "pominiete": 3,
+      "pominiete": 2,
       "linki_zastapione": 1
     },
     "mnk": {
@@ -346,7 +346,7 @@
       "url": "https://mnk.pl/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 25,
       "dla_dzieci": 6,
       "dla_grup": 0,
@@ -359,20 +359,20 @@
       "url": "https://muzeumkrakowa.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 18,
-      "dla_dzieci": 11,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 20,
+      "dla_dzieci": 13,
       "dla_grup": 5,
       "do_weryfikacji": 2,
       "pominiete": 0,
-      "linki_zastapione": 11
+      "linki_zastapione": 13
     },
     "mit": {
       "nazwa": "Muzeum Inżynierii i Techniki",
       "url": "https://www.mit.krakow.pl/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 4,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -385,7 +385,7 @@
       "url": "https://ma.krakow.pl/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 6,
       "dla_dzieci": 2,
       "dla_grup": 0,
@@ -398,20 +398,20 @@
       "url": "https://mocak.pl/kalendarz",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
-      "wszystkich": 30,
-      "dla_dzieci": 12,
+      "pobrano": "2026-10-14T11:33:26+02:00",
+      "wszystkich": 32,
+      "dla_dzieci": 14,
       "dla_grup": 0,
       "do_weryfikacji": 0,
       "pominiete": 18,
-      "linki_zastapione": 12
+      "linki_zastapione": 14
     },
     "cricoteka": {
       "nazwa": "Cricoteka",
       "url": "https://cricoteka.pl/pl/kalendarium/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 14,
       "dla_dzieci": 10,
       "dla_grup": 0,
@@ -424,7 +424,7 @@
       "url": "https://mufo.krakow.pl/odwiedzaj/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 9,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -437,7 +437,7 @@
       "url": "https://www.kupbilecik.pl/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-13T21:28:06+02:00",
+      "pobrano": "2026-10-14T11:33:26+02:00",
       "wszystkich": 19,
       "dla_dzieci": 17,
       "dla_grup": 0,
@@ -447,104 +447,6 @@
     }
   },
   "wydarzenia": [
-    {
-      "id": "variete-krakowski-teatr-variete-adonis-ma-goscia-2026-10-13T09:00",
-      "typ": "spektakl",
-      "kino": false,
-      "kategoria": "spektakl",
-      "nazwa": "Adonis ma gościa",
-      "data_regula": "2026-10-13",
-      "godzina": "09:00",
-      "miejsce": "Krakowski Teatr VARIETE",
-      "powiazane_miejsce_id": "ChIJP5ASiDlbFkcR3exk4kmaWBo",
-      "grupa_wiekowa": "5+",
-      "cena": "",
-      "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=685&idt=a2f22227801a8db08553e5ac25546530",
-      "zrodlo": "variete",
-      "status": "zatwierdzone",
-      "dla_grup": true
-    },
-    {
-      "id": "biblioteka-biblioteka-krakow-filia-kosmos-nr-58-co-moga-smoki-a-czego-nie-zaraz-dowiesz-sie-2026-10-13T10:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "inne",
-      "nazwa": "Co mogą smoki, a czego nie, zaraz dowiesz się",
-      "data_regula": "2026-10-13",
-      "godzina": "10:00",
-      "miejsce": "Biblioteka Kraków, Filia „Kosmos” (nr 58)",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://biblioteka.krakow.pl/wydarzenia/co-moga-smoki-a-czego-nie-zaraz-dowiesz-sie/2473",
-      "zrodlo": "biblioteka",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "ckpodgorza-klub-kostrze-spotkanie-z-apiterapia-dla-dzieci-2026-10-13T10:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "inne",
-      "nazwa": "Spotkanie z Apiterapią dla dzieci",
-      "data_regula": "2026-10-13",
-      "godzina": "10:00",
-      "miejsce": "Klub Kostrze",
-      "powiazane_miejsce_id": "ChIJ2_KZcT1cFkcRJQrkNtYfeJk",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/spotkanie-z-apiterapia-dla-doroslych-3-kopia-kopia-kopia-kopia-kopia-1",
-      "zrodlo": "ckpodgorza",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "variete-krakowski-teatr-variete-adonis-ma-goscia-2026-10-13T12:00",
-      "typ": "spektakl",
-      "kino": false,
-      "kategoria": "spektakl",
-      "nazwa": "Adonis ma gościa",
-      "data_regula": "2026-10-13",
-      "godzina": "12:00",
-      "miejsce": "Krakowski Teatr VARIETE",
-      "powiazane_miejsce_id": "ChIJP5ASiDlbFkcR3exk4kmaWBo",
-      "grupa_wiekowa": "5+",
-      "cena": "",
-      "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=686&idt=6ac33ddedf77bf8d9f9a96514fb35960",
-      "zrodlo": "variete",
-      "status": "zatwierdzone",
-      "dla_grup": true
-    },
-    {
-      "id": "biblioteka-biblioteka-krakow-filia-pod-kawka-nr-44-daj-mi-spokoj-o-nekaniu-i-zlosliwosci-2026-10-13T17:00",
-      "typ": "wydarzenie",
-      "kino": false,
-      "kategoria": "warsztaty",
-      "nazwa": "Daj mi spokój – o nękaniu i złośliwości",
-      "data_regula": "2026-10-13",
-      "godzina": "17:00",
-      "miejsce": "Biblioteka Kraków, Filia „Pod Kawką” (nr 44)",
-      "powiazane_miejsce_id": "",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://biblioteka.krakow.pl/wydarzenia/daj-mi-spokoj-o-nekaniu-i-zlosliwosci/2475",
-      "zrodlo": "biblioteka",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "groteska-teatr-groteska-witrazowanki-stasia-wyspianskiego-2026-10-14T09:00",
-      "typ": "spektakl",
-      "kino": false,
-      "kategoria": "spektakl",
-      "nazwa": "Witrażowanki Stasia Wyspiańskiego",
-      "data_regula": "2026-10-14",
-      "godzina": "09:00",
-      "miejsce": "Teatr Groteska",
-      "powiazane_miejsce_id": "ChIJXyVLKQpbFkcR0luGkQ-2tVk",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=10869&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
-      "zrodlo": "groteska",
-      "status": "zatwierdzone"
-    },
     {
       "id": "kfk-klub-malwa-klub-rodzicow-sensoplastyka-2026-10-14T10:00",
       "typ": "wydarzenie",
@@ -577,67 +479,6 @@
       "zrodlo": "muzeum-krakowa",
       "status": "zatwierdzone",
       "dla_grup": true
-    },
-    {
-      "id": "kijow-kino-kijow-zapomniana-wyspa-2026-10-14T10:15",
-      "typ": "seans",
-      "kino": true,
-      "nazwa": "Zapomniana wyspa (dubbing)",
-      "data_regula": "2026-10-14",
-      "godzina": "10:15",
-      "miejsce": "Kino Kijów",
-      "powiazane_miejsce_id": "ChIJbVilzHRbFkcRRVLlOC1cpQk",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://kijow.pl/zapomniana-wyspa-premiera-2-10/",
-      "zrodlo": "kijow",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "kijow-kino-kijow-tedi-i-magiczna-lampa-2026-10-14T10:30",
-      "typ": "seans",
-      "kino": true,
-      "nazwa": "Tedi i magiczna lampa (dubbing)",
-      "data_regula": "2026-10-14",
-      "godzina": "10:30",
-      "miejsce": "Kino Kijów",
-      "powiazane_miejsce_id": "ChIJbVilzHRbFkcRRVLlOC1cpQk",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://kijow.pl/tedi-i-magiczna-lampa-premiera-18-09/",
-      "zrodlo": "kijow",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "kijow-kino-kijow-pucio-kocha-zwierzaki-2026-10-14T10:45",
-      "typ": "seans",
-      "kino": true,
-      "nazwa": "Pucio kocha zwierzaki (dubbing)",
-      "data_regula": "2026-10-14",
-      "godzina": "10:45",
-      "miejsce": "Kino Kijów",
-      "powiazane_miejsce_id": "ChIJbVilzHRbFkcRRVLlOC1cpQk",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://kijow.pl/pucio-kocha-zwierzaki-premiera-21-08/",
-      "zrodlo": "kijow",
-      "status": "zatwierdzone"
-    },
-    {
-      "id": "groteska-teatr-groteska-witrazowanki-stasia-wyspianskiego-2026-10-14T11:00",
-      "typ": "spektakl",
-      "kino": false,
-      "kategoria": "spektakl",
-      "nazwa": "Witrażowanki Stasia Wyspiańskiego",
-      "data_regula": "2026-10-14",
-      "godzina": "11:00",
-      "miejsce": "Teatr Groteska",
-      "powiazane_miejsce_id": "ChIJXyVLKQpbFkcR0luGkQ-2tVk",
-      "grupa_wiekowa": "",
-      "cena": "",
-      "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=10870&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
-      "zrodlo": "groteska",
-      "status": "zatwierdzone"
     },
     {
       "id": "kijow-kino-kijow-vincent-legenda-oceanu-2026-10-14T11:45",
@@ -763,7 +604,8 @@
       "cena": "",
       "link_biletow": "\thttps://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=871&idt=cf39f21e160e1a4d1832aed916521599",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia"
     },
     {
       "id": "biblioteka-biblioteka-krakow-filia-nr-14-100-lat-puchatku-2026-10-14T17:30",
@@ -1505,7 +1347,7 @@
       "powiazane_miejsce_id": "ChIJHbYmukhbFkcRFqvKpHaz3is",
       "grupa_wiekowa": "1–3 lat",
       "cena": "",
-      "link_biletow": "https://mocak.pl/do-dziela-zajecia-sensoryczne-dla-dzieci-od-roku-do-trzech-lat-17-9",
+      "link_biletow": "https://mocak.pl/do-dziela-zajecia-sensoryczne-dla-dzieci-od-roku-do-trzech-lat-17-10",
       "zrodlo": "mocak",
       "status": "zatwierdzone"
     },
@@ -1618,6 +1460,22 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "ckpodgorza-klub-przewoz-dzien-ziemniaka-2026-10-17T15:00",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "festyn",
+      "nazwa": "Dzień Ziemniaka",
+      "data_regula": "2026-10-17",
+      "godzina": "15:00",
+      "miejsce": "Klub Przewóz",
+      "powiazane_miejsce_id": "ChIJa9LvqUdEFkcRrJlpgpyR6tA",
+      "grupa_wiekowa": "",
+      "cena": "wstęp wolny",
+      "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/dzien-ziemniaka",
+      "zrodlo": "ckpodgorza",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "paradox-kino-paradox-baranek-shaun-i-kudlata-bestia-2026-10-17T15:15",
       "typ": "seans",
       "kino": true,
@@ -1645,6 +1503,22 @@
       "grupa_wiekowa": "",
       "cena": "",
       "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/kultury-swiata-slowacja-julia-masnicova-trio",
+      "zrodlo": "ckpodgorza",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "ckpodgorza-klub-iskierka-warsztaty-wizazu-i-stylizacji-w-ramach-sobotnich-spotkan-w-iskierce-2026-10-17T",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Warsztaty wizażu i stylizacji w ramach sobotnich spotkań w Iskierce",
+      "data_regula": "2026-10-17",
+      "godzina": "",
+      "miejsce": "Klub Iskierka",
+      "powiazane_miejsce_id": "ChIJd1u09epcFkcRgIPsdf_UlHg",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://www.ckpodgorza.pl/oferta/wydarzenie/warsztaty-wizazu-i-pielegnacji-w-ramach-sobotnich-spotkan-w-iskierce",
       "zrodlo": "ckpodgorza",
       "status": "zatwierdzone"
     },
@@ -2253,6 +2127,22 @@
       "dla_grup": true
     },
     {
+      "id": "kfk-klub-malwa-klub-rodzicow-bystry-bobas-2026-10-20T09:30",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Klub Rodziców: Bystry Bobas",
+      "data_regula": "2026-10-20",
+      "godzina": "09:30",
+      "miejsce": "Klub Malwa",
+      "powiazane_miejsce_id": "ChIJlyVtGO5aFkcRQokhpgx3Diw",
+      "grupa_wiekowa": "",
+      "cena": "2 zł / osoba dorosła, dzieci wstęp wolny!",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3656-klub_rodzicow_bystry_bobas-szczegoly-44150.html",
+      "zrodlo": "kfk",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "kijow-kino-kijow-vincent-legenda-oceanu-2026-10-20T10:00",
       "typ": "seans",
       "kino": true,
@@ -2439,6 +2329,38 @@
       "cena": "",
       "link_biletow": "https://biblioteka.krakow.pl/wydarzenia",
       "zrodlo": "biblioteka",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "kfk-klub-malwa-balet-dla-dzieci-w-wieku-4-6-lat-2026-10-20T17:00",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Balet dla dzieci w wieku 4-6 lat",
+      "data_regula": "2026-10-20",
+      "godzina": "17:00",
+      "miejsce": "Klub Malwa",
+      "powiazane_miejsce_id": "ChIJlyVtGO5aFkcRQokhpgx3Diw",
+      "grupa_wiekowa": "4–6 lat",
+      "cena": "1240 zł / cały kurs (31 zajęć)",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3661-balet_dla_dzieci_w_wieku_4_6_lat-szczegoly-44171.html",
+      "zrodlo": "kfk",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "kfk-klub-malwa-balet-dla-dzieci-w-wieku-6-8-lat-2026-10-20T17:45",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Balet dla dzieci w wieku 6-8 lat",
+      "data_regula": "2026-10-20",
+      "godzina": "17:45",
+      "miejsce": "Klub Malwa",
+      "powiazane_miejsce_id": "ChIJlyVtGO5aFkcRQokhpgx3Diw",
+      "grupa_wiekowa": "6–8 lat",
+      "cena": "1240 zł / cały kurs (31 zajęć)",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3662-balet_dla_dzieci_w_wieku_6_8_lat-szczegoly-44167.html",
+      "zrodlo": "kfk",
       "status": "zatwierdzone"
     },
     {
@@ -3979,6 +3901,22 @@
       "dla_grup": true
     },
     {
+      "id": "kfk-klub-malwa-klub-rodzicow-bystry-bobas-2026-10-27T09:30",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Klub Rodziców: Bystry Bobas",
+      "data_regula": "2026-10-27",
+      "godzina": "09:30",
+      "miejsce": "Klub Malwa",
+      "powiazane_miejsce_id": "ChIJlyVtGO5aFkcRQokhpgx3Diw",
+      "grupa_wiekowa": "",
+      "cena": "2 zł / osoba dorosła, dzieci wstęp wolny!",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3656-klub_rodzicow_bystry_bobas-szczegoly-44151.html",
+      "zrodlo": "kfk",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "ludowy-teatr-ludowy-calineczka-2026-10-27T10:00",
       "typ": "spektakl",
       "kino": false,
@@ -4062,6 +4000,22 @@
       "dla_grup": true
     },
     {
+      "id": "kfk-klub-malwa-balet-dla-dzieci-w-wieku-4-6-lat-2026-10-27T17:00",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Balet dla dzieci w wieku 4-6 lat",
+      "data_regula": "2026-10-27",
+      "godzina": "17:00",
+      "miejsce": "Klub Malwa",
+      "powiazane_miejsce_id": "ChIJlyVtGO5aFkcRQokhpgx3Diw",
+      "grupa_wiekowa": "4–6 lat",
+      "cena": "1240 zł / cały kurs (31 zajęć)",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3661-balet_dla_dzieci_w_wieku_4_6_lat-szczegoly-44172.html",
+      "zrodlo": "kfk",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "variete-krakowski-teatr-variete-maly-ksiaze-2026-10-27T17:00",
       "typ": "spektakl",
       "kino": false,
@@ -4075,6 +4029,23 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=865&idt=32fcab5c487cabbd271f4f8099a13622",
       "zrodlo": "variete",
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/maly-ksiaze"
+    },
+    {
+      "id": "kfk-klub-malwa-balet-dla-dzieci-w-wieku-6-8-lat-2026-10-27T17:45",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Balet dla dzieci w wieku 6-8 lat",
+      "data_regula": "2026-10-27",
+      "godzina": "17:45",
+      "miejsce": "Klub Malwa",
+      "powiazane_miejsce_id": "ChIJlyVtGO5aFkcRQokhpgx3Diw",
+      "grupa_wiekowa": "6–8 lat",
+      "cena": "1240 zł / cały kurs (31 zajęć)",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3662-balet_dla_dzieci_w_wieku_6_8_lat-szczegoly-44168.html",
+      "zrodlo": "kfk",
       "status": "zatwierdzone"
     },
     {
@@ -4091,7 +4062,8 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=866&idt=fa1c24736aaebf236af2a5bcdad46547",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/maly-ksiaze"
     },
     {
       "id": "variete-krakowski-teatr-variete-maly-ksiaze-2026-10-28T09:00",
@@ -4108,6 +4080,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=872&idt=14902715421de338784825b438437527",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/maly-ksiaze",
       "dla_grup": true
     },
     {
@@ -4272,6 +4245,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=867&idt=89588433d01e3a2bb9c1ab4b62317181",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/maly-ksiaze",
       "dla_grup": true
     },
     {
@@ -4385,7 +4359,8 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=868&idt=9a8b0b77822c3e23bf3c3d75ef629066",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/maly-ksiaze"
     },
     {
       "id": "ckpodgorza-strefa-sokolska-warsztaty-sluchowiskowe-to-co-nie-odbija-sie-w-lustrze-2026-10-28T18:00",
@@ -4417,7 +4392,8 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=869&idt=67547e30c9aeeea56621e8a13f323583",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/maly-ksiaze"
     },
     {
       "id": "groteska-teatr-groteska-nie-placz-koziolku-2026-10-29T09:00",
@@ -5442,6 +5418,22 @@
       "dla_grup": true
     },
     {
+      "id": "muzeum-krakowa-palac-krzysztofory-kostium-na-kazda-legende-smok-wawelski-i-ksiaze-krak-2026-11-14T10:00",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Kostium na każdą legendę „Smok Wawelski i Książę Krak”",
+      "data_regula": "2026-11-14",
+      "godzina": "10:00",
+      "miejsce": "Pałac Krzysztofory",
+      "powiazane_miejsce_id": "ChIJwaiFbA5bFkcR6smpjHvFl6Y",
+      "grupa_wiekowa": "7–12 lat",
+      "cena": "bezpłatnie",
+      "link_biletow": "https://muzeumkrakowa.pl/kalendarium/kostium-na-kazda-legende-smok-wawelski-i-ksiaze-krak",
+      "zrodlo": "muzeum-krakowa",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2026-11-14T10:30",
       "typ": "koncert",
       "kino": false,
@@ -5551,6 +5543,22 @@
       "cena": "",
       "link_biletow": "https://teatrfigurki.pl/spektakle/co-w-trawie-piszczy/",
       "zrodlo": "figurki",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "muzeum-krakowa-palac-krzysztofory-ksiegi-krzysztoforskie-bitwa-magow-2026-11-15T11:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Księgi Krzysztoforskie „Bitwa magów”",
+      "data_regula": "2026-11-15",
+      "godzina": "11:00",
+      "miejsce": "Pałac Krzysztofory",
+      "powiazane_miejsce_id": "ChIJwaiFbA5bFkcR6smpjHvFl6Y",
+      "grupa_wiekowa": "5–10 lat",
+      "cena": "bezpłatnie",
+      "link_biletow": "https://muzeumkrakowa.pl/kalendarium/ksiegi-krzysztoforskie-bitwa-magow",
+      "zrodlo": "muzeum-krakowa",
       "status": "zatwierdzone"
     },
     {
@@ -6827,6 +6835,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=697&idt=861ea83c99f2d3b192f4c0084cb23626",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -6844,6 +6853,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=698&idt=61b15fab3223ef595de0d3967fc32358",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -6861,6 +6871,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=699&idt=9b4ec85a2efbf4cf0888761b0b863403",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -6963,6 +6974,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=700&idt=43745d7af14434870f74226087550302",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -6980,6 +6992,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=701&idt=18f722ba6ba05e4cc83fc48c03265369",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -7064,6 +7077,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=702&idt=7ac7c98b934b79b40e6f98ac9ea26591",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -7429,7 +7443,8 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=704&idt=d5b17f672d737339238a50d3a7066470",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia"
     },
     {
       "id": "wspolczesny-teatr-wspolczesny-dr-dolittle-i-jego-zwierzeta-mikolaj-2026-12-05T13:30",
@@ -7461,7 +7476,8 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=703&idt=892c933c25fa0efdebe053543b513925",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia"
     },
     {
       "id": "ckpodgorza-teatr-praska-52-gino-i-suzi-sklad-spraw-niezwyczajnych-2026-12-05T16:00",
@@ -7541,7 +7557,8 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=706&idt=bcad554fa63a82c3d1faf4b4c7e61295",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia"
     },
     {
       "id": "wspolczesny-teatr-wspolczesny-zaczarowana-zagroda-mikolaj-2026-12-06T13:30",
@@ -7573,7 +7590,8 @@
       "cena": "",
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=779&idt=47b6f8335604fcca2649a141e1133462",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia"
     },
     {
       "id": "groteska-teatr-groteska-kury-z-grubej-rury-2026-12-06T16:00",
@@ -7638,6 +7656,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=707&idt=be49a7536d508769c183366869d36523",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -7723,6 +7742,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=708&idt=c9a25bf332ab1b7b968ac9e7bbc45144",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -7757,6 +7777,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=709&idt=531499721b934fe0293ab9ca97a44142",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -7892,6 +7913,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=710&idt=fee32dd0c3adccbd648df1eb69a37796",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8144,6 +8166,22 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "zis-zis-krakow-dzieciaki-na-start-trening-gokidz-6-10-lat-gojump-11-14-lat-2026-12-13T09:30",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "sport",
+      "nazwa": "Dzieciaki na start: trening GOkidz! (6-10 lat), GOjump (11-14 lat)",
+      "data_regula": "2026-12-13",
+      "godzina": "09:30",
+      "miejsce": "ZIS Kraków",
+      "powiazane_miejsce_id": "",
+      "grupa_wiekowa": "6–14 lat",
+      "cena": "bezpłatnie",
+      "link_biletow": "https://zis.krakow.pl/dzieciaki-na-start",
+      "zrodlo": "zis",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "kupbilecik-kino-kijow-grinch-teatr-zelazny-2026-12-13T10:00",
       "typ": "spektakl",
       "kino": false,
@@ -8157,6 +8195,22 @@
       "cena": "70 zł",
       "link_biletow": "https://www.kupbilecik.pl/pl/event/222070/krakow/grinch?utm_source=pp&utm_medium=661",
       "zrodlo": "kupbilecik",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-aktywne-spiewanie-zajecia-umuzykalniajace-dla-dzieci-w-wieku-od-3-do-6-lat-2026-12-13T11:15",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Aktywne śpiewanie. Zajęcia umuzykalniające dla dzieci w wieku od 3 do 6 lat",
+      "data_regula": "2026-12-13",
+      "godzina": "11:15",
+      "miejsce": "MOCAK Muzeum Sztuki Współczesnej",
+      "powiazane_miejsce_id": "ChIJHbYmukhbFkcRFqvKpHaz3is",
+      "grupa_wiekowa": "3–6 lat",
+      "cena": "",
+      "link_biletow": "https://mocak.pl/aktywne-spiewanie-zajecia-umuzykalniajace-dla-dzieci-w-wieku-od-3-do-6-lat-13-12",
+      "zrodlo": "mocak",
       "status": "zatwierdzone"
     },
     {
@@ -8192,6 +8246,22 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-aktywne-spiewanie-zajecia-umuzykalniajace-dla-dzieci-w-wieku-od-3-do-6-lat-2026-12-13T13:00",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "warsztaty",
+      "nazwa": "Aktywne śpiewanie. Zajęcia umuzykalniające dla dzieci w wieku od 3 do 6 lat",
+      "data_regula": "2026-12-13",
+      "godzina": "13:00",
+      "miejsce": "MOCAK Muzeum Sztuki Współczesnej",
+      "powiazane_miejsce_id": "ChIJHbYmukhbFkcRFqvKpHaz3is",
+      "grupa_wiekowa": "3–6 lat",
+      "cena": "",
+      "link_biletow": "https://mocak.pl/aktywne-spiewanie-zajecia-umuzykalniajace-dla-dzieci-w-wieku-od-3-do-6-lat-13-12",
+      "zrodlo": "mocak",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "kupbilecik-kino-kijow-grinch-teatr-zelazny-2026-12-13T15:00",
       "typ": "spektakl",
       "kino": false,
@@ -8205,6 +8275,22 @@
       "cena": "70 zł",
       "link_biletow": "https://www.kupbilecik.pl/pl/event/222074/krakow/grinch?utm_source=pp&utm_medium=661",
       "zrodlo": "kupbilecik",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "groteska-teatr-groteska-kury-z-grubej-rury-2026-12-13T16:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Kury z grubej rury",
+      "data_regula": "2026-12-13",
+      "godzina": "16:00",
+      "miejsce": "Teatr Groteska",
+      "powiazane_miejsce_id": "ChIJXyVLKQpbFkcR0luGkQ-2tVk",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=10993&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
+      "zrodlo": "groteska",
       "status": "zatwierdzone"
     },
     {
@@ -8530,6 +8616,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=789&idt=e04bf6ee05036e8896909521ff511190",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8547,6 +8634,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=790&idt=67c3ff974e8eac858607051789661643",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8564,6 +8652,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=791&idt=c12e20949410e60b2e8707a3f5020101",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8581,6 +8670,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=792&idt=903e967bf0446a7dcce1521502d23146",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8713,6 +8803,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=800&idt=06f5126263071e18e07afc3f45c17175",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8730,6 +8821,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=801&idt=0877949addf8e2dc6b14f8c681a38731",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8747,6 +8839,7 @@
       "link_biletow": "\thttps://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=802&idt=1e7082a74d462d27b3383b6df4682512",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -8764,6 +8857,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=803&idt=1f75ba6df909afbf34cb62941ab33542",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -9024,6 +9118,7 @@
       "link_biletow": "\thttps://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=808&idt=e3946c82b1b94abb5fcc0a5934975389",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -9040,7 +9135,8 @@
       "cena": "",
       "link_biletow": "\thttps://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=863&idt=207a584d59b50b9e6d6f9ab781b82161",
       "zrodlo": "variete",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia"
     },
     {
       "id": "variete-krakowski-teatr-variete-adonis-ma-goscia-2027-03-23T09:00",
@@ -9057,6 +9153,7 @@
       "link_biletow": "\thttps://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=810&idt=0d5dde57d6a829ff12651da3a0e69624",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -9074,6 +9171,7 @@
       "link_biletow": "https://bilety.teatrvariete.pl/rezerwacja/miejsca.html?id=809&idt=125734cfd675592af300d79741585722",
       "zrodlo": "variete",
       "status": "zatwierdzone",
+      "link_strony": "https://www.teatrvariete.pl/repertuar/spektakle/adonis-ma-goscia",
       "dla_grup": true
     },
     {
@@ -9139,6 +9237,57 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4260&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone"
+    },
+    {
+      "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-04-12T08:30",
+      "typ": "koncert",
+      "kino": false,
+      "kategoria": "koncert",
+      "nazwa": "Bajki Muzyką Pisane: Serce pełne emocji",
+      "data_regula": "2027-04-12",
+      "godzina": "08:30",
+      "miejsce": "Filharmonia Krakowska",
+      "powiazane_miejsce_id": "ChIJE_oaGQ1bFkcR_DV2TdomRHc",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4233&ReturnLink=https://filharmoniakrakow.pl",
+      "zrodlo": "filharmonia",
+      "status": "zatwierdzone",
+      "dla_grup": true
+    },
+    {
+      "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-04-12T10:30",
+      "typ": "koncert",
+      "kino": false,
+      "kategoria": "koncert",
+      "nazwa": "Bajki Muzyką Pisane: Serce pełne emocji",
+      "data_regula": "2027-04-12",
+      "godzina": "10:30",
+      "miejsce": "Filharmonia Krakowska",
+      "powiazane_miejsce_id": "ChIJE_oaGQ1bFkcR_DV2TdomRHc",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4237&ReturnLink=https://filharmoniakrakow.pl",
+      "zrodlo": "filharmonia",
+      "status": "zatwierdzone",
+      "dla_grup": true
+    },
+    {
+      "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-04-12T12:30",
+      "typ": "koncert",
+      "kino": false,
+      "kategoria": "koncert",
+      "nazwa": "Bajki Muzyką Pisane: Serce pełne emocji",
+      "data_regula": "2027-04-12",
+      "godzina": "12:30",
+      "miejsce": "Filharmonia Krakowska",
+      "powiazane_miejsce_id": "ChIJE_oaGQ1bFkcR_DV2TdomRHc",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4259&ReturnLink=https://filharmoniakrakow.pl",
+      "zrodlo": "filharmonia",
+      "status": "zatwierdzone",
+      "dla_grup": true
     }
   ],
   "do_weryfikacji": [
@@ -9190,8 +9339,8 @@
     {
       "zrodlo": "ludowy",
       "tytul": "WICHROWE WZGÓRZA",
-      "data": "2026-12-12",
-      "godzina": "19:00",
+      "data": "2026-12-13",
+      "godzina": "16:00",
       "miejsce": "Teatr Ludowy",
       "wiek": "",
       "strona": "https://ludowy.pl/spektakle/wichrowe-wzgorza/"
