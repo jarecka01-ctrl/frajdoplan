@@ -44,6 +44,9 @@ export function parsuj(html) {
       dlaDzieci: true,
       dlaGrup: dzienTyg >= 1 && dzienTyg <= 5 && Boolean(godz) && godz < '13:00',
     });
+    // strona koncertu u organizatora (opis, wykonawcy); tytuł prowadzi do niej, a „Bilety” do zakupu (`link_strony`)
+    const o = wydarzenia[wydarzenia.length - 1];
+    if (o.strona && o.strona !== o.link) o.opisUrl = o.strona;
   });
   return wydarzenia;
 }

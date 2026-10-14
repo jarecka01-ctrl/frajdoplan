@@ -31,7 +31,11 @@ export function wierszeDnia(wydarzenia, iso) {
   const lista = wydarzenia.filter((w) => !w.kino && trwaW(w.data_regula, iso)).map((w) => ({ ...w, dzien: iso }));
   const wiersze = grupujTerminy(lista).map((w) => {
     const godziny = [...new Set(w.godziny.flatMap((g) => godzinyZTekstu(g.godzina)))].sort();
-    return { ...w, godz: godziny, pora: poraId(godziny[0]), planId: (w.godziny[0] && w.godziny[0].id) || w.id };
+    // godzina → własny link do biletów, gdy terminy mają różne linki (np. dwa koncerty Filharmonii tego samego dnia)
+    const linki = {};
+    w.godziny.forEach((g) => { if (g.link) godzinyZTekstu(g.godzina).forEach((x) => { linki[x] = g.link; }); });
+    const linkiGodz = new Set(Object.values(linki)).size > 1 ? linki : null;
+    return { ...w, godz: godziny, linkiGodz, pora: poraId(godziny[0]), planId: (w.godziny[0] && w.godziny[0].id) || w.id };
   });
   // to samo wydarzenie w kilku miejscach (np. filie biblioteki) = jeden wiersz z listą lokalizacji
   return scalLokalizacje(wiersze).map((w) => (w.lokalizacje ? { ...w, pora: poraId(w.godz[0]) } : w));
@@ -49,7 +53,9 @@ function Karta({ w, miejsca, adresy }) {
   return (
     <li className={`wk-r wk-${w.kategoria || 'inne'}`}>
       <div className="wk-g">
-        {w.godz.length ? w.godz.slice(0, 3).map((g) => <b key={g}>{g}</b>) : <b className="wk-cd">cały dzień</b>}
+        {w.godz.length ? w.godz.slice(0, 3).map((g) => (w.linkiGodz && w.linkiGodz[g]
+          ? <a key={g} className="wk-gl" href={w.linkiGodz[g]} target="_blank" rel="noreferrer" title={`Bilety na ${g}`} aria-label={`Bilety: ${w.nazwa}, ${g}`}><b>{g}</b></a>
+          : <b key={g}>{g}</b>)) : <b className="wk-cd">cały dzień</b>}
         {nadmiar && <small>+{w.godz.length - 3}</small>}
       </div>
       <div className="wk-t">
