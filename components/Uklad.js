@@ -8,6 +8,7 @@ const WERSJA_IKON = 2;
 
 const MENU = [
   { href: '/', label: 'Atrakcje', dzial: '/atrakcje' },
+  { href: '/miejsca', label: 'Miejsca' },
   { href: '/sport', label: 'Sport' },
   { href: '/zajecia', label: 'Zajęcia' },
   { href: '/polkolonie', label: 'Półkolonie' },
@@ -21,8 +22,6 @@ export default function Uklad({ seo, jsonLd = [], children, missingConfig, fetch
   // Menu jest jedno; gdy strona ma widżet (strona główna), stoi po lewej nad nagłówkiem, a widżet po prawej.
   const menu = (
     <nav className={`menu${widget ? ' menu-lewo' : ''}`} aria-label="Główne menu">
-      {/* skrót do listy miejsc na stronie głównej (jest na jej końcu, pod kalendarzem) */}
-      <Link href="/#miejsca" className="menu-link menu-skrot"><span aria-hidden="true">↓ </span>Miejsca</Link>
       {MENU.map((m) => (
         <Link key={m.href} href={m.href} className={`menu-link${m.klasa ? ` ${m.klasa}` : ''}`} aria-current={aktywna(m, pathname) ? 'page' : undefined}>
           {m.label}

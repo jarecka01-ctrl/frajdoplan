@@ -33,7 +33,7 @@ const KATEGORIE = [
 // Na stronie kategorii (`kategoria` + `kategorie` z serwera) kafelki po prostu przenoszą do innej kategorii.
 export default function Katalog({
   places, tytul, pokazDachPole = true, pokazStrefy = true, grupuj = 'podkategoria', placeholder = 'Szukaj po nazwie lub ulicy…',
-  dzial, kategorie, kategoria: aktywna, naStrone = NA_STRONE, id, className,
+  dzial, kategorie, kategoria: aktywna, naStrone = NA_STRONE, id, className, mapaZawsze = false,
 }) {
   // Na stronie kategorii pokazujemy od razu całą listę (bez zawężania do Krakowa), żeby była w HTML.
   const [strefa, setStrefa] = useState(pokazStrefy && !aktywna ? 'Kraków i okolice' : '');
@@ -242,16 +242,19 @@ export default function Katalog({
             {szukam ? 'Szukam…' : 'Blisko mnie'}
           </button>
         </div>
+        {!mapaZawsze && (
         <div className="widok" role="group" aria-label="Widok">
           <button className="widok-btn" aria-pressed={widok === 'lista'} onClick={() => setWidok('lista')}>Lista</button>
           <button className="widok-btn" aria-pressed={widok === 'mapa'} onClick={() => setWidok('mapa')}>Mapa</button>
         </div>
+        )}
         </div>
       </div>
 
       {komunikat && <p className="notice" role="status">{komunikat}</p>}
 
-      {widok === 'mapa' && filtered.length > 0 ? (
+      {mapaZawsze && filtered.length > 0 && <Mapa miejsca={filtered} ja={ja} />}
+      {!mapaZawsze && widok === 'mapa' && filtered.length > 0 ? (
         <Mapa miejsca={filtered} ja={ja} />
       ) : filtered.length === 0 ? (
         <div className="pusto">
