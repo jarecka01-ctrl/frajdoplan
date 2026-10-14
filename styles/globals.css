@@ -750,8 +750,11 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 .wk-spektakl { --c: #B03A2E; } .wk-koncert { --c: #2F5D3A; } .wk-warsztaty, .wk-pokaz, .wk-czytanie, .wk-planszowki { --c: #C27A00; } .wk-sport, .wk-spacer, .wk-jarmark, .wk-festyn { --c: var(--mak); } .wk-wystawa { --c: #3B4A8A; }
 .wk-g { grid-column: 2; display: flex; flex-direction: column; font: 800 18px/1.25 var(--font-display); padding-top: 1px; }
 .wk-g .wk-cd { font-size: 15px; }
-.wk-g .wk-gl { color: inherit; text-decoration: none; }
-.wk-g .wk-gl b { border-bottom: 2px dotted currentColor; }
+.wk-g .wk-gl { display: block; padding: 3px 0 5px; color: inherit; text-decoration: none; }
+.wk-g .wk-gl:first-child { padding-top: 0; }
+.wk-g .wk-gl b { display: inline-block; line-height: 1.1; padding-bottom: 2px; border-bottom: 2px dotted currentColor; }
+.wk-g small { margin-top: 2px; }
+.wk-r:has(.wk-gl) { padding: 14px 0; }
 .wk-g .wk-gl:hover b { background: var(--slonce); }
 .wk-g small { font: 600 11.5px var(--font-body); color: var(--tusz-2); }
 .wk-t { grid-column: 3; min-width: 0; }
