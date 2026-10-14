@@ -123,6 +123,14 @@ const naWydarzenieInne = (zrodlo, s, idMiejsc = '') => ({
   ...(s.kandydatBanera ? { kandydat_banera: true } : {}), // duże widowisko rodzinne: o banerze (`wyrozniony`) decyduje właścicielka
 });
 
+// Ręczna kategoria wydarzenia z „Wyjątków” (kolumna `kategoria`): dopasowanie po początku tytułu; wpis dla jednego źródła wygrywa z ogólnym.
+const kategoriaZWyjatku = (wyjatki, idZrodla, tytul) => {
+  const pasuje = (e) => naListe([e.tytul], tytul);
+  const lista = wyjatki.kategorie || [];
+  const e = lista.find((x) => x.zrodlo === idZrodla && pasuje(x)) || lista.find((x) => !x.zrodlo && pasuje(x));
+  return e ? e.kategoria : null;
+};
+
 // wymus / ukryj: ogólne (kina i wszystkie źródła) oraz własne źródła (`zrodla.<id>`)
 const wyjatkiZrodla = (wyjatki, id) => ({
   wymus: [...(wyjatki.wymus || []), ...(wyjatki.zrodla?.[id]?.wymus || [])],
@@ -294,6 +302,7 @@ async function main() {
     uwagi.forEach((u) => console.log(`  link: ${u}`));
     if (niesprawdzone) console.warn(`  ${zrodlo.id}: ${niesprawdzone} linków nie udało się sprawdzić (zostają bez zmian)`);
     const gotowe = wybrane.map((s) => naWydarzenieInne(zrodlo, s, miejsceId(zrodlo, s)));
+    gotowe.forEach((w) => { w.kategoria = kategoriaZWyjatku(wyjatki, zrodlo.id, w.nazwa) || w.kategoria; }); // ręczna kategoria z zakładki „Wyjątki” wygrywa
     const dlaGrup = gotowe.filter((w) => w.dla_grup).length;
     const wWeryfikacji = doWeryfikacji.filter((w) => w.zrodlo === zrodlo.id).length;
     tabelaInne.push({ źródło: zrodlo.nazwa, 'dla dzieci': gotowe.length - dlaGrup, 'dla grup (ukryte)': dlaGrup, 'do weryfikacji': wWeryfikacji, 'zastąpione linki': zastapione });
