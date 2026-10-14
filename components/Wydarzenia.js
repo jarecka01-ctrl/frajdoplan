@@ -64,15 +64,29 @@ export const zakresDat = (a, b) => {
 export const poGodzinie = (a, b) => (a.godzina || '99').localeCompare(b.godzina || '99');
 
 // Wydarzenie z godziną (jedną, kilkoma albo zakresem „10:00–12:00") jest „po", gdy wszystkie jego godziny już minęły; bez godziny = cały dzień, nie mija.
-// Znamy tylko godzinę rozpoczęcia, więc oznaczenie mówi „zaczęło się", nie „skończyło się".
+// Znamy tylko godzinę rozpoczęcia, więc do 1,5 godziny od startu oznaczenie mówi „zaczęło się", potem „odbyło się" (statusDzis).
 const godzinyZTekstu = (t) => (String(t || '').match(/\d{1,2}:\d{2}/g) || []).map((g) => g.padStart(5, '0'));
 export const juzPo = (w, godz) => { const g = godzinyZTekstu(w.godzina); return g.length > 0 && g.every((x) => x <= godz); };
 
-function Karta({ w, dzien, minelo = false }) {
+// Po ilu minutach od rozpoczęcia wydarzenie dostaje oznaczenie „Już się odbyło" (wcześniej: „Już się zaczęło").
+export const MINUT_DO_ODBYCIA = 90;
+const naMinuty = (g) => { const [h, m] = g.split(':').map(Number); return h * 60 + m; };
+// 'przed' (jeszcze się nie zaczęło albo cały dzień), 'trwa' (zaczęło się, mniej niż 1,5 godziny temu), 'po' (od rozpoczęcia minęło 1,5 godziny).
+// Zakres „10:00–12:00" kończy się o godzinie końca; przy kilku godzinach liczy się ostatnia.
+export function statusDzis(w, godz) {
+  if (!juzPo(w, godz)) return 'przed';
+  const g = godzinyZTekstu(w.godzina);
+  const zakres = String(w.godzina || '').match(/(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/);
+  const koniec = zakres ? naMinuty(zakres[2].padStart(5, '0')) : naMinuty(g[g.length - 1]) + MINUT_DO_ODBYCIA;
+  return naMinuty(godz) >= koniec ? 'po' : 'trwa';
+}
+
+function Karta({ w, dzien, status = 'przed' }) {
+  const minelo = status !== 'przed';
   return (
     <Bilet className={minelo ? 'tk-minelo' : ''} godzina={w.godzina} plan={{ id: w.id, dzien, tytul: w.nazwa }}>
       <Nazwa nazwa={w.nazwa} />
-      <Szczegoly czesci={[minelo && <strong className="tk-znacznik">Już się zaczęło</strong>, w.miejsce, w.wiek, w.cena, w.link && <a className="tk-link" href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>]} />
+      <Szczegoly czesci={[minelo && <strong className="tk-znacznik">{status === 'po' ? 'Już się odbyło' : 'Już się zaczęło'}</strong>, w.miejsce, w.wiek, w.cena, w.link && <a className="tk-link" href={w.link} target="_blank" rel="noreferrer">Szczegóły</a>]} />
     </Bilet>
   );
 }
@@ -186,8 +200,11 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
   const [teraz, setTeraz] = useState(null); // liczone w przeglądarce, żeby „dziś" zawsze było dzisiaj
   const [glowny, setGlowny] = useState('dzis'); // co pokazuje duża sekcja: dziś albo (po kliknięciu) jutro
   const [okno, setOkno] = useState(null); // 'jutro' | null: otwarte okno „Zobacz wszystko"
+  const [, setTik] = useState(0);
 
   useEffect(() => setTeraz(dzisWarszawa()), []);
+  // co minutę odświeżamy oznaczenia „Już się zaczęło / odbyło" (strona bywa otwarta godzinami)
+  useEffect(() => { const t = setInterval(() => setTik((x) => x + 1), 60000); return () => clearInterval(t); }, []);
 
   if (!teraz) return <section className="wydarzenia wydarzenia-ladowanie" aria-hidden="true" />;
   const miejsca = new Map(places.map((p) => [p.id, adresKarty(p)])); // karty miejsc, do których można linkować na stronie głównej
@@ -202,12 +219,14 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
   const godz = godzinaWarszawa();
   // Wydarzenia, które już się zaczęły, zostają na liście (wyszarzone, z oznaczeniem), pod tymi, które jeszcze przed nami.
   const dzisWszystkie = naDzien(teraz);
-  const przyszle = dzisWszystkie.filter((w) => !juzPo(w, godz));
-  const minione = dzisWszystkie.filter((w) => juzPo(w, godz));
+  const przyszle = dzisWszystkie.filter((w) => statusDzis(w, godz) === 'przed');
+  const trwajace = dzisWszystkie.filter((w) => statusDzis(w, godz) === 'trwa');
+  const odbyte = dzisWszystkie.filter((w) => statusDzis(w, godz) === 'po');
   // Pokazujemy wszystkie wydarzenia dnia: najpierw te, które jeszcze przed nami, pod nimi wyszarzone (długa lista się przewija, patrz ListaDnia).
   const dzis = [
-    ...przyszle.map((w) => ({ w, minelo: false })),
-    ...minione.map((w) => ({ w, minelo: true })),
+    ...przyszle.map((w) => ({ w, status: 'przed' })),
+    ...trwajace.map((w) => ({ w, status: 'trwa' })),
+    ...odbyte.map((w) => ({ w, status: 'po' })),
   ];
   const jutroLista = naDzien(jutro);
   const weekend = [...naDzien(sob).map((w) => ({ ...w, dzien: 'sob.', iso: sob })), ...naDzien(nd).map((w) => ({ ...w, dzien: 'niedz.', iso: nd }))];
@@ -222,7 +241,7 @@ export default function Wydarzenia({ wydarzenia, places = [] }) {
             <p className="wyd-data">{NAZWY_DNI[dzienTygodnia(teraz)]}, {ladnaData(teraz)}</p>
             {dzis.length ? (
               <>
-                <ListaDnia ile={dzis.length} etykieta="Wydarzenia dziś">{dzis.map(({ w, minelo }) => <Karta key={w.id} w={w} dzien={teraz} minelo={minelo} />)}</ListaDnia>
+                <ListaDnia ile={dzis.length} etykieta="Wydarzenia dziś">{dzis.map(({ w, status }) => <Karta key={w.id} w={w} dzien={teraz} status={status} />)}</ListaDnia>
                 {!przyszle.length && (
                   <>
                     <p className="wyd-pusto">Na dziś to już wszystko. Zobacz, co jest jutro</p>
