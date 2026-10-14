@@ -1,12 +1,12 @@
 {
-  "zaktualizowano": "2026-10-14T14:07:35+02:00",
+  "zaktualizowano": "2026-10-14T17:43:38+02:00",
   "zrodla": {
     "kijow": {
       "nazwa": "Kino Kijów",
       "url": "https://kijow.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
-      "wszystkich": 141,
+      "pobrano": "2026-10-14T17:43:38+02:00",
+      "wszystkich": 136,
       "dla_dzieci": 27,
       "linki_zastapione": 27
     },
@@ -14,8 +14,8 @@
       "nazwa": "Kino Mikro",
       "url": "https://kinomikro.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
-      "wszystkich": 128,
+      "pobrano": "2026-10-14T17:43:38+02:00",
+      "wszystkich": 123,
       "dla_dzieci": 7,
       "linki_zastapione": 0
     },
@@ -23,7 +23,7 @@
       "nazwa": "Kino Agrafka",
       "url": "http://kinoagrafka.pl/rep.php",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 30,
       "dla_dzieci": 1,
       "linki_zastapione": 0
@@ -32,8 +32,8 @@
       "nazwa": "Kino Pod Baranami",
       "url": "https://www.kinopodbaranami.pl/repertuar.php",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
-      "wszystkich": 196,
+      "pobrano": "2026-10-14T17:43:38+02:00",
+      "wszystkich": 191,
       "dla_dzieci": 2,
       "linki_zastapione": 1
     },
@@ -41,7 +41,7 @@
       "nazwa": "Kino Paradox",
       "url": "https://kinoparadox.pl/repertuar/",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 29,
       "dla_dzieci": 6,
       "linki_zastapione": 0
@@ -50,7 +50,7 @@
       "nazwa": "Kino Sfinks",
       "url": "https://kinosfinks.okn.edu.pl/wydarzenia-kategoria-158.html",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 55,
       "dla_dzieci": 1,
       "linki_zastapione": 0
@@ -60,7 +60,7 @@
       "url": "https://okn.edu.pl/wydarzenia.html",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 0,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -73,11 +73,11 @@
       "url": "https://ludowy.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
-      "wszystkich": 100,
+      "pobrano": "2026-10-14T17:43:38+02:00",
+      "wszystkich": 101,
       "dla_dzieci": 16,
       "dla_grup": 16,
-      "do_weryfikacji": 0,
+      "do_weryfikacji": 1,
       "pominiete": 68,
       "linki_zastapione": 1
     },
@@ -86,7 +86,7 @@
       "url": "https://kultureska.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 31,
       "dla_dzieci": 0,
       "dla_grup": 31,
@@ -99,7 +99,7 @@
       "url": "https://teatrkrakow.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 132,
       "dla_dzieci": 5,
       "dla_grup": 49,
@@ -112,12 +112,12 @@
       "url": "https://teatrszczescie.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
-      "wszystkich": 20,
-      "dla_dzieci": 6,
+      "pobrano": "2026-10-14T17:43:38+02:00",
+      "wszystkich": 27,
+      "dla_dzieci": 10,
       "dla_grup": 0,
       "do_weryfikacji": 0,
-      "pominiete": 14,
+      "pominiete": 17,
       "linki_zastapione": 0
     },
     "filharmonia": {
@@ -125,7 +125,7 @@
       "url": "https://filharmoniakrakow.pl/public/program",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 65,
       "dla_dzieci": 47,
       "dla_grup": 18,
@@ -138,7 +138,7 @@
       "url": "https://sinfonietta.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 5,
       "dla_dzieci": 0,
       "dla_grup": 2,
@@ -151,7 +151,7 @@
       "url": "https://biblioteka.krakow.pl/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 49,
       "dla_dzieci": 49,
       "dla_grup": 0,
@@ -164,7 +164,7 @@
       "url": "https://www.ckpodgorza.pl/oferta/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 41,
       "dla_dzieci": 29,
       "dla_grup": 8,
@@ -177,7 +177,7 @@
       "url": "https://zis.krakow.pl/dzieciaki-na-start",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 6,
       "dla_dzieci": 6,
       "dla_grup": 0,
@@ -190,7 +190,7 @@
       "url": "https://www.tauronarenakrakow.pl/events/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 33,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -203,7 +203,7 @@
       "url": "https://icekrakow.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 17,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -216,7 +216,7 @@
       "url": "https://www.klubstudio.pl/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 61,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -229,7 +229,7 @@
       "url": "https://www.teatrvariete.pl/repertuar/sprawdz-repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 53,
       "dla_dzieci": 10,
       "dla_grup": 23,
@@ -242,7 +242,7 @@
       "url": "https://www.groteska.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 86,
       "dla_dzieci": 28,
       "dla_grup": 47,
@@ -255,7 +255,7 @@
       "url": "https://teatrfigurki.pl/repertuar/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 7,
       "dla_dzieci": 7,
       "dla_grup": 0,
@@ -268,7 +268,7 @@
       "url": "https://teatrwkrakowie.pl/repertuar",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 98,
       "dla_dzieci": 0,
       "dla_grup": 0,
@@ -281,7 +281,7 @@
       "url": "https://kbfbilety.krakow.pl/wydarzenia/filtruj?type%5B%22children%22%5D=on&location=0",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 2,
       "dla_dzieci": 2,
       "dla_grup": 0,
@@ -294,9 +294,9 @@
       "url": "https://krakowskieforum.pl/wydarzenia.html",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
-      "wszystkich": 34,
-      "dla_dzieci": 34,
+      "pobrano": "2026-10-14T17:43:38+02:00",
+      "wszystkich": 36,
+      "dla_dzieci": 36,
       "dla_grup": 0,
       "do_weryfikacji": 0,
       "pominiete": 0,
@@ -307,7 +307,7 @@
       "url": "https://dworek.eu/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 11,
       "dla_dzieci": 2,
       "dla_grup": 0,
@@ -320,7 +320,7 @@
       "url": "https://mydlniki.dworek.eu/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 26,
       "dla_dzieci": 10,
       "dla_grup": 0,
@@ -333,7 +333,7 @@
       "url": "https://mck.krakow.pl/wystawy-i-wydarzenia/kalendarz/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 3,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -346,7 +346,7 @@
       "url": "https://mnk.pl/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 25,
       "dla_dzieci": 8,
       "dla_grup": 0,
@@ -359,7 +359,7 @@
       "url": "https://muzeumkrakowa.pl/kalendarium",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 19,
       "dla_dzieci": 15,
       "dla_grup": 4,
@@ -372,7 +372,7 @@
       "url": "https://www.mit.krakow.pl/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 4,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -385,7 +385,7 @@
       "url": "https://ma.krakow.pl/wydarzenia/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 6,
       "dla_dzieci": 2,
       "dla_grup": 0,
@@ -398,7 +398,7 @@
       "url": "https://mocak.pl/kalendarz",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 32,
       "dla_dzieci": 14,
       "dla_grup": 0,
@@ -411,7 +411,7 @@
       "url": "https://cricoteka.pl/pl/kalendarium/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 14,
       "dla_dzieci": 10,
       "dla_grup": 0,
@@ -424,7 +424,7 @@
       "url": "https://mufo.krakow.pl/odwiedzaj/wydarzenia",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 9,
       "dla_dzieci": 1,
       "dla_grup": 0,
@@ -437,7 +437,7 @@
       "url": "https://www.kupbilecik.pl/",
       "rodzaj": "wydarzenia",
       "ok": true,
-      "pobrano": "2026-10-14T14:07:35+02:00",
+      "pobrano": "2026-10-14T17:43:38+02:00",
       "wszystkich": 19,
       "dla_dzieci": 17,
       "dla_grup": 0,
@@ -1239,7 +1239,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4248&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364"
     },
     {
       "id": "kijow-kino-kijow-street-fighter-uliczny-wojownik-2026-10-17T10:30",
@@ -1380,7 +1381,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4249&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2"
     },
     {
       "id": "kijow-kino-kijow-baranek-shaun-i-kudlata-bestia-2026-10-17T14:00",
@@ -1771,7 +1773,8 @@
       "cena": "",
       "link_biletow": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-3",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-3"
     },
     {
       "id": "groteska-teatr-groteska-bajka-o-szewczyku-2026-10-18T13:30",
@@ -1867,6 +1870,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4228&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2",
       "dla_grup": true
     },
     {
@@ -1949,6 +1953,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4247&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2",
       "dla_grup": true
     },
     {
@@ -1999,6 +2004,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4250&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -3406,7 +3412,7 @@
       "id": "dworek-kluby-klub-kultury-wola-bobobrzmienia-zwierzece-brzmienia-2026-10-24T16:00",
       "typ": "wydarzenie",
       "kino": false,
-      "kategoria": "inne",
+      "kategoria": "koncert",
       "nazwa": "Bobobrzmienia: Zwierzęce Brzmienia",
       "data_regula": "2026-10-24",
       "godzina": "16:00",
@@ -5121,7 +5127,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4122&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2"
     },
     {
       "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-dla-ucha-malucha-zajecia-umuzykalniajace-dla-dzieci-do-trzeciego-roku-zycia-2026-11-07T11:15",
@@ -5153,7 +5160,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4133&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2"
     },
     {
       "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-dla-ucha-malucha-zajecia-umuzykalniajace-dla-dzieci-do-trzeciego-roku-zycia-2026-11-07T12:30",
@@ -5236,6 +5244,22 @@
       "status": "zatwierdzone"
     },
     {
+      "id": "szczescie-teatr-szczescie-klaun-feliks-ale-cyrki-2026-11-08T11:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Klaun Feliks – Ale cyrki",
+      "data_regula": "2026-11-08",
+      "godzina": "11:00",
+      "miejsce": "Teatr Szczęście",
+      "powiazane_miejsce_id": "ChIJ_Uz7xw5bFkcRM4P7QNqmriY",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://ekobilet.pl/teatr-szczescie/klaun-feliks--ale-cyrki-54327?calendar=true",
+      "zrodlo": "szczescie",
+      "status": "zatwierdzone"
+    },
+    {
       "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-aktywne-spiewanie-zajecia-umuzykalniajace-dla-dzieci-w-wieku-od-3-do-6-lat-2026-11-08T11:15",
       "typ": "wydarzenie",
       "kino": false,
@@ -5313,6 +5337,22 @@
       "cena": "",
       "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=10907&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
       "zrodlo": "groteska",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "szczescie-teatr-szczescie-klaun-feliks-klaun-w-balonie-2026-11-08T15:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Klaun Feliks – Klaun w balonie",
+      "data_regula": "2026-11-08",
+      "godzina": "15:00",
+      "miejsce": "Teatr Szczęście",
+      "powiazane_miejsce_id": "ChIJ_Uz7xw5bFkcRM4P7QNqmriY",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://ekobilet.pl/teatr-szczescie/klaun-feliks--klaun-w-balonie-54333?calendar=true",
+      "zrodlo": "szczescie",
       "status": "zatwierdzone"
     },
     {
@@ -5453,7 +5493,7 @@
       "typ": "wydarzenie",
       "kino": false,
       "kategoria": "warsztaty",
-      "nazwa": "WARSZTATY PEŁNE ZAPACHÓW - słoiczki z solami zapachowymi",
+      "nazwa": "WARSZTATY PEŁNE ZAPACHÓW - Słoiczki z solami zapachowymi",
       "data_regula": "2026-11-12",
       "godzina": "18:00",
       "miejsce": "Klub Skotniki",
@@ -5544,7 +5584,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4246&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2"
     },
     {
       "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-aktywne-czytanie-zajecia-rodzinne-2026-11-14T11:15",
@@ -5576,7 +5617,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4252&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2"
     },
     {
       "id": "groteska-teatr-groteska-kto-pocieszy-pechowego-nosorozca-2026-11-14T13:30",
@@ -5720,7 +5762,8 @@
       "cena": "",
       "link_biletow": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-3-2",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-3-2"
     },
     {
       "id": "groteska-teatr-groteska-kto-pocieszy-pechowego-nosorozca-2026-11-15T13:00",
@@ -5753,6 +5796,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4229&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -5803,6 +5847,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4245&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -5837,6 +5882,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4251&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -6376,7 +6422,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4144&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2"
     },
     {
       "id": "kfk-krakowskie-forum-kultury-smyko-multisensoryka-1-3-lata-2026-11-21T10:00",
@@ -6390,7 +6437,7 @@
       "powiazane_miejsce_id": "ChIJBVoRjhFbFkcRjU4OsprPpbI",
       "grupa_wiekowa": "1–3 lat",
       "cena": "35 zł / dziecko (opiekun gratis)",
-      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3718-smyko_multisensoryka_1_3_lata-szczegoly-44373.html",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3718-smyko_multisensoryka_1_3_lata-szczegoly-44376.html",
       "zrodlo": "kfk",
       "status": "zatwierdzone"
     },
@@ -6456,7 +6503,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4164&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "kfk-krakowskie-forum-kultury-kreatywna-plastyka-3-5-lat-listopad-2026-11-21T11:30",
@@ -6520,7 +6568,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4145&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "mnk-mnk-arsenal-bron-i-barwa-oprowadzanie-dla-rodzin-z-dziecmi-2026-11-22T11:00",
@@ -6536,6 +6585,22 @@
       "cena": "15 zł / os.",
       "link_biletow": "https://mnk.pl/wydarzenia/bron-i-barwa-oprowadzanie-dla-rodzin-z-dziecmi/",
       "zrodlo": "mnk",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "szczescie-teatr-szczescie-klaun-swietego-mikolaja-2026-11-22T11:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Klaun Świętego Mikołaja",
+      "data_regula": "2026-11-22",
+      "godzina": "11:00",
+      "miejsce": "Teatr Szczęście",
+      "powiazane_miejsce_id": "ChIJ_Uz7xw5bFkcRM4P7QNqmriY",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://ekobilet.pl/teatr-szczescie/klaun-feliks--klaun-swietego-mikolaja-59663?calendar=true",
+      "zrodlo": "szczescie",
       "status": "zatwierdzone"
     },
     {
@@ -6584,7 +6649,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4165&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "figurki-teatr-figur-malenkie-krolestwo-krolewny-aurelki-2026-11-22T12:00",
@@ -6600,6 +6666,22 @@
       "cena": "",
       "link_biletow": "https://teatrfigurki.pl/spektakle/malenkie-krolestwo-krolewny-aurelki/",
       "zrodlo": "figurki",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "szczescie-teatr-szczescie-klaun-swietego-mikolaja-2026-11-22T15:00",
+      "typ": "spektakl",
+      "kino": false,
+      "kategoria": "spektakl",
+      "nazwa": "Klaun Świętego Mikołaja",
+      "data_regula": "2026-11-22",
+      "godzina": "15:00",
+      "miejsce": "Teatr Szczęście",
+      "powiazane_miejsce_id": "ChIJ_Uz7xw5bFkcRM4P7QNqmriY",
+      "grupa_wiekowa": "",
+      "cena": "",
+      "link_biletow": "https://ekobilet.pl/teatr-szczescie/klaun-feliks--klaun-swietego-mikolaja-59663?calendar=true",
+      "zrodlo": "szczescie",
       "status": "zatwierdzone"
     },
     {
@@ -6839,7 +6921,7 @@
       "typ": "wydarzenie",
       "kino": false,
       "kategoria": "warsztaty",
-      "nazwa": "WARSZTATY PEŁNE ZAPACHÓW - świece sojowe",
+      "nazwa": "WARSZTATY PEŁNE ZAPACHÓW - Świece sojowe",
       "data_regula": "2026-11-26",
       "godzina": "18:00",
       "miejsce": "Klub Skotniki",
@@ -6995,6 +7077,38 @@
       "cena": "",
       "link_biletow": "https://kup-bilet.groteska.pl/msi/?event_id=10931&typetran=0&ReturnLink=https://www.groteska.pl/repertuar",
       "zrodlo": "groteska",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "kfk-krakowskie-forum-kultury-bal-andrzejkowy-dla-dzieci-1-5-lat-2026-11-29T14:00",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "inne",
+      "nazwa": "Bal andrzejkowy dla dzieci (1-5 lat)",
+      "data_regula": "2026-11-29",
+      "godzina": "14:00",
+      "miejsce": "Krakowskie Forum Kultury",
+      "powiazane_miejsce_id": "ChIJBVoRjhFbFkcRjU4OsprPpbI",
+      "grupa_wiekowa": "1–5 lat",
+      "cena": "30 zł / dziecko (opiekun gratis)",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3721-bal_andrzejkowy_dla_dzieci_1_5_lat-szczegoly-44377.html",
+      "zrodlo": "kfk",
+      "status": "zatwierdzone"
+    },
+    {
+      "id": "kfk-krakowskie-forum-kultury-bal-andrzejkowy-dla-dzieci-6-10-lat-2026-11-29T16:00",
+      "typ": "wydarzenie",
+      "kino": false,
+      "kategoria": "inne",
+      "nazwa": "Bal andrzejkowy dla dzieci (6-10 lat)",
+      "data_regula": "2026-11-29",
+      "godzina": "16:00",
+      "miejsce": "Krakowskie Forum Kultury",
+      "powiazane_miejsce_id": "ChIJBVoRjhFbFkcRjU4OsprPpbI",
+      "grupa_wiekowa": "6–10 lat",
+      "cena": "30 zł / dziecko (opiekun gratis)",
+      "link_biletow": "https://krakowskieforum.pl/wydarzenie-3722-bal_andrzejkowy_dla_dzieci_6_10_lat-szczegoly-44378.html",
+      "zrodlo": "kfk",
       "status": "zatwierdzone"
     },
     {
@@ -7556,7 +7670,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4123&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2"
     },
     {
       "id": "muzeum-krakowa-muzeum-podgorza-do-hotelu-zapraszamy-zwiedzanie-2026-12-05T11:00",
@@ -7604,7 +7719,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4134&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2"
     },
     {
       "id": "variete-krakowski-teatr-variete-adonis-ma-goscia-2026-12-05T12:00",
@@ -8276,7 +8392,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4244&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-dla-ucha-malucha-zajecia-umuzykalniajace-dla-dzieci-do-trzeciego-roku-zycia-2026-12-12T11:15",
@@ -8308,7 +8425,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4254&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-dla-ucha-malucha-zajecia-umuzykalniajace-dla-dzieci-do-trzeciego-roku-zycia-2026-12-12T12:30",
@@ -8420,7 +8538,8 @@
       "cena": "",
       "link_biletow": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-3-2-2",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-3-2-2"
     },
     {
       "id": "mocak-mocak-muzeum-sztuki-wspolczesnej-aktywne-spiewanie-zajecia-umuzykalniajace-dla-dzieci-w-wieku-od-3-do-6-lat-2026-12-13T13:00",
@@ -8485,6 +8604,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4230&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -8502,6 +8622,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4243&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -8519,6 +8640,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4253&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -8600,7 +8722,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4146&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-w-ciemnosci-w-jasnosci-2026-12-19T11:30",
@@ -8616,7 +8739,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4166&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-w-ciemnosci-w-jasnosci-2026-12-20T10:00",
@@ -8632,7 +8756,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4147&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-w-ciemnosci-w-jasnosci-2026-12-20T11:30",
@@ -8648,7 +8773,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4167&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "kupbilecik-ice-krakow-teatr-avatar-opowiesc-wigilijna-2026-12-20T13:00",
@@ -8696,7 +8822,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4148&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-laponiada-2027-01-16T11:30",
@@ -8712,7 +8839,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4168&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-laponiada-2027-01-17T10:00",
@@ -8728,7 +8856,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4149&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-laponiada-2027-01-17T11:30",
@@ -8744,7 +8873,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4169&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-kamishibai-ka-krolowa-jadwiga-i-skrzypce-dobrych-serc-2027-01-23T10:30",
@@ -8760,7 +8890,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4124&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-kamishibai-ka-krolowa-jadwiga-i-skrzypce-dobrych-serc-2027-01-23T12:00",
@@ -8776,7 +8907,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4135&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "variete-krakowski-teatr-variete-adonis-ma-goscia-2027-01-25T09:00",
@@ -8864,7 +8996,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4242&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-01-30T12:30",
@@ -8880,7 +9013,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4256&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-02-01T08:30",
@@ -8897,6 +9031,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4231&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -8914,6 +9049,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4241&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -8931,6 +9067,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4255&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -8947,7 +9084,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4125&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-kamishibai-ka-dzwon-zygmunta-i-zagubiony-glos-2027-02-06T12:00",
@@ -8963,7 +9101,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4136&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "variete-krakowski-teatr-variete-adonis-ma-goscia-2027-02-08T09:00",
@@ -9051,7 +9190,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4150&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-garnki-ogniki-papryki-2027-02-27T11:30",
@@ -9067,7 +9207,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4170&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-garnki-ogniki-papryki-2027-02-28T10:00",
@@ -9083,7 +9224,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4151&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-garnki-ogniki-papryki-2027-02-28T11:30",
@@ -9099,7 +9241,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4171&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-03-06T10:30",
@@ -9115,7 +9258,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4240&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-03-06T12:30",
@@ -9131,7 +9275,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4258&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-03-08T08:30",
@@ -9148,6 +9293,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4232&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3",
       "dla_grup": true
     },
     {
@@ -9165,6 +9311,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4239&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3-2",
       "dla_grup": true
     },
     {
@@ -9182,6 +9329,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4257&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3-2-2",
       "dla_grup": true
     },
     {
@@ -9198,7 +9346,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4126&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-kamishibai-ka-czakram-ktory-zasnal-2027-03-13T12:00",
@@ -9214,7 +9363,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4137&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-spiewajki-marzajki-2027-03-20T10:00",
@@ -9230,7 +9380,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4152&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-spiewajki-marzajki-2027-03-20T11:30",
@@ -9246,7 +9397,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4172&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-spiewajki-marzajki-2027-03-21T10:00",
@@ -9262,7 +9414,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4153&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-muzyczne-bobasy-spiewajki-marzajki-2027-03-21T11:30",
@@ -9278,7 +9431,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4173&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/muzyczne-bobasy-5-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "variete-krakowski-teatr-variete-adonis-ma-goscia-2027-03-22T12:00",
@@ -9365,7 +9519,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4127&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-kamishibai-ka-stanczyk-ktory-zapomnial-sie-smiac-2027-04-03T12:00",
@@ -9381,7 +9536,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4138&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/kamishibai-ka-4-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-04-10T10:30",
@@ -9397,7 +9553,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4238&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-04-10T12:30",
@@ -9413,7 +9570,8 @@
       "cena": "",
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4260&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
-      "status": "zatwierdzone"
+      "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3-2-2-2-2"
     },
     {
       "id": "filharmonia-filharmonia-krakowska-bajki-muzyka-pisane-serce-pelne-emocji-2027-04-12T08:30",
@@ -9430,6 +9588,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4233&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -9447,6 +9606,7 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4237&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3-2-2-2-2-2-2",
       "dla_grup": true
     },
     {
@@ -9464,8 +9624,19 @@
       "link_biletow": "https://filharmonia-krakowska.vectorsoft.pl/msi?event_id=4259&ReturnLink=https://filharmoniakrakow.pl",
       "zrodlo": "filharmonia",
       "status": "zatwierdzone",
+      "link_strony": "https://filharmoniakrakow.pl/public/program/bajki-muzyka-pisane-364-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-2-3-2-2-2-2-2-2-2",
       "dla_grup": true
     }
   ],
-  "do_weryfikacji": []
+  "do_weryfikacji": [
+    {
+      "zrodlo": "ludowy",
+      "tytul": "FESTIWAL OTWARCIA/CHÓR NA CZTERY WIOSŁA I POCZUCIE WINY",
+      "data": "2026-11-24",
+      "godzina": "10:00",
+      "miejsce": "Teatr Ludowy",
+      "wiek": "",
+      "strona": "https://ludowy.pl/spektakle/chor-na-cztery-wiosla-i-poczucie-winy/"
+    }
+  ]
 }
