@@ -4,7 +4,7 @@
 // po opisie (np. „rekomendowany dla widzów od 10. roku życia"); niepewne (np. „Adonis ma gościa", spektakl dla szkół)
 // trafiają do „do weryfikacji". Poranki w dni robocze przed 13:00 to terminy dla grup.
 import * as cheerio from 'cheerio';
-import { pobierz, godzina, dzienTygodnia, sprawdz } from '../wspolne.mjs';
+import { pobierz, godzina, dzienTygodnia, USER_AGENT } from '../wspolne.mjs';
 import { ocenaGoscinna, tekstZHtml } from '../dla-dzieci.mjs';
 
 const BAZA = 'https://www.teatrvariete.pl';
@@ -71,6 +71,21 @@ export function parsuj(html) {
   return wydarzenia;
 }
 
+// Zwraca adres strony (po przekierowaniach), jeśli działa, nie jest stroną główną ani błędem i w <title> ma tytuł spektaklu; inaczej ''.
+export async function stronaSpektaklu(adres, tytul) {
+  try {
+    await new Promise((r) => setTimeout(r, 1500)); // nie męczymy serwera zapytaniami
+    const res = await fetch(adres, { headers: { 'User-Agent': USER_AGENT, Accept: 'text/html,*/*' }, redirect: 'follow', signal: AbortSignal.timeout(20000) });
+    if (!res.ok) return '';
+    const koniec = new URL(res.url);
+    if (koniec.pathname === '/' || /error|b[lł]ad|not[-_]?found|404/i.test(koniec.pathname)) return '';
+    const tytulStrony = cheerio.load(await res.text())('title').first().text().toLowerCase();
+    return tytulStrony.includes(String(tytul || '').toLowerCase()) && tytul ? res.url : '';
+  } catch (e) {
+    return '';
+  }
+}
+
 export default {
   id: 'variete',
   nazwa: 'Krakowski Teatr VARIETE',
@@ -81,15 +96,18 @@ export default {
   async pobierz() {
     const wydarzenia = parsuj(await pobierz(this.url, { robots: true }));
     // Strona spektaklu u teatru: własne spektakle są pod /repertuar/spektakle/<slug>, gościnne pod /repertuar/goscinnie/<slug>.
-    // Bierzemy pierwszy adres, który działa; gdy żaden (albo nie da się sprawdzić), `opisUrl` zostaje pusty, a tytuł prowadzi do biletów.
+    // Strona teatru potrafi odpowiedzieć „200” także na zły adres (albo przekierować), więc sprawdzamy, dokąd naprawdę trafiamy
+    // (adres po przekierowaniach) i czy w tytule strony jest tytuł spektaklu. Gdy żaden adres nie przejdzie (albo nie da się
+    // sprawdzić), `opisUrl` zostaje pusty, a tytuł prowadzi do biletów.
     const adresy = new Map();
-    for (const slug of new Set(wydarzenia.map((w) => w.slug).filter(Boolean))) {
+    for (const w of wydarzenia) {
+      if (!w.slug || adresy.has(w.slug)) continue;
       let wybrany = '';
       for (const sciezka of ['spektakle', 'goscinnie']) {
-        const adres = `${BAZA}/repertuar/${sciezka}/${slug}`;
-        if ((await sprawdz(adres)).ok === true) { wybrany = adres; break; }
+        wybrany = await stronaSpektaklu(`${BAZA}/repertuar/${sciezka}/${w.slug}`, w.tytul);
+        if (wybrany) break;
       }
-      adresy.set(slug, wybrany);
+      adresy.set(w.slug, wybrany);
     }
     return wydarzenia.map(({ slug, ...w }) => (adresy.get(slug) ? { ...w, opisUrl: adresy.get(slug) } : w));
   },
