@@ -31,11 +31,13 @@ function Wiersz({ w }) {
   const miejsce = opisMiejsc(w);
   // każda godzina ma własny link do biletów (np. Filharmonia: dwa koncerty w jeden dzień) → godziny są linkami, a jeden przycisk „Bilety” by mylił
   const linkiGodz = new Set(w.godziny.map((g) => g.link).filter(Boolean)).size > 1;
+  // kilka godzin i jakikolwiek link: każda godzina jest klikalna (własny link albo wspólny linku wydarzenia)
+  const godzinyKlikalne = w.godziny.length > 1 && Boolean(link);
   return (
     <li className="wk-r">
       <div className="wk-g">
-        {w.godziny.length ? w.godziny.slice(0, 3).map((g) => (linkiGodz && g.link
-          ? <a key={g.godzina} className="wk-gl" href={g.link} target="_blank" rel="noreferrer" title={`Bilety na ${g.godzina}`} aria-label={`Bilety: ${w.nazwa}, ${g.godzina}`}><b>{g.godzina}</b></a>
+        {w.godziny.length ? w.godziny.slice(0, 3).map((g) => (godzinyKlikalne && (g.link || link)
+          ? <a key={g.godzina} className="wk-gl" href={g.link || link} target="_blank" rel="noreferrer" title={`${g.godzina}: przejdź do wydarzenia`} aria-label={`${w.nazwa}, ${g.godzina}: przejdź do wydarzenia`}><b>{g.godzina}</b></a>
           : <b key={g.godzina}>{g.godzina}</b>)) : <b className="wk-cd">cały dzień</b>}
         {w.godziny.length > 3 && <small>+{w.godziny.length - 3}</small>}
       </div>
