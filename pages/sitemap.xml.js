@@ -4,7 +4,7 @@ import repertuar from '../data/repertuar.json';
 
 // Mapa strony (/sitemap.xml): strona główna, huby, listy /koncerty i /spektakle, strony prawne (polityka prywatności, regulamin, kontakt), kategorie z co najmniej 3 miejscami
 // i karty miejsc, które mogą się indeksować (bez stron z noindex). Odpowiedź trzymana w CDN godzinę (jak ISR, revalidate 3600).
-const STALE = ['/', '/atrakcje', '/sport', '/zajecia', '/polkolonie', '/weekend', '/newsletter', '/koncerty', '/spektakle', '/polityka-prywatnosci', '/regulamin', '/kontakt'];
+const STALE = ['/', '/atrakcje', '/miejsca', '/sport', '/zajecia', '/polkolonie', '/weekend', '/newsletter', '/koncerty', '/spektakle', '/polityka-prywatnosci', '/regulamin', '/kontakt'];
 
 const xml = (wpisy) => `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
