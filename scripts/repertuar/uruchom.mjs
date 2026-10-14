@@ -47,6 +47,7 @@ import mocak from './zrodla/mocak.mjs';
 import cricoteka from './zrodla/cricoteka.mjs';
 import manggha from './zrodla/manggha.mjs';
 import mufo from './zrodla/mufo.mjs';
+import konwersatorium from './zrodla/konwersatorium.mjs';
 import { naprawLinki } from './linki.mjs';
 import { dopracujKategorie } from './kategorie.mjs';
 import { idKin, idKinZCsv, wierszeMiejsc, wierszeZCsv, idMiejsca } from './miejsca.mjs';
@@ -54,7 +55,7 @@ import { wyjatkiZCsv, wyjatkiZArkusza, polaczWyjatki } from './wyjatki.mjs';
 
 const ZRODLA_KIN = [kijow, mikro, agrafka, podBaranami, paradox, sfinks];
 // Źródła wydarzeń (nie kina). Moduł z `wlaczone: false` jest gotowy, ale pomijany.
-const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl, tauronArena, iceKrakow, klubStudio, variete, groteska, figurki, slowacki, operaKrakowska, kbf, kfk, dworek, dworekKluby, mck, dkNowyBienazow, mnk, muzeumKrakowa, mit, muzeumArcheologiczne, mocak, cricoteka, manggha, mufo, kupbilecik]
+const ZRODLA_WYDARZEN = [okn, ludowy, kultureska, wspolczesny, szczescie, filharmonia, sinfonietta, biblioteka, ckpodgorza, zis, krakowPl, tauronArena, iceKrakow, klubStudio, variete, groteska, figurki, slowacki, operaKrakowska, kbf, kfk, dworek, dworekKluby, mck, dkNowyBienazow, mnk, muzeumKrakowa, mit, muzeumArcheologiczne, mocak, cricoteka, manggha, mufo, konwersatorium, kupbilecik]
   .filter((z) => z.wlaczone !== false);
 const WYPRZEDZENIE_DNI = { spektakl: 60, koncert: 180, widowisko: 180, domyslnie: 60 }; // jak daleko do przodu zapisujemy wydarzenia (źródło może mieć własne `wyprzedzenieDni`)
 const KATALOG = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'data');
