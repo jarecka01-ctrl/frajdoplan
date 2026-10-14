@@ -42,9 +42,10 @@ function Wiersz({ w }) {
           {w.wiek && <span className="kk-wiek">{w.wiek}</span>}
           {w.cena && <span>{w.cena}</span>}
         </p>
+        {link && <a className="kk-bilety kk-bilety-tel" href={link} target="_blank" rel="noreferrer" aria-label={`Bilety: ${w.nazwa}`}>Bilety</a>}
       </div>
       <div className="kk-akcje">
-        {link && <a className="kk-bilety" href={link} target="_blank" rel="noreferrer" aria-label={`Bilety: ${w.nazwa}`}>Bilety</a>}
+        {link && <a className="kk-bilety kk-bilety-pc" href={link} target="_blank" rel="noreferrer" aria-label={`Bilety: ${w.nazwa}`}>Bilety</a>}
         {!w.lokalizacje && <PlanPlus typ="wydarzenie" id={(w.godziny[0] && w.godziny[0].id) || w.id} dzien={w.dzien} tytul={w.nazwa} />}
       </div>
     </li>

@@ -139,6 +139,7 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .kk-akcje .plan-plus:active { transform: scale(.92); }
 .kk-bilety { font: 700 13px var(--font-body); color: var(--tusz); text-decoration: none; border: 2px solid var(--tusz); border-radius: 999px; padding: 3px 12px; background: var(--biel); }
 .kk-bilety:hover { background: var(--tusz); color: #fff; }
+.kk-bilety-tel { display: none; }
 .kk-wiek { font-weight: 700; color: var(--tusz); }
 @media (max-width: 560px) {
   /* na telefonie miesiące i miejsca zawijają się do kolejnych wierszy (bez przewijania w bok); pasek nie jest przyklejony, bo zajmowałby za dużo ekranu */
@@ -148,7 +149,8 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
   .kk-mies a small { font-size: 12px; }
   .kk-filtry { flex-wrap: wrap; overflow: visible; gap: 6px; }
   .kk-filtry button { font-size: 13px; padding: 4px 10px; }
-  .kk-bilety { display: none; }
+  .kk-bilety-pc { display: none; }
+  .kk-bilety-tel { display: inline-block; margin-top: 6px; }
   .kk-dh h3 { font-size: 19px; }
   .kk-mh h2 { font-size: 28px; }
   .kk-miesiac { scroll-margin-top: 12px; }
