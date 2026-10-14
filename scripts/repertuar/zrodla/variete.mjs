@@ -4,7 +4,7 @@
 // po opisie (np. „rekomendowany dla widzów od 10. roku życia"); niepewne (np. „Adonis ma gościa", spektakl dla szkół)
 // trafiają do „do weryfikacji". Poranki w dni robocze przed 13:00 to terminy dla grup.
 import * as cheerio from 'cheerio';
-import { pobierz, godzina, dzienTygodnia } from '../wspolne.mjs';
+import { pobierz, godzina, dzienTygodnia, sprawdz } from '../wspolne.mjs';
 import { ocenaGoscinna, tekstZHtml } from '../dla-dzieci.mjs';
 
 const BAZA = 'https://www.teatrvariete.pl';
@@ -61,7 +61,7 @@ export function parsuj(html) {
         kategoria: koncert ? 'koncert' : 'spektakl',
         link: (t.link && t.link.url) || '',
         strona: `${BAZA}/repertuar/spektakle`,
-        opisUrl: `${BAZA}/repertuar/spektakle/${s.slug}`, // strona spektaklu na stronie teatru (opis, obsada); link biletów prowadzi tylko do zakupu
+        slug: s.slug, // z niego `pobierz` składa adres strony spektaklu (opisUrl); link biletów prowadzi tylko do zakupu
         wiek: ocena.wiek,
         dlaDzieci: ocena.dlaDzieci,
         dlaGrup: dzien >= 1 && dzien <= 5 && g < '13:00',
@@ -79,6 +79,18 @@ export default {
   wyprzedzenieDni: 180,
   miejsca: [['Krakowski Teatr VARIETE', /vari[eé]t[eé]/i]],
   async pobierz() {
-    return parsuj(await pobierz(this.url, { robots: true }));
+    const wydarzenia = parsuj(await pobierz(this.url, { robots: true }));
+    // Strona spektaklu u teatru: własne spektakle są pod /repertuar/spektakle/<slug>, gościnne pod /repertuar/goscinnie/<slug>.
+    // Bierzemy pierwszy adres, który działa; gdy żaden (albo nie da się sprawdzić), `opisUrl` zostaje pusty, a tytuł prowadzi do biletów.
+    const adresy = new Map();
+    for (const slug of new Set(wydarzenia.map((w) => w.slug).filter(Boolean))) {
+      let wybrany = '';
+      for (const sciezka of ['spektakle', 'goscinnie']) {
+        const adres = `${BAZA}/repertuar/${sciezka}/${slug}`;
+        if ((await sprawdz(adres)).ok === true) { wybrany = adres; break; }
+      }
+      adresy.set(slug, wybrany);
+    }
+    return wydarzenia.map(({ slug, ...w }) => (adresy.get(slug) ? { ...w, opisUrl: adresy.get(slug) } : w));
   },
 };
