@@ -2,7 +2,6 @@ import Uklad from '../components/Uklad';
 import Baner from '../components/Baner';
 import Wydarzenia from '../components/Wydarzenia';
 import BliskoIKina from '../components/BliskoIKina';
-import Katalog from '../components/Katalog';
 import Kalendarz from '../components/Kalendarz';
 import PogodaPowietrze from '../components/PogodaPowietrze';
 import { pobierzDane } from '../lib/dane';
@@ -44,7 +43,6 @@ export default function Home({ places, wydarzenia = [], kina = null, muzyka = []
       <Wydarzenia wydarzenia={wydarzenia} places={places} />
       <BliskoIKina places={places} wydarzenia={wydarzenia} kina={kina} muzyka={muzyka} />
       <Kalendarz wydarzenia={wydarzenia} />
-      <Katalog id="miejsca" className="katalog-miejsca" naStrone={6} places={places} dzial="atrakcje" tytul="Miejsca na każdy dzień" placeholder="Szukaj: sala zabaw, Nowa Huta, trampoliny…" />
     </Uklad>
   );
 }
