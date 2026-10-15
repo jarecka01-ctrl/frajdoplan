@@ -15,6 +15,9 @@ const nextConfig = {
       // stare adresy działu Sport (301)
       { source: '/treningi', destination: '/sport', statusCode: 301 },
       { source: '/treningi/:dyscyplina', destination: '/sport/:dyscyplina', statusCode: 301 },
+      // laser tag i game room połączone w „Interaktywne”
+      { source: '/atrakcje/laser-tag', destination: '/atrakcje/interaktywne', statusCode: 301 },
+      { source: '/atrakcje/game-room', destination: '/atrakcje/interaktywne', statusCode: 301 },
     ];
   },
 };
