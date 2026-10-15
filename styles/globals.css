@@ -875,3 +875,7 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 .teatry-nav a.teatry-weekend { background: #F7B32B; }
 .teatry-nav a:hover { box-shadow: 2px 2px 0 var(--tusz, #20242B); }
 .teatr-info { margin: 0 0 12px; }
+
+/* Link do osobnej strony kategorii pod kafelkami rodzajów (gdy zaznaczony jest jeden) */
+.rodzaj-strona { margin: 0 0 8px; font-weight: 600; }
+.rodzaj-strona a { text-decoration: underline; text-underline-offset: 3px; }

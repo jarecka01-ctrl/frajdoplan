@@ -230,6 +230,12 @@ export default function Katalog({
             })}
           </div>
         )}
+        {dzial && !aktywna && wybrane.length === 1 && (() => {
+          const k = rodzaje.find((x) => x.klucz === wybrane[0]);
+          if (!k) return null;
+          const kat = kategoriaRodzaju(dzial, k.rodzaj);
+          return <p className="rodzaj-strona"><a href={kat.href}>Zobacz osobną stronę: {kat.nazwa} →</a></p>;
+        })()}
       </div>
 
       <div className="wynik-pasek">
