@@ -139,7 +139,8 @@ export default function Katalog({
     });
     if (odleglosci) out.sort((a, b) => odleglosci[a.id] - odleglosci[b.id]);
     else if (strefa === 'Pod Krakowem') out.sort((a, b) => (a.km ?? 999) - (b.km ?? 999));
-    else out.sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0));
+    // domyślnie: najpierw miejsca w samym Krakowie (bez `gmina`), potem okoliczne gminy; w obu grupach od największej liczby opinii
+    else out.sort((a, b) => (Boolean(a.gmina || a.strefa) - Boolean(b.gmina || b.strefa)) || ((b.reviews ?? 0) - (a.reviews ?? 0)));
     return out;
   }, [places, strefa, kategoria, wybrane, query, odleglosci]);
 
