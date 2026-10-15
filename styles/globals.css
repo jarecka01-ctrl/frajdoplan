@@ -158,12 +158,19 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 @media print {
   .kk-pasek, .kk-bilety, .kk-akcje { display: none !important; }
 }
-/* bilet wydarzenia (components/Bilet.js), wariant „Kartonik": złamana biel bez obrysu, kropkowana perforacja, wcięcia w kolorze tła sekcji. Po lewej odcinek z godziną i datą, po prawej tytuł i szczegóły.
-   --nb = kolor tła sekcji (kolor wcięć przy perforacji), --tw = szerokość odcinka, --fk = kolor obrysu fokusa na ciemnym tle */
-.tk { --pl: 12px; --tw: 84px; position: relative; display: grid; grid-template-columns: var(--tw) minmax(0, 1fr); align-items: center; background: #FAF8F2; color: var(--tusz); border: 0; border-radius: 10px; padding: 8px var(--pl); margin: 0; text-transform: none; }
-.tk::before, .tk::after { content: ""; position: absolute; left: calc(var(--pl) + var(--tw) - 8px); width: 14px; height: 14px; background: var(--nb, var(--papier)); border-radius: 50%; }
-.tk::before { top: -7px; clip-path: inset(50% 0 0 0); }
-.tk::after { bottom: -7px; clip-path: inset(0 0 50% 0); }
+/* bilet wydarzenia (components/Bilet.js), wariant „Kartonik": złamana biel bez obrysu, krótki twardy cień, kropkowana perforacja, wcięcia wycięte (widać przez nie tło sekcji). Po lewej odcinek z godziną i datą, po prawej tytuł i szczegóły.
+   --nb = dawny kolor wcięć (już nieużywany, wcięcia są wycięte maską), --tw = szerokość odcinka, --fk = kolor obrysu fokusa na ciemnym tle */
+.tk {
+  --pl: 12px; --tw: 84px; --tk-tlo: #FAF8F2; --tk-cien: rgba(70, 52, 24, .16);
+  --tk-x: calc(var(--pl) + var(--tw) - 1px);
+  --tk-dziurki: radial-gradient(circle at var(--tk-x) 0, #0000 7px, #000 7.5px) top / 100% 51% no-repeat, radial-gradient(circle at var(--tk-x) 100%, #0000 7px, #000 7.5px) bottom / 100% 51% no-repeat;
+  position: relative; isolation: isolate; display: grid; grid-template-columns: var(--tw) minmax(0, 1fr); align-items: center;
+  background: transparent; color: var(--tusz); border: 0; border-radius: 10px; padding: 8px var(--pl); margin: 0; text-transform: none;
+}
+/* papier biletu (::after) i krótki twardy cień pod nim (::before): obie warstwy mają wycięte dziurki przy perforacji, więc przez wcięcia widać prawdziwe tło sekcji, także wzory (kropki kina, pasy kurtyny, kręgi koncertów) */
+.tk::before, .tk::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 10px; pointer-events: none; -webkit-mask: var(--tk-dziurki); mask: var(--tk-dziurki); }
+.tk::before { background: var(--tk-cien); transform: translate(2px, 3px); }
+.tk::after { background: var(--tk-tlo); }
 .tk .tt { align-self: stretch; border-right: 2px dotted #D3C39F; padding-right: 8px; display: flex; flex-direction: column; justify-content: center; min-height: 36px; min-width: 0; }
 .tk .td { font: 600 11.5px/1.1 var(--font-body); color: var(--tusz-2); margin-bottom: 1px; white-space: nowrap; }
 .tk .tt b { display: block; font: 600 17px/1.1 var(--font-display); color: #6E5A3C; }
@@ -176,27 +183,28 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 /* link tytułu (albo „Szczegóły") obejmuje cały bilet: nie jest pozycjonowany, więc jego ::after rozciąga się na .tk */
 .tk a.tk-link { position: static; z-index: auto; }
 .tk-link::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
-.tk:has(.tk-link):hover { background: #F2EDE1; }
+.tk:has(.tk-link):hover { --tk-tlo: #F2EDE1; }
 .tk-link:focus-visible { outline: none; }
 .tk-link:focus-visible::after { outline: 3px solid var(--fk, var(--tusz)); outline-offset: 2px; }
 .tk-lista { gap: 12px; }
 /* wydarzenie, które już się zaczęło (kafelek „Dziś"): szary bilet i tekst z oznaczeniem, nie sam kolor; kontrast tekstu nadal min. AA */
-.tk-minelo { background: #EFEBE0; }
+.tk-minelo { --tk-tlo: #EFEBE0; }
 .tk-minelo .tt b, .tk-minelo .tk-nazwa { color: var(--tusz-2); }
 .tk-minelo a { color: var(--tusz-2); text-decoration-color: #B9B2A0; }
-.tk-minelo:has(.tk-link):hover { background: #E9E4D5; }
+.tk-minelo:has(.tk-link):hover { --tk-tlo: #E9E4D5; }
 .tk-znacznik { font-weight: 700; color: var(--tusz); }
 .wyd-lista + .wyd-pusto { margin-top: 14px; }
 /* kolor wcięć = tło sekcji; w ciasnych sekcjach odcinek jest węższy */
 .wyd-glowna .tk { --nb: var(--slonce); }
 .wyd-mala .tk { --nb: var(--biel); --tw: 70px; }
+.k .tk { --tk-cien: rgba(0, 0, 0, .25); }
 .k-kino .tk { --nb: var(--tusz); --tw: 66px; --fk: var(--slonce); }
 .k-spektakle .tk { --nb: #B03A2E; --tw: 70px; --fk: var(--slonce); }
 .k-koncerty .tk { --nb: #2F5D3A; --tw: 70px; --fk: var(--slonce); }
 @media (max-width: 480px) { .wyd-glowna .tk { --tw: 70px; --pl: 10px; } }
 /* małe kafelki Jutro i Weekend: stała wysokość, 3 wydarzenia na slajd, strzałki ‹ › */
 .slajdy-okno { min-height: 236px; overflow: hidden; touch-action: pan-y; }
-.slajdy-lista { gap: 10px; }
+.slajdy-lista { gap: 10px; padding: 0 3px 4px 0; } /* miejsce na cień biletów, bo okno slajdów przycina to, co wystaje */
 .tk-s { min-height: 72px; box-sizing: border-box; }
 .slajdy-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
 .slajdy-strzalka { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--tusz); background: var(--biel); font-size: 20px; line-height: 1; cursor: pointer; }
