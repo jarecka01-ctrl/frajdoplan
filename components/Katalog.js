@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { adresKarty } from '../lib/miejsca';
 import { km, pozaRegionem, PROMIEN_REGIONU_KM } from '../lib/geo';
 import { IKONY, SKROTY } from '../lib/ikony';
-import { DZIALY, kategoriaRodzaju, odmianaMiejsc } from '../lib/kategorie';
+import { DZIALY, kategoriaRodzaju, odmianaMiejsc, RANKING_DOPELNIACZ } from '../lib/kategorie';
 
 // Mapa ładuje się tylko w przeglądarce (Leaflet nie działa na serwerze).
 const Mapa = dynamic(() => import('./Mapa'), {
@@ -234,7 +234,8 @@ export default function Katalog({
           const k = rodzaje.find((x) => x.klucz === wybrane[0]);
           if (!k) return null;
           const kat = kategoriaRodzaju(dzial, k.rodzaj);
-          return <p className="rodzaj-strona"><a href={kat.href}>Zobacz osobną stronę: {kat.nazwa} →</a></p>;
+          const ranking = RANKING_DOPELNIACZ[`${dzial}/${kat.slug}`];
+          return <p className="rodzaj-strona"><a href={kat.href}>{ranking ? `Zobacz ranking ${ranking}` : `Zobacz osobną stronę: ${kat.nazwa}`} →</a></p>;
         })()}
       </div>
 
