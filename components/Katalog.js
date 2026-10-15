@@ -234,8 +234,11 @@ export default function Katalog({
           const k = rodzaje.find((x) => x.klucz === wybrane[0]);
           if (!k) return null;
           const kat = kategoriaRodzaju(dzial, k.rodzaj);
-          const ranking = RANKING_DOPELNIACZ[`${dzial}/${kat.slug}`];
-          return <p className="rodzaj-strona"><a href={kat.href}>{ranking ? `Zobacz ranking ${ranking}` : `Zobacz osobną stronę: ${kat.nazwa}`} →</a></p>;
+          const klucz = `${dzial}/${kat.slug}`;
+          const ranking = RANKING_DOPELNIACZ[klucz];
+          // teatry: zamiast pustej karty kategorii prowadzimy do listy wszystkich spektakli
+          const [href, tekst] = klucz === 'atrakcje/teatry' ? ['/spektakle', 'Zobacz wszystkie spektakle'] : [kat.href, ranking ? `Zobacz ranking ${ranking}` : `Zobacz osobną stronę: ${kat.nazwa}`];
+          return <p className="rodzaj-strona"><a href={href}>{tekst} →</a></p>;
         })()}
       </div>
 
