@@ -43,6 +43,7 @@ export default function KartaMiejsca({ miejsce: m, podobne = [], sciezka = [], s
           {m.wiek && <><dt>Wiek</dt><dd>{m.wiek}</dd></>}
           {m.godziny && <><dt>Godziny</dt><dd>{m.godziny}</dd></>}
           {m.cennik && <><dt>Cennik</dt><dd>{m.cennik}</dd></>}
+          {m.woda && <><dt>Temperatura wody</dt><dd>{m.woda}</dd></>}
           {m.telefon && <><dt>Telefon</dt><dd><a className="link" href={`tel:${m.telefon.replace(/[^+\d]/g, '')}`}>{m.telefon}</a></dd></>}
           {m.website && <><dt>Strona</dt><dd><a className="link" href={m.website} target="_blank" rel="noreferrer">{m.website.replace(/^https?:\/\/(www\.)?/, '').replace(/[/?#].*$/, '')}</a></dd></>}
         </dl>
