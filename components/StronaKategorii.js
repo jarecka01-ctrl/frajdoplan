@@ -1,11 +1,12 @@
 import Uklad from './Uklad';
 import Katalog from './Katalog';
 import Okruszki from './Okruszki';
+import RankingKategorii from './RankingKategorii';
 import { DZIALY } from '../lib/kategorie';
 import { listaMiejscJsonLd } from '../lib/jsonld';
 
 // Wspólny wygląd podstron kategorii: /atrakcje/…, /sport/…, /zajecia/…
-export default function StronaKategorii({ dzial, places, kategorie, kategoria, seo, missingConfig, fetchError }) {
+export default function StronaKategorii({ dzial, places, kategorie, kategoria, seo, ranking, poradnik, missingConfig, fetchError }) {
   const d = DZIALY[dzial];
   const atrakcje = dzial === 'atrakcje';
   return (
@@ -21,6 +22,7 @@ export default function StronaKategorii({ dzial, places, kategorie, kategoria, s
           <p className="lead"><a href="/spektakle">Repertuar teatrów dla dzieci: wszystkie spektakle →</a></p>
         )}
       </section>
+      <RankingKategorii ranking={ranking} />
       <Katalog
         places={places}
         dzial={dzial}
@@ -32,6 +34,12 @@ export default function StronaKategorii({ dzial, places, kategorie, kategoria, s
         pokazDachPole={atrakcje}
         pokazStrefy={atrakcje}
       />
+      {poradnik && (
+        <section className="kk-poradnik" aria-labelledby="poradnik-h">
+          <h2 id="poradnik-h">{poradnik.tytul}</h2>
+          <ul>{poradnik.punkty.map((t) => <li key={t}>{t}</li>)}</ul>
+        </section>
+      )}
     </Uklad>
   );
 }
