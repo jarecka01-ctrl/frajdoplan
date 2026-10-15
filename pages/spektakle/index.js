@@ -20,14 +20,11 @@ export async function getStaticProps() {
 }
 
 export default function Spektakle({ teatry = [], ...props }) {
-  const nad = teatry.length > 0 && (
-    <nav className="teatry-nav" aria-label="Teatry i weekend">
-      <Link href="/spektakle/weekend" className="teatry-weekend">Spektakle w ten weekend</Link>
-      {teatry.map((t) => <Link key={t.slug} href={`/spektakle/${t.slug}`}>{t.nazwa}<i>{t.n}</i></Link>)}
-    </nav>
+  const nad = (
+    <p className="lead-link">Szukasz czegoś na najbliższy weekend? Zobacz <Link href="/spektakle/weekend">spektakle w ten weekend</Link>.</p>
   );
   return (
-    <ListaWydarzen {...props} nad={nad} nazwaOkruszka="Spektakle" kolor="spektakl" pusto="Nie mamy teraz spektakli dla dzieci w kalendarzu. Zajrzyj tu za kilka dni.">
+    <ListaWydarzen {...props} nad={nad} teatry={teatry} nazwaOkruszka="Spektakle" kolor="spektakl" pusto="Nie mamy teraz spektakli dla dzieci w kalendarzu. Zajrzyj tu za kilka dni.">
       <section className="kk-poradnik" aria-labelledby="kk-poradnik-h">
         <h2 id="kk-poradnik-h">Jak wybrać spektakl dla dziecka</h2>
         <ul>
@@ -36,6 +33,14 @@ export default function Spektakle({ teatry = [], ...props }) {
           <li><b>Plan.</b> Przyciskiem „+” dodasz spektakl do swojego planu i wyślesz go rodzinie. Szukasz muzyki? Zobacz <Link href="/koncerty">koncerty dla dzieci w Krakowie</Link>.</li>
         </ul>
       </section>
+      {teatry.length > 0 && (
+        <section className="kk-poradnik" aria-labelledby="kk-teatry-h">
+          <h2 id="kk-teatry-h">Repertuar według teatru</h2>
+          <ul>
+            {teatry.map((t) => <li key={t.slug}><Link href={`/spektakle/${t.slug}`}>{t.nazwa}</Link>: {t.n} {t.n % 10 >= 2 && t.n % 10 <= 4 && !(t.n % 100 >= 12 && t.n % 100 <= 14) ? 'terminy' : 'terminów'}</li>)}
+          </ul>
+        </section>
+      )}
     </ListaWydarzen>
   );
 }

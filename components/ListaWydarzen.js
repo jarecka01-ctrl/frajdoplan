@@ -78,7 +78,7 @@ function Dzien({ dzien, wiersze, dzis }) {
   );
 }
 
-export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszka, pusto, missingConfig, fetchError, kolor = 'koncert', okruszki, nad, children }) {
+export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszka, pusto, missingConfig, fetchError, kolor = 'koncert', okruszki, nad, teatry, children }) {
   const [czas, setCzas] = useState(null);
   const [miejsce, setMiejsce] = useState('');
   const [tylkoDarmo, setTylkoDarmo] = useState(false);
@@ -128,6 +128,10 @@ export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszk
               </div>
             )}
           </div>
+          {miejsce && teatry && (() => {
+            const t = teatry.find((x) => x.nazwa === miejsce);
+            return t ? <p className="rodzaj-strona"><Link href={`/spektakle/${t.slug}`}>Zobacz osobną stronę: {t.nazwa} →</Link></p> : null;
+          })()}
           {widoczne.map((m) => (
             <section key={m.klucz} id={`m-${m.klucz}`} className="kk-miesiac" aria-label={m.nazwa}>
               <div className="kk-mh">
