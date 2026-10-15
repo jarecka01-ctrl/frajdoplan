@@ -879,3 +879,6 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 /* Link do osobnej strony kategorii pod kafelkami rodzajów (gdy zaznaczony jest jeden) */
 .rodzaj-strona { margin: 0 0 8px; font-weight: 600; }
 .rodzaj-strona a { text-decoration: underline; text-underline-offset: 3px; }
+
+.lead-link { margin: -8px 0 16px; }
+.lead-link a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
