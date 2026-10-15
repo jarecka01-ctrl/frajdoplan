@@ -882,3 +882,7 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 
 .lead-link { margin: -8px 0 16px; }
 .lead-link a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Temperatura wody w basenach (kolumna temperatura_wody): w rankingu i na kartach listy */
+.rank .rank-woda { display: block; margin-top: 2px; font-weight: 600; color: var(--tusz, #20242B); }
+.karta .woda { margin: 4px 0 0; font-size: 0.92rem; font-weight: 600; }

@@ -289,6 +289,7 @@ export default function Katalog({
                 </div>
                 <h3 className="nazwa"><Link href={adresKarty(p)}>{p.name}</Link></h3>
                 <p className="adres">{[p.adres, (p.gmina || 'Kraków') !== 'Kraków' || !p.adres ? (p.gmina || 'Kraków') : null].filter(Boolean).join(', ')}</p>
+                {p.woda && <p className="woda">Woda: {p.woda}</p>}
                 <div className="dol">
                   {p.rating != null && (
                     <span className="ocena" title={`${p.reviews ?? 0} opinii w Google`}>

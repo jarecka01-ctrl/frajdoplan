@@ -17,6 +17,7 @@ export default function RankingKategorii({ ranking }) {
             <span className="rank-tekst">
               <Link href={adresKarty(p)}>{p.name}</Link>
               <small>{[p.adres, p.gmina].filter(Boolean).join(', ')}{p.urodziny ? ' · urodziny' : ''}</small>
+              {p.woda && <small className="rank-woda">Woda: {p.woda}</small>}
             </span>
             <span className="ocena" title={`${p.reviews} opinii w Google`}>★ {ocenaTekst(p.rating)} <small>({p.reviews})</small></span>
           </li>
