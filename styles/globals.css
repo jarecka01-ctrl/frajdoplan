@@ -867,3 +867,11 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 .rank-tekst small { font-size: 13px; color: var(--tusz-2); }
 .rank .ocena { white-space: nowrap; }
 @media print { .rank { box-shadow: none; } }
+
+/* Spektakle: odnośniki do teatrów i „w weekend" */
+.teatry-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.teatry-nav a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 2px solid var(--tusz, #20242B); border-radius: 999px; background: var(--papier, #FFFDF7); color: inherit; font-weight: 600; text-decoration: none; }
+.teatry-nav a i { font-style: normal; font-size: 0.85em; opacity: 0.7; }
+.teatry-nav a.teatry-weekend { background: #F7B32B; }
+.teatry-nav a:hover { box-shadow: 2px 2px 0 var(--tusz, #20242B); }
+.teatr-info { margin: 0 0 12px; }

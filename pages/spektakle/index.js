@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import ListaWydarzen from '../components/ListaWydarzen';
-import { pobierzListeWydarzen } from '../lib/dane';
+import ListaWydarzen from '../../components/ListaWydarzen';
+import { pobierzListeWydarzen } from '../../lib/dane';
 
 export async function getStaticProps() {
   return pobierzListeWydarzen({
     kategoria: 'spektakl',
     adres: '/spektakle',
+    zTeatrami: true,
     teksty: {
       // {liczba} = liczba pozycji na liście (lib/seo.js); gdy listy nie ma, działają teksty „Pusty” bez liczby
       tytul: 'Spektakle dla dzieci w Krakowie: {liczba} terminów | Frajdoplan',
@@ -18,9 +19,15 @@ export async function getStaticProps() {
   });
 }
 
-export default function Spektakle(props) {
+export default function Spektakle({ teatry = [], ...props }) {
+  const nad = teatry.length > 0 && (
+    <nav className="teatry-nav" aria-label="Teatry i weekend">
+      <Link href="/spektakle/weekend" className="teatry-weekend">Spektakle w ten weekend</Link>
+      {teatry.map((t) => <Link key={t.slug} href={`/spektakle/${t.slug}`}>{t.nazwa}<i>{t.n}</i></Link>)}
+    </nav>
+  );
   return (
-    <ListaWydarzen {...props} nazwaOkruszka="Spektakle" kolor="spektakl" pusto="Nie mamy teraz spektakli dla dzieci w kalendarzu. Zajrzyj tu za kilka dni.">
+    <ListaWydarzen {...props} nad={nad} nazwaOkruszka="Spektakle" kolor="spektakl" pusto="Nie mamy teraz spektakli dla dzieci w kalendarzu. Zajrzyj tu za kilka dni.">
       <section className="kk-poradnik" aria-labelledby="kk-poradnik-h">
         <h2 id="kk-poradnik-h">Jak wybrać spektakl dla dziecka</h2>
         <ul>
