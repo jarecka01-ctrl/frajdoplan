@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { adresKarty } from '../lib/miejsca';
 import { km, pozaRegionem, PROMIEN_REGIONU_KM } from '../lib/geo';
 import { IKONY, SKROTY } from '../lib/ikony';
-import { DZIALY, kategoriaRodzaju, odmianaMiejsc, RANKING_DOPELNIACZ } from '../lib/kategorie';
+import { DZIALY, kategoriaRodzaju, odmianaMiejsc, RANKING_DOPELNIACZ, kategoriaIndeksowana } from '../lib/kategorie';
 
 // Mapa ładuje się tylko w przeglądarce (Leaflet nie działa na serwerze).
 const Mapa = dynamic(() => import('./Mapa'), {
@@ -234,6 +234,8 @@ export default function Katalog({
           const k = rodzaje.find((x) => x.klucz === wybrane[0]);
           if (!k) return null;
           const kat = kategoriaRodzaju(dzial, k.rodzaj);
+          // link tylko tam, gdzie osobna strona ma sens (własny ranking, spektakle albo fraza z wyszukaniami); inne kategorie to ta sama lista co filtr
+          if (!kategoriaIndeksowana(dzial, kat.slug) && `${dzial}/${kat.slug}` !== 'atrakcje/teatry') return null;
           const klucz = `${dzial}/${kat.slug}`;
           const ranking = RANKING_DOPELNIACZ[klucz];
           // teatry: zamiast pustej karty kategorii prowadzimy do listy wszystkich spektakli
