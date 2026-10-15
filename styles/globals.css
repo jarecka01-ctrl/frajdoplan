@@ -158,12 +158,12 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 @media print {
   .kk-pasek, .kk-bilety, .kk-akcje { display: none !important; }
 }
-/* bilet wydarzenia (components/Bilet.js), wariant „Kartonik": kremowy karton, cienki półprzezroczysty obrys, kropkowana perforacja. Po lewej odcinek z godziną i datą, po prawej tytuł i szczegóły.
+/* bilet wydarzenia (components/Bilet.js), wariant „Kartonik": złamana biel bez obrysu, kropkowana perforacja, wcięcia w kolorze tła sekcji. Po lewej odcinek z godziną i datą, po prawej tytuł i szczegóły.
    --nb = kolor tła sekcji (kolor wcięć przy perforacji), --tw = szerokość odcinka, --fk = kolor obrysu fokusa na ciemnym tle */
-.tk { --pl: 12px; --tw: 84px; --tk-obrys: rgba(32, 36, 43, .22); position: relative; display: grid; grid-template-columns: var(--tw) minmax(0, 1fr); align-items: center; background: #FBF5E6; color: var(--tusz); border: 1.5px solid var(--tk-obrys); border-radius: 10px; padding: 8px var(--pl); margin: 0; text-transform: none; }
-.tk::before, .tk::after { content: ""; position: absolute; left: calc(var(--pl) + var(--tw) - 8px); width: 14px; height: 14px; background: var(--nb, var(--papier)); border: 1.5px solid var(--tk-obrys); border-radius: 50%; }
-.tk::before { top: -8.5px; clip-path: inset(50% 0 0 0); }
-.tk::after { bottom: -8.5px; clip-path: inset(0 0 50% 0); }
+.tk { --pl: 12px; --tw: 84px; position: relative; display: grid; grid-template-columns: var(--tw) minmax(0, 1fr); align-items: center; background: #FAF8F2; color: var(--tusz); border: 0; border-radius: 10px; padding: 8px var(--pl); margin: 0; text-transform: none; }
+.tk::before, .tk::after { content: ""; position: absolute; left: calc(var(--pl) + var(--tw) - 8px); width: 14px; height: 14px; background: var(--nb, var(--papier)); border-radius: 50%; }
+.tk::before { top: -7px; clip-path: inset(50% 0 0 0); }
+.tk::after { bottom: -7px; clip-path: inset(0 0 50% 0); }
 .tk .tt { align-self: stretch; border-right: 2px dotted #D3C39F; padding-right: 8px; display: flex; flex-direction: column; justify-content: center; min-height: 36px; min-width: 0; }
 .tk .td { font: 600 11.5px/1.1 var(--font-body); color: var(--tusz-2); margin-bottom: 1px; white-space: nowrap; }
 .tk .tt b { display: block; font: 600 17px/1.1 var(--font-display); color: #6E5A3C; }
@@ -176,7 +176,7 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 /* link tytułu (albo „Szczegóły") obejmuje cały bilet: nie jest pozycjonowany, więc jego ::after rozciąga się na .tk */
 .tk a.tk-link { position: static; z-index: auto; }
 .tk-link::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
-.tk:has(.tk-link):hover { background: #F7EDD3; }
+.tk:has(.tk-link):hover { background: #F2EDE1; }
 .tk-link:focus-visible { outline: none; }
 .tk-link:focus-visible::after { outline: 3px solid var(--fk, var(--tusz)); outline-offset: 2px; }
 .tk-lista { gap: 12px; }
