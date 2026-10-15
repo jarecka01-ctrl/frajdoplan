@@ -78,7 +78,7 @@ function Dzien({ dzien, wiersze, dzis }) {
   );
 }
 
-export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszka, pusto, missingConfig, fetchError, kolor = 'koncert', children }) {
+export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszka, pusto, missingConfig, fetchError, kolor = 'koncert', okruszki, nad, children }) {
   const [czas, setCzas] = useState(null);
   const [miejsce, setMiejsce] = useState('');
   const [tylkoDarmo, setTylkoDarmo] = useState(false);
@@ -106,11 +106,12 @@ export default function ListaWydarzen({ miesiace, liczba: ile, seo, nazwaOkruszk
 
   return (
     <Uklad seo={seo} jsonLd={[...(wydarzeniaJsonLd(wszystkie.flatMap((w) => (w.lokalizacje ? w.lokalizacje.map((l) => ({ ...w, miejsce: l.miejsce, link: l.link || w.link, godziny: l.godziny, lokalizacje: undefined })) : [w])), seo.canonical)), listaWydarzenJsonLd(wszystkie, seo.canonical, seo.h1)]} missingConfig={missingConfig} fetchError={fetchError}>
-      <Okruszki sciezka={[{ nazwa: nazwaOkruszka, href: seo.adres }]} siteUrl={seo.siteUrl} />
+      <Okruszki sciezka={okruszki || [{ nazwa: nazwaOkruszka, href: seo.adres }]} siteUrl={seo.siteUrl} />
       <section className="hero">
         <h1>{seo.h1}</h1>
         <p className="lead">{seo.wstep}</p>
       </section>
+      {nad}
       {ile === 0 ? (
         <p className="wyd-pusto">{pusto}</p>
       ) : (

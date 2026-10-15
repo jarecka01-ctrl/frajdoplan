@@ -14,10 +14,10 @@ ${wpisy.map(([a, data]) => `  <url><loc>${SITE_URL}${a}</loc><lastmod>${data}</l
 
 export async function getServerSideProps({ res }) {
   const dzis = dzisWarszawa();
-  const { kategorie, miejsca } = await adresyDoMapy();
+  const { kategorie, miejsca, spektakle } = await adresyDoMapy();
   const dataRepertuaru = String(repertuar.zaktualizowano || '').slice(0, 10) || dzis;
   // lastmod: listy wydarzeń = ostatnia aktualizacja repertuaru, reszta = dzień odświeżenia danych z arkusza
-  const wpisy = [...new Set([...STALE, ...kategorie, ...miejsca])].map((a) => [a, a === '/koncerty' || a === '/spektakle' ? dataRepertuaru : dzis]);
+  const wpisy = [...new Set([...STALE, ...kategorie, ...miejsca, ...spektakle])].map((a) => [a, a === '/koncerty' || a.startsWith('/spektakle') ? dataRepertuaru : dzis]);
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
   res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
   res.write(xml(wpisy));
