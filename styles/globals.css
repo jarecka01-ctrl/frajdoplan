@@ -854,3 +854,16 @@ textarea.zgl-pole { resize: vertical; min-height: 110px; }
 .kk-poradnik ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 15px; line-height: 1.5; }
 .kk-poradnik a { color: inherit; text-decoration-color: var(--mak); text-underline-offset: 2px; }
 @media print { .kk-poradnik { display: none; } }
+
+/* Ranking najlepiej ocenianych miejsc kategorii (/atrakcje/sale-zabaw, /atrakcje/place-zabaw) */
+.rank { margin: 6px 0 28px; padding: 18px 20px 14px; background: var(--biel); border: 2px solid var(--tusz); border-radius: 22px 22px 22px 6px; box-shadow: 5px 5px 0 var(--slonce); }
+.rank h2 { font: 800 26px/1.1 var(--font-display); margin: 0 0 4px; }
+.rank-opis { margin: 0 0 10px; font-size: 14px; color: var(--tusz-2); }
+.rank ol { list-style: none; counter-reset: rank; margin: 0; padding: 0; }
+.rank li { counter-increment: rank; display: flex; align-items: center; gap: 12px; padding: 9px 0; border-top: 1px dashed #d6cdb8; }
+.rank-nr::before { content: counter(rank); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--slonce); border: 2px solid var(--tusz); font: 800 15px var(--font-display); }
+.rank-tekst { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.rank-tekst a { font: 700 17px/1.2 var(--font-display); color: var(--tusz); text-decoration-color: var(--mak); text-underline-offset: 2px; }
+.rank-tekst small { font-size: 13px; color: var(--tusz-2); }
+.rank .ocena { white-space: nowrap; }
+@media print { .rank { box-shadow: none; } }
