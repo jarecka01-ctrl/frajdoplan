@@ -10,11 +10,11 @@ export async function getStaticProps() {
     teksty: {
       // {liczba} = liczba pozycji na liście (lib/seo.js); gdy listy nie ma, działają teksty „Pusty” bez liczby
       tytul: 'Spektakle dla dzieci w Krakowie: {liczba} terminów | Frajdoplan',
-      opis: 'Repertuar teatrów dla dzieci w Krakowie: {liczba} terminów z godzinami i biletami. Groteska, Ludowy, Figur, VARIETE i inne. Linki do biletów przy każdym.',
+      opis: 'Repertuar teatrów dla dzieci w Krakowie: {liczba} terminów z godzinami. Groteska, Ludowy, Figur, VARIETE i inne.',
       tytulPusty: 'Spektakle dla dzieci w Krakowie: repertuar | Frajdoplan',
       opisPusty: 'Repertuar teatrów dla dzieci w Krakowie: spektakle z datami, godzinami, miejscami i linkami do biletów.',
       h1: 'Spektakle dla dzieci w Krakowie',
-      wstep: 'Wszystkie spektakle dla dzieci w Krakowie na jednej liście, od najbliższego terminu: teatry lalkowe, bajki i przedstawienia dla przedszkolaków i starszych dzieci. Przy każdym jest link do biletów, a filtr pozwala wybrać teatr. Lista odświeża się kilka razy w tygodniu.',
+      wstep: 'Wszystkie spektakle dla dzieci w Krakowie na jednej liście, od najbliższego terminu: teatry lalkowe, bajki i przedstawienia dla przedszkolaków i starszych dzieci. Filtr pozwala wybrać teatr. Lista odświeża się kilka razy w tygodniu.',
     },
   });
 }
