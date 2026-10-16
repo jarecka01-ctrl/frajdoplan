@@ -2,6 +2,10 @@
   "_opis": "wymus: tytuły zawsze traktowane jako dla dzieci. ukryj: tytuły zawsze pomijane. Wystarczy początek tytułu, wielkość liter nie ma znaczenia. Wpisy w polu „zrodla.<id>” dotyczą tylko jednego źródła, wpisy na górze wszystkich (kin i innych).",
   "wymus": ["Dzieci z Bullerbyn"],
   "ukryj": ["Folwark zwierzęcy"],
+  "wiek": {
+    "_opis": "Ręczny wiek dla tytułów, przy których źródło go nie podaje (początek tytułu, bez wielkości liter). Wpis nadpisuje wiek ze źródła.",
+    "Street Fighter": "13+"
+  },
   "zrodla": {
     "_uwaga": "PROPOZYCJA DO ZATWIERDZENIA przez właścicielkę: listy poniżej wpisał Claude na podstawie danych z 4 października 2026.",
     "ludowy": {

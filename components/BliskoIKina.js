@@ -31,7 +31,7 @@ function DzisWKinach({ places, wydarzenia, dzis, godz, info }) {
     .filter((p) => p.podkategoria === 'Kino' && p.website)
     .sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0))
     .slice(0, 6);
-  const zrodla = info ? info.zrodla : [];
+  const zrodla = info ? info.zrodla.filter((z) => z.kino) : []; // tylko kina: awaria np. teatru czy ZIS nie dotyczy tego kafelka
   const zrodloSeansu = (lista) => zrodla.find((z) => z.id === lista[0].zrodlo);
   const nieaktualne = zrodla.filter((z) => !z.ok);
   const stale = info ? info.stale : [];
