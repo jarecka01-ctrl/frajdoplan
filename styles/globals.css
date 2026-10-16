@@ -9,8 +9,10 @@
   --mak: #E4483A;
   --kreda: #EFE7D6;
   --biel: #FFFFFF;
-  --font-display: 'Baloo 2', 'Trebuchet MS', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* 'Noto Color Emoji' na końcu: emoji (ikony rodzajów, kategorii, mapy) wyglądają wszędzie jak na Androidzie, także na Windows i Macu;
+     zwykłe litery i cyfry biorą się z wcześniejszych krojów */
+  --font-display: 'Baloo 2', 'Trebuchet MS', system-ui, sans-serif, 'Noto Color Emoji';
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif, 'Noto Color Emoji';
 }
 
 * { box-sizing: border-box; }
