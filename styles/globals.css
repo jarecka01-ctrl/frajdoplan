@@ -409,8 +409,7 @@ section[id] { scroll-margin-top: 16px; }
   --akcent: var(--slonce);
   background: var(--biel); border: 2px solid var(--tusz);
   border-radius: 22px 22px 22px 6px;
-  box-shadow: 5px 5px 0 var(--akcent);
-  padding: 16px 18px 14px; display: flex; flex-direction: column; min-width: 0;
+  padding: 16px 18px 14px; /* bez kolorowego cienia; --akcent zostaje dla koloru podkreślenia linku */ display: flex; flex-direction: column; min-width: 0;
 }
 .karta-pole { --akcent: var(--mak); border-radius: 22px 22px 6px 22px; }
 .karta-gora { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
