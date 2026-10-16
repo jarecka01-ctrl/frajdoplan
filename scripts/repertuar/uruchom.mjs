@@ -334,6 +334,12 @@ async function main() {
     widziane.set(klucz, w.zrodlo);
     return true;
   });
+  // ręczny wiek z data/wyjatki.json (pole „wiek”: początek tytułu → np. „13+”), gdy źródło go nie podaje albo podaje błędnie
+  const wiekReczny = Object.entries(wyjatki.wiek || {}).filter(([t]) => !t.startsWith('_'));
+  bezDubli.forEach((w) => {
+    const e = wiekReczny.find(([t]) => naListe([t], w.nazwa));
+    if (e) w.grupa_wiekowa = e[1];
+  });
   const unikalne = bezDubli
     .sort((a, b) => `${a.data_regula}${a.godzina}${a.miejsce}`.localeCompare(`${b.data_regula}${b.godzina}${b.miejsce}`));
 
