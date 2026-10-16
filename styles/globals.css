@@ -175,7 +175,7 @@ a.rodzaj { color: var(--tusz); text-decoration: none; }
 .tk::after { background: var(--tk-tlo); }
 .tk .tt { align-self: stretch; border-right: 2px dotted #D3C39F; padding-right: 8px; display: flex; flex-direction: column; justify-content: center; min-height: 36px; min-width: 0; }
 .tk .td { font: 600 11.5px/1.1 var(--font-body); color: var(--tusz-2); margin-bottom: 1px; white-space: nowrap; }
-.tk .tt b { display: block; font: 600 17px/1.1 var(--font-display); color: #C73A2D; } /* ciemniejszy mak: czytelny na złamanej bieli (kontrast 4,9:1) */
+.tk .tt b { display: block; font: 600 17px/1.1 var(--font-display); color: #6E5A3C; }
 .tk .tt b.dl { font-size: 13px; line-height: 1.05; }
 .tk .tn { padding-left: 12px; min-width: 0; }
 .tk-nazwa { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font: 700 14.5px/1.2 var(--font-display); color: var(--tusz); }
